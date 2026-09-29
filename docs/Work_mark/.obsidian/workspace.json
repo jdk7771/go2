@@ -1,0 +1,236 @@
+{
+  "main": {
+    "id": "8c2d132d50650366",
+    "type": "split",
+    "children": [
+      {
+        "id": "48d5b3de4eba84fe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a9fcffe1ca906743",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "paper/学习日报与周报.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "学习日报与周报"
+            }
+          },
+          {
+            "id": "12a6105244709fa7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "paper/leg-dog/Learning robust perceptive locomotion for quadrupedal/笔记.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "笔记"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d6df17665b3cb202",
+    "type": "split",
+    "children": [
+      {
+        "id": "266c184ca756374f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2d53e287c015622f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "5c10e0a72ed785dc",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "3bf8fa9030703f69",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200
+  },
+  "right": {
+    "id": "c0747ecde23c52c9",
+    "type": "split",
+    "children": [
+      {
+        "id": "fa9e177447c46f92",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a722031b57a2c2e7",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "DailyWork/Talk.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "8159b24b7b468164",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "DailyWork/Talk.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "4d668ee0265abe30",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "7ce765a26558832b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "4f9ce3da368bf6a6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "DailyWork/Talk.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "a9fcffe1ca906743",
+  "lastOpenFiles": [
+    "paper/leg-dog/Learning robust perceptive locomotion for quadrupedal/笔记.md",
+    "paper/学习日报与周报.md",
+    "paper/leg-dog/Learning robust perceptive locomotion for quadrupedal/Learning robust perceptive locomotion for quadrupedal.pdf",
+    "笔记模板.md",
+    "paper/dog/Learning robust perceptive locomotion for quadrupedal.pdf",
+    "paper/leg-dog/Learning robust perceptive locomotion for quadrupedal",
+    "paper/12周学习计划.md",
+    "paper/leg-dog/CTS-MoE/CTS-MoE_笔记.md",
+    "paper/leg-dog/MoE-Loco/MoE-Loco.md",
+    "paper/dog/MUJICA.pdf",
+    "paper/dog/MoE-Loco.pdf",
+    "paper/dog/CTS-MoE.pdf",
+    "paper/dog/Adaptive_multimode-llocomotn.pdf",
+    "Pasted image 20260925101902.png",
+    "paper/leg-dog/CTS-MoE/CTS-MoE.pdf",
+    "paper/论文笔记模板.md",
+    "paper/Idea.md",
+    "paper/论文索引.md",
+    "paper/leg-dog/CTS-MoE/CTS-MoE.md",
+    "paper/leg-dog/CTS-MoE/MoE-Loco.md",
+    "paper/dog/Vision-Assisted_Bipedal_Locomotion_on_Challenging_Terrains_via_Terrain-Related_Adversarial_Motion_Priors.pdf",
+    "paper/dog/Rdf_lio.pdf",
+    "DailyWork/VLA/VLA.md",
+    "paper/leg-dog/leg-dog.md",
+    "paper/leg-dog/MoE-Loco.md",
+    "DailyWork/Todo.md",
+    "DailyWork/Talk.md",
+    "欢迎.md"
+  ]
+}
