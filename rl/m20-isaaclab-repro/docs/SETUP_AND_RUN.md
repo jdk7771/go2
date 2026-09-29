@@ -195,5 +195,36 @@ seed (`42`) for both replays, with 600 recorded steps each. The current AutoDL
 image crashes in Isaac Sim's RTX scene renderer even after training finishes,
 so run the script only on a renderer-capable image or a different server.
 
+### CPU fallback when Isaac Sim's video renderer fails
+
+`scripts/export_m20_trajectory.py` is the reproducible fallback for a host
+that can simulate but cannot invoke Isaac Sim's RTX camera renderer. It runs
+the checkpoint with **no camera**, exporting the actual Isaac Sim base pose,
+orientation, and all joint positions into a compressed `.npz` trajectory.
+`scripts/render_m20_trajectory.py` then uses the supplied M20 URDF/STL files
+and PyBullet's CPU TinyRenderer to make an MP4. The physics trajectory is from
+Isaac Sim; only the image rasterization is offline, so the resulting video is
+explicitly labelled `CPU offline render`.
+
+```bash
+RUN=/root/autodl-tmp/m20-artifacts/logs/rsl_rl/deeprobotics_m20_rough/2026-09-28_08-58-15
+OUT=/root/autodl-tmp/m20-artifacts/cpu-video
+
+python /root/m20-repro/scripts/export_m20_trajectory.py \
+  --task=Rough-Deeprobotics-M20-v0 --checkpoint "$RUN/model_4999.pt" \
+  --num_envs=1 --seed=42 --trajectory_steps=600 \
+  --trajectory_out "$OUT/model_4999.npz" --headless
+
+python /root/m20-repro/scripts/render_m20_trajectory.py \
+  --trajectory "$OUT/model_4999.npz" \
+  --urdf /root/m20-repro/deep_robotics_model/M20/urdf/M20.urdf \
+  --output "$OUT/model_4999.mp4" --label "M20 checkpoint 4999" \
+  --frame_stride=2
+```
+
+At the M20 environment step time of 0.02 s, `frame_stride=2` produces a
+25 FPS video from the 600-step (12-second) rollout. Use the same seed and
+settings for every checkpoint so the comparisons are meaningful.
+
 Upstream references: [rl_training README](https://github.com/DeepRoboticsLab/rl_training/blob/main/README.md)
 and [Isaac Lab v2.3.2 installation guide](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/setup/installation/index.html).

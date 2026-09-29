@@ -85,3 +85,8 @@ bash /root/m20-repro/scripts/verify_m20.sh
 `scripts/record_policy_comparison.sh` 已保留；在图形渲染正常的 NVIDIA
 容器或其他服务器上，可用它对 `model_0.pt` 与最终模型生成固定 seed 的视频
 对比。
+
+若需要在该类服务器上交付视频，可用 `export_m20_trajectory.py` 执行无相机
+Isaac Sim 回放并导出真实轨迹，再用 `render_m20_trajectory.py` 和 M20 的原始
+URDF/STL 进行 CPU 离线渲染。成片会标注 `CPU offline render`，避免将离线
+光栅化误认为 Isaac Sim 原生 RTX 画面。
