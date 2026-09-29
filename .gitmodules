@@ -1,0 +1,7 @@
+[submodule "rl/m20-isaaclab-repro/upstream/IsaacLab"]
+	path = rl/m20-isaaclab-repro/upstream/IsaacLab
+	url = https://github.com/isaac-sim/IsaacLab.git
+	branch = v2.3.2
+[submodule "rl/m20-isaaclab-repro/upstream/rl_training"]
+	path = rl/m20-isaaclab-repro/upstream/rl_training
+	url = https://github.com/DeepRoboticsLab/rl_training.git
