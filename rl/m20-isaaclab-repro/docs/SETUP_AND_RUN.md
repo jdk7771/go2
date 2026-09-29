@@ -226,5 +226,8 @@ At the M20 environment step time of 0.02 s, `frame_stride=2` produces a
 25 FPS video from the 600-step (12-second) rollout. Use the same seed and
 settings for every checkpoint so the comparisons are meaningful.
 
+See `M20_TRAINING_EXPLAINED.md` for the policy input/output, terrain mix,
+rewards, PPO configuration, and the limits of the first CPU-rendered videos.
+
 Upstream references: [rl_training README](https://github.com/DeepRoboticsLab/rl_training/blob/main/README.md)
 and [Isaac Lab v2.3.2 installation guide](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/setup/installation/index.html).

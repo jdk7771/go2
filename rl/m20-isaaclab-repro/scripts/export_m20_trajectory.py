@@ -112,13 +112,25 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
     policy = runner.get_inference_policy(device=env.unwrapped.device)
 
     root_positions, root_orientations, joint_positions = [], [], []
+    commanded_velocities, base_velocities = [], []
+    terrain_hits = []
     obs, _ = env.reset()
     robot = env.unwrapped.scene["robot"]
+    try:
+        height_scanner = env.unwrapped.scene["height_scanner"]
+    except KeyError:
+        height_scanner = None
 
     def capture() -> None:
         root_positions.append(robot.data.root_pos_w[0].detach().cpu().numpy().copy())
         root_orientations.append(robot.data.root_quat_w[0].detach().cpu().numpy().copy())
         joint_positions.append(robot.data.joint_pos[0].detach().cpu().numpy().copy())
+        commanded_velocities.append(
+            env.unwrapped.command_manager.get_command("base_velocity")[0].detach().cpu().numpy().copy()
+        )
+        base_velocities.append(robot.data.root_lin_vel_b[0].detach().cpu().numpy().copy())
+        if height_scanner is not None:
+            terrain_hits.append(height_scanner.data.ray_hits_w[0].detach().cpu().numpy().copy())
 
     capture()
     with torch.inference_mode():
@@ -134,9 +146,12 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         root_quat_w=np.stack(root_orientations),  # Isaac Sim order: w, x, y, z
         joint_pos=np.stack(joint_positions),
         joint_names=np.asarray(robot.joint_names),
+        command_velocity=np.stack(commanded_velocities),
+        root_lin_vel_b=np.stack(base_velocities),
         step_dt=np.asarray(env.unwrapped.step_dt, dtype=np.float64),
         checkpoint=np.asarray(str(resume_path)),
         seed=np.asarray(args_cli.seed, dtype=np.int64),
+        **({"terrain_hits_w": np.stack(terrain_hits)} if terrain_hits else {}),
     )
     print(f"[TRAJECTORY] frames={len(root_positions)} dt={env.unwrapped.step_dt} output={out_path}")
     env.close()

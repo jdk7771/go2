@@ -39,6 +39,9 @@ root_quat = data["root_quat_w"].astype(np.float64)
 joint_pos = data["joint_pos"].astype(np.float64)
 joint_names = [str(name) for name in data["joint_names"]]
 dt = float(data["step_dt"])
+command_velocity = data["command_velocity"].astype(np.float64) if "command_velocity" in data.files else None
+root_lin_vel_b = data["root_lin_vel_b"].astype(np.float64) if "root_lin_vel_b" in data.files else None
+terrain_hits_w = data["terrain_hits_w"].astype(np.float64) if "terrain_hits_w" in data.files else None
 if not (len(root_pos) == len(root_quat) == len(joint_pos)):
     raise ValueError("Trajectory arrays have mismatched lengths.")
 
@@ -59,6 +62,37 @@ try:
     plane_shape = p.createCollisionShape(p.GEOM_PLANE)
     plane = p.createMultiBody(baseMass=0.0, baseCollisionShapeIndex=plane_shape)
     p.changeVisualShape(plane, -1, rgbaColor=[0.32, 0.34, 0.37, 1.0])
+    terrain_source = "flat placeholder"
+    if terrain_hits_w is not None:
+        # Reconstruct a static local mesh from the exact height-scanner hits
+        # observed during the Isaac Sim rollout.  This is visual-only: robot
+        # physics was already simulated before these poses were exported.
+        hits = terrain_hits_w.reshape(-1, 3)
+        hits = hits[np.isfinite(hits).all(axis=1)]
+        hits[:, :2] -= root_pos[0, :2]
+        resolution = 0.1
+        grid_ids = np.rint(hits[:, :2] / resolution).astype(np.int32)
+        heights = {}
+        for (gx, gy), z in zip(grid_ids, hits[:, 2]):
+            heights.setdefault((int(gx), int(gy)), []).append(float(z))
+        heights = {key: sum(values) / len(values) for key, values in heights.items()}
+        vertices = [(gx * resolution, gy * resolution, z) for (gx, gy), z in heights.items()]
+        vertex_ids = {key: index for index, key in enumerate(heights)}
+        indices = []
+        for gx, gy in heights:
+            quad = ((gx, gy), (gx + 1, gy), (gx, gy + 1), (gx + 1, gy + 1))
+            if all(key in vertex_ids for key in quad):
+                a, b, c, d = (vertex_ids[key] for key in quad)
+                indices.extend((a, b, c, b, d, c))
+        if indices:
+            terrain_shape = p.createVisualShape(
+                p.GEOM_MESH,
+                vertices=vertices,
+                indices=indices,
+                rgbaColor=[0.38, 0.40, 0.30, 1.0],
+            )
+            p.createMultiBody(baseMass=0.0, baseVisualShapeIndex=terrain_shape)
+            terrain_source = "Isaac Sim height-scan mesh"
     robot = p.loadURDF(str(args.urdf), useFixedBase=False)
 
     pybullet_joint_ids = {
@@ -114,6 +148,14 @@ try:
         status = f"Isaac Sim trajectory | t={elapsed:.2f}s | distance={displacement:.2f} m | speed={planar_speed:.2f} m/s"
         cv2.putText(frame, status, (24, args.height - 22), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (20, 20, 20), 3, cv2.LINE_AA)
         cv2.putText(frame, status, (24, args.height - 22), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (245, 245, 245), 1, cv2.LINE_AA)
+        if command_velocity is not None:
+            cmd = command_velocity[frame_index]
+            actual = root_lin_vel_b[frame_index] if root_lin_vel_b is not None else (0.0, 0.0, 0.0)
+            command_text = f"command body vx={cmd[0]:+.2f}, vy={cmd[1]:+.2f}, yaw={cmd[2]:+.2f} | actual vx={actual[0]:+.2f}, vy={actual[1]:+.2f}"
+            cv2.putText(frame, command_text, (24, args.height - 48), cv2.FONT_HERSHEY_SIMPLEX, 0.48, (20, 20, 20), 3, cv2.LINE_AA)
+            cv2.putText(frame, command_text, (24, args.height - 48), cv2.FONT_HERSHEY_SIMPLEX, 0.48, (245, 245, 245), 1, cv2.LINE_AA)
+        cv2.putText(frame, terrain_source, (24, 66), cv2.FONT_HERSHEY_SIMPLEX, 0.48, (20, 20, 20), 3, cv2.LINE_AA)
+        cv2.putText(frame, terrain_source, (24, 66), cv2.FONT_HERSHEY_SIMPLEX, 0.48, (245, 245, 245), 1, cv2.LINE_AA)
         writer.write(frame)
 finally:
     writer.release()
