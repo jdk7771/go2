@@ -23,6 +23,12 @@ parser.add_argument("--width", type=int, default=960)
 parser.add_argument("--height", type=int, default=540)
 parser.add_argument("--frame_stride", type=int, default=2, help="Keep every N trajectory samples.")
 parser.add_argument(
+    "--end_seconds",
+    type=float,
+    default=None,
+    help="Stop the rendered clip at this trajectory time, while retaining the original trajectory file.",
+)
+parser.add_argument(
     "--camera",
     choices=("follow", "fixed"),
     default="follow",
@@ -32,6 +38,8 @@ args = parser.parse_args()
 
 if args.frame_stride < 1:
     raise ValueError("--frame_stride must be positive")
+if args.end_seconds is not None and args.end_seconds <= 0:
+    raise ValueError("--end_seconds must be positive")
 
 data = np.load(args.trajectory, allow_pickle=False)
 root_pos = data["root_pos_w"].astype(np.float64)
@@ -42,8 +50,14 @@ dt = float(data["step_dt"])
 command_velocity = data["command_velocity"].astype(np.float64) if "command_velocity" in data.files else None
 root_lin_vel_b = data["root_lin_vel_b"].astype(np.float64) if "root_lin_vel_b" in data.files else None
 terrain_hits_w = data["terrain_hits_w"].astype(np.float64) if "terrain_hits_w" in data.files else None
+scenario = str(data["scenario"].item()) if "scenario" in data.files else "random"
+stair_height = float(data["stair_height"]) if "stair_height" in data.files else None
+spawn_x = float(data["spawn_x"]) if "spawn_x" in data.files else None
 if not (len(root_pos) == len(root_quat) == len(joint_pos)):
     raise ValueError("Trajectory arrays have mismatched lengths.")
+frame_stop = len(root_pos)
+if args.end_seconds is not None:
+    frame_stop = min(frame_stop, int(np.floor(args.end_seconds / dt)) + 1)
 
 args.output.parent.mkdir(parents=True, exist_ok=True)
 fps = 1.0 / (dt * args.frame_stride)
@@ -63,7 +77,58 @@ try:
     plane = p.createMultiBody(baseMass=0.0, baseCollisionShapeIndex=plane_shape)
     p.changeVisualShape(plane, -1, rgbaColor=[0.32, 0.34, 0.37, 1.0])
     terrain_source = "flat placeholder"
-    if terrain_hits_w is not None:
+    if scenario in {"stairs_up", "stairs_down"} and stair_height is not None and spawn_x is not None:
+        # The stair exporter builds one deterministic Isaac Lab
+        # Mesh(Pyramid|InvertedPyramid)Stairs terrain with these parameters.
+        # Recreate those visual blocks exactly instead of showing the limited
+        # 1.6 m x 1.0 m height-scan footprint as a misleading flat patch.
+        size = 8.0
+        border = 1.0
+        step_width = 0.30
+        platform_width = 3.0
+        inner_size = size - 2.0 * border
+        num_steps = int((inner_size - platform_width) // (2.0 * step_width)) + 1
+        centre_x = -spawn_x
+        centre_y = 0.0
+        inverted = scenario == "stairs_down"
+        plane_z = -(num_steps + 2) * stair_height if inverted else 0.0
+        p.resetBasePositionAndOrientation(plane, [0.0, 0.0, plane_z], [0.0, 0.0, 0.0, 1.0])
+
+        def add_block(cx: float, cy: float, hx: float, hy: float, top_z: float) -> None:
+            if inverted:
+                height = abs(plane_z - top_z)
+                z = plane_z + height / 2.0
+            else:
+                height = top_z - plane_z
+                z = plane_z + height / 2.0
+            if height <= 0.0:
+                return
+            shape = p.createVisualShape(
+                p.GEOM_BOX,
+                halfExtents=[hx, hy, height / 2.0],
+                rgbaColor=[0.46, 0.38, 0.22, 1.0],
+            )
+            p.createMultiBody(baseMass=0.0, baseVisualShapeIndex=shape, basePosition=[cx, cy, z])
+
+        # Four stepped sides and a centre platform reproduce the actual
+        # procedural pyramid geometry.  The robot approaches along +x from
+        # the left, so the climb is visible without an ambiguous camera angle.
+        for level in range(num_steps):
+            half_span = inner_size / 2.0 - level * step_width
+            top_z = (level + 1) * stair_height
+            if inverted:
+                top_z = -top_z
+            add_block(centre_x - half_span + step_width / 2.0, centre_y, step_width / 2.0, half_span, top_z)
+            add_block(centre_x + half_span - step_width / 2.0, centre_y, step_width / 2.0, half_span, top_z)
+            add_block(centre_x, centre_y - half_span + step_width / 2.0, half_span - step_width, step_width / 2.0, top_z)
+            add_block(centre_x, centre_y + half_span - step_width / 2.0, half_span - step_width, step_width / 2.0, top_z)
+        top_z = (num_steps + 1) * stair_height
+        if inverted:
+            top_z = -top_z
+        platform_half = inner_size / 2.0 - num_steps * step_width
+        add_block(centre_x, centre_y, platform_half, platform_half, top_z)
+        terrain_source = "fixed Isaac Sim pyramid-stair geometry"
+    elif terrain_hits_w is not None:
         # Reconstruct a static local mesh from the exact height-scanner hits
         # observed during the Isaac Sim rollout.  This is visual-only: robot
         # physics was already simulated before these poses were exported.
@@ -107,9 +172,9 @@ try:
         fov=58.0, aspect=args.width / args.height, nearVal=0.05, farVal=20.0
     )
     start_xy = root_pos[0, :2].copy()
-    trajectory_xy = root_pos[:, :2] - start_xy
+    trajectory_xy = root_pos[:frame_stop, :2] - start_xy
     fixed_target_xy = (trajectory_xy.min(axis=0) + trajectory_xy.max(axis=0)) / 2.0
-    for frame_index in range(0, len(root_pos), args.frame_stride):
+    for frame_index in range(0, frame_stop, args.frame_stride):
         base_pos = root_pos[frame_index].copy()
         base_pos[:2] -= start_xy
         # Isaac Sim uses w,x,y,z; PyBullet uses x,y,z,w.
@@ -125,7 +190,7 @@ try:
             target = [float(fixed_target_xy[0]), float(fixed_target_xy[1]), 0.40]
         view = p.computeViewMatrixFromYawPitchRoll(
             cameraTargetPosition=target,
-            distance=2.8,
+            distance=3.8 if scenario in {"stairs_up", "stairs_down"} else 2.8,
             yaw=45.0,
             pitch=-20.0,
             roll=0.0,
@@ -145,7 +210,11 @@ try:
             planar_speed = float(np.linalg.norm(base_pos[:2] - previous) / dt)
         cv2.putText(frame, args.label, (24, 38), cv2.FONT_HERSHEY_SIMPLEX, 0.85, (20, 20, 20), 3, cv2.LINE_AA)
         cv2.putText(frame, args.label, (24, 38), cv2.FONT_HERSHEY_SIMPLEX, 0.85, (245, 245, 245), 1, cv2.LINE_AA)
-        status = f"Isaac Sim trajectory | t={elapsed:.2f}s | distance={displacement:.2f} m | speed={planar_speed:.2f} m/s"
+        rise = float(base_pos[2] - root_pos[0, 2])
+        status = (
+            f"Isaac Sim trajectory | t={elapsed:.2f}s | distance={displacement:.2f} m "
+            f"| base rise={rise:+.2f} m | speed={planar_speed:.2f} m/s"
+        )
         cv2.putText(frame, status, (24, args.height - 22), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (20, 20, 20), 3, cv2.LINE_AA)
         cv2.putText(frame, status, (24, args.height - 22), cv2.FONT_HERSHEY_SIMPLEX, 0.55, (245, 245, 245), 1, cv2.LINE_AA)
         if command_velocity is not None:
@@ -161,4 +230,4 @@ finally:
     writer.release()
     p.disconnect(client)
 
-print(f"[VIDEO] frames={len(range(0, len(root_pos), args.frame_stride))} fps={fps:.2f} output={args.output}")
+print(f"[VIDEO] frames={len(range(0, frame_stop, args.frame_stride))} fps={fps:.2f} output={args.output}")
