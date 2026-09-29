@@ -54,9 +54,11 @@ sha256sum -c SHA256SUMS.txt
 私有仓库：<https://huggingface.co/JIANGdk0303/m20-isaaclab-rslrl-checkpoints>
 
 完成训练的 checkpoint 置于独立路径
-`runs/2026-09-28_08-58-15/`。其中保留 `model_500.pt`、`model_1000.pt`、
-…、`model_4500.pt`，以及最终 `model_4999.pt`。每个文件单独上传，未覆盖
-已有版本。此前的 partial-run checkpoint 也仍保留在该私有仓库。
+`runs/2026-09-28_08-58-15/`。其中保留初始基线 `model_0.pt`、每 500 步的
+`model_500.pt` 至 `model_4500.pt`，以及最终 `model_4999.pt`。每个文件单独
+上传，未覆盖已有版本。`model_0.pt` 与 `model_4999.pt` 用于在下一台
+renderer-capable 服务器录制训练前后视频。此前的 partial-run checkpoint 也仍
+保留在该私有仓库。
 
 源代码、文档、资源包和完整日志保留在本地及云端；Hugging Face 只保存模型
 checkpoint，避免将主机路径、日志和环境内部信息公开或混入模型仓库。

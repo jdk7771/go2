@@ -25,12 +25,12 @@ reached iteration 459 of 5,000 before the rented instance stopped. The last
 logged mean reward was 43.27. This is a partial training checkpoint, not a
 completed or validated policy.
 
-`runs/2026-09-28_08-58-15/model_500.pt` is the first retained 500-iteration
-checkpoint from a fresh 2,048-environment, 5,000-iteration run started on
-2026-09-28. The path also contains the independent 1,000-, 1,500-, and
-2,000-, 2,500-, 3,000-, 3,500-, 4,000-, and 4,500-iteration snapshots, plus
-the final `model_4999.pt`. RSL-RL counts its 5,000 updates from zero, so
-`model_4999.pt` is the completed baseline policy.
+`runs/2026-09-28_08-58-15/model_0.pt` is the initial, untrained baseline
+checkpoint for before/after playback. The same path contains independent
+snapshots at 500, 1,000, 1,500, 2,000, 2,500, 3,000, 3,500, 4,000, and 4,500
+updates from a fresh 2,048-environment, 5,000-iteration run started on
+2026-09-28, plus the final `model_4999.pt`. RSL-RL counts its 5,000 updates
+from zero, so `model_4999.pt` is the completed baseline policy.
 
 At the final logged update, mean reward was 60.38, mean episode length 996.39,
 time-out termination 98.28%, bad-orientation termination 1.61%, and
