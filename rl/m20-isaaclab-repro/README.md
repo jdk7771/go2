@@ -18,6 +18,7 @@ git submodule update --init --recursive
 
 准确提交和来源见 [`SOURCE_REVISIONS.md`](SOURCE_REVISIONS.md)。本项目的
 M20 资源路径修复保留在 `patches/apply_m20_asset_fix.sh`。
+新目标任务的代码改动保留在 `patches/m20_goal10m.patch`。
 
 ## 训练结果与模型
 
@@ -31,6 +32,10 @@ checkpoint 与最终 `model_4999.pt`。准确路径、哈希和恢复命令见
 先阅读 [`docs/SETUP_AND_RUN.md`](docs/SETUP_AND_RUN.md)。其中说明了
 AutoDL 的 Vulkan EGL ICD 修复、M20 资源恢复、烟雾测试和正式训练命令。
 `scripts/` 目录包含实际使用的脚本；所有凭据仅从环境变量读取，未保存在仓库。
+
+新增的“起点正前方 10 m 目标 + 更高楼梯”任务见
+[`docs/M20_GOAL10M.md`](docs/M20_GOAL10M.md)。它使用独立任务 ID、训练脚本和
+实验目录，旧速度跟踪 baseline 的模型与复现记录保持原样。
 
 ## 视频
 

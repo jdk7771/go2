@@ -1,0 +1,213 @@
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/__init__.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/__init__.py
+index 3ec0c08..3e88fb5 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/__init__.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/__init__.py
+@@ -35 +35,11 @@ gym.register(
+ )
++
++gym.register(
++    id="Rough-Deeprobotics-M20-Goal10m-v0",
++    entry_point="isaaclab.envs:ManagerBasedRLEnv",
++    disable_env_checker=True,
++    kwargs={
++        "env_cfg_entry_point": f"{__name__}.goal_env_cfg:DeeproboticsM20GoalEnvCfg",
++        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:DeeproboticsM20GoalPPORunnerCfg",
++    },
++)
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/agents/rsl_rl_ppo_cfg.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/agents/rsl_rl_ppo_cfg.py
+index d3062fc..bd66e76 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/agents/rsl_rl_ppo_cfg.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/agents/rsl_rl_ppo_cfg.py
+@@ -48 +48,10 @@ class DeeproboticsM20FlatPPORunnerCfg(DeeproboticsM20RoughPPORunnerCfg):
+         self.experiment_name = "deeprobotics_m20_flat"
++
++
++@configclass
++class DeeproboticsM20GoalPPORunnerCfg(DeeproboticsM20RoughPPORunnerCfg):
++    """Separate the 10 m goal task from the completed velocity baseline."""
++
++    max_iterations = 5000
++    save_interval = 500
++    experiment_name = "deeprobotics_m20_goal10m_rough"
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/goal_command.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/goal_command.py
+new file mode 100644
+index 0000000..f54f593
+--- /dev/null
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/goal_command.py
+@@ -0,0 +1,94 @@
++"""Episode-fixed waypoint command for the M20 goal-reaching task."""
++
++from __future__ import annotations
++
++from collections.abc import Sequence
++
++import torch
++
++from isaaclab.utils import configclass
++from rl_training.tasks.manager_based.locomotion.velocity.mdp.commands import (
++    UniformThresholdVelocityCommand,
++    UniformThresholdVelocityCommandCfg,
++)
++
++
++class FixedForwardGoalVelocityCommand(UniformThresholdVelocityCommand):
++    """Track a world waypoint 10 m in front of each episode's reset pose.
++
++    The actor still receives the same three body-frame velocity commands as the
++    baseline task. The target is fixed in world coordinates until that env resets.
++    """
++
++    cfg: FixedForwardGoalVelocityCommandCfg
++
++    def __init__(self, cfg: FixedForwardGoalVelocityCommandCfg, env):
++        super().__init__(cfg, env)
++        self.goal_pos_w = torch.zeros(self.num_envs, 2, device=self.device)
++
++    def _resample_command(self, env_ids: Sequence[int]):
++        if len(env_ids) == 0:
++            return
++        heading = self.robot.data.heading_w[env_ids]
++        forward_w = torch.stack((torch.cos(heading), torch.sin(heading)), dim=-1)
++        self.goal_pos_w[env_ids] = self.robot.data.root_pos_w[env_ids, :2] + self.cfg.goal_distance * forward_w
++        self.is_standing_env[env_ids] = False
++        self.is_heading_env[env_ids] = False
++        self._update_command()
++
++    def _update_command(self):
++        delta_w = self.goal_pos_w - self.robot.data.root_pos_w[:, :2]
++        distance = torch.linalg.vector_norm(delta_w, dim=-1)
++        heading = self.robot.data.heading_w
++        cos_heading = torch.cos(heading)
++        sin_heading = torch.sin(heading)
++
++        # Rotate the world-frame goal displacement into the current body frame.
++        delta_x_b = cos_heading * delta_w[:, 0] + sin_heading * delta_w[:, 1]
++        delta_y_b = -sin_heading * delta_w[:, 0] + cos_heading * delta_w[:, 1]
++        self.vel_command_b[:, 0] = torch.clamp(
++            self.cfg.position_gain * delta_x_b,
++            min=self.cfg.ranges.lin_vel_x[0],
++            max=self.cfg.ranges.lin_vel_x[1],
++        )
++        self.vel_command_b[:, 1] = torch.clamp(
++            self.cfg.position_gain * delta_y_b,
++            min=self.cfg.ranges.lin_vel_y[0],
++            max=self.cfg.ranges.lin_vel_y[1],
++        )
++        goal_heading = torch.atan2(delta_w[:, 1], delta_w[:, 0])
++        heading_error = torch.atan2(torch.sin(goal_heading - heading), torch.cos(goal_heading - heading))
++        self.vel_command_b[:, 2] = torch.clamp(
++            self.cfg.heading_control_stiffness * heading_error,
++            min=self.cfg.ranges.ang_vel_z[0],
++            max=self.cfg.ranges.ang_vel_z[1],
++        )
++        self.vel_command_b[distance <= self.cfg.goal_tolerance] = 0.0
++
++
++@configclass
++class FixedForwardGoalVelocityCommandCfg(UniformThresholdVelocityCommandCfg):
++    """Generate velocity commands toward an episode-fixed forward waypoint."""
++
++    class_type: type = FixedForwardGoalVelocityCommand
++
++    goal_distance: float = 10.0
++    goal_tolerance: float = 0.6
++    position_gain: float = 1.0
++
++
++def goal_reached(env, command_name: str, tolerance: float) -> torch.Tensor:
++    """Return whether the robot base is within tolerance of its fixed target."""
++    command = env.command_manager.get_term(command_name)
++    delta = command.goal_pos_w - env.scene["robot"].data.root_pos_w[:, :2]
++    return torch.linalg.vector_norm(delta, dim=-1) <= tolerance
++
++
++def goal_progress(env, command_name: str) -> torch.Tensor:
++    """Signed velocity toward the target, in m/s."""
++    command = env.command_manager.get_term(command_name)
++    robot = env.scene["robot"]
++    delta = command.goal_pos_w - robot.data.root_pos_w[:, :2]
++    direction = delta / torch.clamp(torch.linalg.vector_norm(delta, dim=-1, keepdim=True), min=1e-6)
++    progress = torch.sum(robot.data.root_lin_vel_w[:, :2] * direction, dim=-1)
++    return torch.where(goal_reached(env, command_name, command.cfg.goal_tolerance), 0.0, progress)
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/goal_env_cfg.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/goal_env_cfg.py
+new file mode 100644
+index 0000000..ce0f7e8
+--- /dev/null
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/goal_env_cfg.py
+@@ -0,0 +1,76 @@
++"""M20 waypoint task: reach a point 10 m ahead across taller rough terrain."""
++
++from isaaclab.managers import RewardTermCfg as RewTerm
++from isaaclab.managers import TerminationTermCfg as DoneTerm
++from isaaclab.utils import configclass
++
++from rl_training.tasks.manager_based.locomotion.velocity.config.wheeled.deeprobotics_m20.goal_command import (
++    FixedForwardGoalVelocityCommandCfg,
++    goal_progress,
++    goal_reached,
++)
++from rl_training.tasks.manager_based.locomotion.velocity.config.wheeled.deeprobotics_m20.rough_env_cfg import (
++    DeeproboticsM20RewardsCfg,
++    DeeproboticsM20RoughEnvCfg,
++)
++from rl_training.tasks.manager_based.locomotion.velocity.velocity_env_cfg import TerminationsCfg
++
++
++@configclass
++class DeeproboticsM20GoalRewardsCfg(DeeproboticsM20RewardsCfg):
++    goal_progress = RewTerm(func=goal_progress, weight=2.0, params={"command_name": "base_velocity"})
++    goal_reached = RewTerm(
++        func=goal_reached,
++        weight=250.0,
++        params={"command_name": "base_velocity", "tolerance": 0.6},
++    )
++
++
++@configclass
++class DeeproboticsM20GoalTerminationsCfg(TerminationsCfg):
++    goal_reached = DoneTerm(
++        func=goal_reached,
++        params={"command_name": "base_velocity", "tolerance": 0.6},
++    )
++
++
++@configclass
++class DeeproboticsM20GoalEnvCfg(DeeproboticsM20RoughEnvCfg):
++    """Keep the baseline controller interface while replacing its command source."""
++
++    rewards: DeeproboticsM20GoalRewardsCfg = DeeproboticsM20GoalRewardsCfg()
++    terminations: DeeproboticsM20GoalTerminationsCfg = DeeproboticsM20GoalTerminationsCfg()
++
++    def __post_init__(self):
++        super().__post_init__()
++
++        self.commands.base_velocity = FixedForwardGoalVelocityCommandCfg(
++            asset_name="robot",
++            resampling_time_range=(60.0, 60.0),
++            heading_command=False,
++            heading_control_stiffness=1.5,
++            rel_standing_envs=0.0,
++            debug_vis=False,
++            ranges=FixedForwardGoalVelocityCommandCfg.Ranges(
++                lin_vel_x=(-1.5, 1.5),
++                lin_vel_y=(-1.0, 1.0),
++                ang_vel_z=(-1.5, 1.5),
++            ),
++            goal_distance=10.0,
++            goal_tolerance=0.6,
++            position_gain=1.0,
++        )
++
++        terrain = self.scene.terrain.terrain_generator.sub_terrains
++        # Retain easy curriculum levels, but expose 32 cm steps at the hard end.
++        terrain["pyramid_stairs"].step_height_range = (0.05, 0.32)
++        terrain["pyramid_stairs_inv"].step_height_range = (0.05, 0.32)
++        terrain["pyramid_stairs"].proportion = 0.25
++        terrain["pyramid_stairs_inv"].proportion = 0.25
++        terrain["boxes"].grid_height_range = (0.025, 0.25)
++        terrain["hf_pyramid_slope"].proportion = 0.05
++        terrain["hf_pyramid_slope_inv"].proportion = 0.05
++
++        # The waypoint is fixed for a whole episode; 10 m at <= 1.5 m/s fits in 20 s.
++        # Keep the historical velocity task and its checkpoints untouched.
++        self.disable_zero_weight_rewards()

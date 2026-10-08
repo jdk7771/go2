@@ -24,8 +24,12 @@ tar -C "$ROOT_DIR/deep_robotics_model" -xzf "$BUNDLE_DIR/deep_robotics_model-M20
 
 mkdir -p "$ROOT_DIR/docs"
 cp -a "$BUNDLE_DIR/SETUP_AND_RUN.md" "$ROOT_DIR/docs/"
+if [[ -f "$BUNDLE_DIR/M20_GOAL10M.md" ]]; then
+    cp -a "$BUNDLE_DIR/M20_GOAL10M.md" "$ROOT_DIR/docs/"
+fi
 cp -a "$BUNDLE_DIR/scripts/." "$ROOT_DIR/scripts/"
 cp -a "$BUNDLE_DIR/patches/." "$ROOT_DIR/patches/"
 "$ROOT_DIR/patches/apply_m20_asset_fix.sh" "$ROOT_DIR/src/rl_training"
+"$ROOT_DIR/patches/apply_m20_goal10m_patch.sh" "$ROOT_DIR/src/rl_training"
 
 echo "Source restored at $ROOT_DIR. Run: bash $ROOT_DIR/scripts/bootstrap_m20.sh"

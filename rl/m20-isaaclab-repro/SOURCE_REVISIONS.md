@@ -14,3 +14,7 @@
 
 两个改动由 `patches/apply_m20_asset_fix.sh` 重放，原始 diff 也随完成训练
 保存在本地结果归档中。
+
+另有独立的 Goal10m 实验改动，由 `patches/m20_goal10m.patch` 和
+`patches/apply_m20_goal10m_patch.sh` 重放到上述固定 `rl_training` 提交。
+它新增任务 ID，不改已完成 baseline 的任务配置或 checkpoint。

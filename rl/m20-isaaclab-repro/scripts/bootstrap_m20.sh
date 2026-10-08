@@ -44,6 +44,8 @@ if [[ ! -d "$SRC_DIR/rl_training/.git" && ! -d "$SRC_DIR/rl_training/source/rl_t
     # The M20 task uses only M20 assets. A sparse model checkout avoids
     # downloading unrelated robot models while retaining the pinned commit.
     git clone --depth 1 https://github.com/DeepRoboticsLab/rl_training.git "$SRC_DIR/rl_training"
+    git -C "$SRC_DIR/rl_training" fetch --depth 1 origin 331ce0f09299d94b8c68f0987c6c8bffbd91eb0a
+    git -C "$SRC_DIR/rl_training" checkout --detach 331ce0f09299d94b8c68f0987c6c8bffbd91eb0a
 fi
 RL_DIR="$SRC_DIR/rl_training"
 MODEL_DIR="$RL_DIR/deep_robotics_model"
@@ -66,6 +68,7 @@ else
 fi
 
 "$ROOT_DIR/patches/apply_m20_asset_fix.sh" "$RL_DIR"
+"$ROOT_DIR/patches/apply_m20_goal10m_patch.sh" "$RL_DIR"
 
 "$SRC_DIR/IsaacLab/isaaclab.sh" -i rsl_rl
 python -m pip install 'setuptools<81'

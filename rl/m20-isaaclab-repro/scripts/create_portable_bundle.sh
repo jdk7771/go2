@@ -29,6 +29,7 @@ conda activate m20
 python -m pip freeze --all | sort > "$OUT_DIR/pip-freeze.txt"
 conda env export --no-builds > "$OUT_DIR/environment.yml"
 cp "$ROOT_DIR/docs/SETUP_AND_RUN.md" "$OUT_DIR/"
+cp "$ROOT_DIR/docs/M20_GOAL10M.md" "$OUT_DIR/"
 cp -a "$ROOT_DIR/scripts" "$OUT_DIR/"
 cp -a "$ROOT_DIR/patches" "$OUT_DIR/"
 WHEELHOUSE_DIR="${M20_WHEELHOUSE_DIR:-/root/autodl-tmp/m20-wheelhouse}"
