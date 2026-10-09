@@ -1,0 +1,30 @@
+diff --git a/source/isaaclab/isaaclab/envs/manager_based_rl_env.py b/source/isaaclab/isaaclab/envs/manager_based_rl_env.py
+index ab8c041..1171752 100644
+--- a/source/isaaclab/isaaclab/envs/manager_based_rl_env.py
++++ b/source/isaaclab/isaaclab/envs/manager_based_rl_env.py
+@@ -195,6 +195,9 @@ class ManagerBasedRLEnv(ManagerBasedEnv, gym.Env):
+                 self.sim.render()
+             # update buffers at sim dt
+             self.scene.update(dt=self.physics_dt)
++            # Optional task hook for quantities that must be audited at physics-step
++            # frequency rather than only once per decimated policy step.
++            self._on_physics_step()
+ 
+         # post-step:
+         # -- update env counters (used for curriculum generation)
+@@ -314,6 +317,15 @@ class ManagerBasedRLEnv(ManagerBasedEnv, gym.Env):
+             # call the parent class to close the environment
+             super().close()
+ 
++    def _on_physics_step(self):
++        """Hook invoked after every physics update.
++
++        The default environment has no physics-step bookkeeping.  Tasks that
++        need it (for example a safety limit) may override this method without
++        changing the action/observation scheduling of other environments.
++        """
++        pass
++
+     """
+     Helper functions.
+     """

@@ -37,6 +37,10 @@ AutoDL 的 Vulkan EGL ICD 修复、M20 资源恢复、烟雾测试和正式训�
 [`docs/M20_GOAL10M.md`](docs/M20_GOAL10M.md)。它使用独立任务 ID、训练脚本和
 实验目录，旧速度跟踪 baseline 的模型与复现记录保持原样。
 
+第一轮 6 m 直接 Position-Goal Blind PPO 实验见
+[`docs/M20_POSITION_GOAL_BLIND_PPO_001.md`](docs/M20_POSITION_GOAL_BLIND_PPO_001.md)。
+它有独立的任务 ID、增量补丁和训练入口；方案原文也已归档，训练结果尚未产生。
+
 ## 视频
 
 `scripts/record_policy_comparison.sh` 可以在渲染正常的 NVIDIA 容器中，以固定

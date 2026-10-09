@@ -27,6 +27,12 @@ cp -a "$BUNDLE_DIR/SETUP_AND_RUN.md" "$ROOT_DIR/docs/"
 if [[ -f "$BUNDLE_DIR/M20_GOAL10M.md" ]]; then
     cp -a "$BUNDLE_DIR/M20_GOAL10M.md" "$ROOT_DIR/docs/"
 fi
+if [[ -f "$BUNDLE_DIR/M20_POSITION_GOAL_BLIND_PPO_001.md" ]]; then
+    cp -a "$BUNDLE_DIR/M20_POSITION_GOAL_BLIND_PPO_001.md" "$ROOT_DIR/docs/"
+fi
+if [[ -d "$BUNDLE_DIR/experiments" ]]; then
+    cp -a "$BUNDLE_DIR/experiments" "$ROOT_DIR/docs/"
+fi
 cp -a "$BUNDLE_DIR/scripts/." "$ROOT_DIR/scripts/"
 cp -a "$BUNDLE_DIR/patches/." "$ROOT_DIR/patches/"
 "$ROOT_DIR/patches/apply_m20_asset_fix.sh" "$ROOT_DIR/src/rl_training"
