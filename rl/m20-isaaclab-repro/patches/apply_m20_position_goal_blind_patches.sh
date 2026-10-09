@@ -30,4 +30,5 @@ apply_once() {
 }
 
 apply_once "$RL_TRAINING_DIR" "$SCRIPT_DIR/m20_position_goal_blind.patch" "M20 Position-Goal task"
+apply_once "$RL_TRAINING_DIR" "$SCRIPT_DIR/m20_checkpoint_video_evaluation.patch" "M20 checkpoint video evaluation"
 apply_once "$ISAACLAB_DIR" "$SCRIPT_DIR/m20_position_goal_blind_isaaclab.patch" "Isaac Lab physics-step hook"

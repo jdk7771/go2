@@ -1,0 +1,71 @@
+diff --git a/scripts/reinforcement_learning/rsl_rl/play.py b/scripts/reinforcement_learning/rsl_rl/play.py
+--- a/scripts/reinforcement_learning/rsl_rl/play.py
++++ b/scripts/reinforcement_learning/rsl_rl/play.py
+@@ -27,6 +27,7 @@ import cli_args
+ parser = argparse.ArgumentParser(description="Train an RL agent with RSL-RL.")
+ parser.add_argument("--video", action="store_true", default=False, help="Record videos during training.")
+ parser.add_argument("--video_length", type=int, default=200, help="Length of the recorded video (in steps).")
++parser.add_argument("--video_prefix", type=str, default=None, help="Prefix for a recorded playback video.")
+ parser.add_argument(
+     "--disable_fabric", action="store_true", default=False, help="Disable fabric and use USD I/O operations."
+ )
+@@ -36,6 +37,13 @@ parser.add_argument(
+     "--agent", type=str, default="rsl_rl_cfg_entry_point", help="Name of the RL agent configuration entry point."
+ )
+ parser.add_argument("--seed", type=int, default=None, help="Seed used for the environment")
++parser.add_argument(
++    "--fixed_terrain",
++    type=str,
++    choices=("flat", "stairs", "ledge"),
++    default=None,
++    help="Evaluate on one deterministic terrain type instead of the task terrain mix.",
++)
+ parser.add_argument("--real-time", action="store_true", default=False, help="Run in real-time, if possible.")
+ parser.add_argument("--keyboard", action="store_true", default=False, help="Whether to use keyboard.")
+ # append RSL-RL cli arguments
+@@ -191,6 +199,36 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+         env_cfg.scene.terrain.terrain_generator.num_rows = 5
+         env_cfg.scene.terrain.terrain_generator.num_cols = 5
+         env_cfg.scene.terrain.terrain_generator.curriculum = False
++        if args_cli.fixed_terrain is not None:
++            # Keep checkpoint comparisons meaningful: each fixed scenario has a
++            # single seeded tile and preserves the training terrain parameters.
++            import isaaclab.terrains as terrain_gen
++
++            generator = env_cfg.scene.terrain.terrain_generator
++            generator.num_rows = 1
++            generator.num_cols = 1
++            if args_cli.fixed_terrain == "flat":
++                generator.sub_terrains = {"flat": terrain_gen.MeshPlaneTerrainCfg(proportion=1.0)}
++            elif args_cli.fixed_terrain == "stairs":
++                generator.sub_terrains = {
++                    "stairs": terrain_gen.MeshPyramidStairsTerrainCfg(
++                        proportion=1.0,
++                        step_height_range=(0.03, 0.08),
++                        step_width=0.50,
++                        platform_width=3.0,
++                        border_width=1.0,
++                        holes=False,
++                    )
++                }
++            else:
++                generator.sub_terrains = {
++                    "ledge": terrain_gen.MeshBoxTerrainCfg(
++                        proportion=1.0,
++                        box_height_range=(0.05, 0.08),
++                        platform_width=3.0,
++                        double_box=False,
++                    )
++                }
+         env_cfg.scene.terrain.max_init_terrain_level = None
+ 
+     # disable randomization for play
+@@ -242,6 +280,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+             "video_length": args_cli.video_length,
+             "disable_logger": True,
+         }
++        if args_cli.video_prefix is not None:
++            video_kwargs["name_prefix"] = args_cli.video_prefix
+         print("[INFO] Recording videos during playback.")
+         print_dict(video_kwargs, nesting=4)
+         env = gym.wrappers.RecordVideo(env, **video_kwargs)
