@@ -1,0 +1,371 @@
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
+index 32e3cee..d6585cb 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
+@@ -2,7 +2,6 @@
+
+ from __future__ import annotations
+
+-import isaaclab.terrains as terrain_gen
+ from isaaclab.managers import RewardTermCfg as RewTerm
+ from isaaclab.managers import TerminationTermCfg as DoneTerm
+ from isaaclab.utils import configclass
+@@ -16,6 +15,10 @@ from rl_training.tasks.manager_based.locomotion.velocity.config.wheeled.deeprobo
+     speed_penalty,
+     speed_violation,
+ )
++from rl_training.tasks.manager_based.locomotion.velocity.config.wheeled.deeprobotics_m20.position_goal_terrains import (
++    PositionGoalRouteTerrainCfg,
++    position_goal_route_terrain,
++)
+ from rl_training.tasks.manager_based.locomotion.velocity.config.wheeled.deeprobotics_m20.rough_env_cfg import (
+     DeeproboticsM20ActionsCfg,
+     DeeproboticsM20RewardsCfg,
+@@ -81,18 +84,28 @@ class DeeproboticsM20PositionGoalBlindEnvCfg(DeeproboticsM20RoughEnvCfg):
+         self.observations.critic.velocity_commands.params = {"command_name": "position_goal"}
+         self.observations.critic.height_scan = None
+
+-        # Phase 1 mixture: flat / regular stairs / a square ledge.  The first run deliberately
+-        # uses only low obstacles; higher curriculum stages require evidence from this run.
++        # Phase 1 mixture.  Unlike Isaac Lab's generic pyramid/box terrains,
++        # every tile has an explicit route: level start -> obstacle at 2--4 m
++        # -> landing platform containing the 6 m goal.
+         generator = self.scene.terrain.terrain_generator
+-        generator.size = (12.0, 8.0)
++        generator.size = (14.0, 8.0)
+         generator.sub_terrains = {
+-            "flat": terrain_gen.MeshPlaneTerrainCfg(proportion=0.50),
+-            "stairs": terrain_gen.MeshPyramidStairsTerrainCfg(
+-                proportion=0.35, step_height_range=(0.03, 0.08), step_width=0.50,
+-                platform_width=3.0, border_width=1.0, holes=False,
++            "flat": PositionGoalRouteTerrainCfg(
++                function=position_goal_route_terrain, proportion=0.50, terrain_type="flat"
++            ),
++            "stairs": PositionGoalRouteTerrainCfg(
++                function=position_goal_route_terrain,
++                proportion=0.35,
++                terrain_type="stairs",
++                obstacle_height_range=(0.03, 0.08),
++                stair_count=3,
++                stair_tread_depth=0.50,
+             ),
+-            "ledge": terrain_gen.MeshBoxTerrainCfg(
+-                proportion=0.15, box_height_range=(0.05, 0.08), platform_width=3.0, double_box=False,
++            "ledge": PositionGoalRouteTerrainCfg(
++                function=position_goal_route_terrain,
++                proportion=0.15,
++                terrain_type="ledge",
++                obstacle_height_range=(0.05, 0.08),
+             ),
+         }
+         self.scene.terrain.max_init_terrain_level = 0
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py
+new file mode 100644
+index 0000000..533508c
+--- /dev/null
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py
+@@ -0,0 +1,159 @@
++"""Route terrains used by the M20 six-metre position-goal experiment.
++
++Every tile has the same semantic layout: the robot starts on level ground,
++the 6 m XY goal lies on a valid support surface (ground, a stair tread, or a
++raised platform), and any obstacle is placed on the direct route.  This is deliberately different from
++the generic Isaac Lab pyramid/box terrains, whose spawn point and obstacle
++layout do not encode this experiment's task.
++"""
++
++from __future__ import annotations
++
++from dataclasses import dataclass
++
++import numpy as np
++import trimesh
++
++from isaaclab.terrains.sub_terrain_cfg import SubTerrainBaseCfg
++from isaaclab.utils import configclass
++
++
++@configclass
++class PositionGoalRouteTerrainCfg(SubTerrainBaseCfg):
++    """A flat, stair, or single-ledge route with a controlled start and goal."""
++
++    function = None
++    terrain_type: str = "flat"  # ``flat``, ``stairs``, or ``ledge``.
++    route_start_x: float = 2.0
++    goal_distance: float = 6.0
++    route_width: float = 3.0
++    obstacle_distance_range: tuple[float, float] = (2.0, 4.0)
++    obstacle_height_range: tuple[float, float] = (0.05, 0.05)
++    stair_count: int = 3
++    stair_tread_depth: float = 0.50
++
++
++def _box(size: tuple[float, float, float], center: tuple[float, float, float]) -> trimesh.Trimesh:
++    """Make an axis-aligned, collision-ready box mesh."""
++    return trimesh.creation.box(size, trimesh.transformations.translation_matrix(center))
++
++
++def position_goal_route_terrain(
++    difficulty: float, cfg: PositionGoalRouteTerrainCfg
++) -> tuple[list[trimesh.Trimesh], np.ndarray]:
++    """Generate a route whose terrain origin is the robot's level start pose.
++
++    ``difficulty`` provides bounded variation for training only: it changes the
++    obstacle's position and height within the configuration ranges.  Fixed
++    evaluation scenarios set both ends of every range to the same value.
++    """
++    size_x, size_y = cfg.size
++    start_x = cfg.route_start_x
++    goal_x = start_x + cfg.goal_distance
++    if not 0.0 < start_x < goal_x < size_x:
++        raise ValueError("Route start and 6 m goal must lie inside the terrain tile.")
++
++    obstacle_distance = cfg.obstacle_distance_range[0] + difficulty * (
++        cfg.obstacle_distance_range[1] - cfg.obstacle_distance_range[0]
++    )
++    obstacle_x = start_x + obstacle_distance
++    if not start_x < obstacle_x < goal_x:
++        raise ValueError("Obstacle must be between the route start and the 6 m goal.")
++    height = cfg.obstacle_height_range[0] + difficulty * (
++        cfg.obstacle_height_range[1] - cfg.obstacle_height_range[0]
++    )
++
++    # A solid base gives every route a level floor at z=0.  Raised boxes add
++    # only the directed obstacle and its landing platform.
++    meshes: list[trimesh.Trimesh] = [_box((size_x, size_y, 1.0), (size_x / 2.0, size_y / 2.0, -0.5))]
++    if cfg.terrain_type == "flat":
++        return meshes, np.array([start_x, size_y / 2.0, 0.0])
++
++    route_min_y = (size_y - cfg.route_width) / 2.0
++    route_max_y = (size_y + cfg.route_width) / 2.0
++    route_center_y = (route_min_y + route_max_y) / 2.0
++
++    if cfg.terrain_type == "stairs":
++        stair_end_x = obstacle_x + cfg.stair_count * cfg.stair_tread_depth
++        if stair_end_x >= size_x:
++            raise ValueError("The stair route must fit inside the terrain tile.")
++        for step in range(cfg.stair_count):
++            step_height = height * (step + 1)
++            step_center_x = obstacle_x + (step + 0.5) * cfg.stair_tread_depth
++            meshes.append(
++                _box((cfg.stair_tread_depth, cfg.route_width, step_height),
++                     (step_center_x, route_center_y, step_height / 2.0))
++            )
++        landing_height = height * cfg.stair_count
++        landing_width = size_x - stair_end_x
++        meshes.append(
++            _box((landing_width, cfg.route_width, landing_height),
++                 (stair_end_x + landing_width / 2.0, route_center_y, landing_height / 2.0))
++        )
++    elif cfg.terrain_type == "ledge":
++        landing_width = size_x - obstacle_x
++        meshes.append(
++            _box((landing_width, cfg.route_width, height),
++                 (obstacle_x + landing_width / 2.0, route_center_y, height / 2.0))
++        )
++    else:
++        raise ValueError(f"Unknown position-goal terrain type: {cfg.terrain_type}")
++
++    # The origin determines where Isaac Lab resets this environment.  Keep it
++    # at the route start rather than at the terrain centre.
++    return meshes, np.array([start_x, size_y / 2.0, 0.0])
++
++
++PositionGoalRouteTerrainCfg.function = position_goal_route_terrain
++
++
++@dataclass(frozen=True)
++class FixedEvaluationScenario:
++    test_id: str
++    terrain_type: str
++    obstacle_height: float = 0.0
++    stair_count: int = 0
++    label: str = ""
++
++
++# Geometry version 1.0.  All scenarios use start x=2.0 m, goal x=8.0 m,
++# obstacle leading edge x=4.5 m, 3 m route width, and a 14 m x 8 m tile.
++# Goal support is scenario-defined; the current stairs end in a top platform,
++# while the ledge tests place the goal directly on the raised platform.
++FIXED_EVALUATION_SCENARIOS: dict[str, FixedEvaluationScenario] = {
++    "T01": FixedEvaluationScenario("T01", "flat", label="flat_6m"),
++    "T02": FixedEvaluationScenario("T02", "stairs", 0.05, 3, "stairs_0p05m"),
++    "T03": FixedEvaluationScenario("T03", "stairs", 0.10, 3, "stairs_0p10m"),
++    "T04": FixedEvaluationScenario("T04", "stairs", 0.15, 3, "stairs_0p15m"),
++    "T05": FixedEvaluationScenario("T05", "ledge", 0.05, label="ledge_0p05m"),
++    "T06": FixedEvaluationScenario("T06", "ledge", 0.10, label="ledge_0p10m"),
++    "T07": FixedEvaluationScenario("T07", "ledge", 0.15, label="ledge_0p15m"),
++    "T08": FixedEvaluationScenario("T08", "ledge", 0.20, label="ledge_0p20m"),
++}
++
++
++def configure_fixed_evaluation_terrain(env_cfg, test_id: str) -> FixedEvaluationScenario:
++    """Replace a task terrain mix with one deterministic, versioned test route."""
++    scenario = FIXED_EVALUATION_SCENARIOS[test_id]
++    generator = env_cfg.scene.terrain.terrain_generator
++    generator.size = (14.0, 8.0)
++    generator.num_rows = 1
++    generator.num_cols = 1
++    generator.curriculum = False
++    generator.seed = 20261009
++    generator.sub_terrains = {
++        scenario.test_id: PositionGoalRouteTerrainCfg(
++            function=position_goal_route_terrain,
++            proportion=1.0,
++            terrain_type=scenario.terrain_type,
++            route_start_x=2.0,
++            goal_distance=6.0,
++            route_width=3.0,
++            obstacle_distance_range=(2.5, 2.5),
++            obstacle_height_range=(scenario.obstacle_height, scenario.obstacle_height),
++            stair_count=scenario.stair_count,
++            stair_tread_depth=0.50,
++        )
++    }
++    env_cfg.scene.terrain.max_init_terrain_level = 0
++    return scenario
+diff --git a/scripts/reinforcement_learning/rsl_rl/play.py b/scripts/reinforcement_learning/rsl_rl/play.py
+index 184c5ab..179cc93 100644
+--- a/scripts/reinforcement_learning/rsl_rl/play.py
++++ b/scripts/reinforcement_learning/rsl_rl/play.py
+@@ -44,6 +44,13 @@ parser.add_argument(
+     default=None,
+     help="Evaluate on one deterministic terrain type instead of the task terrain mix.",
+ )
++parser.add_argument(
++    "--eval_scenario",
++    type=str,
++    choices=("T01", "T02", "T03", "T04", "T05", "T06", "T07", "T08"),
++    default=None,
++    help="Run one versioned M20 position-goal route (start -> 6 m goal through its specified obstacle).",
++)
+ parser.add_argument("--real-time", action="store_true", default=False, help="Run in real-time, if possible.")
+ parser.add_argument("--keyboard", action="store_true", default=False, help="Whether to use keyboard.")
+ # append RSL-RL cli arguments
+@@ -90,6 +97,7 @@ import math
+ import time
+ from collections import deque
+
++import numpy as np
+ import torch
+
+ import isaaclab.utils.math as math_utils
+@@ -195,11 +203,37 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+
+     # spawn the robot randomly in the grid (instead of their terrain levels)
+     # reduce the number of terrains to save memory
++    if args_cli.eval_scenario is not None and args_cli.fixed_terrain is not None:
++        raise ValueError("Use either --eval_scenario or legacy --fixed_terrain, not both.")
++
+     if env_cfg.scene.terrain.terrain_generator is not None:
+         env_cfg.scene.terrain.terrain_generator.num_rows = 5
+         env_cfg.scene.terrain.terrain_generator.num_cols = 5
+         env_cfg.scene.terrain.terrain_generator.curriculum = False
+-        if args_cli.fixed_terrain is not None:
++        if args_cli.eval_scenario is not None:
++            from rl_training.tasks.manager_based.locomotion.velocity.config.wheeled.deeprobotics_m20.position_goal_terrains import (
++                configure_fixed_evaluation_terrain,
++            )
++
++            scenario = configure_fixed_evaluation_terrain(env_cfg, args_cli.eval_scenario)
++            # Fixed evaluation means fixed geometry *and* fixed reset state.
++            env_cfg.events.randomize_reset_base.params["pose_range"] = {
++                "x": (0.0, 0.0), "y": (0.0, 0.0), "z": (0.0, 0.0),
++                "roll": (0.0, 0.0), "pitch": (0.0, 0.0), "yaw": (0.0, 0.0),
++            }
++            env_cfg.events.randomize_reset_base.params["velocity_range"] = {
++                "x": (0.0, 0.0), "y": (0.0, 0.0), "z": (0.0, 0.0),
++                "roll": (0.0, 0.0), "pitch": (0.0, 0.0), "yaw": (0.0, 0.0),
++            }
++            # This is a persistent side-front view of the 2--8 m route in
++            # world coordinates.  It makes start, obstacle, and goal legible
++            # in the recorded RGB frames rather than flattening them in the
++            # default high, diagonal viewport.
++            env_cfg.viewer.origin_type = "world"
++            env_cfg.viewer.eye = (5.0, -14.0, 6.0)
++            env_cfg.viewer.lookat = (5.0, 4.0, 0.35)
++            print(f"[INFO] Fixed evaluation {scenario.test_id}: {scenario.label}")
++        elif args_cli.fixed_terrain is not None:
+             # Keep checkpoint comparisons meaningful: each fixed scenario has a
+             # single seeded tile and preserves the training terrain parameters.
+             import isaaclab.terrains as terrain_gen
+@@ -229,7 +263,8 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+                         double_box=False,
+                     )
+                 }
+-        env_cfg.scene.terrain.max_init_terrain_level = None
++        if args_cli.eval_scenario is None:
++            env_cfg.scene.terrain.max_init_terrain_level = None
+
+     # disable randomization for play
+     env_cfg.observations.policy.enable_corruption = False
+@@ -417,6 +452,48 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+     # reset environment
+     obs, _ = env.reset()
+
++    # A persistent orange goal post marks the world-space 6 m target in fixed
++    # evaluation videos.  VisualizationMarkers creates renderable USD-only
++    # geometry (no collision API), so the target still comes exclusively from
++    # the position-goal command.
++    fixed_goal_marker = None
++    fixed_goal_visualizer = None
++    if args_cli.eval_scenario is not None:
++        fixed_goal_marker = env.unwrapped.command_manager.get_term("position_goal").goal_pos_w[0].detach().cpu().tolist()
++        robot_start = env.unwrapped.scene["robot"].data.root_pos_w[0].detach().cpu().numpy()
++        route_midpoint = 0.5 * (robot_start[:2] + np.asarray(fixed_goal_marker))
++        env.unwrapped.viewport_camera_controller.set_view_env_index(env_index=0)
++        env.unwrapped.viewport_camera_controller.update_view_location(
++            eye=np.array([route_midpoint[0], route_midpoint[1] - 12.0, 5.0]),
++            lookat=np.array([route_midpoint[0], route_midpoint[1], 0.35]),
++        )
++        print(
++            "[INFO] Fixed route camera: "
++            f"start=({robot_start[0]:.2f}, {robot_start[1]:.2f}), "
++            f"goal=({fixed_goal_marker[0]:.2f}, {fixed_goal_marker[1]:.2f})"
++        )
++        try:
++            import isaaclab.sim as sim_utils
++            from isaaclab.markers import VisualizationMarkers, VisualizationMarkersCfg
++
++            goal_x, goal_y = fixed_goal_marker
++            fixed_goal_visualizer = VisualizationMarkers(
++                VisualizationMarkersCfg(
++                    prim_path="/Visuals/M20FixedEvaluationGoal",
++                    markers={
++                        "goal_post": sim_utils.CylinderCfg(
++                            radius=0.16,
++                            height=1.8,
++                            visual_material=sim_utils.PreviewSurfaceCfg(diffuse_color=(1.0, 0.20, 0.0)),
++                        )
++                    },
++                )
++            )
++            goal_position = torch.tensor([[goal_x, goal_y, 0.90]], device=env.unwrapped.device)
++            fixed_goal_visualizer.visualize(goal_position)
++        except Exception as exc:
++            print(f"[WARN] Could not create visual goal marker: {exc}")
++
+     timestep = 0
+     # simulate environment
+     while simulation_app.is_running():
+@@ -507,6 +584,20 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
+
+             if starts:
+                 draw_interface.draw_lines(starts, ends, colors, widths)
++            if fixed_goal_marker is not None:
++                gx, gy = fixed_goal_marker
++                marker_bottom = [gx, gy, 0.0]
++                marker_top = [gx, gy, 1.2]
++                marker_cross_a = [gx - 0.28, gy, 1.15]
++                marker_cross_b = [gx + 0.28, gy, 1.15]
++                marker_cross_c = [gx, gy - 0.28, 1.15]
++                marker_cross_d = [gx, gy + 0.28, 1.15]
++                draw_interface.draw_lines(
++                    [marker_bottom, marker_cross_a, marker_cross_c],
++                    [marker_top, marker_cross_b, marker_cross_d],
++                    [[1.0, 0.45, 0.0, 1.0]] * 3,
++                    [5.0, 5.0, 5.0],
++                )
+         if args_cli.video:
+             timestep += 1
+             # Exit the play loop after recording one video

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# Record deterministic, comparable 30-second rollouts for every saved checkpoint.
+# Record the versioned, fixed M20 position-goal test suite for every checkpoint.
+# Every test is a route from a fixed start to a fixed 6 m goal. T02--T08 put
+# their obstacle on that direct route; they are not generic terrain-category demos.
 set -euo pipefail
 
 RUN_DIR="${1:?usage: $0 RUN_DIR [poll_seconds]}"
@@ -8,7 +10,7 @@ PROJECT_ROOT="${PROJECT_ROOT:-/root/m20-repro}"
 TASK="M20-PositionGoal-Blind-v0"
 SEED=20261009
 VIDEO_LENGTH=1500  # 30 seconds at the 50 Hz policy rate
-SCENARIOS=(flat stairs ledge)
+SCENARIOS=(T01 T02 T03 T04 T05 T06 T07 T08)
 MARKER_DIR="$RUN_DIR/videos/checkpoint-evaluation-markers"
 LOG_DIR="$RUN_DIR/videos/checkpoint-evaluation-logs"
 mkdir -p "$MARKER_DIR" "$LOG_DIR"
@@ -24,7 +26,7 @@ run_checkpoint() {
     for scenario in "${SCENARIOS[@]}"; do
         python "$PROJECT_ROOT/src/rl_training/scripts/reinforcement_learning/rsl_rl/play.py" \
             --task="$TASK" --headless --num_envs=1 --seed="$SEED" \
-            --checkpoint="$checkpoint" --fixed_terrain="$scenario" \
+            --checkpoint="$checkpoint" --eval_scenario="$scenario" \
             --video --video_length="$VIDEO_LENGTH" --video_prefix="${label}_${scenario}" \
             >"$LOG_DIR/${label}_${scenario}.log" 2>&1
     done

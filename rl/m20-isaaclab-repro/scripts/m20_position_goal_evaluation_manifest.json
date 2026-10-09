@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "task": "M20-PositionGoal-Blind-v0",
+  "route": {
+    "tile_size_m": [14.0, 8.0],
+    "start_xy_in_tile_m": [2.0, 4.0],
+    "goal_offset_body_m": [6.0, 0.0],
+    "obstacle_leading_edge_from_start_m": 2.5,
+    "route_width_m": 3.0,
+    "stair_tread_depth_m": 0.5,
+    "stair_count": 3,
+    "seed": 20261009,
+    "reset_pose_and_velocity": "zero"
+  },
+  "tests": {
+    "T01": {"type": "flat", "obstacle_height_m": 0.0},
+    "T02": {"type": "stairs", "step_height_m": 0.05},
+    "T03": {"type": "stairs", "step_height_m": 0.1},
+    "T04": {"type": "stairs", "step_height_m": 0.15},
+    "T05": {"type": "ledge", "height_m": 0.05},
+    "T06": {"type": "ledge", "height_m": 0.1},
+    "T07": {"type": "ledge", "height_m": 0.15},
+    "T08": {"type": "ledge", "height_m": 0.2}
+  }
+}
