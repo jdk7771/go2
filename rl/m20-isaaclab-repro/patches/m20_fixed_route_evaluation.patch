@@ -1,5 +1,5 @@
 diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
-index 32e3cee..d6585cb 100644
+index 32e3cee..66c4c40 100644
 --- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
 +++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
 @@ -2,7 +2,6 @@
@@ -21,7 +21,7 @@ index 32e3cee..d6585cb 100644
  from rl_training.tasks.manager_based.locomotion.velocity.config.wheeled.deeprobotics_m20.rough_env_cfg import (
      DeeproboticsM20ActionsCfg,
      DeeproboticsM20RewardsCfg,
-@@ -81,18 +84,28 @@ class DeeproboticsM20PositionGoalBlindEnvCfg(DeeproboticsM20RoughEnvCfg):
+@@ -81,18 +84,30 @@ class DeeproboticsM20PositionGoalBlindEnvCfg(DeeproboticsM20RoughEnvCfg):
          self.observations.critic.velocity_commands.params = {"command_name": "position_goal"}
          self.observations.critic.height_scan = None
 
@@ -55,16 +55,18 @@ index 32e3cee..d6585cb 100644
 +                function=position_goal_route_terrain,
 +                proportion=0.15,
 +                terrain_type="ledge",
-+                obstacle_height_range=(0.05, 0.08),
++                # A single vertical ledge must match the total elevation of
++                # the three-step route, not one individual stair riser.
++                obstacle_height_range=(0.09, 0.24),
              ),
          }
          self.scene.terrain.max_init_terrain_level = 0
 diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py
 new file mode 100644
-index 0000000..533508c
+index 0000000..5f8d293
 --- /dev/null
 +++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py
-@@ -0,0 +1,159 @@
+@@ -0,0 +1,160 @@
 +"""Route terrains used by the M20 six-metre position-goal experiment.
 +
 +Every tile has the same semantic layout: the robot starts on level ground,
@@ -186,16 +188,17 @@ index 0000000..533508c
 +# Geometry version 1.0.  All scenarios use start x=2.0 m, goal x=8.0 m,
 +# obstacle leading edge x=4.5 m, 3 m route width, and a 14 m x 8 m tile.
 +# Goal support is scenario-defined; the current stairs end in a top platform,
-+# while the ledge tests place the goal directly on the raised platform.
++# while the ledge tests place the goal directly on the raised platform.  The
++# first three ledge heights equal the corresponding three-stair total rises.
 +FIXED_EVALUATION_SCENARIOS: dict[str, FixedEvaluationScenario] = {
 +    "T01": FixedEvaluationScenario("T01", "flat", label="flat_6m"),
 +    "T02": FixedEvaluationScenario("T02", "stairs", 0.05, 3, "stairs_0p05m"),
 +    "T03": FixedEvaluationScenario("T03", "stairs", 0.10, 3, "stairs_0p10m"),
 +    "T04": FixedEvaluationScenario("T04", "stairs", 0.15, 3, "stairs_0p15m"),
-+    "T05": FixedEvaluationScenario("T05", "ledge", 0.05, label="ledge_0p05m"),
-+    "T06": FixedEvaluationScenario("T06", "ledge", 0.10, label="ledge_0p10m"),
-+    "T07": FixedEvaluationScenario("T07", "ledge", 0.15, label="ledge_0p15m"),
-+    "T08": FixedEvaluationScenario("T08", "ledge", 0.20, label="ledge_0p20m"),
++    "T05": FixedEvaluationScenario("T05", "ledge", 0.15, label="ledge_0p15m"),
++    "T06": FixedEvaluationScenario("T06", "ledge", 0.30, label="ledge_0p30m"),
++    "T07": FixedEvaluationScenario("T07", "ledge", 0.45, label="ledge_0p45m"),
++    "T08": FixedEvaluationScenario("T08", "ledge", 0.60, label="ledge_0p60m_exploratory"),
 +}
 +
 +

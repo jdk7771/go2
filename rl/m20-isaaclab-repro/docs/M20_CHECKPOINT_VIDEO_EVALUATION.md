@@ -9,7 +9,8 @@ Fixed protocol:
 - the robot starts at a fixed point; the XY goal is always 6 m forward
 - T01: flat route
 - T02–T04: three-step routes at 0.05 / 0.10 / 0.15 m per step
-- T05–T08: single raised-platform routes at 0.05 / 0.10 / 0.15 / 0.20 m
+- T05–T07: single raised-platform routes at 0.15 / 0.30 / 0.45 m, equal to the total rise of T02–T04
+- T08: 0.60 m raised-platform exploratory challenge
 - every obstacle lies on the direct start-to-goal route; the goal is on a valid support surface and may be on a platform or stair route
 - a fixed side-front camera and orange visual goal post are recorded in every video
 - 1,500 policy steps (30 seconds at 50 Hz)

@@ -17,9 +17,9 @@
     "T02": {"type": "stairs", "step_height_m": 0.05},
     "T03": {"type": "stairs", "step_height_m": 0.1},
     "T04": {"type": "stairs", "step_height_m": 0.15},
-    "T05": {"type": "ledge", "height_m": 0.05},
-    "T06": {"type": "ledge", "height_m": 0.1},
-    "T07": {"type": "ledge", "height_m": 0.15},
-    "T08": {"type": "ledge", "height_m": 0.2}
+    "T05": {"type": "ledge", "height_m": 0.15},
+    "T06": {"type": "ledge", "height_m": 0.3},
+    "T07": {"type": "ledge", "height_m": 0.45},
+    "T08": {"type": "ledge", "height_m": 0.6, "purpose": "exploratory challenge"}
   }
 }
