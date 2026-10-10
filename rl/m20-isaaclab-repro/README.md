@@ -39,7 +39,9 @@ AutoDL 的 Vulkan EGL ICD 修复、M20 资源恢复、烟雾测试和正式训�
 
 第一轮 6 m 直接 Position-Goal Blind PPO 实验见
 [`docs/M20_POSITION_GOAL_BLIND_PPO_001.md`](docs/M20_POSITION_GOAL_BLIND_PPO_001.md)。
-它有独立的任务 ID、增量补丁和训练入口；方案原文已归档，且已完成 5,000 轮训练。
+它有独立的任务 ID、增量补丁和训练入口；已完成 5,000 轮训练，但没有产生成功
+到达样本。第一次实验原始方案见
+[`docs/experiments/2026-10-09_M20_PositionGoal_Blind_PPO_第一次实验_Baseline_限速0.8ms.md`](docs/experiments/2026-10-09_M20_PositionGoal_Blind_PPO_第一次实验_Baseline_限速0.8ms.md)。
 
 第二次实验 M20-PG-002 针对第一轮“5,000 轮仍未到达、后期姿态退化”的结果，
 重构了奖励、速度观测、水平限速监督和 PPO 探索参数，并采用 2--3 m 平地热身后
@@ -47,8 +49,13 @@ AutoDL 的 Vulkan EGL ICD 修复、M20 资源恢复、烟雾测试和正式训�
 [`docs/experiments/2026-10-10_M20_PositionGoal_Blind_PPO_第二次实验_奖励与姿态修正.md`](docs/experiments/2026-10-10_M20_PositionGoal_Blind_PPO_第二次实验_奖励与姿态修正.md)；
 入口为 [`scripts/train_m20_position_goal_blind_v2.sh`](scripts/train_m20_position_goal_blind_v2.sh)。
 
+两次实验的顺序、状态和对应文件统一列在
+[`docs/experiments/README.md`](docs/experiments/README.md)，后续实验继续按“日期 + 第几次实验 + 修改主题”命名。
+
 ## 视频
 
 `scripts/record_policy_comparison.sh` 可以在渲染正常的 NVIDIA 容器中，以固定
-seed 回放两个 checkpoint。当前 AutoDL 镜像的 Isaac Sim 5.1 RTX 渲染器会原生
-崩溃，因此该机器未生成伪造视频；详见交付文档。
+seed 回放两个 checkpoint。早期 AutoDL 镜像曾发生 Isaac Sim 5.1 RTX 渲染器崩溃；
+迁移到可渲染服务器后，第一次实验的固定 checkpoint 视频已经生成并下载到本地归档，
+大型视频不提交 Git。固定场景协议见
+[`docs/M20_CHECKPOINT_VIDEO_EVALUATION.md`](docs/M20_CHECKPOINT_VIDEO_EVALUATION.md)。

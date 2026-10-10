@@ -325,7 +325,7 @@ index db07a54..b9d4e9b 100644
 +        if not self.slowdown_speed < self.speed_limit:
 +            raise ValueError("slowdown_speed must be below speed_limit")
 diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/position_goal_env.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/position_goal_env.py
-index 97997b6..218e5ca 100644
+index 97997b6..861bb08 100644
 --- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/position_goal_env.py
 +++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/position_goal_env.py
 @@ -18,7 +18,8 @@ class M20PositionGoalSafetyEnv(ManagerBasedRLEnv):
@@ -338,7 +338,7 @@ index 97997b6..218e5ca 100644
          self.physics_speed_violation = torch.zeros(self.num_envs, dtype=torch.bool, device=self.device)
          self.goal_stable = torch.zeros(self.num_envs, dtype=torch.bool, device=self.device)
          self._goal_stable_time = torch.zeros(self.num_envs, device=self.device)
-@@ -26,35 +27,40 @@ class M20PositionGoalSafetyEnv(ManagerBasedRLEnv):
+@@ -26,35 +27,45 @@ class M20PositionGoalSafetyEnv(ManagerBasedRLEnv):
  
      def _on_physics_step(self):
          robot = self.scene["robot"]
@@ -356,7 +356,12 @@ index 97997b6..218e5ca 100644
          command = self.command_manager.get_term("position_goal")
          distance = command.goal_distance()
 -        stable = (distance < 0.35) & (speed < 0.15)
-+        stable = (distance < 0.40) & (planar_speed < 0.20)
++        delta_w = command.goal_pos_w - robot.data.root_pos_w[:, :2]
++        heading = robot.data.heading_w
++        forward_error = torch.cos(heading) * delta_w[:, 0] + torch.sin(heading) * delta_w[:, 1]
++        # Requiring the target not to remain materially ahead prevents a robot
++        # stopped at the face of a stair from receiving a false success.
++        stable = (distance < 0.40) & (forward_error <= 0.05) & (planar_speed < 0.20)
          self._goal_stable_time = torch.where(stable, self._goal_stable_time + self.physics_dt, 0.0)
 -        self.goal_stable |= self._goal_stable_time >= 0.5
 +        self.goal_stable |= self._goal_stable_time >= 0.3
