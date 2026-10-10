@@ -1,0 +1,390 @@
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/__init__.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/__init__.py
+index e408561..c06f175 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/__init__.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/__init__.py
+@@ -56,3 +56,19 @@ gym.register(
+         "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:DeeproboticsM20PositionGoalBlindPPORunnerCfg",
+     },
+ )
++
++gym.register(
++    id="M20-PositionGoal-Blind-Warmup-v0",
++    entry_point=(
++        "rl_training.tasks.manager_based.locomotion.velocity.position_goal_env:"
++        "M20PositionGoalSafetyEnv"
++    ),
++    disable_env_checker=True,
++    kwargs={
++        "env_cfg_entry_point": (
++            f"{__name__}.position_goal_env_cfg:"
++            "DeeproboticsM20PositionGoalBlindWarmupEnvCfg"
++        ),
++        "rsl_rl_cfg_entry_point": f"{agents.__name__}.rsl_rl_ppo_cfg:DeeproboticsM20PositionGoalBlindPPORunnerCfg",
++    },
++)
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/agents/rsl_rl_ppo_cfg.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/agents/rsl_rl_ppo_cfg.py
+index 01fba6a..12b303a 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/agents/rsl_rl_ppo_cfg.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/agents/rsl_rl_ppo_cfg.py
+@@ -59,8 +59,14 @@ class DeeproboticsM20GoalPPORunnerCfg(DeeproboticsM20RoughPPORunnerCfg):
+ 
+ @configclass
+ class DeeproboticsM20PositionGoalBlindPPORunnerCfg(DeeproboticsM20RoughPPORunnerCfg):
+-    """Fresh PPO run for the 6 m blind position-goal baseline."""
++    """Fresh PPO run for the second blind position-goal experiment."""
+ 
+     max_iterations = 5000
+     save_interval = 500
+-    experiment_name = "m20_position_goal_blind_6m_v1"
++    experiment_name = "m20_position_goal_blind_6m_v2"
++
++    def __post_init__(self):
++        super().__post_init__()
++        self.clip_actions = 1.0
++        self.policy.init_noise_std = 0.5
++        self.algorithm.entropy_coef = 0.001
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal.py
+index 34d098c..1f60739 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal.py
+@@ -15,14 +15,18 @@ from isaaclab.utils import configclass
+ 
+ 
+ class FixedForwardPositionGoalCommand(CommandTerm):
+-    """Keep a 2-D world goal six metres ahead of the reset pose for one episode."""
++    """Keep one forward 2-D world goal fixed for the whole episode."""
+ 
+     cfg: "FixedForwardPositionGoalCommandCfg"
+ 
+     def __init__(self, cfg: "FixedForwardPositionGoalCommandCfg", env):
+         super().__init__(cfg, env)
++        goal_min, goal_max = cfg.goal_distance_range
++        if goal_min <= 0.0 or goal_min > goal_max:
++            raise ValueError("goal_distance_range must be positive and ordered")
+         self.robot = env.scene[cfg.asset_name]
+         self.goal_pos_w = torch.zeros(self.num_envs, 2, device=self.device)
++        self.sampled_goal_distance = torch.zeros(self.num_envs, device=self.device)
+         self.previous_distance = torch.zeros(self.num_envs, device=self.device)
+         self._command = torch.zeros(self.num_envs, 2, device=self.device)
+ 
+@@ -37,16 +41,23 @@ class FixedForwardPositionGoalCommand(CommandTerm):
+         heading = self.robot.data.heading_w[env_ids]
+         forward_w = torch.stack((torch.cos(heading), torch.sin(heading)), dim=-1)
+         start_xy = self.robot.data.root_pos_w[env_ids, :2]
+-        self.goal_pos_w[env_ids] = start_xy + self.cfg.goal_distance * forward_w
+-        self.previous_distance[env_ids] = self.cfg.goal_distance
++        goal_min, goal_max = self.cfg.goal_distance_range
++        if goal_min == goal_max:
++            sampled_distance = torch.full((len(env_ids),), goal_min, device=self.device)
++        else:
++            sampled_distance = torch.empty(len(env_ids), device=self.device).uniform_(goal_min, goal_max)
++        self.sampled_goal_distance[env_ids] = sampled_distance
++        self.goal_pos_w[env_ids] = start_xy + sampled_distance.unsqueeze(-1) * forward_w
++        self.previous_distance[env_ids] = sampled_distance
+ 
+     def _update_command(self):
+         delta_w = self.goal_pos_w - self.robot.data.root_pos_w[:, :2]
+         heading = self.robot.data.heading_w
+         cos_heading = torch.cos(heading)
+         sin_heading = torch.sin(heading)
+-        self._command[:, 0] = (cos_heading * delta_w[:, 0] + sin_heading * delta_w[:, 1]) / self.cfg.goal_distance
+-        self._command[:, 1] = (-sin_heading * delta_w[:, 0] + cos_heading * delta_w[:, 1]) / self.cfg.goal_distance
++        normalizer = torch.clamp(self.sampled_goal_distance, min=1.0)
++        self._command[:, 0] = (cos_heading * delta_w[:, 0] + sin_heading * delta_w[:, 1]) / normalizer
++        self._command[:, 1] = (-sin_heading * delta_w[:, 0] + cos_heading * delta_w[:, 1]) / normalizer
+ 
+     def _update_metrics(self):
+         # Episode metrics are gathered by the environment's 200 Hz safety monitor.
+@@ -68,7 +79,7 @@ class FixedForwardPositionGoalCommandCfg(CommandTermCfg):
+     class_type: type = FixedForwardPositionGoalCommand
+ 
+     asset_name: str = "robot"
+-    goal_distance: float = 6.0
++    goal_distance_range: tuple[float, float] = (6.0, 6.0)
+ 
+ 
+ def relative_goal_position(env, command_name: str = "position_goal") -> torch.Tensor:
+@@ -81,9 +92,25 @@ def goal_progress(env, command_name: str = "position_goal") -> torch.Tensor:
+     return env.command_manager.get_term(command_name).consume_progress(env.step_dt)
+ 
+ 
++def normalized_goal_distance_l2(env, command_name: str = "position_goal") -> torch.Tensor:
++    """Squared remaining distance normalized by this episode's starting distance."""
++    command = env.command_manager.get_term(command_name)
++    distance = command.goal_distance()
++    normalizer = torch.clamp(command.sampled_goal_distance, min=1.0)
++    return torch.square(distance / normalizer)
++
++
++def near_goal_speed_penalty(env, command_name: str = "position_goal", activation_distance: float = 1.0) -> torch.Tensor:
++    """Penalize horizontal speed above a distance-dependent braking profile."""
++    distance = env.command_manager.get_term(command_name).goal_distance()
++    planar_speed = torch.linalg.vector_norm(env.scene["robot"].data.root_lin_vel_w[:, :2], dim=-1)
++    allowed_speed = torch.clamp(0.5 * distance, min=0.15, max=0.65)
++    return (distance < activation_distance) * torch.square(torch.clamp(planar_speed - allowed_speed, min=0.0))
++
++
+ def speed_penalty(env, threshold: float) -> torch.Tensor:
+-    """Squared excess of real world-frame 3-D base speed above ``threshold``."""
+-    speed = torch.linalg.vector_norm(env.scene["robot"].data.root_lin_vel_w, dim=-1)
++    """Squared excess of real world-frame horizontal base speed above ``threshold``."""
++    speed = torch.linalg.vector_norm(env.scene["robot"].data.root_lin_vel_w[:, :2], dim=-1)
+     return torch.square(torch.clamp(speed - threshold, min=0.0))
+ 
+ 
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
+index 66c4c40..f1d5d77 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_env_cfg.py
+@@ -2,6 +2,7 @@
+ 
+ from __future__ import annotations
+ 
++from isaaclab.managers import ObservationTermCfg as ObsTerm
+ from isaaclab.managers import RewardTermCfg as RewTerm
+ from isaaclab.managers import TerminationTermCfg as DoneTerm
+ from isaaclab.utils import configclass
+@@ -11,6 +12,8 @@ from rl_training.tasks.manager_based.locomotion.velocity.config.wheeled.deeprobo
+     FixedForwardPositionGoalCommandCfg,
+     goal_progress,
+     goal_reached_stably,
++    near_goal_speed_penalty,
++    normalized_goal_distance_l2,
+     relative_goal_position,
+     speed_penalty,
+     speed_violation,
+@@ -33,21 +36,24 @@ from rl_training.tasks.manager_based.locomotion.velocity.velocity_env_cfg import
+ 
+ @configclass
+ class M20PositionGoalActionsCfg(DeeproboticsM20ActionsCfg):
+-    """Keep the 12+4 action layout while shielding wheel targets above 0.75 m/s."""
++    """Keep the 12+4 action layout with a continuous horizontal-speed shield."""
+ 
+     joint_vel = SpeedShieldedJointVelocityActionCfg(
+         asset_name="robot", joint_names=[""], scale=5.0, use_default_offset=True, clip=None, preserve_order=True,
+-        warning_speed=0.75,
++        slowdown_speed=0.70,
++        speed_limit=0.80,
+     )
+ 
+ 
+ @configclass
+ class M20PositionGoalRewardsCfg(DeeproboticsM20RewardsCfg):
+-    goal_progress = RewTerm(func=goal_progress, weight=1.0)
+-    speed_buffer = RewTerm(func=speed_penalty, weight=-8.0, params={"threshold": 0.65})
+-    speed_warning = RewTerm(func=speed_penalty, weight=-80.0, params={"threshold": 0.75})
+-    goal_success = RewTerm(func=goal_reached_stably, weight=5000.0)
+-    speed_violation = RewTerm(func=speed_violation, weight=-2500.0)
++    goal_progress = RewTerm(func=goal_progress, weight=10.0)
++    goal_distance = RewTerm(func=normalized_goal_distance_l2, weight=-0.5)
++    near_goal_braking = RewTerm(func=near_goal_speed_penalty, weight=-20.0)
++    speed_buffer = RewTerm(func=speed_penalty, weight=-10.0, params={"threshold": 0.65})
++    speed_warning = RewTerm(func=speed_penalty, weight=-100.0, params={"threshold": 0.75})
++    goal_success = RewTerm(func=goal_reached_stably, weight=2500.0)
++    speed_violation = RewTerm(func=speed_violation, weight=-1000.0)
+ 
+ 
+ @configclass
+@@ -58,7 +64,7 @@ class M20PositionGoalTerminationsCfg(TerminationsCfg):
+ 
+ @configclass
+ class DeeproboticsM20PositionGoalBlindEnvCfg(DeeproboticsM20RoughEnvCfg):
+-    """First-experiment task: phase-1 terrain mix and direct 2-D goal observation."""
++    """Second-experiment task: dense goal shaping, posture control, and safer exploration."""
+ 
+     actions: M20PositionGoalActionsCfg = M20PositionGoalActionsCfg()
+     rewards: M20PositionGoalRewardsCfg = M20PositionGoalRewardsCfg()
+@@ -71,14 +77,17 @@ class DeeproboticsM20PositionGoalBlindEnvCfg(DeeproboticsM20RoughEnvCfg):
+         # Position-goal command: never expose or train against a velocity command.
+         self.commands.base_velocity = None
+         self.commands.position_goal = FixedForwardPositionGoalCommandCfg(
+-            asset_name="robot", resampling_time_range=(31.0, 31.0), debug_vis=False, goal_distance=6.0
++            asset_name="robot", resampling_time_range=(31.0, 31.0), debug_vis=False,
++            goal_distance_range=(6.0, 6.0),
+         )
+ 
+-        # Actor: 3 angular velocity + 3 gravity + 2 goal + 16 q + 16 qd + 16 action = 56.
+-        # Critic adds only 3-D true linear velocity, for a 59-D privileged state.
++        # Actor and critic both receive body-frame linear velocity so the policy can
++        # learn braking rather than depending on an external shield to infer speed.
++        self.observations.policy.base_lin_vel = ObsTerm(
++            func=mdp.base_lin_vel, clip=(-2.0, 2.0), scale=2.0
++        )
+         self.observations.policy.velocity_commands.func = relative_goal_position
+         self.observations.policy.velocity_commands.params = {"command_name": "position_goal"}
+-        self.observations.policy.base_lin_vel = None
+         self.observations.policy.height_scan = None
+         self.observations.critic.velocity_commands.func = relative_goal_position
+         self.observations.critic.velocity_commands.params = {"command_name": "position_goal"}
+@@ -93,10 +102,19 @@ class DeeproboticsM20PositionGoalBlindEnvCfg(DeeproboticsM20RoughEnvCfg):
+             "flat": PositionGoalRouteTerrainCfg(
+                 function=position_goal_route_terrain, proportion=0.50, terrain_type="flat"
+             ),
+-            "stairs": PositionGoalRouteTerrainCfg(
++            "stairs_goal_after": PositionGoalRouteTerrainCfg(
++                function=position_goal_route_terrain,
++                proportion=0.20,
++                terrain_type="stairs",
++                obstacle_height_range=(0.03, 0.08),
++                stair_count=3,
++                stair_tread_depth=0.50,
++            ),
++            "stairs_goal_on_tread": PositionGoalRouteTerrainCfg(
+                 function=position_goal_route_terrain,
+-                proportion=0.35,
++                proportion=0.15,
+                 terrain_type="stairs",
++                obstacle_distance_range=(4.5, 5.2),
+                 obstacle_height_range=(0.03, 0.08),
+                 stair_count=3,
+                 stair_tread_depth=0.50,
+@@ -126,6 +144,15 @@ class DeeproboticsM20PositionGoalBlindEnvCfg(DeeproboticsM20RoughEnvCfg):
+         }
+         self.events.randomize_push_robot = None
+ 
++        # V1 removed all posture constraints.  A light default-pose cost plus a
++        # terrain-relative base-height target prevents the late crouched/splayed
++        # solution while retaining enough freedom to climb.
++        self.rewards.joint_deviation_l1.weight = -0.2
++        self.rewards.joint_deviation_l1.params["asset_cfg"].joint_names = self.leg_joint_names
++        self.rewards.base_height_l2.weight = -10.0
++        self.rewards.base_height_l2.params["target_height"] = 0.40
++        self.rewards.flat_orientation_l2.weight = -20.0
++
+         # Remove rewards tied to the old velocity-command task or its gait template.
+         for name in (
+             "track_lin_vel_xy_exp", "track_ang_vel_z_exp", "stand_still", "hipx_joint_pos_penalty",
+@@ -149,3 +176,18 @@ class DeeproboticsM20PositionGoalBlindEnvCfg(DeeproboticsM20RoughEnvCfg):
+ 
+ 
+ M20PositionGoalBlindEnv = M20PositionGoalSafetyEnv
++
++
++@configclass
++class DeeproboticsM20PositionGoalBlindWarmupEnvCfg(DeeproboticsM20PositionGoalBlindEnvCfg):
++    """Flat 2--3 m warm-up used only for the first 1,000 V2 iterations."""
++
++    def __post_init__(self):
++        super().__post_init__()
++        self.commands.position_goal.goal_distance_range = (2.0, 3.0)
++        generator = self.scene.terrain.terrain_generator
++        generator.sub_terrains = {
++            "flat": PositionGoalRouteTerrainCfg(
++                function=position_goal_route_terrain, proportion=1.0, terrain_type="flat"
++            )
++        }
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py
+index 5f8d293..1028fe4 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/position_goal_terrains.py
+@@ -136,6 +136,9 @@ FIXED_EVALUATION_SCENARIOS: dict[str, FixedEvaluationScenario] = {
+ def configure_fixed_evaluation_terrain(env_cfg, test_id: str) -> FixedEvaluationScenario:
+     """Replace a task terrain mix with one deterministic, versioned test route."""
+     scenario = FIXED_EVALUATION_SCENARIOS[test_id]
++    # Training samples 2--6 m goals to expose successful stopping episodes;
++    # evaluation remains the original deterministic 6 m task.
++    env_cfg.commands.position_goal.goal_distance_range = (6.0, 6.0)
+     generator = env_cfg.scene.terrain.terrain_generator
+     generator.size = (14.0, 8.0)
+     generator.num_rows = 1
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/mdp/position_goal_safety.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/mdp/position_goal_safety.py
+index db07a54..b9d4e9b 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/mdp/position_goal_safety.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/mdp/position_goal_safety.py
+@@ -9,15 +9,16 @@ from isaaclab.utils import configclass
+ 
+ 
+ class SpeedShieldedJointVelocityAction(JointVelocityAction):
+-    """Set wheel velocity targets to zero while the measured 3-D base speed is unsafe."""
++    """Continuously reduce wheel targets as horizontal speed approaches the limit."""
+ 
+     cfg: "SpeedShieldedJointVelocityActionCfg"
+ 
+     def apply_actions(self):
+-        speed = torch.linalg.vector_norm(self._asset.data.root_lin_vel_w, dim=-1)
+-        intervene = speed >= self.cfg.warning_speed
+-        targets = self.processed_actions.clone()
+-        targets[intervene] = 0.0
++        speed = torch.linalg.vector_norm(self._asset.data.root_lin_vel_w[:, :2], dim=-1)
++        speed_span = self.cfg.speed_limit - self.cfg.slowdown_speed
++        scale = torch.clamp((self.cfg.speed_limit - speed) / speed_span, min=0.0, max=1.0)
++        intervene = scale < 1.0
++        targets = self.processed_actions * scale.unsqueeze(-1)
+         self._asset.set_joint_velocity_target(targets, joint_ids=self._joint_ids)
+         if hasattr(self._env, "record_shield_intervention"):
+             self._env.record_shield_intervention(intervene)
+@@ -26,4 +27,9 @@ class SpeedShieldedJointVelocityAction(JointVelocityAction):
+ @configclass
+ class SpeedShieldedJointVelocityActionCfg(JointVelocityActionCfg):
+     class_type: type = SpeedShieldedJointVelocityAction
+-    warning_speed: float = 0.75
++    slowdown_speed: float = 0.70
++    speed_limit: float = 0.80
++
++    def __post_init__(self):
++        if not self.slowdown_speed < self.speed_limit:
++            raise ValueError("slowdown_speed must be below speed_limit")
+diff --git a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/position_goal_env.py b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/position_goal_env.py
+index 97997b6..218e5ca 100644
+--- a/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/position_goal_env.py
++++ b/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/position_goal_env.py
+@@ -18,7 +18,8 @@ class M20PositionGoalSafetyEnv(ManagerBasedRLEnv):
+ 
+     def __init__(self, cfg, render_mode: str | None = None, **kwargs):
+         super().__init__(cfg, render_mode=render_mode, **kwargs)
+-        self.physics_max_speed = torch.zeros(self.num_envs, device=self.device)
++        self.physics_max_planar_speed = torch.zeros(self.num_envs, device=self.device)
++        self.physics_max_vertical_speed = torch.zeros(self.num_envs, device=self.device)
+         self.physics_speed_violation = torch.zeros(self.num_envs, dtype=torch.bool, device=self.device)
+         self.goal_stable = torch.zeros(self.num_envs, dtype=torch.bool, device=self.device)
+         self._goal_stable_time = torch.zeros(self.num_envs, device=self.device)
+@@ -26,35 +27,40 @@ class M20PositionGoalSafetyEnv(ManagerBasedRLEnv):
+ 
+     def _on_physics_step(self):
+         robot = self.scene["robot"]
+-        speed = torch.linalg.vector_norm(robot.data.root_lin_vel_w, dim=-1)
+-        self.physics_max_speed = torch.maximum(self.physics_max_speed, speed)
+-        self.physics_speed_violation |= speed > 0.80
++        planar_speed = torch.linalg.vector_norm(robot.data.root_lin_vel_w[:, :2], dim=-1)
++        vertical_speed = torch.abs(robot.data.root_lin_vel_w[:, 2])
++        self.physics_max_planar_speed = torch.maximum(self.physics_max_planar_speed, planar_speed)
++        self.physics_max_vertical_speed = torch.maximum(self.physics_max_vertical_speed, vertical_speed)
++        self.physics_speed_violation |= planar_speed > 0.80
+ 
+         if "position_goal" not in self.command_manager.active_terms:
+             return
+         command = self.command_manager.get_term("position_goal")
+         distance = command.goal_distance()
+-        stable = (distance < 0.35) & (speed < 0.15)
++        stable = (distance < 0.40) & (planar_speed < 0.20)
+         self._goal_stable_time = torch.where(stable, self._goal_stable_time + self.physics_dt, 0.0)
+-        self.goal_stable |= self._goal_stable_time >= 0.5
++        self.goal_stable |= self._goal_stable_time >= 0.3
+ 
+     def record_shield_intervention(self, intervene: torch.Tensor):
+         self._shield_intervention_steps += intervene.to(torch.long)
+ 
+     def _reset_idx(self, env_ids: Sequence[int]):
+-        if not hasattr(self, "physics_max_speed"):
++        if not hasattr(self, "physics_max_planar_speed"):
+             return super()._reset_idx(env_ids)
+-        max_speed = self.physics_max_speed[env_ids].clone()
++        max_planar_speed = self.physics_max_planar_speed[env_ids].clone()
++        max_vertical_speed = self.physics_max_vertical_speed[env_ids].clone()
+         violations = self.physics_speed_violation[env_ids].float().clone()
+         shield_steps = self._shield_intervention_steps[env_ids].float().clone()
+         super()._reset_idx(env_ids)
+         self.extras["log"].update({
+-            "Episode/max_speed_3d": max_speed.mean().item(),
++            "Episode/max_speed_xy": max_planar_speed.mean().item(),
++            "Episode/max_abs_speed_z": max_vertical_speed.mean().item(),
+             "Episode/speed_violation_rate": violations.mean().item(),
+             "Episode/shield_intervention_count": shield_steps.mean().item(),
+             "Episode/shield_intervention_duration_s": (shield_steps * self.physics_dt).mean().item(),
+         })
+-        self.physics_max_speed[env_ids] = 0.0
++        self.physics_max_planar_speed[env_ids] = 0.0
++        self.physics_max_vertical_speed[env_ids] = 0.0
+         self.physics_speed_violation[env_ids] = False
+         self.goal_stable[env_ids] = False
+         self._goal_stable_time[env_ids] = 0.0
