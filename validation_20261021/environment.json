@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-21",
+  "python": "3.12.14 (main, Sep  2 2026, 23:27:36) [GCC 15.3.0]",
+  "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+  "packages": {
+    "numpy": "2.3.1",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8",
+    "isaacsim": "6.0.1.0"
+  },
+  "gpu_for_isaac": "NVIDIA GeForce RTX 5090; confirmed by isaac.log",
+  "purpose": "Reduced geometry and static PhysX queries only"
+}
