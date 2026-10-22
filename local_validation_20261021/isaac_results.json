@@ -1,0 +1,19 @@
+{
+  "scope": "Isaac Sim 5.1.0 static PhysX overlap queries, no locomotion dynamics or RL",
+  "swing": {
+    "nominal_sample_count": 301,
+    "nominal_colliding_samples": 111,
+    "searched_sample_count": 616,
+    "searched_colliding_samples": 0
+  },
+  "orientation": {
+    "yaw0_collision": false,
+    "yaw30_collision": true
+  },
+  "knee": {
+    "torso_collision": false,
+    "wheel_collision": false,
+    "knee_collision": true
+  },
+  "agrees_with_reduced_geometry": true
+}

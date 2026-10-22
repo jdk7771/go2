@@ -1,0 +1,628 @@
+{
+  "method": "searched_shift",
+  "dt": 0.002,
+  "body_feedback": true,
+  "wheel_feedback": true,
+  "terminal_reason": "duration_complete",
+  "duration_s": 19.999999999999794,
+  "initial_obstacle": {
+    "pos": [
+      0.422,
+      0.193,
+      0.043
+    ],
+    "size": [
+      0.025,
+      0.065,
+      0.043
+    ]
+  },
+  "actual_liftoff": true,
+  "actual_reload": true,
+  "resume_gate_passed": true,
+  "landing_error_xy_m": 0.006153237438709261,
+  "takeoff_gate_passed": true,
+  "max_tilt_deg": 1.067833658200145,
+  "max_joint_limit_violation_rad": 0.0,
+  "saturation_fraction": 0.0,
+  "forbidden_contact_steps": 0,
+  "resumed_mean_vx_m_s": 0.060786965992633675,
+  "resumed_four_wheel_load_fraction": 1.0,
+  "crossing_three_support_fraction": 1.0,
+  "crossing_fl_unloaded_fraction": 1.0,
+  "slip_p95_m_s": 0.0013600323861076243,
+  "final_position": [
+    0.4506330510311118,
+    0.010912476795730097,
+    0.4070724388578535
+  ],
+  "max_ik_error_m": 3.195868384241519e-06,
+  "planned_obstacle_collisions": [],
+  "planning_wall_seconds": 1.1833583890002046,
+  "landing_x_m": 0.5580000094251978,
+  "advance_m": 0.28962250660171457,
+  "chosen_body_shift_m": [
+    0.0,
+    -0.07,
+    -0.09
+  ],
+  "candidates": [
+    {
+      "shift_m": [
+        0.0,
+        -0.04,
+        -0.03
+      ],
+      "ik_max_error_m": 0.01977073814604948,
+      "support_margin_min_m": 0.004964121734594852,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.05
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.04,
+        -0.06
+      ],
+      "ik_max_error_m": 0.0007906179640764871,
+      "support_margin_min_m": 0.005225287146081163,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.07211102550927978
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.04,
+        -0.09
+      ],
+      "ik_max_error_m": 7.419238040763135e-08,
+      "support_margin_min_m": 0.005412712010087674,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.09848857801796104
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.07,
+        -0.03
+      ],
+      "ik_max_error_m": 0.03300928117550066,
+      "support_margin_min_m": 0.020619894411163284,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.07615773105863909
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.07,
+        -0.06
+      ],
+      "ik_max_error_m": 0.01459747176218195,
+      "support_margin_min_m": 0.020932129806792023,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.09219544457292887
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.07,
+        -0.09
+      ],
+      "ik_max_error_m": 3.2734768566261954e-08,
+      "support_margin_min_m": 0.0211826722769722,
+      "obstacle_contacts": 0,
+      "feasible": true,
+      "cost": 0.11401754250991379
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.1,
+        -0.03
+      ],
+      "ik_max_error_m": 0.047775927832236526,
+      "support_margin_min_m": 0.03622713465300181,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.1044030650891055
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.1,
+        -0.06
+      ],
+      "ik_max_error_m": 0.029959139609852244,
+      "support_margin_min_m": 0.036585031080078795,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.11661903789690602
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.1,
+        -0.09
+      ],
+      "ik_max_error_m": 0.013466159961291245,
+      "support_margin_min_m": 0.0368746073875878,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.13453624047073712
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.13,
+        -0.03
+      ],
+      "ik_max_error_m": 0.063932880897969,
+      "support_margin_min_m": 0.05174019330598609,
+      "obstacle_contacts": 1,
+      "feasible": false,
+      "cost": 0.13341664064126335
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.13,
+        -0.06
+      ],
+      "ik_max_error_m": 0.04672380946121712,
+      "support_margin_min_m": 0.05213566466029417,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.14317821063276354
+    },
+    {
+      "shift_m": [
+        0.0,
+        -0.13,
+        -0.09
+      ],
+      "ik_max_error_m": 0.030834803942484126,
+      "support_margin_min_m": 0.052440182814218486,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.15811388300841897
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.04,
+        -0.03
+      ],
+      "ik_max_error_m": 0.0013745553580496227,
+      "support_margin_min_m": -0.010563443102774794,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.058309518948453
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.04,
+        -0.06
+      ],
+      "ik_max_error_m": 1.4621765625975289e-07,
+      "support_margin_min_m": -0.010297691071355766,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.07810249675906654
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.04,
+        -0.09
+      ],
+      "ik_max_error_m": 1.4953359116234577e-07,
+      "support_margin_min_m": -0.010129589542090034,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.10295630140987
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.07,
+        -0.03
+      ],
+      "ik_max_error_m": 0.015162087908647115,
+      "support_margin_min_m": 0.005167540849023031,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.0818535277187245
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.07,
+        -0.06
+      ],
+      "ik_max_error_m": 2.0974409366462374e-07,
+      "support_margin_min_m": 0.00545203708857931,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.09695359714832658
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.07,
+        -0.09
+      ],
+      "ik_max_error_m": 1.3545287039144134e-08,
+      "support_margin_min_m": 0.005742698575167848,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.11789826122551596
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.1,
+        -0.03
+      ],
+      "ik_max_error_m": 0.030504810576932582,
+      "support_margin_min_m": 0.020828547462887717,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.10862780491200216
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.1,
+        -0.06
+      ],
+      "ik_max_error_m": 0.01198804342687991,
+      "support_margin_min_m": 0.021209139825177442,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.12041594578792296
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.1,
+        -0.09
+      ],
+      "ik_max_error_m": 1.3886177626810306e-08,
+      "support_margin_min_m": 0.021419544097102457,
+      "obstacle_contacts": 0,
+      "feasible": true,
+      "cost": 0.13784048752090222
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.13,
+        -0.03
+      ],
+      "ik_max_error_m": 0.04725020212382949,
+      "support_margin_min_m": 0.03639121958983625,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.13674794331177342
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.13,
+        -0.06
+      ],
+      "ik_max_error_m": 0.029412903654381737,
+      "support_margin_min_m": 0.03682464746176502,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.14628738838327793
+    },
+    {
+      "shift_m": [
+        0.03,
+        -0.13,
+        -0.09
+      ],
+      "ik_max_error_m": 0.012899455672860749,
+      "support_margin_min_m": 0.03718560916706509,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.1609347693943108
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.04,
+        -0.03
+      ],
+      "ik_max_error_m": 2.9647178065283646e-07,
+      "support_margin_min_m": -0.026195324255734925,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.07810249675906654
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.04,
+        -0.06
+      ],
+      "ik_max_error_m": 4.8050071797478624e-08,
+      "support_margin_min_m": -0.025907449079609762,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.09380831519646858
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.04,
+        -0.09
+      ],
+      "ik_max_error_m": 3.1942619378930643e-09,
+      "support_margin_min_m": -0.025774735494427298,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.11532562594670795
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.07,
+        -0.03
+      ],
+      "ik_max_error_m": 1.2438082765175875e-06,
+      "support_margin_min_m": -0.010558165301145395,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.09695359714832658
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.07,
+        -0.06
+      ],
+      "ik_max_error_m": 1.2202506164294787e-08,
+      "support_margin_min_m": -0.010071268275437376,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.11
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.07,
+        -0.09
+      ],
+      "ik_max_error_m": 8.906317155930066e-09,
+      "support_margin_min_m": -0.009816297876310942,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.12884098726725127
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.1,
+        -0.03
+      ],
+      "ik_max_error_m": 0.014597559795734558,
+      "support_margin_min_m": 0.005336916281499737,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.12041594578792296
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.1,
+        -0.06
+      ],
+      "ik_max_error_m": 2.2997192781899054e-08,
+      "support_margin_min_m": 0.0055271298396846955,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.13114877048604
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.1,
+        -0.09
+      ],
+      "ik_max_error_m": 4.694509886253856e-09,
+      "support_margin_min_m": 0.005953116908144873,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.14730919862656236
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.13,
+        -0.03
+      ],
+      "ik_max_error_m": 0.03192341650143055,
+      "support_margin_min_m": 0.020938998779676372,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.14628738838327796
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.13,
+        -0.06
+      ],
+      "ik_max_error_m": 0.013466245134070826,
+      "support_margin_min_m": 0.0213937275044613,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.15524174696260024
+    },
+    {
+      "shift_m": [
+        0.06,
+        -0.13,
+        -0.09
+      ],
+      "ik_max_error_m": 2.893274306751356e-07,
+      "support_margin_min_m": 0.02146800793061439,
+      "obstacle_contacts": 0,
+      "feasible": true,
+      "cost": 0.16911534525287764
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.04,
+        -0.03
+      ],
+      "ik_max_error_m": 9.927177374585693e-08,
+      "support_margin_min_m": -0.04185282516092173,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.10295630140987
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.04,
+        -0.06
+      ],
+      "ik_max_error_m": 1.5759308887248362e-08,
+      "support_margin_min_m": -0.04158431164367668,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.11532562594670795
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.04,
+        -0.09
+      ],
+      "ik_max_error_m": 8.482675714278022e-09,
+      "support_margin_min_m": -0.041491254939566666,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.13341664064126332
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.07,
+        -0.03
+      ],
+      "ik_max_error_m": 6.556523423071057e-08,
+      "support_margin_min_m": -0.02616883041539414,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.11789826122551596
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.07,
+        -0.06
+      ],
+      "ik_max_error_m": 4.10845999050395e-08,
+      "support_margin_min_m": -0.025708976763686137,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.12884098726725127
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.07,
+        -0.09
+      ],
+      "ik_max_error_m": 1.4226518382868604e-07,
+      "support_margin_min_m": -0.025464557876354696,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.1452583904633395
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.1,
+        -0.03
+      ],
+      "ik_max_error_m": 0.0002286070805320584,
+      "support_margin_min_m": -0.010577377512857145,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.13784048752090222
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.1,
+        -0.06
+      ],
+      "ik_max_error_m": 4.560045066247511e-08,
+      "support_margin_min_m": -0.010057346265776257,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.14730919862656236
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.1,
+        -0.09
+      ],
+      "ik_max_error_m": 5.772879695145086e-09,
+      "support_margin_min_m": -0.009655940630642443,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.16186414056238646
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.13,
+        -0.03
+      ],
+      "ik_max_error_m": 0.01809253337648572,
+      "support_margin_min_m": 0.005388767842886874,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.1609347693943108
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.13,
+        -0.06
+      ],
+      "ik_max_error_m": 4.930167289317884e-06,
+      "support_margin_min_m": 0.0054583508125718855,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.16911534525287764
+    },
+    {
+      "shift_m": [
+        0.09,
+        -0.13,
+        -0.09
+      ],
+      "ik_max_error_m": 2.32038847974445e-08,
+      "support_margin_min_m": 0.005916341001351522,
+      "obstacle_contacts": 0,
+      "feasible": false,
+      "cost": 0.1819340539866025
+    }
+  ],
+  "diagnostic_success": true
+}

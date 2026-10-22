@@ -1,0 +1,72 @@
+[
+  {
+    "directory": "e1_height_sweep/h0.043",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "e1_height_sweep/h0.086",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "e1_height_sweep/h0.129",
+    "states": 6250,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "e1_height_sweep/h0.172",
+    "states": 2251,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "e1_dt001",
+    "states": 20000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.3_push+0",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.3_push+20",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.3_push-20",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.5_push+0",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.5_push+20",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.5_push-20",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.8_push+0",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.8_push+20",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  },
+  {
+    "directory": "robustness_screen/mu0.8_push-20",
+    "states": 10000,
+    "recorded_state_integrity_passed": true
+  }
+]

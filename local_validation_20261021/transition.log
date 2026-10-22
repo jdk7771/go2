@@ -1,0 +1,49 @@
+[
+  {
+    "kind": "flat",
+    "scenes": 1,
+    "path_edges": 22,
+    "all_greedy_contacts_changed": 22,
+    "greedy_x_rolling_compatible": 22,
+    "locked_stance_edges_passing": 22,
+    "locked_stance_failure_reasons": {}
+  },
+  {
+    "kind": "table",
+    "scenes": 12,
+    "path_edges": 308,
+    "all_greedy_contacts_changed": 264,
+    "greedy_x_rolling_compatible": 308,
+    "locked_stance_edges_passing": 308,
+    "locked_stance_failure_reasons": {}
+  },
+  {
+    "kind": "gap",
+    "scenes": 12,
+    "path_edges": 394,
+    "all_greedy_contacts_changed": 370,
+    "greedy_x_rolling_compatible": 224,
+    "locked_stance_edges_passing": 394,
+    "locked_stance_failure_reasons": {}
+  },
+  {
+    "kind": "table_gap",
+    "scenes": 12,
+    "path_edges": 426,
+    "all_greedy_contacts_changed": 370,
+    "greedy_x_rolling_compatible": 257,
+    "locked_stance_edges_passing": 426,
+    "locked_stance_failure_reasons": {}
+  },
+  {
+    "kind": "step",
+    "scenes": 1,
+    "path_edges": 25,
+    "all_greedy_contacts_changed": 20,
+    "greedy_x_rolling_compatible": 23,
+    "locked_stance_edges_passing": 24,
+    "locked_stance_failure_reasons": {
+      "support": 1
+    }
+  }
+]

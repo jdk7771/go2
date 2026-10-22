@@ -1,0 +1,26 @@
+{
+  "scope": "Full Go2W bounded IK and upstream-primitive collision screen; not a stable workspace",
+  "samples": 1197,
+  "feasible": 891,
+  "ik_tolerance_m": 0.001,
+  "penetration_tolerance_m": 0.001,
+  "ground_clearance_at_nominal_m": 0.002,
+  "wall_seconds": 3.2497684419995494,
+  "slices": [
+    {
+      "body_y_m": -0.06,
+      "feasible": 276,
+      "total": 399
+    },
+    {
+      "body_y_m": 0.0,
+      "feasible": 339,
+      "total": 399
+    },
+    {
+      "body_y_m": 0.06,
+      "feasible": 276,
+      "total": 399
+    }
+  ]
+}

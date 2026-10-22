@@ -1,0 +1,19 @@
+{
+  "continuous_ground": {
+    "found": true,
+    "expanded": 9897,
+    "post_hoc_trace_validation": true,
+    "body_advances": 22,
+    "single_leg_swings": 28
+  },
+  "full_width_gap": {
+    "found": false,
+    "expanded": 2138,
+    "search_exhausted": true,
+    "expansion_limit_hit": false,
+    "max_reached_body_x": 1.0,
+    "post_hoc_trace_validation": null,
+    "body_advances": 0,
+    "single_leg_swings": 0
+  }
+}

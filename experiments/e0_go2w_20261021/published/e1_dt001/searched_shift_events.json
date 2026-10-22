@@ -1,0 +1,26 @@
+[
+  {
+    "time": 7.048000000000688,
+    "event": "actual_liftoff"
+  },
+  {
+    "time": 8.000000000001005,
+    "event": "takeoff_gate",
+    "passed": true
+  },
+  {
+    "time": 11.615999999999001,
+    "event": "actual_reloaded"
+  },
+  {
+    "time": 12.50099999999851,
+    "event": "resume_gate",
+    "passed": true,
+    "load": [
+      25.348499944571888,
+      59.65898352777716,
+      39.15491086907945,
+      63.44498104955624
+    ]
+  }
+]

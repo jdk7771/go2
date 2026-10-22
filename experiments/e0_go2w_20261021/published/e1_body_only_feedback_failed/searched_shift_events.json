@@ -1,0 +1,47 @@
+[
+  {
+    "time": 7.055999999999445,
+    "event": "actual_liftoff"
+  },
+  {
+    "time": 8.001999999999342,
+    "event": "takeoff_gate",
+    "passed": true
+  },
+  {
+    "time": 11.612000000000547,
+    "event": "actual_reloaded"
+  },
+  {
+    "time": 12.500000000000844,
+    "event": "resume_gate",
+    "passed": true,
+    "load": [
+      25.67569951844856,
+      59.83881075091941,
+      38.48768474578787,
+      63.60633993229341
+    ]
+  },
+  {
+    "time": 12.502000000000844,
+    "event": "resume_gate",
+    "passed": true,
+    "load": [
+      25.67286628171579,
+      59.83775907122446,
+      38.48958123468854,
+      63.60697706973679
+    ]
+  },
+  {
+    "time": 15.374000000001804,
+    "event": "forbidden_contact",
+    "pairs": [
+      [
+        "obstacle",
+        "FL_wheel_geom_1"
+      ]
+    ]
+  }
+]

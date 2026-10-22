@@ -1,0 +1,130 @@
+{
+  "generated_at": "2026-10-22T08:25:38.158985+08:00",
+  "source_repository": "https://github.com/unitreerobotics/unitree_mujoco",
+  "source_commit": "1eb6642e3f3fdfb7fb13a9794fd6a2dd93ea0e7d",
+  "source_model_sha256": "c8feaef4afdf360335727c80a826d1611950c562a3daaa5b5bfcf8b57f6859a6",
+  "python": "3.10.20 (main, Mar 11 2026, 17:46:40) [GCC 14.3.0]",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+  "packages": {
+    "mujoco": "3.8.0",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "matplotlib": "3.10.9"
+  },
+  "model": {
+    "mass_kg": 19.126407999999998,
+    "wheel_radius_m": 0.08600000942519778,
+    "joint_count": 17,
+    "motor_count": 16,
+    "ctrlrange_nm": [
+      [
+        -23.7,
+        23.7
+      ],
+      [
+        -23.7,
+        23.7
+      ],
+      [
+        -45.43,
+        45.43
+      ],
+      [
+        -23.7,
+        23.7
+      ],
+      [
+        -23.7,
+        23.7
+      ],
+      [
+        -45.43,
+        45.43
+      ],
+      [
+        -23.7,
+        23.7
+      ],
+      [
+        -23.7,
+        23.7
+      ],
+      [
+        -45.43,
+        45.43
+      ],
+      [
+        -23.7,
+        23.7
+      ],
+      [
+        -23.7,
+        23.7
+      ],
+      [
+        -45.43,
+        45.43
+      ],
+      [
+        -15.0,
+        15.0
+      ],
+      [
+        -15.0,
+        15.0
+      ],
+      [
+        -15.0,
+        15.0
+      ],
+      [
+        -15.0,
+        15.0
+      ]
+    ]
+  },
+  "scripts": {
+    "e1_local.py": "072e8e9e6d4c823afb0b0f691eced2f43793225cba5217bc92e89adb8295b3ba",
+    "validate_geometry_sat.py": "50b9d1d3fdbc15f082c931cf6f848eecb10021bf760c95334cd7d102ef3757df",
+    "model.py": "c87ffa5467248e27caa9a545f7d3bd22cf35cb4598209cfcf602e1f252653008",
+    "check_recorded_trials.py": "07bb758f3f42c4f8b719e40321fdfd57523cfd16425616622231bb9614edec3d",
+    "screen_failure.py": "f59febf74cefcfba1717b4ee12f70448cea7a1d3fa38fb77d849f14bf1cf40b1",
+    "make_figures.py": "f9e446ad80dd6d36121b7f16b1e362d5365fd9b1ea5961077c82631e7814c657",
+    "sweep_e1.py": "10d4c3e651ac2f16406d5c759fcc160b451bc6fa0285ec616f03c7183ac6bb5c",
+    "sweep_body_reference.py": "e159b025cd53890dd60f1b79e298ca6a939272b07f92d4fac030ba52ddeac8a1",
+    "validate_robustness.py": "380492f83c99838bd6091e778e7ff416bdb3652834200eef71e44210441ea34f",
+    "workspace_scan.py": "1f85c59f293c9b41335d0f8bc8b20a8728d05943302a9e9af96c8a1f7cfabeaf",
+    "export_results.py": "ab37ee5941d0632982e64d9c1cc756a5caa894cbc310e9ce9cfb830e5c0741e0",
+    "run_e0.py": "469bcdb6d07cf7c1c75398bf5fe896c5a3962f5ba2861a5f8f31e633f09ab97e",
+    "sweep_robustness.py": "34732ecb26fdf33aecd9d455d8192ea053d59f5cbc9fcaf507ba0a761df4fe09",
+    "test_geometry_sat.py": "e99cbd233dfd57bdab791334f0a2259b74de8b41afdc0c180f2b2563b455d956",
+    "validate_geometry.py": "387b9c81f484367973f71fd3b002f5f5e9f3d069fbf5cbaa81d81b41d69784d1",
+    "render_trial.py": "9b4cab3018ce2911a3afb5b7bcdc93ea02b6dbee26858a83ea54e0f165f8f614"
+  },
+  "meshes": {
+    "wheel1.stl": "d0f0ad618e1d7791020e752aaca171fa0bef0700e42493b063e4a1e8a2f9e24e",
+    "base_2.obj": "29cae463f95d678e4ede863c36c9b19b0d356b8340412add10670d70bdcc3095",
+    "terrain.STL": "38dd949eecfb697a4fff0a3a527bf638807df9a0481b29c22aff4298d5ac2b6a",
+    "calf_mirror.stl": "528b471bfc60b6e72dbb162b34eefebced994bea82aaf58eda91f090219cd911",
+    "foot.obj": "df9e78a7c0110d02557439010f2a5f11f0ec4fd907b32704145dbd6aa7affc0b",
+    "calf_1.obj": "51950c3a153ae3208592df86ea11c9d6756f8f645ebca5caf6910c61aeb03817",
+    "base_4.obj": "49ddec0129546e5dd2075d5beacf7f207baa2860aeff7626818e64d2efbf3821",
+    "thigh_mirror_0.obj": "07abaedce761f1dd48647384ac14ba1959276bc78d5a2a62051e8f1c6093933b",
+    "wheel.stl": "51c95e80dcd41c0cf1a9575d4d7c2c89855848f7fa2c4bf28f2f10c2e3d639e2",
+    "base_3.obj": "f51ba43bf300e68957a0c1aa83eaf3e4926f4ac7e64a0d6c33ae5d21fcbcf5f6",
+    "base_1.obj": "39d2f4724ff64dd5a0640c308fd98902a2946660a8d033ec8dbf368fd5af0dd6",
+    "calf_mirror_0.obj": "6dc0406207a1c08a5953fd5962aca1a270fd06593d30d100205e05c1b32d4af2",
+    "untitled.stl": "654d229dcbd6e02cd43c32e71ba137eef1bba992cd64541e46f2e2f8e7e10a5d",
+    "calf_mirror_1.obj": "f84f5af90b914633165beb3a5493ee499169144c5797dcf04c6eb5842f74b31a",
+    "hip_0.obj": "cc29932ab4d251ce3f72389ec4c1f757e44eee138b87e772b648c2bc76b506cd",
+    "hip_1.obj": "3fd5bd9b2ef6abe622c0739d3c67eaa1679b19b47132951972c4892a779ea7cf",
+    "thigh_mirror_1.obj": "db984a3e983eabbc9b38183427cca9ab0bb3bdb049f9eab030e06edda36579d6",
+    "base_0.obj": "8cdc53719002a5ee737d867904e534a6d6fa930b616bdcc1b3131e577d4e46c0",
+    "calf.stl": "2aee434b80da010deebb11c8538d593f7901a169cc34916350902746e591437e",
+    "thigh_1.obj": "3a631822f9f7d2114b1b79dcdff5abf95103630abb7d91d1f3b8b18117132ed2",
+    "calf_0.obj": "4a818cd563c5b7e2a271504442d05fd777d38cbaa028d4a10ad29c9f87bb355e",
+    "thigh_0.obj": "bb3edfe6a7b04f4f4dff1ce7b05d426ddce941e276cc6372fb542055893c71ec",
+    "terrain.stl": "561c95d28cf9bc648feacced5b4044560dc157468c114e8314ac9c4e169097fa"
+  },
+  "evidence_scope": "Development experiments on a public model. No RL training, hardware calibration, general success-rate claim or real-time guarantee."
+}

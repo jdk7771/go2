@@ -1,0 +1,17 @@
+__pycache__/
+*.log
+*.csv
+*.npz
+*.xml
+*.mp4
+pilot_*/
+formal_gravity/
+sensitivity_dt001/
+e1_*/
+failure_screen/
+body_reference_screen/
+robustness_screen/
+workspace/
+published/
+!published/**
+!published/

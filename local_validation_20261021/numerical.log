@@ -1,0 +1,271 @@
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+{
+  "summary": [
+    {
+      "kind": "flat",
+      "method": "body_only",
+      "n": 1,
+      "paths": 1,
+      "node_screen_pass": 1,
+      "swept_body_clear": 1,
+      "median_ms": 0.93
+    },
+    {
+      "kind": "flat",
+      "method": "body_with_node_support",
+      "n": 1,
+      "paths": 1,
+      "node_screen_pass": 1,
+      "swept_body_clear": 1,
+      "median_ms": 10.85
+    },
+    {
+      "kind": "table",
+      "method": "body_only",
+      "n": 12,
+      "paths": 12,
+      "node_screen_pass": 12,
+      "swept_body_clear": 12,
+      "median_ms": 3.13
+    },
+    {
+      "kind": "table",
+      "method": "body_with_node_support",
+      "n": 12,
+      "paths": 12,
+      "node_screen_pass": 12,
+      "swept_body_clear": 12,
+      "median_ms": 30.24
+    },
+    {
+      "kind": "gap",
+      "method": "body_only",
+      "n": 12,
+      "paths": 12,
+      "node_screen_pass": 0,
+      "swept_body_clear": 12,
+      "median_ms": 0.84
+    },
+    {
+      "kind": "gap",
+      "method": "body_with_node_support",
+      "n": 12,
+      "paths": 12,
+      "node_screen_pass": 12,
+      "swept_body_clear": 12,
+      "median_ms": 197.6
+    },
+    {
+      "kind": "table_gap",
+      "method": "body_only",
+      "n": 12,
+      "paths": 12,
+      "node_screen_pass": 0,
+      "swept_body_clear": 12,
+      "median_ms": 1.59
+    },
+    {
+      "kind": "table_gap",
+      "method": "body_with_node_support",
+      "n": 12,
+      "paths": 12,
+      "node_screen_pass": 12,
+      "swept_body_clear": 12,
+      "median_ms": 212.07
+    },
+    {
+      "kind": "step",
+      "method": "body_only",
+      "n": 1,
+      "paths": 1,
+      "node_screen_pass": 1,
+      "swept_body_clear": 1,
+      "median_ms": 6.12
+    },
+    {
+      "kind": "step",
+      "method": "body_with_node_support",
+      "n": 1,
+      "paths": 1,
+      "node_screen_pass": 1,
+      "swept_body_clear": 1,
+      "median_ms": 53.84
+    }
+  ],
+  "swing": {
+    "endpoint_clear": true,
+    "nominal_min_clearance": -0.11,
+    "searched_min_clearance": 0.01280109889280498,
+    "expanded": 4853,
+    "searched_mid_swing_min_center_height": 0.12
+  },
+  "diagnostics": {
+    "knee": {
+      "hip": [
+        0.0,
+        0.0,
+        0.5
+      ],
+      "foot": [
+        0.15,
+        0.0,
+        0.06
+      ],
+      "knee": [
+        0.20503754841640548,
+        0.0,
+        0.3243309824146837
+      ],
+      "alternate_knee": [
+        -0.05503754841640547,
+        0.0,
+        0.23566901758531633
+      ],
+      "obstacle": [
+        [
+          0.17003754841640548,
+          -0.035,
+          0.2893309824146837
+        ],
+        [
+          0.24003754841640548,
+          0.035,
+          0.35933098241468375
+        ]
+      ],
+      "link_length": 0.27,
+      "foot_clear": true,
+      "torso_clear": true,
+      "knee_clear": false
+    },
+    "orientation": {
+      "corridor_width": 0.4,
+      "body_width": 0.3,
+      "body_length": 0.6,
+      "required_width_yaw0": 0.3,
+      "required_width_yaw30": 0.5598076211353316
+    },
+    "friction": [
+      {
+        "slope_deg": 0,
+        "mu": 0.1,
+        "geometric_support": true,
+        "force_feasible": true,
+        "analytic_friction_possible": true
+      },
+      {
+        "slope_deg": 0,
+        "mu": 0.3,
+        "geometric_support": true,
+        "force_feasible": true,
+        "analytic_friction_possible": true
+      },
+      {
+        "slope_deg": 0,
+        "mu": 0.6,
+        "geometric_support": true,
+        "force_feasible": true,
+        "analytic_friction_possible": true
+      },
+      {
+        "slope_deg": 10,
+        "mu": 0.1,
+        "geometric_support": true,
+        "force_feasible": false,
+        "analytic_friction_possible": false
+      },
+      {
+        "slope_deg": 10,
+        "mu": 0.3,
+        "geometric_support": true,
+        "force_feasible": true,
+        "analytic_friction_possible": true
+      },
+      {
+        "slope_deg": 10,
+        "mu": 0.6,
+        "geometric_support": true,
+        "force_feasible": true,
+        "analytic_friction_possible": true
+      },
+      {
+        "slope_deg": 20,
+        "mu": 0.1,
+        "geometric_support": true,
+        "force_feasible": false,
+        "analytic_friction_possible": false
+      },
+      {
+        "slope_deg": 20,
+        "mu": 0.3,
+        "geometric_support": true,
+        "force_feasible": false,
+        "analytic_friction_possible": false
+      },
+      {
+        "slope_deg": 20,
+        "mu": 0.6,
+        "geometric_support": true,
+        "force_feasible": true,
+        "analytic_friction_possible": true
+      },
+      {
+        "slope_deg": 30,
+        "mu": 0.1,
+        "geometric_support": true,
+        "force_feasible": false,
+        "analytic_friction_possible": false
+      },
+      {
+        "slope_deg": 30,
+        "mu": 0.3,
+        "geometric_support": true,
+        "force_feasible": false,
+        "analytic_friction_possible": false
+      },
+      {
+        "slope_deg": 30,
+        "mu": 0.6,
+        "geometric_support": true,
+        "force_feasible": true,
+        "analytic_friction_possible": true
+      }
+    ],
+    "disconnected_contacts": {
+      "all_body_layers_nonempty": true,
+      "start_to_goal_path_exists": false,
+      "witness_graph": {
+        "s0": [
+          "s1_left"
+        ],
+        "s1_left": [],
+        "s1_right": [
+          "s2"
+        ],
+        "s2": []
+      },
+      "note": "Abstract graph counterexample, not a robot simulation"
+    },
+    "rolling": {
+      "reference_center_velocity": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "wheel_tangent": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "lateral_no_slip_residual_m_s": 0.2,
+      "note": "Fixed yaw and fixed relative leg positions; side-stepping is a different motion"
+    }
+  }
+}
