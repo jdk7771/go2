@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T08:33:38.064597+08:00",
+  "generated_at": "2026-10-22T08:43:07.169737+08:00",
   "source_repository": "https://github.com/unitreerobotics/unitree_mujoco",
   "source_commit": "1eb6642e3f3fdfb7fb13a9794fd6a2dd93ea0e7d",
   "source_model_sha256": "c8feaef4afdf360335727c80a826d1611950c562a3daaa5b5bfcf8b57f6859a6",
@@ -86,8 +86,9 @@
   "scripts": {
     "plot_retarget.py": "ce34c6877aec45cefcc347c01f28baab58db3da2b2fe6c525b5e71f16fec7d4b",
     "sweep_contact_points.py": "0218eb97fad6752f97ec4ba15fbc7099b1219bcbe6c950c38ef21dde8aa3a59f",
-    "e1_local.py": "5790a9ea483ad710fbcbb5fe1b55d8e21630f08150a71fad346d7611e634cf2e",
+    "e1_local.py": "b7097cd1b789488525bdae19aeae858ade55fb783b6cd9985d5769010d895cc7",
     "validate_geometry_sat.py": "50b9d1d3fdbc15f082c931cf6f848eecb10021bf760c95334cd7d102ef3757df",
+    "coupled_plan.py": "6565139c45ccdba1137bbcf06d0650aa7f3b217d5a0b7041dec128eb16cafc90",
     "model.py": "291e65eaaf3f546ad69ca7e7dcb2601e59353fc8bd35fdaa2dd1346273f07942",
     "check_recorded_trials.py": "07bb758f3f42c4f8b719e40321fdfd57523cfd16425616622231bb9614edec3d",
     "validate_retarget.py": "5849100c3bbc5b8b9652b1863be4246f5231338df1783e925365d9df600ea40b",
@@ -99,7 +100,7 @@
     "validate_robustness.py": "380492f83c99838bd6091e778e7ff416bdb3652834200eef71e44210441ea34f",
     "workspace_scan.py": "1f85c59f293c9b41335d0f8bc8b20a8728d05943302a9e9af96c8a1f7cfabeaf",
     "diagnose_landing.py": "7d08a2f038db696cdf6f46089b0b2ae5e56ff1abd19bd8cbd3c97d08a5529e71",
-    "export_results.py": "93fefedeee3c87615f0f16e7c668cbaeb3d0ce3f7cda710fca00dcf7667dd23d",
+    "export_results.py": "d7e2513bfa102b2e7a56a51b843c49f199d2b1fc3aa0791ce518922e76d2a110",
     "run_e0.py": "469bcdb6d07cf7c1c75398bf5fe896c5a3962f5ba2861a5f8f31e633f09ab97e",
     "sweep_robustness.py": "34732ecb26fdf33aecd9d455d8192ea053d59f5cbc9fcaf507ba0a761df4fe09",
     "test_geometry_sat.py": "e99cbd233dfd57bdab791334f0a2259b74de8b41afdc0c180f2b2563b455d956",

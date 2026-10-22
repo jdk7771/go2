@@ -15,6 +15,7 @@ contact_point_screen/
 retarget_screen/
 retarget_validation/
 landing_reference_screen/
+coupled_landing_screen/
 workspace/
 published/
 !published/**

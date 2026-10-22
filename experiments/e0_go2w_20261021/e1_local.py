@@ -96,7 +96,7 @@ def crossing_plan(robot,method,obstacle,swing_clearance=.07,body_raise=0.,relax_
                 candidates=candidates)
 
 
-def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=25.,swing_clearance=.07,body_raise=0.,friction=.8,push_force=0.,contact_points=False,retarget_swing=False,relax_landing=False):
+def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=25.,swing_clearance=.07,body_raise=0.,friction=.8,push_force=0.,contact_points=False,retarget_swing=False,relax_landing=False,coupled_landing=False,coupled_grid='expanded'):
     # Identical world geometry for both methods, fixed before execution.
     obstacle={'pos':[.422,.193,height/2],'size':[.025,.065,height/2]}
     m,xml=build_model(dt,variant='single_collision',obstacle=obstacle,friction=friction)
@@ -118,7 +118,10 @@ def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=
         else:
             if plan is None:
                 plan=crossing_plan(robot,method,obstacle,swing_clearance,body_raise,relax_landing)
-                if plan['max_ik_error_m']>.001 or plan['planned_obstacle_collisions']:
+                if coupled_landing:
+                    from coupled_plan import refine
+                    plan=refine(robot,plan,coupled_grid)
+                if plan['max_ik_error_m']>.001 or plan['planned_obstacle_collisions'] or plan.get('coupled_search_failed',False):
                     reason='planning_rejected';events.append(dict(time=t,event=reason));break
             qref=np.array([np.interp(t,plan['time'],plan['q'][:,i]) for i in range(12)])
             wheel=np.array([np.interp(t,plan['time'],plan['wheel_speed'][:,i]) for i in range(4)])
@@ -206,10 +209,11 @@ def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=
                 initial_obstacle=obstacle,actual_liftoff=lift_seen,actual_reload=land_seen,contact_point_feedback=contact_points,
                 retarget_swing=retarget_swing,retarget_max_ik_error_m=max(retarget_errors) if retarget_errors else None,
                 relax_landing=relax_landing,
+                coupled_landing=coupled_landing,
                 retarget_update_count=len(retarget_errors),
                 retarget_ik_over_1mm_fraction=float(np.mean(np.array(retarget_errors)>.001)) if retarget_errors else None,
                 retarget_wall_seconds_p95=float(np.quantile(retarget_wall,.95)) if retarget_wall else None,
-                execution_code_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['model.py','e1_local.py']},
+                execution_code_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['model.py','e1_local.py','coupled_plan.py']},
                 resume_gate_passed=bool(resume_allowed),
                 landing_error_xy_m=landing_error,takeoff_gate_passed=takeoff_gate,
                 actual_friction=friction,controller_nominal_friction=.8,push_force_y_n=push_force,push_impulse_y_ns=push_impulse,
@@ -247,6 +251,8 @@ if __name__=='__main__':
     p.add_argument('--contact-points',action='store_true')
     p.add_argument('--retarget-swing',action='store_true')
     p.add_argument('--relax-landing',action='store_true')
+    p.add_argument('--coupled-landing',action='store_true')
+    p.add_argument('--coupled-grid',choices=['initial','expanded'],default='expanded')
     a=p.parse_args()
-    results=[run(method,a.dt,a.out,a.feedback,a.height,a.wheel_feedback,a.body_gain,a.swing_clearance,a.body_raise,a.friction,a.push_force,a.contact_points,a.retarget_swing,a.relax_landing) for method in a.methods]
+    results=[run(method,a.dt,a.out,a.feedback,a.height,a.wheel_feedback,a.body_gain,a.swing_clearance,a.body_raise,a.friction,a.push_force,a.contact_points,a.retarget_swing,a.relax_landing,a.coupled_landing,a.coupled_grid) for method in a.methods]
     (a.out/'summary.json').write_text(json.dumps(results,indent=2))

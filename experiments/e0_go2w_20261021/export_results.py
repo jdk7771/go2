@@ -37,13 +37,17 @@ def main():
                  'contact_point_screen','retarget_screen','retarget_validation','landing_reference_screen']:
         p=ROOT/name/'summary.json'
         if p.exists():groups[name]=json.loads(p.read_text())
+    coupled=[]
+    for p in sorted((ROOT/'coupled_landing_screen').glob('*/searched_shift.json')):
+        row=json.loads(p.read_text());row['case_directory']=str(p.parent.relative_to(ROOT));coupled.append(row)
+    if coupled:groups['coupled_landing_screen']=coupled
     (out/'trial_summaries.json').write_text(json.dumps(groups,indent=2))
     context=dict(final_height_screen='e1_height_sweep',final_perturbation_screen='robustness_screen',
         retained_historical_groups=['e1_search','e1_pilot','e1_feedback','e1_gravity_gated','e1_contact_feedback'],
         note='Historical e1_search success flags predate the strict 3 cm landing-error gate. Retain them as development history; do not count them as passes under current gates. Each deterministic cell is one development case, not a success-rate estimate.')
     (out/'trial_group_context.json').write_text(json.dumps(context,indent=2))
     fields=['group','method','name','height_m','dt','controller','body_gain','body_raise_m','swing_clearance_m',
-            'actual_friction','push_force_y_n','contact_point_feedback','retarget_swing','relax_landing','retarget_max_ik_error_m',
+            'actual_friction','push_force_y_n','contact_point_feedback','retarget_swing','relax_landing','coupled_landing','retarget_max_ik_error_m',
             'retarget_ik_over_1mm_fraction','terminal_reason','diagnostic_success','landing_error_xy_m',
             'max_tilt_deg','slip_p95_m_s','saturation_fraction','forbidden_contact_steps']
     with (out/'trial_table.csv').open('w') as f:
@@ -62,6 +66,8 @@ def main():
         'e1_body_only_feedback_failed':'e1_feedback',
         'e1_h129_retarget':'retarget_validation/nominal',
         'e1_h129_lateral_return_rejected':'landing_reference_screen/retarget0',
+        'e1_h129_coupled_initial_rejected':'coupled_landing_screen/retarget',
+        'e1_h129_coupled_expanded_rejected':'coupled_landing_screen/expanded_support',
     }
     manifest=[]
     for name,source in selected.items():

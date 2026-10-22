@@ -1,0 +1,34 @@
+[
+  {
+    "grid": "initial",
+    "source": "coupled_landing_screen/retarget",
+    "candidate_records_exact_match": true,
+    "candidates": 144,
+    "first_rejection_counts": {
+      "obstacle_clearance": 39,
+      "biased_fl_ik": 16,
+      "support_margin": 89
+    },
+    "integrity": {
+      "directory": "coupled_landing_screen/retarget",
+      "states": 2251,
+      "recorded_state_integrity_passed": true
+    }
+  },
+  {
+    "grid": "expanded",
+    "source": "coupled_landing_screen/expanded_support",
+    "candidate_records_exact_match": true,
+    "candidates": 192,
+    "first_rejection_counts": {
+      "obstacle_clearance": 109,
+      "biased_fl_ik": 26,
+      "support_margin": 57
+    },
+    "integrity": {
+      "directory": "coupled_landing_screen/expanded_support",
+      "states": 2251,
+      "recorded_state_integrity_passed": true
+    }
+  }
+]
