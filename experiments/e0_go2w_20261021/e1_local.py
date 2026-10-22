@@ -10,6 +10,7 @@ import csv
 import json
 import time
 import itertools
+import hashlib
 from pathlib import Path
 
 import mujoco
@@ -44,7 +45,7 @@ def search_shift(robot,origin,feet,landing,swing_height,body_raise=0.):
     return (np.array(chosen['shift_m']) if chosen else None),records
 
 
-def crossing_plan(robot,method,obstacle,swing_clearance=.07,body_raise=0.):
+def crossing_plan(robot,method,obstacle,swing_clearance=.07,body_raise=0.,relax_landing=False):
     d=robot.d
     origin=d.qpos[:3].copy();quat=np.array([1.,0.,0.,0.])
     feet=robot.centers(d).copy()
@@ -68,6 +69,10 @@ def crossing_plan(robot,method,obstacle,swing_clearance=.07,body_raise=0.):
         f[0,0]+=advance*smooth((t-8)/2)
         catch=smooth((t-12.5)/4)
         b+=np.array([advance,0.,0.])*catch-shift*catch
+        if relax_landing:
+            # The large lateral shift needed at peak lift need not persist
+            # through touchdown. Return toward the low-obstacle support pose.
+            b[1]+=(max(shift[1],-.07)-shift[1])*smooth((t-10.)/1.5)*(1.-catch)
         f[1:,0]+=advance*catch
         q,e=robot.ik(b,quat,f,previous,centers=True);previous=q
         qs.append(q);points.append(f);body.append(b);errors.append(e)
@@ -91,7 +96,7 @@ def crossing_plan(robot,method,obstacle,swing_clearance=.07,body_raise=0.):
                 candidates=candidates)
 
 
-def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=25.,swing_clearance=.07,body_raise=0.,friction=.8,push_force=0.):
+def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=25.,swing_clearance=.07,body_raise=0.,friction=.8,push_force=0.,contact_points=False,retarget_swing=False,relax_landing=False):
     # Identical world geometry for both methods, fixed before execution.
     obstacle={'pos':[.422,.193,height/2],'size':[.025,.065,height/2]}
     m,xml=build_model(dt,variant='single_collision',obstacle=obstacle,friction=friction)
@@ -101,6 +106,7 @@ def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=
     max_joint_limit=0.;max_bad=0;lift_seen=False;land_seen=False;resume_allowed=False
     takeoff_gate=None;landing_error=None;resume_checked=False
     qref=robot.nominal[:12].copy()
+    retarget_q=None;retarget_next=7.;retarget_errors=[];retarget_times=[];retarget_wall=[];executed_references=[]
     for step in range(int(round(20/dt))):
         t=d.time;wheel=0.;support=np.ones(4);phase='approach';body_target=None
         d.xfrc_applied[:]=0.
@@ -111,7 +117,7 @@ def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=
             wheel=.08/robot.radius*(smooth((t-2)/.5)-smooth((t-3.5)/.5))
         else:
             if plan is None:
-                plan=crossing_plan(robot,method,obstacle,swing_clearance,body_raise)
+                plan=crossing_plan(robot,method,obstacle,swing_clearance,body_raise,relax_landing)
                 if plan['max_ik_error_m']>.001 or plan['planned_obstacle_collisions']:
                     reason='planning_rejected';events.append(dict(time=t,event=reason));break
             qref=np.array([np.interp(t,plan['time'],plan['q'][:,i]) for i in range(12)])
@@ -120,6 +126,23 @@ def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=
                 body_target=np.array([np.interp(t,plan['time'],plan['body'][:,i]) for i in range(3)])
             phase='shift' if t<6.5 else 'unload' if t<7 else 'raise' if t<8 else 'cross' if t<10 else 'lower' if t<11.5 else 'reload' if t<12.5 else 'catchup' if t<16.5 else 'rolling'
             support[0]=1.-smooth((t-6.5)/.5)+smooth((t-11.5)/.5)
+            if retarget_swing and 7.<=t<16.5:
+                # Recompute FL targets at 50 Hz in the measured base frame.
+                # Other legs keep the original controller. During reload and
+                # catch-up, preserve measured height while correcting XY.
+                if t>=retarget_next-1e-9:
+                    target=robot.centers(d)
+                    target[0]=[np.interp(t,plan['time'],plan['centers'][:,0,j]) for j in range(3)]
+                    if t>=11.5:target[0,2]=robot.centers(d)[0,2]
+                    solve_started=time.monotonic()
+                    solved,error=robot.ik(d.qpos[:3],d.qpos[3:7],target,
+                        initial=d.qpos[robot.qa[:12]],centers=True)
+                    retarget_errors.append(error)
+                    retarget_times.append(t);retarget_wall.append(time.monotonic()-solve_started)
+                    retarget_q=solved[3:6].copy()
+                    retarget_next=t+.02
+                blend=smooth((t-7.)/.3)*(1.-smooth((t-16.)/.5))
+                qref[3:6]=(1.-blend)*qref[3:6]+blend*retarget_q
             if t>=8 and takeoff_gate is None:
                 s=robot.measure()
                 takeoff_gate=bool(s['load'][0]<1 and np.all(s['load'][1:]>5)
@@ -149,7 +172,7 @@ def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=
                         wheel[actuator]=vx/robot.radius-joint_motion
             if t>=16.5:
                 wheel=.08/robot.radius*(smooth((t-16.5)/.5)-smooth((t-18)/.5))
-        saturation+=robot.torque(qref,wheel,gravity_support=support,body_target=body_target,body_gain=body_gain)
+        saturation+=robot.torque(qref,wheel,gravity_support=support,body_target=body_target,body_gain=body_gain,contact_points=contact_points)
         mujoco.mj_step(m,d);mujoco.mj_forward(m,d)
         s=robot.measure();max_joint_limit=max(max_joint_limit,s['joint_limit_violation'])
         if 7<=t<11.5 and s['load'][0]<1 and not lift_seen:
@@ -163,6 +186,7 @@ def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=
         states.append(d.qpos.copy())
         velocities.append(d.qvel.copy());controls.append(d.ctrl.copy())
         external.append(d.xfrc_applied[robot.base].copy())
+        executed_references.append(qref.copy())
         if s['bad_contacts']:
             reason='forbidden_contact';break
         if s['tilt']>np.deg2rad(20) or s['base_pos'][2]<.2:
@@ -172,13 +196,20 @@ def run(method,dt,out,feedback=False,height=.043,wheel_feedback=False,body_gain=
     header += [f'{l}_center_{axis}' for l in LEGS for axis in 'xyz']+[f'tau_{m.actuator(i).name}' for i in range(16)]
     with (out/f'{method}.csv').open('w') as f:
         w=csv.writer(f);w.writerow(header);w.writerows(rows)
-    np.savez_compressed(out/f'{method}_states.npz',time=[r[0] for r in rows],qpos=states,qvel=velocities,ctrl=controls,external_wrench=external)
+    np.savez_compressed(out/f'{method}_states.npz',time=[r[0] for r in rows],qpos=states,qvel=velocities,ctrl=controls,external_wrench=external,joint_reference=executed_references,
+        retarget_time=retarget_times,retarget_error=retarget_errors,retarget_wall_seconds=retarget_wall)
     (out/'model.xml').write_text(xml)
     (out/f'{method}_events.json').write_text(json.dumps(events,indent=2))
     resumed=[r for r in rows if 17.2<=r[0]<=17.9]
     crossing=[r for r in rows if 8.2<=r[0]<=9.8]
     result=dict(method=method,dt=dt,body_feedback=feedback,wheel_feedback=wheel_feedback,body_gain=body_gain,swing_clearance_m=swing_clearance,body_raise_m=body_raise,terminal_reason=reason,duration_s=float(d.time),
-                initial_obstacle=obstacle,actual_liftoff=lift_seen,actual_reload=land_seen,
+                initial_obstacle=obstacle,actual_liftoff=lift_seen,actual_reload=land_seen,contact_point_feedback=contact_points,
+                retarget_swing=retarget_swing,retarget_max_ik_error_m=max(retarget_errors) if retarget_errors else None,
+                relax_landing=relax_landing,
+                retarget_update_count=len(retarget_errors),
+                retarget_ik_over_1mm_fraction=float(np.mean(np.array(retarget_errors)>.001)) if retarget_errors else None,
+                retarget_wall_seconds_p95=float(np.quantile(retarget_wall,.95)) if retarget_wall else None,
+                execution_code_sha256={name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['model.py','e1_local.py']},
                 resume_gate_passed=bool(resume_allowed),
                 landing_error_xy_m=landing_error,takeoff_gate_passed=takeoff_gate,
                 actual_friction=friction,controller_nominal_friction=.8,push_force_y_n=push_force,push_impulse_y_ns=push_impulse,
@@ -213,6 +244,9 @@ if __name__=='__main__':
     p.add_argument('--body-gain',type=float,default=25.);p.add_argument('--swing-clearance',type=float,default=.07)
     p.add_argument('--body-raise',type=float,default=0.)
     p.add_argument('--friction',type=float,default=.8);p.add_argument('--push-force',type=float,default=0.)
+    p.add_argument('--contact-points',action='store_true')
+    p.add_argument('--retarget-swing',action='store_true')
+    p.add_argument('--relax-landing',action='store_true')
     a=p.parse_args()
-    results=[run(method,a.dt,a.out,a.feedback,a.height,a.wheel_feedback,a.body_gain,a.swing_clearance,a.body_raise,a.friction,a.push_force) for method in a.methods]
+    results=[run(method,a.dt,a.out,a.feedback,a.height,a.wheel_feedback,a.body_gain,a.swing_clearance,a.body_raise,a.friction,a.push_force,a.contact_points,a.retarget_swing,a.relax_landing) for method in a.methods]
     (a.out/'summary.json').write_text(json.dumps(results,indent=2))

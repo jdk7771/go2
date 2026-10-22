@@ -33,7 +33,8 @@ def main():
     groups={}
     for name in ['pilot_upstream','pilot_single','pilot_gravity','formal_gravity','sensitivity_dt001',
                  'e1_pilot','e1_search','e1_gravity_gated','e1_feedback','e1_contact_feedback',
-                 'e1_height_sweep','e1_dt001','failure_screen','body_reference_screen','robustness_screen']:
+                 'e1_height_sweep','e1_dt001','failure_screen','body_reference_screen','robustness_screen',
+                 'contact_point_screen','retarget_screen','retarget_validation','landing_reference_screen']:
         p=ROOT/name/'summary.json'
         if p.exists():groups[name]=json.loads(p.read_text())
     (out/'trial_summaries.json').write_text(json.dumps(groups,indent=2))
@@ -42,7 +43,8 @@ def main():
         note='Historical e1_search success flags predate the strict 3 cm landing-error gate. Retain them as development history; do not count them as passes under current gates. Each deterministic cell is one development case, not a success-rate estimate.')
     (out/'trial_group_context.json').write_text(json.dumps(context,indent=2))
     fields=['group','method','name','height_m','dt','controller','body_gain','body_raise_m','swing_clearance_m',
-            'actual_friction','push_force_y_n','terminal_reason','diagnostic_success','landing_error_xy_m',
+            'actual_friction','push_force_y_n','contact_point_feedback','retarget_swing','relax_landing','retarget_max_ik_error_m',
+            'retarget_ik_over_1mm_fraction','terminal_reason','diagnostic_success','landing_error_xy_m',
             'max_tilt_deg','slip_p95_m_s','saturation_fraction','forbidden_contact_steps']
     with (out/'trial_table.csv').open('w') as f:
         w=csv.DictWriter(f,fieldnames=fields,lineterminator='\n');w.writeheader()
@@ -58,6 +60,8 @@ def main():
         'e1_h129_failed':'e1_height_sweep/h0.129',
         'e1_dt001':'e1_dt001',
         'e1_body_only_feedback_failed':'e1_feedback',
+        'e1_h129_retarget':'retarget_validation/nominal',
+        'e1_h129_lateral_return_rejected':'landing_reference_screen/retarget0',
     }
     manifest=[]
     for name,source in selected.items():
@@ -74,7 +78,8 @@ def main():
                                      bytes=(dest/file).stat().st_size,sha256=digest(dest/file),source_sha256=digest(p)))
         telemetry=origin/'searched_shift.csv'
         if telemetry.exists():
-            with telemetry.open('rb') as src,gzip.open(dest/'telemetry.csv.gz','wb') as dst:shutil.copyfileobj(src,dst)
+            with telemetry.open('rb') as src,(dest/'telemetry.csv.gz').open('wb') as raw:
+                with gzip.GzipFile(fileobj=raw,mode='wb',mtime=0,filename='') as dst:shutil.copyfileobj(src,dst)
     for name in ['fixed_wheel_body_slices.png','summary.json','samples.csv','samples.npz']:
         p=ROOT/'workspace'/name
         if p.exists():
@@ -84,6 +89,10 @@ def main():
     if checks.exists():shutil.copy2(checks,out/checks.name)
     robust_geometry=ROOT/'robustness_screen'/'geometry_summary.json'
     if robust_geometry.exists():shutil.copy2(robust_geometry,out/'robustness_geometry_summary.json')
+    retarget_checks=ROOT/'retarget_validation'/'validation.json'
+    if retarget_checks.exists():shutil.copy2(retarget_checks,out/'retarget_validation.json')
+    landing_checks=ROOT/'landing_reference_screen'/'validation.json'
+    if landing_checks.exists():shutil.copy2(landing_checks,out/'landing_reference_validation.json')
     m,_=build_model(variant='single_collision');robot=Robot(m)
     dependency=SOURCE.parents[2]
     commit=subprocess.check_output(['git','-C',str(dependency),'rev-parse','HEAD'],text=True).strip()
@@ -99,7 +108,15 @@ def main():
         scripts={p.name:digest(p) for p in ROOT.glob('*.py')},
         meshes={p.name:digest(p) for p in (SOURCE.parent/'assets').iterdir() if p.is_file()},
         evidence_scope='Development experiments on a public model. No RL training, hardware calibration, general success-rate claim or real-time guarantee.')
+    provenance['code_version_scope']='Scripts are hashed at export time. Original 15 trial groups were checkpointed at 1ad63a12e36a7c4ab2d3c3b3878eb4c7c554355f. New trials may also include execution_code_sha256; defaults preserve the original controller.'
     (out/'provenance.json').write_text(json.dumps(provenance,indent=2))
+    by_path={row['published']:row for row in manifest}
+    manifest=[]
+    for p in sorted(out.rglob('*')):
+        if not p.is_file() or p.name=='manifest.json':continue
+        relative=str(p.relative_to(ROOT))
+        row=by_path.get(relative,dict(published=relative))
+        row.update(bytes=p.stat().st_size,sha256=digest(p));manifest.append(row)
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2))
     print(f'Published {len(groups)} result groups and {len(selected)} selected complete traces.')
 

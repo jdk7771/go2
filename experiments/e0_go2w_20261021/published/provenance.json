@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-22T08:25:38.158985+08:00",
+  "generated_at": "2026-10-22T08:33:38.064597+08:00",
   "source_repository": "https://github.com/unitreerobotics/unitree_mujoco",
   "source_commit": "1eb6642e3f3fdfb7fb13a9794fd6a2dd93ea0e7d",
   "source_model_sha256": "c8feaef4afdf360335727c80a826d1611950c562a3daaa5b5bfcf8b57f6859a6",
@@ -84,21 +84,27 @@
     ]
   },
   "scripts": {
-    "e1_local.py": "072e8e9e6d4c823afb0b0f691eced2f43793225cba5217bc92e89adb8295b3ba",
+    "plot_retarget.py": "ce34c6877aec45cefcc347c01f28baab58db3da2b2fe6c525b5e71f16fec7d4b",
+    "sweep_contact_points.py": "0218eb97fad6752f97ec4ba15fbc7099b1219bcbe6c950c38ef21dde8aa3a59f",
+    "e1_local.py": "5790a9ea483ad710fbcbb5fe1b55d8e21630f08150a71fad346d7611e634cf2e",
     "validate_geometry_sat.py": "50b9d1d3fdbc15f082c931cf6f848eecb10021bf760c95334cd7d102ef3757df",
-    "model.py": "c87ffa5467248e27caa9a545f7d3bd22cf35cb4598209cfcf602e1f252653008",
+    "model.py": "291e65eaaf3f546ad69ca7e7dcb2601e59353fc8bd35fdaa2dd1346273f07942",
     "check_recorded_trials.py": "07bb758f3f42c4f8b719e40321fdfd57523cfd16425616622231bb9614edec3d",
+    "validate_retarget.py": "5849100c3bbc5b8b9652b1863be4246f5231338df1783e925365d9df600ea40b",
     "screen_failure.py": "f59febf74cefcfba1717b4ee12f70448cea7a1d3fa38fb77d849f14bf1cf40b1",
     "make_figures.py": "f9e446ad80dd6d36121b7f16b1e362d5365fd9b1ea5961077c82631e7814c657",
+    "sweep_landing_reference.py": "086b4af8174ad1f294d06964085922f1a17339b152d151d380b5f882e48cc4db",
     "sweep_e1.py": "10d4c3e651ac2f16406d5c759fcc160b451bc6fa0285ec616f03c7183ac6bb5c",
     "sweep_body_reference.py": "e159b025cd53890dd60f1b79e298ca6a939272b07f92d4fac030ba52ddeac8a1",
     "validate_robustness.py": "380492f83c99838bd6091e778e7ff416bdb3652834200eef71e44210441ea34f",
     "workspace_scan.py": "1f85c59f293c9b41335d0f8bc8b20a8728d05943302a9e9af96c8a1f7cfabeaf",
-    "export_results.py": "ab37ee5941d0632982e64d9c1cc756a5caa894cbc310e9ce9cfb830e5c0741e0",
+    "diagnose_landing.py": "7d08a2f038db696cdf6f46089b0b2ae5e56ff1abd19bd8cbd3c97d08a5529e71",
+    "export_results.py": "93fefedeee3c87615f0f16e7c668cbaeb3d0ce3f7cda710fca00dcf7667dd23d",
     "run_e0.py": "469bcdb6d07cf7c1c75398bf5fe896c5a3962f5ba2861a5f8f31e633f09ab97e",
     "sweep_robustness.py": "34732ecb26fdf33aecd9d455d8192ea053d59f5cbc9fcaf507ba0a761df4fe09",
     "test_geometry_sat.py": "e99cbd233dfd57bdab791334f0a2259b74de8b41afdc0c180f2b2563b455d956",
     "validate_geometry.py": "387b9c81f484367973f71fd3b002f5f5e9f3d069fbf5cbaa81d81b41d69784d1",
+    "sweep_retarget.py": "472951284afe8543dae736b1033dffb697fa34d8e1ba42fb96f809bbe8122974",
     "render_trial.py": "9b4cab3018ce2911a3afb5b7bcdc93ea02b6dbee26858a83ea54e0f165f8f614"
   },
   "meshes": {
@@ -126,5 +132,6 @@
     "thigh_0.obj": "bb3edfe6a7b04f4f4dff1ce7b05d426ddce941e276cc6372fb542055893c71ec",
     "terrain.stl": "561c95d28cf9bc648feacced5b4044560dc157468c114e8314ac9c4e169097fa"
   },
-  "evidence_scope": "Development experiments on a public model. No RL training, hardware calibration, general success-rate claim or real-time guarantee."
+  "evidence_scope": "Development experiments on a public model. No RL training, hardware calibration, general success-rate claim or real-time guarantee.",
+  "code_version_scope": "Scripts are hashed at export time. Original 15 trial groups were checkpointed at 1ad63a12e36a7c4ab2d3c3b3878eb4c7c554355f. New trials may also include execution_code_sha256; defaults preserve the original controller."
 }

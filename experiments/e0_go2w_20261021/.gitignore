@@ -11,6 +11,10 @@ e1_*/
 failure_screen/
 body_reference_screen/
 robustness_screen/
+contact_point_screen/
+retarget_screen/
+retarget_validation/
+landing_reference_screen/
 workspace/
 published/
 !published/**

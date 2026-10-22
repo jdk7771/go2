@@ -116,7 +116,27 @@ class Robot:
         err=float(np.max(np.linalg.norm(fun(opt.x).reshape(4,3),axis=1)))
         return opt.x,err
 
-    def torque(self,qtarget, wheel_speed=0., kp=80., kd=2., gravity_support=None,body_target=None,body_gain=25.):
+    def support_points(self):
+        """Simulator contact-position feedback; fall back to center - radius.
+
+        This uses privileged simulator contacts, not a hardware estimator.
+        Force weighting locates the normal-force center of pressure.
+        """
+        pts=self.centers(self.d);pts[:,2]-=self.radius
+        sums=np.zeros((4,3));weights=np.zeros(4)
+        for k,c in enumerate(self.d.contact):
+            if self.floor not in (c.geom1,c.geom2):continue
+            bodies=[int(self.m.geom_bodyid[g]) for g in (c.geom1,c.geom2)]
+            leg=next((i for i,b in enumerate(self.wheel_bodies) if b in bodies),None)
+            if leg is None:continue
+            f=np.zeros(6);mujoco.mj_contactForce(self.m,self.d,k,f)
+            if f[0]<=1e-4:continue
+            sums[leg]+=c.pos*f[0];weights[leg]+=f[0]
+        active=weights>1e-4
+        pts[active]=sums[active]/weights[active,None]
+        return pts
+
+    def torque(self,qtarget, wheel_speed=0., kp=80., kd=2., gravity_support=None,body_target=None,body_gain=25.,contact_points=False):
         d,m=self.d,self.m
         raw=np.zeros(m.nu)
         raw[:12]=kp*(qtarget-d.qpos[self.qa[:12]])-kd*d.qvel[self.va[:12]]
@@ -126,6 +146,7 @@ class Robot:
             # diagnostic inverse-dynamics feedforward, not a full MPC/WBC.
             ids=[i for i,w in enumerate(gravity_support) if w>1e-4]
             pts=self.centers(d);pts[:,2]-=self.radius
+            if contact_points:pts=self.support_points()
             com=d.subtree_com[self.base]
             A=np.vstack((np.ones(len(ids)),(pts[ids,:2]-com[:2]).T/.2))
             weight=float(m.body_mass.sum()*9.81)

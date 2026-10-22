@@ -1,0 +1,90 @@
+[
+  {
+    "case": "nominal",
+    "integrity": {
+      "directory": "retarget_validation/nominal",
+      "states": 10000,
+      "recorded_state_integrity_passed": true
+    },
+    "geometry": {
+      "scope": "Independent SAT lower bounds over all saved physical poses; no inter-step guarantee",
+      "geometry": "Exact boxes/convex mesh hulls; cylinders enclosed by circumscribed 24-gon prisms; analytic spheres",
+      "physical_state_count": 10000,
+      "collision_geometries": 23,
+      "distance_cutoff_m": 0.05,
+      "min_robot_obstacle_separation_lower_bound_m": 0.01382100718268732,
+      "min_nonwheel_floor_clearance_lower_bound_m": 0.07544250248684843,
+      "potential_robot_obstacle_overlap_states": 0,
+      "potential_nonwheel_floor_overlap_states": 0,
+      "closest_obstacle_geom": "geom17",
+      "closest_obstacle_time_s": 11.144000000000391,
+      "geometry_validation_passed": true
+    }
+  },
+  {
+    "case": "dt001",
+    "integrity": {
+      "directory": "retarget_validation/dt001",
+      "states": 20000,
+      "recorded_state_integrity_passed": true
+    },
+    "geometry": {
+      "scope": "Independent SAT lower bounds over all saved physical poses; no inter-step guarantee",
+      "geometry": "Exact boxes/convex mesh hulls; cylinders enclosed by circumscribed 24-gon prisms; analytic spheres",
+      "physical_state_count": 20000,
+      "collision_geometries": 23,
+      "distance_cutoff_m": 0.05,
+      "min_robot_obstacle_separation_lower_bound_m": 0.013796346621671743,
+      "min_nonwheel_floor_clearance_lower_bound_m": 0.07526241156100348,
+      "potential_robot_obstacle_overlap_states": 0,
+      "potential_nonwheel_floor_overlap_states": 0,
+      "closest_obstacle_geom": "geom17",
+      "closest_obstacle_time_s": 11.143999999999263,
+      "geometry_validation_passed": true
+    }
+  },
+  {
+    "case": "mu03_push_minus20",
+    "integrity": {
+      "directory": "retarget_validation/mu03_push_minus20",
+      "states": 10000,
+      "recorded_state_integrity_passed": true
+    },
+    "geometry": {
+      "scope": "Independent SAT lower bounds over all saved physical poses; no inter-step guarantee",
+      "geometry": "Exact boxes/convex mesh hulls; cylinders enclosed by circumscribed 24-gon prisms; analytic spheres",
+      "physical_state_count": 10000,
+      "collision_geometries": 23,
+      "distance_cutoff_m": 0.05,
+      "min_robot_obstacle_separation_lower_bound_m": 0.007462569899205768,
+      "min_nonwheel_floor_clearance_lower_bound_m": 0.07459661022585906,
+      "potential_robot_obstacle_overlap_states": 0,
+      "potential_nonwheel_floor_overlap_states": 0,
+      "closest_obstacle_geom": "geom17",
+      "closest_obstacle_time_s": 14.502000000001512,
+      "geometry_validation_passed": true
+    }
+  },
+  {
+    "case": "mu03_push_plus20",
+    "integrity": {
+      "directory": "retarget_validation/mu03_push_plus20",
+      "states": 10000,
+      "recorded_state_integrity_passed": true
+    },
+    "geometry": {
+      "scope": "Independent SAT lower bounds over all saved physical poses; no inter-step guarantee",
+      "geometry": "Exact boxes/convex mesh hulls; cylinders enclosed by circumscribed 24-gon prisms; analytic spheres",
+      "physical_state_count": 10000,
+      "collision_geometries": 23,
+      "distance_cutoff_m": 0.05,
+      "min_robot_obstacle_separation_lower_bound_m": 0.007608273146111788,
+      "min_nonwheel_floor_clearance_lower_bound_m": 0.07618796832157357,
+      "potential_robot_obstacle_overlap_states": 0,
+      "potential_nonwheel_floor_overlap_states": 0,
+      "closest_obstacle_geom": "geom17",
+      "closest_obstacle_time_s": 14.502000000001512,
+      "geometry_validation_passed": true
+    }
+  }
+]
