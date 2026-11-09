@@ -1,0 +1,972 @@
+{
+  "metadata": {
+    "urdf": "/home/jiang/m20-repro/src/rl_training/deep_robotics_model/M20/urdf/M20.urdf",
+    "config": "/home/jiang/m20-repro/src/rl_training/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/rough_env_cfg.py",
+    "m20_base_mass_kg": 15.882,
+    "m20_body_obb_size_m": [
+      0.75,
+      0.23,
+      0.14000000509617255
+    ],
+    "nominal_height_m": 0.4,
+    "target_clearance_m": 0.02,
+    "planning_activation_distance_m": 0.047,
+    "scene_count": 17,
+    "passed_20mm_count": 14,
+    "collision_free_count": 17
+  },
+  "scenes": [
+    {
+      "index": 1,
+      "name": "beam_h430_yaw00_tilt+0",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.43,
+        "yaw_deg": 0.0,
+        "tilt_deg": 0.0
+      },
+      "point_count": 14861,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": -0.04000000254808636,
+      "minimum_signed_distance_m": 0.04433019624683541,
+      "minimum_safety_margin_m": 0.024330196246835408,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.3101467331008295,
+      "maximum_abs_y_m": 0.0008520299870473772,
+      "max_abs_roll_deg": 0.8188543213601698,
+      "max_abs_pitch_deg": 10.064485518783556,
+      "max_abs_yaw_deg": 0.24022355372184204,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 27283,
+        "injected_outlier_count": 163,
+        "after_radius_filter_count": 27301,
+        "voxelized_point_count": 14861,
+        "mean_returns_per_scan": 1948.7857142857142,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 313,
+          "cost": 2.2403666436879908,
+          "gradient_inf_norm": 0.011205662224866852
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04433019624683541,
+        "minimum_safety_margin_m": 0.024330196246835408,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.1240880579411446,
+        "maximum_node_rotation_step_deg": 3.5142890483513916
+      }
+    },
+    {
+      "index": 2,
+      "name": "beam_h430_yaw20_tilt+8",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.43,
+        "yaw_deg": 20.0,
+        "tilt_deg": 8.0
+      },
+      "point_count": 15513,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": 0.00998870310287589,
+      "minimum_signed_distance_m": 0.046652868508902996,
+      "minimum_safety_margin_m": 0.026652868508902996,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.3775212244414119,
+      "maximum_abs_y_m": 0.005562156918908559,
+      "max_abs_roll_deg": 7.762748651298029,
+      "max_abs_pitch_deg": 2.995761282625912,
+      "max_abs_yaw_deg": 1.3483856410425528,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 27477,
+        "injected_outlier_count": 164,
+        "after_radius_filter_count": 27497,
+        "voxelized_point_count": 15513,
+        "mean_returns_per_scan": 1962.642857142857,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 321,
+          "cost": 1.3056259028183808,
+          "gradient_inf_norm": 0.0024424791169461724
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.046652868508902996,
+        "minimum_safety_margin_m": 0.026652868508902996,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.11851000674405292,
+        "maximum_node_rotation_step_deg": 1.3842025618313205
+      }
+    },
+    {
+      "index": 3,
+      "name": "beam_h430_yaw40_tilt-8",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.43,
+        "yaw_deg": 40.0,
+        "tilt_deg": -8.0
+      },
+      "point_count": 15433,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": -0.0045913360453214425,
+      "minimum_signed_distance_m": 0.047790953831626314,
+      "minimum_safety_margin_m": 0.027790953831626313,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.3497062047290404,
+      "maximum_abs_y_m": 0.014666880972887946,
+      "max_abs_roll_deg": 6.457555184424867,
+      "max_abs_pitch_deg": 5.473627691320476,
+      "max_abs_yaw_deg": 4.359686981862431,
+      "optimization_iterations": 274,
+      "optimizer_formal_success": true,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 27219,
+        "injected_outlier_count": 163,
+        "after_radius_filter_count": 27238,
+        "voxelized_point_count": 15433,
+        "mean_returns_per_scan": 1944.2142857142858,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "iterations": 274,
+          "evaluations": 287,
+          "cost": 1.5082417638987542,
+          "gradient_inf_norm": 0.00046496200450396596
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.047790953831626314,
+        "minimum_safety_margin_m": 0.027790953831626313,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.11959387574759724,
+        "maximum_node_rotation_step_deg": 2.8558835157461204
+      }
+    },
+    {
+      "index": 4,
+      "name": "beam_h450_yaw00_tilt+0",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.45,
+        "yaw_deg": 0.0,
+        "tilt_deg": 0.0
+      },
+      "point_count": 14954,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": -0.020000002548086343,
+      "minimum_signed_distance_m": 0.04537497698933922,
+      "minimum_safety_margin_m": 0.02537497698933922,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.3303867318432666,
+      "maximum_abs_y_m": 0.02146841843247326,
+      "max_abs_roll_deg": 0.44271072567476283,
+      "max_abs_pitch_deg": 7.803029434632778,
+      "max_abs_yaw_deg": 1.9905995772370089,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 27601,
+        "injected_outlier_count": 165,
+        "after_radius_filter_count": 27617,
+        "voxelized_point_count": 14954,
+        "mean_returns_per_scan": 1971.5,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 315,
+          "cost": 1.8051324289559918,
+          "gradient_inf_norm": 0.008476056285312006
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04537497698933922,
+        "minimum_safety_margin_m": 0.02537497698933922,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.12192395290897563,
+        "maximum_node_rotation_step_deg": 2.802830388137608
+      }
+    },
+    {
+      "index": 5,
+      "name": "beam_h450_yaw20_tilt+8",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.45,
+        "yaw_deg": 20.0,
+        "tilt_deg": 8.0
+      },
+      "point_count": 15576,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": 0.029349856099344648,
+      "minimum_signed_distance_m": 0.04976765989542373,
+      "minimum_safety_margin_m": 0.029767659895423727,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.387821889671366,
+      "maximum_abs_y_m": 0.0014978617856307062,
+      "max_abs_roll_deg": 4.552283685804408,
+      "max_abs_pitch_deg": 1.627463112619781,
+      "max_abs_yaw_deg": 0.13762271382097319,
+      "optimization_iterations": 266,
+      "optimizer_formal_success": true,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 27404,
+        "injected_outlier_count": 164,
+        "after_radius_filter_count": 27424,
+        "voxelized_point_count": 15576,
+        "mean_returns_per_scan": 1957.4285714285713,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "iterations": 266,
+          "evaluations": 280,
+          "cost": 1.2526749052145876,
+          "gradient_inf_norm": 0.0032136644357902977
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04976765989542373,
+        "minimum_safety_margin_m": 0.029767659895423727,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.11827447190415948,
+        "maximum_node_rotation_step_deg": 0.7935146835225849
+      }
+    },
+    {
+      "index": 6,
+      "name": "beam_h450_yaw40_tilt-8",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.45,
+        "yaw_deg": 40.0,
+        "tilt_deg": -8.0
+      },
+      "point_count": 15400,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": 0.014370250297830707,
+      "minimum_signed_distance_m": 0.04668811908012502,
+      "minimum_safety_margin_m": 0.026688119080125017,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.33368728499858097,
+      "maximum_abs_y_m": 0.010096027524454232,
+      "max_abs_roll_deg": 6.955232295218314,
+      "max_abs_pitch_deg": 9.231286563444156,
+      "max_abs_yaw_deg": 0.9387545507442797,
+      "optimization_iterations": 295,
+      "optimizer_formal_success": true,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 27044,
+        "injected_outlier_count": 162,
+        "after_radius_filter_count": 27059,
+        "voxelized_point_count": 15400,
+        "mean_returns_per_scan": 1931.7142857142858,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "iterations": 295,
+          "evaluations": 309,
+          "cost": 7.483865508523144,
+          "gradient_inf_norm": 0.00813151255620298
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04668811908012502,
+        "minimum_safety_margin_m": 0.026688119080125017,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.14269219336498082,
+        "maximum_node_rotation_step_deg": 6.48932145997468
+      }
+    },
+    {
+      "index": 7,
+      "name": "beam_h470_yaw00_tilt+0",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.47,
+        "yaw_deg": 0.0,
+        "tilt_deg": 0.0
+      },
+      "point_count": 14933,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": -2.5480863252713704e-09,
+      "minimum_signed_distance_m": 0.045757096529708385,
+      "minimum_safety_margin_m": 0.025757096529708385,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.3502819064813604,
+      "maximum_abs_y_m": 0.00098616290227315,
+      "max_abs_roll_deg": 1.140651990005708,
+      "max_abs_pitch_deg": 5.550401978023342,
+      "max_abs_yaw_deg": 0.050643556750628684,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 27754,
+        "injected_outlier_count": 166,
+        "after_radius_filter_count": 27773,
+        "voxelized_point_count": 14933,
+        "mean_returns_per_scan": 1982.4285714285713,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 318,
+          "cost": 1.510927023675253,
+          "gradient_inf_norm": 0.0011427420756137396
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.045757096529708385,
+        "minimum_safety_margin_m": 0.025757096529708385,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.12001593454384861,
+        "maximum_node_rotation_step_deg": 1.9486030981182358
+      }
+    },
+    {
+      "index": 8,
+      "name": "beam_h470_yaw20_tilt+8",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.47,
+        "yaw_deg": 20.0,
+        "tilt_deg": 8.0
+      },
+      "point_count": 15462,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": 0.04918643026748478,
+      "minimum_signed_distance_m": 0.04918622733799707,
+      "minimum_safety_margin_m": 0.029186227337997066,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.39999763908375013,
+      "maximum_abs_y_m": 6.078860526825118e-07,
+      "max_abs_roll_deg": 0.001330419389288813,
+      "max_abs_pitch_deg": 0.0048079536890735745,
+      "max_abs_yaw_deg": 0.00043968838530780246,
+      "optimization_iterations": 38,
+      "optimizer_formal_success": true,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 27052,
+        "injected_outlier_count": 162,
+        "after_radius_filter_count": 27071,
+        "voxelized_point_count": 15462,
+        "mean_returns_per_scan": 1932.2857142857142,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "iterations": 38,
+          "evaluations": 46,
+          "cost": 1.2290909333416467,
+          "gradient_inf_norm": 0.0003913493802646384
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04918622733799707,
+        "minimum_safety_margin_m": 0.029186227337997066,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.11818181820779775,
+        "maximum_node_rotation_step_deg": 0.0015756224143878045
+      }
+    },
+    {
+      "index": 9,
+      "name": "beam_h470_yaw40_tilt-8",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.47,
+        "yaw_deg": 40.0,
+        "tilt_deg": -8.0
+      },
+      "point_count": 15466,
+      "truth_point_count": 31354,
+      "baseline_min_distance_m": 0.03385649000006589,
+      "minimum_signed_distance_m": 0.04769626644648243,
+      "minimum_safety_margin_m": 0.027696266446482428,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.3913869173079473,
+      "maximum_abs_y_m": 0.003287924324200781,
+      "max_abs_roll_deg": 2.9570670721825403,
+      "max_abs_pitch_deg": 1.0559703535396823,
+      "max_abs_yaw_deg": 0.3730979309342009,
+      "optimization_iterations": 260,
+      "optimizer_formal_success": true,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 26791,
+        "injected_outlier_count": 160,
+        "after_radius_filter_count": 26806,
+        "voxelized_point_count": 15466,
+        "mean_returns_per_scan": 1913.642857142857,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "iterations": 260,
+          "evaluations": 274,
+          "cost": 1.2404417104597345,
+          "gradient_inf_norm": 0.0006278016865447489
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04769626644648243,
+        "minimum_safety_margin_m": 0.027696266446482428,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.1182300140944785,
+        "maximum_node_rotation_step_deg": 0.5505358717741464
+      }
+    },
+    {
+      "index": 10,
+      "name": "beam_h450_yaw25_pitch-10",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.45,
+        "yaw_deg": 25.0,
+        "pitch_deg": -10.0
+      },
+      "point_count": 16124,
+      "truth_point_count": 35462,
+      "baseline_min_distance_m": -0.020000002548086288,
+      "minimum_signed_distance_m": 0.04470417043740761,
+      "minimum_safety_margin_m": 0.02470417043740761,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.3330751038436487,
+      "maximum_abs_y_m": 0.01713450887065733,
+      "max_abs_roll_deg": 2.1889703558643014,
+      "max_abs_pitch_deg": 6.903668187064616,
+      "max_abs_yaw_deg": 1.7859780989257061,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 28962,
+        "injected_outlier_count": 173,
+        "after_radius_filter_count": 28981,
+        "voxelized_point_count": 16124,
+        "mean_returns_per_scan": 2068.714285714286,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 314,
+          "cost": 1.6432861526671159,
+          "gradient_inf_norm": 0.002955267460406974
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04470417043740761,
+        "minimum_safety_margin_m": 0.02470417043740761,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.1203888748706648,
+        "maximum_node_rotation_step_deg": 3.569787057641049
+      }
+    },
+    {
+      "index": 11,
+      "name": "beam_h450_yaw25_pitch+10",
+      "family": "low_beam",
+      "params": {
+        "bottom_m": 0.45,
+        "yaw_deg": 25.0,
+        "pitch_deg": 10.0
+      },
+      "point_count": 16196,
+      "truth_point_count": 35462,
+      "baseline_min_distance_m": -0.020000002548086288,
+      "minimum_signed_distance_m": 0.04417129189221981,
+      "minimum_safety_margin_m": 0.024171291892219813,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.33371984575550845,
+      "maximum_abs_y_m": 0.0021382979386214713,
+      "max_abs_roll_deg": 2.4552551097869606,
+      "max_abs_pitch_deg": 6.584238720029711,
+      "max_abs_yaw_deg": 0.3306321106247854,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 28947,
+        "injected_outlier_count": 173,
+        "after_radius_filter_count": 28971,
+        "voxelized_point_count": 16196,
+        "mean_returns_per_scan": 2067.6428571428573,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 314,
+          "cost": 1.613012235104749,
+          "gradient_inf_norm": 0.00315965185134115
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04417129189221981,
+        "minimum_safety_margin_m": 0.024171291892219813,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.12026711122953972,
+        "maximum_node_rotation_step_deg": 3.45649183690106
+      }
+    },
+    {
+      "index": 12,
+      "name": "tilted_corridor_10deg",
+      "family": "tilted_corridor",
+      "params": {
+        "corridor_angle_deg": 10.0,
+        "half_gap_m": 0.102
+      },
+      "point_count": 16718,
+      "truth_point_count": 43990,
+      "baseline_min_distance_m": 0.01351969093663316,
+      "minimum_signed_distance_m": 0.028328999506397987,
+      "minimum_safety_margin_m": 0.008328999506397986,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.38904557834325193,
+      "maximum_abs_y_m": 0.07392397838051659,
+      "max_abs_roll_deg": 10.67675687481187,
+      "max_abs_pitch_deg": 1.041374442153505,
+      "max_abs_yaw_deg": 7.381455306959595,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 30847,
+        "injected_outlier_count": 185,
+        "after_radius_filter_count": 30875,
+        "voxelized_point_count": 16718,
+        "mean_returns_per_scan": 2203.3571428571427,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 317,
+          "cost": 763.782306787899,
+          "gradient_inf_norm": 118.64635272832086
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.028328999506397987,
+        "minimum_safety_margin_m": 0.008328999506397986,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.20552650270527004,
+        "maximum_node_rotation_step_deg": 6.0346374961672105
+      }
+    },
+    {
+      "index": 13,
+      "name": "tilted_corridor_20deg",
+      "family": "tilted_corridor",
+      "params": {
+        "corridor_angle_deg": 20.0,
+        "half_gap_m": 0.102
+      },
+      "point_count": 16821,
+      "truth_point_count": 43990,
+      "baseline_min_distance_m": -0.0023680170522913657,
+      "minimum_signed_distance_m": 0.012146073378476329,
+      "minimum_safety_margin_m": -0.007853926621523672,
+      "collision_free": true,
+      "safety_clearance_met": false,
+      "minimum_base_z_m": 0.3400841627583853,
+      "maximum_abs_y_m": 0.06736160640982329,
+      "max_abs_roll_deg": 20.542936272738228,
+      "max_abs_pitch_deg": 6.666348871955802,
+      "max_abs_yaw_deg": 4.731284261908431,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 30813,
+        "injected_outlier_count": 184,
+        "after_radius_filter_count": 30844,
+        "voxelized_point_count": 16821,
+        "mean_returns_per_scan": 2200.9285714285716,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 318,
+          "cost": 787.176936524677,
+          "gradient_inf_norm": 134.41639566049352
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.012146073378476329,
+        "minimum_safety_margin_m": -0.007853926621523672,
+        "collision_free": true,
+        "safety_clearance_met": false,
+        "maximum_node_translation_step_m": 0.17110216672987458,
+        "maximum_node_rotation_step_deg": 9.371332214017116
+      }
+    },
+    {
+      "index": 14,
+      "name": "tilted_corridor_30deg",
+      "family": "tilted_corridor",
+      "params": {
+        "corridor_angle_deg": 30.0,
+        "half_gap_m": 0.102
+      },
+      "point_count": 16671,
+      "truth_point_count": 43990,
+      "baseline_min_distance_m": -0.01166541136207358,
+      "minimum_signed_distance_m": 0.005552843722721912,
+      "minimum_safety_margin_m": -0.014447156277278089,
+      "collision_free": true,
+      "safety_clearance_met": false,
+      "minimum_base_z_m": 0.38199379732504796,
+      "maximum_abs_y_m": 0.0945160732883191,
+      "max_abs_roll_deg": 30.927300303457557,
+      "max_abs_pitch_deg": 3.3774283073294007,
+      "max_abs_yaw_deg": 4.930241927247561,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 30478,
+        "injected_outlier_count": 182,
+        "after_radius_filter_count": 30503,
+        "voxelized_point_count": 16671,
+        "mean_returns_per_scan": 2177.0,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 323,
+          "cost": 776.8189033639738,
+          "gradient_inf_norm": 122.35970932919889
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.005552843722721912,
+        "minimum_safety_margin_m": -0.014447156277278089,
+        "collision_free": true,
+        "safety_clearance_met": false,
+        "maximum_node_translation_step_m": 0.18657626578608588,
+        "maximum_node_rotation_step_deg": 11.804671297593085
+      }
+    },
+    {
+      "index": 15,
+      "name": "tilted_corridor_35deg",
+      "family": "tilted_corridor",
+      "params": {
+        "corridor_angle_deg": 35.0,
+        "half_gap_m": 0.102
+      },
+      "point_count": 16937,
+      "truth_point_count": 43990,
+      "baseline_min_distance_m": -0.013489721167021254,
+      "minimum_signed_distance_m": 0.01638443127860842,
+      "minimum_safety_margin_m": -0.0036155687213915814,
+      "collision_free": true,
+      "safety_clearance_met": false,
+      "minimum_base_z_m": 0.39198173566590283,
+      "maximum_abs_y_m": 0.03087247959391203,
+      "max_abs_roll_deg": 35.7070858179271,
+      "max_abs_pitch_deg": 3.071957212436514,
+      "max_abs_yaw_deg": 4.314077942570207,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 30664,
+        "injected_outlier_count": 183,
+        "after_radius_filter_count": 30695,
+        "voxelized_point_count": 16937,
+        "mean_returns_per_scan": 2190.285714285714,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 312,
+          "cost": 717.1926989239842,
+          "gradient_inf_norm": 105.39226614978988
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.01638443127860842,
+        "minimum_safety_margin_m": -0.0036155687213915814,
+        "collision_free": true,
+        "safety_clearance_met": false,
+        "maximum_node_translation_step_m": 0.1842572379679708,
+        "maximum_node_rotation_step_deg": 11.95384508321815
+      }
+    },
+    {
+      "index": 16,
+      "name": "asymmetric_overhang_slalom",
+      "family": "true_3d",
+      "params": {
+        "beam_bottom_m": 0.462,
+        "beam_rpy_deg": [
+          8.0,
+          5.0,
+          28.0
+        ]
+      },
+      "point_count": 17961,
+      "truth_point_count": 54844,
+      "baseline_min_distance_m": 0.00039603681380066813,
+      "minimum_signed_distance_m": 0.04296056783986365,
+      "minimum_safety_margin_m": 0.02296056783986365,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.3406053227239761,
+      "maximum_abs_y_m": 0.053195571447434906,
+      "max_abs_roll_deg": 8.037934597383463,
+      "max_abs_pitch_deg": 6.200456744647706,
+      "max_abs_yaw_deg": 7.6992935756392935,
+      "optimization_iterations": 300,
+      "optimizer_formal_success": false,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 35655,
+        "injected_outlier_count": 213,
+        "after_radius_filter_count": 35695,
+        "voxelized_point_count": 17961,
+        "mean_returns_per_scan": 2546.785714285714,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": false,
+          "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+          "iterations": 300,
+          "evaluations": 309,
+          "cost": 2.453792954542265,
+          "gradient_inf_norm": 0.003284620274590422
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04296056783986365,
+        "minimum_safety_margin_m": 0.02296056783986365,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.12386884095878944,
+        "maximum_node_rotation_step_deg": 3.71178079888345
+      }
+    },
+    {
+      "index": 17,
+      "name": "double_overhang_offset_pillar",
+      "family": "true_3d",
+      "params": {
+        "overhang_bottoms_m": [
+          0.455,
+          0.47
+        ]
+      },
+      "point_count": 17174,
+      "truth_point_count": 45152,
+      "baseline_min_distance_m": 0.01683801935312669,
+      "minimum_signed_distance_m": 0.04466005491520465,
+      "minimum_safety_margin_m": 0.024660054915204652,
+      "collision_free": true,
+      "safety_clearance_met": true,
+      "minimum_base_z_m": 0.38534324720510377,
+      "maximum_abs_y_m": 0.031552011083121986,
+      "max_abs_roll_deg": 3.414837484477777,
+      "max_abs_pitch_deg": 1.745244034503947,
+      "max_abs_yaw_deg": 3.0039231413682455,
+      "optimization_iterations": 288,
+      "optimizer_formal_success": true,
+      "used_adaptive_retry": false,
+      "cloud_stats": {
+        "scan_count": 14,
+        "raw_return_count": 31561,
+        "injected_outlier_count": 189,
+        "after_radius_filter_count": 31590,
+        "voxelized_point_count": 17174,
+        "mean_returns_per_scan": 2254.3571428571427,
+        "voxel_size_m": 0.02,
+        "range_noise_model": "sigma=3.5mm+1.2mm/m plus 1.2mm isotropic",
+        "dropout_probability": 0.075,
+        "angular_resolution_deg": 0.8
+      },
+      "optimizer": {
+        "first_pass": {
+          "formal_success": true,
+          "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+          "iterations": 288,
+          "evaluations": 299,
+          "cost": 1.3084495691548381,
+          "gradient_inf_norm": 0.00043476743229829695
+        },
+        "used_retry": false
+      },
+      "validation": {
+        "minimum_signed_distance_m": 0.04466005491520465,
+        "minimum_safety_margin_m": 0.024660054915204652,
+        "collision_free": true,
+        "safety_clearance_met": true,
+        "maximum_node_translation_step_m": 0.11858423361029719,
+        "maximum_node_rotation_step_deg": 1.581057040944496
+      }
+    }
+  ]
+}
