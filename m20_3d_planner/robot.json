@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "urdf": "/home/jiang/m20-repro/src/rl_training/deep_robotics_model/M20/urdf/M20.urdf",
+    "config": "/home/jiang/m20-repro/src/rl_training/source/rl_training/rl_training/tasks/manager_based/locomotion/velocity/config/wheeled/deeprobotics_m20/rough_env_cfg.py",
+    "m20_base_mass_kg": 15.882,
+    "m20_body_obb_size_m": [
+      0.75,
+      0.23,
+      0.14000000509617255
+    ],
+    "nominal_height_m": 0.4,
+    "target_clearance_m": 0.02,
+    "planning_activation_distance_m": 0.047,
+    "scene_count": 17,
+    "passed_20mm_count": 14,
+    "collision_free_count": 17
+  },
+  "provenance": {
+    "kind": "recorded_robot_geometry_replay",
+    "source": "archive/previous_layout.zip:artifacts/suite_results.json",
+    "source_sha256": "994c8c96b2899fc5c7a20bacf504c05a2e9a3d541b16b0380cbb2e9503771d29"
+  }
+}

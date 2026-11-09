@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M20 · 点云轨迹查看器</title>
+  <style>__STYLE__</style>
+  <script type="importmap">__IMPORT_MAP__</script>
+</head>
+<body>
+  <header>
+    <div class="brand"><span class="brand-mark">M</span><div><strong>点云轨迹查看器</strong><small>M20 · 初始路径与六维姿态优化</small></div></div>
+    <nav><span id="run-name" class="run-tag"></span><a id="report-link" href="report/REPORT.md" target="_blank">实验报告 ↗</a><button id="video-open">查看视频</button></nav>
+  </header>
+  <main>
+    <aside>
+      <section><label for="scene">场景</label><select id="scene"></select><p id="scene-description" class="hint" hidden></p><label for="dataset">实验 / 点云筛选</label><select id="dataset"></select><label for="method">优化自由度</label><select id="method"><option value="full">完整 6D</option><option value="translation_yaw">XYZ + yaw</option><option value="translation">仅 XYZ</option></select></section>
+      <section><h2>画面图层</h2><label id="section-toggle" class="toggle" hidden><input id="show-section" type="checkbox" checked>场景截面参考（仅显示）</label><p id="section-key" class="hint" hidden>紫色：上表面 · 棕色：下表面<br>轮廓位于 x=0，关闭可单独看点云</p><label class="toggle"><input id="show-cloud" type="checkbox" checked>障碍点云</label><label class="toggle"><input id="show-initial" type="checkbox" checked><i class="swatch initial"></i>初始路径与机身</label><label class="toggle"><input id="show-final" type="checkbox" checked><i class="swatch final"></i>优化后路径与机身</label><label class="toggle"><input id="show-ghosts" type="checkbox">沿途机身姿态</label><label class="range-label" for="opacity">点云透明度 <output id="opacity-value">28%</output></label><input id="opacity" type="range" min="5" max="85" value="28"></section>
+      <section><h2>观察视角</h2><div class="view-grid"><button data-view="iso">三维</button><button data-view="front">正视 · 看侧倾</button><button data-view="side">侧视 · 看俯仰</button><button data-view="top">俯视 · 看转向</button></div><div class="view-grid last"><button id="focus-body">聚焦机身</button><button id="reset-view">复位视角</button></div><p class="hint">左键拖动旋转 · 滚轮缩放<br>右键拖动平移 · 触屏双指缩放</p></section>
+      <section class="pose-section"><h2>当前机身姿态</h2><div class="attitude-values"><div class="roll"><span>侧倾 roll</span><strong id="roll">—</strong></div><div class="pitch"><span>俯仰 pitch</span><strong id="pitch">—</strong></div><div class="yaw"><span>转向 yaw</span><strong id="yaw">—</strong></div></div><p id="position" class="position">—</p><canvas id="angle-chart" width="520" height="200" aria-label="当前轨迹的三个姿态角曲线"></canvas><div class="chart-legend"><span class="roll">roll</span><span class="pitch">pitch</span><span class="yaw">yaw</span><span>横轴：路径 x</span></div></section>
+      <section class="scope"><span class="dot"></span>离线点云 · 机身几何验证<br><span>尺寸与姿态角按实验数据展示</span></section>
+    </aside>
+    <div class="workspace">
+      <div id="viewport" aria-label="可拖动旋转、缩放的三维点云场景">
+        <div class="scene-heading"><span class="eyebrow">POINT CLOUD / BODY PATH</span><h1 id="scene-name">正在加载点云…</h1><p id="phase-note"></p></div>
+        <div class="clearance-card"><small>整条优化轨迹最小间隙</small><strong id="minimum">—</strong><span id="safety-label"></span></div>
+        <div id="error" role="alert" hidden></div>
+        <div class="body-key"><span class="gold"></span>顶面 <span class="nose"></span>机头 <span class="white"></span>前进箭头</div>
+        <div class="axis-key"><b class="nose-text">x</b> 前后 <b class="roll">y</b> 左右 <b class="yaw">z</b> 高度 · 单位 m</div>
+        <div id="loading">加载场景…</div>
+      </div>
+      <footer>
+        <div class="transport-head"><div class="tabs" role="group" aria-label="播放模式"><button data-phase="compare" class="active">初始 / 最终对比</button><button data-phase="optimize">优化过程</button><button data-phase="path">沿轨迹回放</button></div><div class="speed"><label for="speed">速度</label><select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></div></div>
+        <div class="timeline"><button id="play" aria-label="播放">▶</button><input id="timeline" type="range" min="0" max="100" value="50" aria-label="播放进度"><output id="timeline-label">—</output></div>
+        <div class="transport-foot"><label id="node-label" for="node">观察节点 <input id="node" type="range" min="0" max="22" value="11"><output id="node-value">12 / 23</output></label><span id="local-clearance"></span><span class="hint">播放进度不代表求解或执行时间</span></div>
+      </footer>
+    </div>
+  </main>
+  <dialog id="videos"><div class="dialog-head"><h2>优化过程与姿态特写</h2><button id="video-close" aria-label="关闭视频">✕</button></div><select id="video-select"></select><video id="video-player" controls playsinline preload="metadata"></video><p>使用原实验轨迹，包含优化迭代、姿态停留和最终轨迹回放。</p></dialog>
+  <noscript>请启用 JavaScript 以显示三维点云。</noscript>
+  <script>window.PLANNER_MANIFEST = __MANIFEST__;</script>
+  <script type="module">__VIEWER_JS__</script>
+</body>
+</html>
