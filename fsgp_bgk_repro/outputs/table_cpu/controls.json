@@ -1,0 +1,26 @@
+[
+  {
+    "input": "complete_clean",
+    "points_before_local_crop": 32683,
+    "points_after_local_crop": 31491,
+    "under_cells": 60,
+    "under_height_median_m": 0.8756937317680762,
+    "under_height_abs_error_mean_m": 0.9179035510985332,
+    "under_slope_mean": 3.34802744022392,
+    "under_height_variation_mean_m": 0.0,
+    "under_cost_mean": 1.1139258240371814,
+    "outside_cost_mean": 0.986806918007666
+  },
+  {
+    "input": "floor_only_clean",
+    "points_before_local_crop": 22759,
+    "points_after_local_crop": 21567,
+    "under_cells": 60,
+    "under_height_median_m": 0.0,
+    "under_height_abs_error_mean_m": 0.0,
+    "under_slope_mean": 0.0,
+    "under_height_variation_mean_m": 0.0,
+    "under_cost_mean": 0.0,
+    "outside_cost_mean": 0.0
+  }
+]

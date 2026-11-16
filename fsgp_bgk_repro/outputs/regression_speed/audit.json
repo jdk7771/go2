@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "post_sampling_cases": 18,
+  "raw_xyz_cases": 7,
+  "stage_cases": 2,
+  "timing_samples_recomputed": 1650,
+  "current_local_function_matches_snapshot": true,
+  "source_snapshots_and_input_hashes_match": true
+}

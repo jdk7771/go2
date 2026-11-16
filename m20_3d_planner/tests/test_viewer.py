@@ -247,5 +247,83 @@ class ViewerChecks(unittest.TestCase):
         np.testing.assert_array_equal(poses[0], poses[1])
 
 
+TALL_ENTRY = settings.HERE / "outputs/tall_obstacle_wide/index.html"
+
+
+@unittest.skipUnless(
+    sync_playwright and CHROME and TALL_ENTRY.exists(),
+    "Requires Playwright, Chrome and the exported tall-obstacle experiment",
+)
+class TallObstacleViewerChecks(unittest.TestCase):
+    def test_offline_detour_bounds_comparison_and_real_iterations(self):
+        with sync_playwright() as playwright:
+            browser = playwright.chromium.launch(
+                executable_path=CHROME, headless=True,
+                args=["--no-sandbox", "--enable-unsafe-swiftshader", "--use-angle=swiftshader", "--disable-dev-shm-usage"],
+            )
+            page = browser.new_page(viewport={"width": 1536, "height": 1024})
+            errors, requests = [], []
+            page.on("pageerror", lambda error: errors.append(str(error)))
+            page.on("request", lambda request: requests.append(request.url))
+            page.goto(TALL_ENTRY.as_uri(), wait_until="load")
+            page.wait_for_function("window.plannerViewer?.getState().ready")
+            self.assertEqual(page.locator("#scene option").count(), 1)
+            entries = page.evaluate("window.PLANNER_MANIFEST.scenes")
+            self.assertEqual(page.locator("#dataset option").count(), len(entries))
+            self.assertIn("0.60", page.locator("#result-bound").inner_text())
+            self.assertTrue(page.locator("#geometry-toggle").is_visible())
+            page.uncheck("#show-geometry")
+            self.assertFalse(page.evaluate("window.plannerViewer.getState().geometryVisible"))
+            page.check("#show-geometry")
+            for entry in entries:
+                page.evaluate("name => window.plannerViewer.setScene(name)", entry["id"])
+                run = TALL_ENTRY.parent / entry["directory"]
+                for mode in entry["modes"]:
+                    page.evaluate("mode => window.plannerViewer.setMode(mode)", mode)
+                    page.evaluate("window.plannerViewer.setPhase('optimize')")
+                    page.evaluate("window.plannerViewer.setProgress(0)")
+                    with np.load(run / "trials" / f"tall_obstacle_detour__{mode}.npz") as trial:
+                        np.testing.assert_allclose(page.evaluate("window.plannerViewer.getState().pose"), trial["initial_trajectory"][11], atol=5.1e-8)
+                        page.evaluate("window.plannerViewer.setProgress(99999)")
+                        actual = page.evaluate("window.plannerViewer.getState()")
+                        np.testing.assert_allclose(actual["pose"], trial["iteration_poses"][-1, 11], atol=5.1e-8)
+                        matrix = np.asarray(actual["bodyMatrix"]).reshape((4, 4), order="F")
+                        np.testing.assert_allclose(matrix[:3, :3], core.rpy_matrix(np.array(actual["pose"][3:])), atol=1e-12)
+                        if "iteration_wrenches" in trial:
+                            self.assertEqual(actual["solver"], "virtual_wrench")
+                            self.assertTrue(page.locator("#dynamics-panel").is_visible())
+                            page.evaluate("window.plannerViewer.setProgress(1)")
+                            expected = ", ".join(f"{value:.3f}" for value in trial["iteration_wrenches"][1, 11, :3])
+                            self.assertEqual(page.locator("#dynamic-force").text_content(), expected)
+                            page.uncheck("#show-wrench")
+                            self.assertFalse(page.evaluate("window.plannerViewer.getState().forceVisible"))
+                            page.check("#show-wrench")
+                self.assertTrue((TALL_ENTRY.parent / page.locator("#report-link").get_attribute("href")).is_file())
+            page.evaluate("window.plannerViewer.setScene('tall_obstacle_detour')")
+            page.evaluate("window.plannerViewer.setMode('full')")
+            page.evaluate("window.plannerViewer.setPhase('compare')")
+            page.check("#show-ghosts")
+            page.screenshot(path=str(TALL_ENTRY.parent / "report/viewer_top.png"))
+            page.click('[data-view="iso"]')
+            page.screenshot(path=str(TALL_ENTRY.parent / "report/viewer_iso.png"))
+            page.evaluate("window.plannerViewer.setPhase('optimize')")
+            page.click("#play")
+            page.wait_for_function("window.plannerViewer.getState().frame > 0")
+            page.click("#play")
+            self.assertEqual(errors, [])
+            self.assertFalse(any(url.startswith(("https://", "http://")) for url in requests))
+            dynamic_entry = next((entry for entry in entries if "virtual_wrench" in entry["run"]), None)
+            if dynamic_entry:
+                page.evaluate("name => window.plannerViewer.setScene(name)", dynamic_entry["id"])
+                page.evaluate("window.plannerViewer.setMode('full')")
+                page.evaluate("window.plannerViewer.setPhase('optimize')")
+                page.evaluate("window.plannerViewer.setProgress(20)")
+                page.locator("#dynamics-panel").scroll_into_view_if_needed()
+                page.screenshot(path=str(TALL_ENTRY.parent / "report/viewer_virtual_wrench.png"))
+                self.assertEqual(errors, [])
+            # Close before leaving the Playwright context.
+            browser.close()
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,242 @@
+{
+  "timestamp_utc": "2026-11-15T12:22:35.378701+00:00",
+  "environment": {
+    "python": "3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]",
+    "executable": "/usr/bin/python3",
+    "numpy": "1.21.5",
+    "scipy": "1.8.0",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "processor": "AMD Ryzen 9 7945HX with Radeon Graphics",
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "backend": "CPU / NumPy + SciPy",
+    "cuda_used": false
+  },
+  "fit_config": {
+    "alpha": 1.0,
+    "beta": 0.1,
+    "gamma": 1.9,
+    "mse_threshold": 0.04,
+    "planar_ratio": 0.01,
+    "covariance_floor": 0.0001,
+    "min_patch": 20,
+    "mapping_min_patch": 50,
+    "point_budget": 4000,
+    "points_per_patch": 160,
+    "association_samples": 48,
+    "association_distance": 8.0,
+    "max_residual_distance": 3.0,
+    "outer_iterations": 3,
+    "lm_iterations": 8,
+    "max_range": 60.0,
+    "normal_angle_deg": 35.0,
+    "segmentation_angle_deg": 10.0,
+    "map_radius": 70.0,
+    "hash_resolution": 1.5,
+    "association_normal_deg": 45.0,
+    "robust_scale": 1.0,
+    "fitting": "taubin",
+    "seed": 7
+  },
+  "segmentation": {
+    "neighbors": 20,
+    "cell_size": 1.5,
+    "max_link": 0.45,
+    "normal_angle_deg": 30.0,
+    "plane_distance": 0.08,
+    "min_patch": 20,
+    "support_radius": 0.45
+  },
+  "gp_config": {
+    "resolution": 0.2,
+    "length": 5.0,
+    "neighbors": 20,
+    "interpolation_neighbors": 5,
+    "voxel_size": 0.1,
+    "curvature_threshold": 0.03,
+    "gradient_threshold": 0.03,
+    "inducing_points": 125,
+    "pca": true,
+    "lengthscale": 0.6,
+    "alpha": 10.0,
+    "signal_variance": 1.0,
+    "noise_variance": 0.0004,
+    "jitter": 1e-08,
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "support_radius": 0.45,
+    "max_variance": 0.8,
+    "decay_rate": 1.0,
+    "history_ttl": 60.0,
+    "smoothing_sigma": 0.8,
+    "seed": 7
+  },
+  "scenes": [
+    {
+      "scene": "hill",
+      "raw_points": 200000,
+      "voxel_representatives": 37302,
+      "reference_normals": "PCD provided normals",
+      "base_center": [
+        0.024959462694823742,
+        0.054587800055742264
+      ],
+      "source": {
+        "path": "src/simulation_env_ros2/PCD/hill.pcd",
+        "size": 4800219,
+        "sha": "32490e5f2a090b83e943a5c6da7d4bc0c68504f6",
+        "local_path": "fsgp_bgk_repro/data/hill.pcd",
+        "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/hill.pcd",
+        "sha256": "d18fcc97609b5a7fcd4cac2ce14d6876a7bee6b77c15c2eb9e8c8e0a1b092c56"
+      }
+    },
+    {
+      "scene": "forest",
+      "raw_points": 141068,
+      "voxel_representatives": 58909,
+      "reference_normals": "dense clean-cloud PCA normals (estimated)",
+      "base_center": [
+        0.36120492219924927,
+        -0.18773315846920013
+      ],
+      "source": {
+        "path": "src/simulation_env_ros2/PCD/forest.pcd",
+        "size": 1692990,
+        "sha": "60c9964059db5cffe8d6c2f92e83cacdc1d8c014",
+        "local_path": "quadric_lidar_repro/data/fsgp_terrain/forest.pcd",
+        "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/forest.pcd",
+        "sha256": "31c09a96b84f85e0ab07d0735226de6103593a3781d60891a926d8d86d054903"
+      }
+    },
+    {
+      "scene": "quick",
+      "raw_points": 100000,
+      "voxel_representatives": 100000,
+      "reference_normals": "PCD provided normals",
+      "base_center": [
+        0.31229259073734283,
+        -0.31253325939178467
+      ],
+      "source": {
+        "path": "src/simulation_env_ros2/PCD/quick.pcd",
+        "size": 2400219,
+        "sha": "1b67e7e0b5fad1b94175658d433f5f43b8279bb2",
+        "local_path": "fsgp_bgk_repro/data/quick.pcd",
+        "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/quick.pcd",
+        "sha256": "8d358bd27597c45f529d4d7b76c9cd3c4931fb711f073cab9e3725473c818264"
+      }
+    },
+    {
+      "scene": "desert",
+      "raw_points": 100000,
+      "voxel_representatives": 46418,
+      "reference_normals": "PCD provided normals",
+      "base_center": [
+        0.09775574132800102,
+        0.017362593673169613
+      ],
+      "source": {
+        "path": "src/simulation_env_ros2/PCD/desert.pcd",
+        "size": 2400219,
+        "sha": "51ddcd62a51565f5e2c758e3df23c33d19cf6b0a",
+        "local_path": "quadric_lidar_repro/data/fsgp_terrain/desert.pcd",
+        "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/desert.pcd",
+        "sha256": "d8d9ebb2d2d7ec6901ee93c7234a4b60cf7839f61c2f4e7ee04b4b3173d76d4f"
+      }
+    },
+    {
+      "scene": "mountain",
+      "raw_points": 50000,
+      "voxel_representatives": 19677,
+      "reference_normals": "PCD provided normals",
+      "base_center": [
+        -0.12524177134037018,
+        0.023073358461260796
+      ],
+      "source": {
+        "path": "src/simulation_env_ros2/PCD/mountain.pcd",
+        "size": 1200217,
+        "sha": "0e733b088fa0b4fc716537a000be7d4e4327db42",
+        "local_path": "quadric_lidar_repro/data/fsgp_terrain/mountain.pcd",
+        "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/mountain.pcd",
+        "sha256": "73eef197c44a7a067d64c740a302f6d1d80aaccd27b8b05d593928e167bd5cca"
+      }
+    },
+    {
+      "scene": "snow",
+      "raw_points": 500000,
+      "voxel_representatives": 159708,
+      "reference_normals": "PCD provided normals",
+      "base_center": [
+        0.43329766392707825,
+        0.35556840896606445
+      ],
+      "source": {
+        "path": "src/simulation_env_ros2/PCD/snow.pcd",
+        "size": 12000219,
+        "sha": "d73534666096cd6795e533ef0fc1e5a94030a322",
+        "local_path": "quadric_lidar_repro/data/fsgp_terrain/snow.pcd",
+        "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/snow.pcd",
+        "sha256": "ee0331a8543cf3bb99f799764aec38faf189f67f29c2aae509f09a7da1dea7a1"
+      }
+    },
+    {
+      "scene": "vocano",
+      "raw_points": 100000,
+      "voxel_representatives": 38020,
+      "reference_normals": "PCD provided normals",
+      "base_center": [
+        0.0883280374109745,
+        -0.023042253218591213
+      ],
+      "source": {
+        "path": "src/simulation_env_ros2/PCD/vocano.pcd",
+        "size": 2400219,
+        "sha": "f3e97edb9c89f89f400943fcc0aa867a7cd63a83",
+        "local_path": "quadric_lidar_repro/data/fsgp_terrain/vocano.pcd",
+        "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/vocano.pcd",
+        "sha256": "84b0450e7c4fed69874a2cbbb8374e5a0e35108b1817c471c39351c308e958e2"
+      }
+    }
+  ],
+  "frames": 8,
+  "repeats": 7,
+  "raw_repeats": 3,
+  "sensor": {
+    "reference_voxel_m": 0.06,
+    "cap_before_dropout": 2500,
+    "point_dropout": 0.15,
+    "added_z_noise_std_m": 0.015,
+    "note": "Local diagnostic sensor model. Point dropout is not ray-traced occlusion; extra Gaussian noise is not specified by paper."
+  },
+  "timing": "Warm single-thread CPU; starts at XYZ input; includes segmentation normals/KNN/regions, fitting and grid geometry. Excludes PCD I/O, reference generation and visualization. Compilation occurs before timing.",
+  "segmentation_method": "Unorganized 20-NN PCA normals; 1.5m XY blocks; 3D distance/normal/point-to-plane constrained connected components; no supplied labels or PCD normals.",
+  "fsgp": "Independent CPU reference; 125/500 inducing points, single frame without BGK; also outputs uncertainty/cost. Not author GPU execution.",
+  "metrics": "Height/slope against dense clean-cloud geometric reference. Curvature reference is estimated from normal variation, not author ground truth. PCA curvature index and geometric curvature units differ.",
+  "common_mask": "Reference and current support intersection of Quadric, Local-quadratic and both FSGP variants. Quadric-general sensitivity uses its own reference intersection, reported separately.",
+  "dataset_scope": "All seven official PCD examples at pinned commit. They are not the complete 2500 paper benchmark; Road/Indoor/Ruin original evaluation datasets are not in this release.",
+  "raw_input_run": "Unmodified full PCD XYZ in memory, then local-window crop timed; no 0.06m thinning, cap, dropout or added noise.",
+  "source_sha256": {
+    "terrain.py": "efd30a66ab86ae16d11cf476cb91ade408f4e825420c447771bfc35569c6c97f",
+    "terrain_segment.cpp": "143c77fe0c0fac34fd801a338552cfe3a23a2fe1dc18689b26233bcc07872953",
+    "benchmark_terrain.py": "1d773681a8a6d8855ba41cdb0f0e12a2564bec41fd32cc0196f9ae848fc33e1e",
+    "terrain_report.py": "241b8ef7a603adff601886b02ac13087da1d284a751b1b7d2facc6267312ebc1",
+    "core.py": "363563efb1b5f08991a8b417e259212f9746fed9078e7d8667dcadb3e7084a81",
+    "curvature.py": "9bd08f5cb4a3ce59779637943808899543cc6f70a4997dac9c10cfdd8320c820"
+  },
+  "fsgp_source_sha256": {
+    "core.py": "c176374d9d8bad4faa4841738a6798e24b3cb8bfe466e0cbe71b4974313009bb",
+    "io.py": "421ebfaf3dfca06090e80c49a0926abe2cfc472644e2fc6d9b5203f022d56da1"
+  },
+  "manifest_sha256": "7ab607ba6104d78085f84f73b141db1de81292bf535ef6be8eddc50b24785cbf",
+  "sources": [
+    "https://arxiv.org/html/2503.04134v2",
+    "https://github.com/ZJU-FAST-Lab/FSGP_BGK"
+  ]
+}

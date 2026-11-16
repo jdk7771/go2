@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "input_points": 2125,
+  "brute_force_neighbor_checks": 2125,
+  "valid_fits": 1955,
+  "independent_svd_max_height_error_m": 2.363875761801637e-10,
+  "compatible_edges": 15600,
+  "union_find_major_components": 3,
+  "triangles": 3388,
+  "observed_max_triangle_height_span_m": 0.03136864431240172,
+  "rendered_patch_vertices_checked": 48875,
+  "checks": [
+    "input and source hashes",
+    "exact input XYZ",
+    "brute-force radius and seed-relative gate before nearest 30",
+    "independent SVD fitting and residuals",
+    "mutual model and normal compatibility",
+    "independent union-find connectivity with no preset component count",
+    "all mesh edges belong to compatibility graph",
+    "rendered patches are actual polynomial samples"
+  ]
+}

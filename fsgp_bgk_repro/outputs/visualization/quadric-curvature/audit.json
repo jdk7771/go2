@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "accuracy_cases": 840,
+  "latency_samples": 1275,
+  "source_hashes_verified": true,
+  "prior_kitti_algorithm_sources_unchanged": true,
+  "input_hashes_verified": true,
+  "noiseless_five_model_classes_curvature_rmse_below": 1e-07,
+  "all_query_counts_and_timing_statistics_verified": true,
+  "viewer_matches_artifacts": true,
+  "browser": {
+    "status": "passed",
+    "images": 4,
+    "tables": 3,
+    "mobile_overflow": false,
+    "page_errors": []
+  },
+  "unit_tests_passed": 14
+}

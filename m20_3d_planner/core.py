@@ -240,7 +240,10 @@ class TrajectoryProblem:
         mode: str,
         weights: PlannerWeights,
         point_selection: PointSelection | None = None,
+        lateral_limit: float = 0.16,
     ) -> None:
+        if not np.isfinite(lateral_limit) or lateral_limit <= 0:
+            raise ValueError("lateral_limit must be finite and positive")
         self.points = points
         self.point_weights = point_weights
         self.initial = initial.copy()
@@ -249,6 +252,7 @@ class TrajectoryProblem:
         self.safety = safety
         self.mode = mode
         self.weights = weights
+        self.lateral_limit = lateral_limit
         self.selector = BodyCenterSelector(points, point_selection or PointSelection())
         modes = {
             "translation": [0, 1, 2],
@@ -275,7 +279,7 @@ class TrajectoryProblem:
             x0 = self.initial[idx, 0]
             all_bounds = [
                 (x0 - 0.09, x0 + 0.09),
-                (-0.16, 0.16),
+                (-self.lateral_limit, self.lateral_limit),
                 (0.28, 0.52),
                 (math.radians(-45.0), math.radians(45.0)),
                 (math.radians(-22.0), math.radians(22.0)),
@@ -360,12 +364,24 @@ class TrajectoryProblem:
         return float(total), packed_grad
 
 
-def densify_trajectory(poses: np.ndarray, subdivisions: int = 8) -> np.ndarray:
+def densify_trajectory(poses: np.ndarray, subdivisions: int = 8, rotation_interpolation: str = "euler") -> np.ndarray:
+    if subdivisions < 1:
+        raise ValueError("subdivisions must be positive")
+    if rotation_interpolation not in ("euler", "so3"):
+        raise ValueError("Unknown rotation interpolation")
+    if rotation_interpolation == "so3":
+        from scipy.spatial.transform import Rotation
+        rotations = Rotation.from_euler("xyz", poses[:, 3:]).as_matrix()
+        increments = Rotation.from_matrix(rotations[:-1].transpose(0, 2, 1) @ rotations[1:]).as_rotvec()
     dense = []
     for i in range(len(poses) - 1):
         for j in range(subdivisions):
             t = j / subdivisions
-            dense.append((1.0 - t) * poses[i] + t * poses[i + 1])
+            pose = (1.0 - t) * poses[i] + t * poses[i + 1]
+            if rotation_interpolation == "so3":
+                rotation = rotations[i] @ Rotation.from_rotvec(t * increments[i]).as_matrix()
+                pose[3:] = Rotation.from_matrix(rotation).as_euler("xyz")
+            dense.append(pose)
     dense.append(poses[-1])
     return np.asarray(dense)
 

@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "cases": 9,
+  "checks": [
+    {
+      "case": "scan_02cm",
+      "valid_query_layer_pairs": 13523,
+      "probes": 12,
+      "triangles": 25959,
+      "passed": true
+    },
+    {
+      "case": "scan_03cm",
+      "valid_query_layer_pairs": 13935,
+      "probes": 12,
+      "triangles": 26981,
+      "passed": true
+    },
+    {
+      "case": "scan_04cm",
+      "valid_query_layer_pairs": 14023,
+      "probes": 12,
+      "triangles": 27187,
+      "passed": true
+    },
+    {
+      "case": "full_02cm",
+      "valid_query_layer_pairs": 15203,
+      "probes": 12,
+      "triangles": 29600,
+      "passed": true
+    },
+    {
+      "case": "full_03cm",
+      "valid_query_layer_pairs": 15203,
+      "probes": 12,
+      "triangles": 29600,
+      "passed": true
+    },
+    {
+      "case": "full_04cm",
+      "valid_query_layer_pairs": 15203,
+      "probes": 12,
+      "triangles": 29600,
+      "passed": true
+    },
+    {
+      "case": "sparse_02cm",
+      "valid_query_layer_pairs": 0,
+      "probes": 12,
+      "triangles": 0,
+      "passed": true
+    },
+    {
+      "case": "sparse_03cm",
+      "valid_query_layer_pairs": 0,
+      "probes": 12,
+      "triangles": 0,
+      "passed": true
+    },
+    {
+      "case": "sparse_04cm",
+      "valid_query_layer_pairs": 0,
+      "probes": 12,
+      "triangles": 0,
+      "passed": true
+    }
+  ],
+  "assertions": [
+    "input hashes and exact XYZ",
+    "exclusive nearest-mode assignment",
+    "exactly 30 same-layer gated neighbours for every valid fit",
+    "3D radius and predicted height bounds",
+    "finite same-layer mesh and max jump",
+    "JSON matches full precision arrays",
+    "brute-force nearest-neighbour probe check",
+    "independent Delaunay hull and SVD prediction probe checks"
+  ]
+}

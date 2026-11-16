@@ -1,0 +1,98 @@
+{
+  "components": [
+    {
+      "component": 0,
+      "seeds": 1373,
+      "median_z_m": -0.00026597557105593507,
+      "candidate_triangles": 2695,
+      "kept_triangles": 2443,
+      "observed_seed_xy_hull_area_m2": 29.671200131225575,
+      "kept_area_m2": 23.542000376611924,
+      "kept_area_fraction_of_seed_hull": 0.7934293278496893,
+      "first_failure_reasons": {
+        "edge_length": {
+          "triangles": 184,
+          "area_m2": 5.379199778753535
+        },
+        "model_agreement": {
+          "triangles": 68,
+          "area_m2": 0.7499999758601144
+        },
+        "normal_angle": {
+          "triangles": 0,
+          "area_m2": 0.0
+        },
+        "centroid_agreement": {
+          "triangles": 0,
+          "area_m2": 0.0
+        }
+      }
+    },
+    {
+      "component": 1,
+      "seeds": 298,
+      "median_z_m": 1.1021062875864105,
+      "candidate_triangles": 568,
+      "kept_triangles": 466,
+      "observed_seed_xy_hull_area_m2": 5.70819999717474,
+      "kept_area_m2": 4.140399966380002,
+      "kept_area_fraction_of_seed_hull": 0.7253424842208198,
+      "first_failure_reasons": {
+        "edge_length": {
+          "triangles": 50,
+          "area_m2": 1.091799991127848
+        },
+        "model_agreement": {
+          "triangles": 52,
+          "area_m2": 0.4760000396668899
+        },
+        "normal_angle": {
+          "triangles": 0,
+          "area_m2": 0.0
+        },
+        "centroid_agreement": {
+          "triangles": 0,
+          "area_m2": 0.0
+        }
+      }
+    },
+    {
+      "component": 2,
+      "seeds": 283,
+      "median_z_m": 1.1996288162186544,
+      "candidate_triangles": 541,
+      "kept_triangles": 479,
+      "observed_seed_xy_hull_area_m2": 5.77359996333122,
+      "kept_area_m2": 4.675999937146904,
+      "kept_area_fraction_of_seed_hull": 0.8098933017259081,
+      "first_failure_reasons": {
+        "edge_length": {
+          "triangles": 41,
+          "area_m2": 0.9408000185161787
+        },
+        "model_agreement": {
+          "triangles": 21,
+          "area_m2": 0.1568000076681374
+        },
+        "normal_angle": {
+          "triangles": 0,
+          "area_m2": 0.0
+        },
+        "centroid_agreement": {
+          "triangles": 0,
+          "area_m2": 0.0
+        }
+      }
+    }
+  ],
+  "near_ground_band_m": [
+    -0.06,
+    0.06
+  ],
+  "near_ground_seeds": 1396,
+  "near_ground_under_30": 22,
+  "near_ground_invalid_fit": 22,
+  "near_ground_median_candidates": 70.0,
+  "independent_patch_display_width_m": 0.24,
+  "independent_patch_display_convex_hull_clipped": true
+}

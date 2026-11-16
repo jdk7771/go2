@@ -1,0 +1,17 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quadric LiDAR · KITTI 04 实测</title><style>
+body{margin:0;background:#f6f7f9;color:#23313d;font:15px/1.8 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:30px 22px}h1{font-size:28px;margin:15px 0}h2{font-size:20px;margin:30px 0 10px}p{color:#536371}table{width:100%;border-collapse:collapse;background:white}td,th{text-align:left;padding:12px;border-bottom:1px solid #dce1e6}figure{margin:20px 0}img{width:100%;height:auto}a{color:#246b9d}.status{background:#fff0d5;padding:16px;border-radius:8px}details{margin:20px 0}code{overflow-wrap:anywhere}@media(max-width:600px){main{padding:20px 12px}h1{font-size:23px}td,th{padding:8px 4px;font-size:12px}}</style>
+<main><a href="../">← 已有实验</a><p>RA-L 2023 / arXiv:2304.14190</p><h1>Quadric LiDAR：里程计、建图与定位</h1>
+<p>KITTI 04 · 271 帧 · 官方原始点云与真值 · 独立 CPU 实现</p>
+<p class="status">轨迹发散，论文精度复现未成功。 已运行完整流程；默认版本包含明确列出的法向关联门限与鲁棒损失，不是作者代码。</p>
+<table><thead><tr><th>模块</th><th>平移相对误差 ↓</th><th>旋转相对误差 ↓</th><th>中位耗时</th></tr></thead><tbody><tr><td>odometry</td><td>633.111%</td><td>27.096°/100m</td><td>171.3 ms</td></tr><tr><td>mapping</td><td>626.671%</td><td>23.339°/100m</td><td>312.6 ms</td></tr></tbody></table>
+<p>用官方 KITTI 函数逐子段交叉验证；轨迹只对齐首帧，没有进行尺度或刚体后对齐。CPU耗时不能直接与作者实现比较。</p>
+<figure><img src="trajectory.png" alt="真实、里程计及建图轨迹，位置误差与逐帧耗时"></figure>
+<h2>同序列诊断对照</h2><table><thead><tr><th>版本</th><th>里程计平移误差</th><th>建图平移误差</th></tr></thead><tbody><tr><td>Schur LS + normal gate + Cauchy (current)</td><td>633.111%</td><td>626.671%</td></tr><tr><td>Taubin + normal gate + Cauchy</td><td>52.813%</td><td>35.481%</td></tr><tr><td>Taubin, direct formula residuals</td><td>64.586%</td><td>58.733%</td></tr></tbody></table><p>全部版本均未达到论文精度；这是同一序列上的诊断，未将表现较好的版本当作论文复现结果。</p>
+<h2>二次曲面表示</h2><p>面片保存隐式二次函数、均值和矩统计；增量更新不保留历史原始点云。蓝色为平面，橙色为一般二次曲面。</p>
+<figure><img src="patches.png" alt="首帧采样点及其拟合面片类型"></figure>
+<h2>保存地图后的定位</h2><p>初值按论文由真值加XY±0.2 m、yaw±5°扰动生成。里程计/建图不使用真值；定位结果另受估计地图漂移影响。本轮有匹配并接受优化步的查询为 2/11，不能将未优化的初始先验精度当作定位成功。</p>
+<figure><img src="localization.png" alt="定位前后的平移和旋转误差"></figure>
+<details><summary>实现约定与差异</summary><ul><li>64-beam nominal HDL-64 ring projection, 2048 columns; extra 35-degree normal gate in range segmentation</li><li>quadric fitting uses the Schur-complement LS of ref [34] (or explicit --fitting taubin ablation); sensor-specific maximum-likelihood refinement is not implemented</li><li>PCA plane ratio, regularization, residual gates, sample budgets and LM stopping settings are explicit local choices</li><li>patch association and optimization use deterministic point budgets rather than every source point</li><li>default stability variant adds a 45-degree planar-normal association gate and Cauchy loss (scale 1); --literal disables both</li><li>integer tuple spatial hashing instead of binary GeoHash; same 1.5m cell size and lowest-MSE collision rule</li><li>no ROS, deskew/IMU fusion, loop closure, or official LOAM baseline; timings are Python/C++ reference on this CPU</li></ul></details>
+<p><a href="REPORT.md">完整报告</a> · <a href="metrics.json">实测指标</a> · <a href="protocol.json">参数与来源</a> · <a href="per_frame.csv">逐帧数据</a> · <a href="quadric_map.npz">二次曲面地图</a></p>
+<p><a href="https://arxiv.org/abs/2304.14190v1">论文</a> · <a href="https://www.cvlibs.net/datasets/kitti/eval_odometry.php">KITTI 官方评测</a></p></main></html>

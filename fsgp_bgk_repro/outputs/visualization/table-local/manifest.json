@@ -1,0 +1,20 @@
+{
+  "input_path": "outputs/table_cpu/table_m125_evidence.npz",
+  "input_sha256": "f4f45c3849c8e9dc7e9bc48e6970e8f3dd95c09bb9f974bee7f1067224fb4748",
+  "code_sha256": "c6678ed1c8cc3e1e75c1d8e5bc5ed192e6e33ffcb8f24405c4f7c12804dba709",
+  "settings": {
+    "neighbors": 30,
+    "radius_m": 0.75,
+    "seed_height_gate_m": 0.04,
+    "rank_ratio": 1e-10,
+    "relative_ridge": 1e-10,
+    "max_fit_rmse_m": 0.02,
+    "connect_radius_m": 0.35,
+    "max_model_disagreement_m": 0.02,
+    "max_normal_angle_deg": 15.0,
+    "min_component_points": 30,
+    "patch_half_width_m": 0.12,
+    "patch_grid_size": 5
+  },
+  "method": "Seed-local quadratic fitting and geometry graph assembly; no global height layers; not the FSGP paper method."
+}

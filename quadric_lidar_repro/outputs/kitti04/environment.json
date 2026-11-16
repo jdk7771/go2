@@ -1,0 +1,7 @@
+{
+  "python": "3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]",
+  "executable": "/usr/bin/python3",
+  "cpu": "AMD Ryzen 9 7945HX with Radeon Graphics",
+  "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+  "gpu_used": false
+}

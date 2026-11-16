@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FSGP 论文点云处理与拟合曲线</title>
+  <link rel="stylesheet" href="./viewer.css?v=1">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
+</head>
+<body><main>
+  <header><a href="../">← 原场景首页</a><h1>同一片点云，看拟合曲面与曲线</h1>
+    <p>按 FSGP 论文筛选特征点，再对照 GP 回归与二次函数拟合。原页面六种场景均已接入，新增平地—斜坡组合测试。</p>
+  </header>
+  <div class="method-note"><strong>桌子的新结果</strong><span><a href="../table-layers/?v=1">打开 30 近邻 + 高度约束的多层二次拟合 →</a> 地面、桌底、桌面分别拟合，支持查看实际选中的 30 个点。</span></div>
+  <div class="method-note"><strong>方法对应</strong><span>论文使用 KNN 特征提取、特征点筛选与体素采样，没有逐面片二次曲面分割。蓝色为 FSGP 的 GP 回归；橙色、紫色二次函数是额外对照。它们读取相同的 M 个保留点。</span></div>
+  <section class="toolbar">
+    <label>场景<select id="scene"></select></label><label>保留点 M<select id="count"></select></label><label>观测帧<select id="frame"></select></label>
+    <label>右侧二次对照<select id="control"><option value="local">局部二次函数 · 20 近邻</option><option value="global">全窗单个二次函数</option></select></label>
+    <div class="presets"><button data-view="orbit" class="active">立体</button><button data-view="side">侧面</button><button data-view="top">俯视</button></div>
+    <span id="status" role="status">正在读取数据…</span>
+  </section>
+  <div id="pipeline" class="pipeline" aria-label="论文点云处理步骤及点数"></div>
+  <section class="three-panels">
+    <article><h2>① 论文点云处理</h2><div class="viewport" id="cloud-view"></div><p>橙点：特征点 · 灰点：非特征点 · 红点：保留点</p></article>
+    <article><h2>② FSGP 的 GP 拟合曲面</h2><div class="viewport" id="gp-view"></div><p>蓝色实面 · 论文公式的 CPU 参考实现</p></article>
+    <article><h2 id="control-title">③ 局部二次函数对照</h2><div class="viewport" id="quad-view"></div><p id="control-caption">橙色实面 · 使用相同保留点的 20 近邻</p></article>
+  </section>
+  <div class="view-tools"><span>三个视角同步：拖动旋转，滚轮缩放；绿色线对应下方剖面。</span><label><input id="overlay" type="checkbox">拟合曲面上叠加输入点</label><label><input id="wire" type="checkbox">曲面网格</label></div>
+  <section class="profile-section">
+    <div class="section-heading"><div><h2>剖面拟合曲线</h2><p>固定 Y，看 X–Z 曲线与附近观测点的贴合程度。点云显示在剖面 ±0.10 m 带内。</p></div><a id="profile-image" target="_blank">打开默认剖面图 ↗</a></div>
+    <div class="profile-controls"><label>剖面 Y = <output id="slice-value">—</output><input id="slice" type="range" min="0" max="100" value="50"></label><label class="check"><input id="uncertainty" type="checkbox">GP ±1.96σ</label><label class="check"><input id="show-global" type="checkbox" checked>显示全窗二次函数</label></div>
+    <div id="profile" role="img" aria-label="输入点与各拟合方法的高度剖面"></div>
+    <div class="plot-legend"><span><i class="obs"></i>附近输入点</span><span><i class="gp"></i>FSGP</span><span><i class="local"></i>局部二次对照</span><span><i class="global"></i>全窗二次对照</span><span id="truth-legend"><i class="truth"></i>组合地形解析真值</span></div>
+  </section>
+  <section class="details-grid"><article><h2 id="error-title">高程拟合误差</h2><p id="error-note"></p><div id="metrics"></div><p id="seam-metrics"></p></article><article><h2>二次函数与点云处理设置</h2><p>全窗对照：z = a·u² + b·u·v + c·v² + d·u + e·v + f，u=x−x₀，v=y−y₀。</p><div id="equation" class="equation"></div><p>局部对照为每个查询点重新拟合一个二次高度函数，邻域来自同一组保留点；它不是一张全局二次曲面。</p><p id="settings"></p></article></section>
+  <section class="static-preview"><div class="section-heading"><h2>默认 M=125、第 8 帧静态对比</h2><a id="surface-image" target="_blank">放大 ↗</a></div><img id="preview" alt="特征点处理、GP 曲面与局部二次函数的对照图"></section>
+  <footer><p id="scene-note"></p><p>本地诊断使用每帧最多 2500 点、15% 随机丢点、1.5 cm 附加 Z 噪声；随机丢点不等于 LiDAR 射线遮挡。GP 使用现有 CPU 公式参考，未运行作者 GPU 程序。已有场景沿用原首页第 8 帧，组合地形新增 8 帧。</p><p>原文 RQ（有理二次）核不等于二次多项式。BGK 融合通行代价和方差，高程曲面来自当前帧 GP。空白处表示缺少当前观测支持或局部拟合退化。</p><div class="links"><a href="https://arxiv.org/html/2503.04134v2#S3" target="_blank">论文方法第 III 节 ↗</a><a href="./manifest.json" target="_blank">参数与来源</a><a href="./audit.json" target="_blank">重建与选点校验</a><a href="./combined_metrics.json" target="_blank">组合场景逐帧真值误差</a><a href="./REPORT.md" target="_blank">测试说明与汇总</a></div></footer>
+</main><script type="module" src="./viewer.js?v=1"></script></body>
+</html>

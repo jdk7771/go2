@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大桌子 · 桌下净空场景</title>
+  <link rel="stylesheet" href="./viewer.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+<main>
+  <header><a class="back" href="../">← 实验结果</a><div class="eyebrow">SYNTHETIC POINT CLOUD / 01</div>
+    <h1>一张大桌子，桌下保持空旷。</h1>
+    <p>平整地面、完整桌面、四条桌腿。没有横梁或围挡，地面延伸到桌子正下方。</p>
+  </header>
+  <section class="dimensions" aria-label="场景尺寸">
+    <div><span>桌面长 × 宽</span><strong>3.0 × 2.0 <small>m</small></strong></div>
+    <div><span>桌子总高</span><strong>1.20 <small>m</small></strong></div>
+    <div><span>桌下净空</span><strong>1.10 <small>m</small></strong></div>
+    <div><span>桌腿截面</span><strong>12 × 12 <small>cm</small></strong></div>
+  </section>
+  <section class="viewport-shell">
+    <div class="toolbar"><div class="presets" role="group" aria-label="观察角度">
+      <button data-view="overall" class="active">整体</button><button data-view="under">桌底视角</button>
+      <button data-view="side">侧面</button><button data-view="top">俯视</button>
+    </div><label>显示方式 <select id="mode"><option value="surface">实体 + 点云</option><option value="points">仅点云</option><option value="surface-only">仅实体</option></select></label></div>
+    <div id="viewport" aria-label="可旋转的大桌子三维场景"><div id="status" role="status">正在加载场景…</div>
+      <div class="view-label" id="view-label">整体视角</div><div class="axis-key"><i class="x">X</i><i class="y">Y</i><i class="z">Z ↑</i></div>
+      <div class="gesture">拖动旋转 · 滚轮缩放 · 右键平移</div>
+    </div>
+    <div class="layerbar"><span>图层</span><label><input id="tabletop" type="checkbox" checked>桌面</label>
+      <label><input id="legs" type="checkbox" checked>四条桌腿</label><label><input id="floor" type="checkbox" checked>地面</label>
+      <label><input id="guides" type="checkbox" checked>尺寸标注</label><span class="point-count" id="point-count">—</span></div>
+  </section>
+  <section class="notes"><div><h2>检查桌下空间</h2><p>点击「桌底视角」从低处观察，或取消勾选「桌面」查看地面和桌腿。桌腿之间的净距为 X 方向 2.52 m、Y 方向 1.52 m。</p></div>
+    <div><h2>可用于后续算法测试</h2><p>这是无噪声的完整表面点云，保留桌面、桌底和地面在同一 XY 位置的多层高度。尚未模拟激光雷达的遮挡与扫描轨迹。</p>
+      <div class="downloads"><a href="./large_table.pcd" download>下载 PCD</a><a href="./large_table.npz" download>下载 NPZ</a><a href="./scene.json" download>尺寸与校验记录</a></div></div>
+  </section>
+</main><script type="module" src="./viewer.js"></script>
+</body></html>

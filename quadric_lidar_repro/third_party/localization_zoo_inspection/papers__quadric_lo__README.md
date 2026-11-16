@@ -1,0 +1,182 @@
+# Quadric-LO
+
+From-paper reimplementation of **Quadric Representations for LiDAR Odometry,
+Mapping and Localization** (Xia et al., IEEE Robotics and Automation Letters
+2023, arXiv:2304.14190). 公開実装は確認できず、本実装は論文記述からの独自再構成。
+
+## 動機
+
+点群や平面はシーンの曲面構造 (木の幹・柱=円柱、丸い構造物=球/楕円体) を忠実に
+表せない。二次曲面 (quadric) は平面を退化として含むより一般的な表現で、曲面を
+少ないパラメータでコンパクトに記述できる。
+
+## アプローチ
+
+シーンを二次曲面の implicit function で表現する:
+
+`q(x) = xᵀ A x + bᵀ x + c`  (A は対称 3×3)
+
+1. **Quadric 当てはめ** — マップの局所近傍 (中心化座標 `y = x − μ`) に対し、
+   単項式 `m(y) = [y_x², y_y², y_z², 2y_xy_y, 2y_xy_z, 2y_yy_z, y_x, y_y, y_z, 1]`
+   を使い `M = Σ m(y) m(y)ᵀ` (10×10) を作り、その **最小固有ベクトル** を係数
+   `θ = [A, b, c]` とする (代数当てはめ; 当てはめ残差最小)。
+
+2. **Point-to-quadric 拘束** — ソース点 `p_w` の **Taubin 距離**
+   `d = q(y) / ‖∇q(y)‖`, `∇q = 2A y + b` を残差として最小化する。単位勾配
+   `g = ∇q/‖∇q‖` が局所面法線となり、ヤコビアン `Jr = gᵀ [−skew(p_w), I]`。
+
+3. **平面フォールバック** — 近傍が `quadric_min_neighbors` 未満で quadric が
+   安定に立たない場合は局所 PCA の point-to-plane に退避 (平面は quadric の退化)。
+
+Cauchy ロバスト核併用。IMU 事前積分は KITTI には無いため等速予測 prior で代替。
+
+## パラメータ
+
+- `quadric_min_neighbors` (既定 14): quadric 当てはめに要する近傍点数。
+- `planarity_threshold` (既定 0.4): 平面フォールバックの平面性下限。
+- `--quadric-lo-no-plane-fallback` (dogfooding CLI): quadric が立たない対応を
+  point-to-plane に退避せず、最適化から外す ablation。
+- `quadric_weight` (既定 1.0): quadric 拘束の相対重み。
+- `min_grad_norm` (既定 1e-3): Taubin 距離の勾配ノルム下限 (退化 quadric の弾き)。
+- `robust_scale` (既定 1.0): Cauchy 核スケール。
+- `prior_precision` (既定 0.0): 等速予測への prior。
+
+## テスト
+
+`test_quadric_lo` の 3 ケース:
+
+1. `MonomialMatrixRoundtrip` — 単項式 q=m·θ と行列形 yᵀAy+bᵀy+c の一致。
+2. `RecoversKnownTranslation` — 平面+円柱シーンで既知並進を回復。
+3. `UsesQuadricConstraints` — 円柱の曲面領域で quadric 拘束が使われる。
+
+## KITTI full での所見
+
+KITTI full (no GT seed, dense profile) では quadric 当てはめが大半の対応で成立し、
+point-to-quadric 拘束が使われる (`num_quadric` / `num_plane` で確認可能)。
+既定の fallback-on では seq00 RPE 0.867%、seq07 RPE 0.598%。平面フォールバックは
+seq00 で約 16/2779 corr/frame (0.58%)、seq07 で約 14/2757 corr/frame (0.51%) と少ない。
+
+Plane-fallback off ablation (`--quadric-lo-no-plane-fallback`) では、quadric が立たない対応を
+最適化から外す。seq00 は RPE 0.880%、ATE 12.9m、FPS 1.13、seq07 は RPE 0.590%、
+ATE 2.15m、FPS 1.06。RPE は fallback-on から約 ±1.5% 以内で、速度は 1.6-1.8倍に上がる。
+したがって KITTI evidence は plane fallback ではなく point-to-quadric path が支配的。
+T0 昇格には、曲面物体が多い dataset または non-urban dataset での確認が残る。
+
+Raw paired artifact:
+[`quadric_lo_plane_fallback_ablation.json`](../../docs/benchmarks/kitti_full_new_methods/quadric_lo_plane_fallback_ablation.json).
+
+## Synthetic Curved-Object Stress
+
+Dataset-free mechanism stress:
+
+```bash
+python3 evaluation/scripts/run_quadric_curved_stress.py
+```
+
+The runner generates an orchard-like curved-object fixture under
+`evaluation/fixtures/quadric_curved_stress` and writes
+`docs/benchmarks/quadric_curved_stress/quadric_curved_stress_summary.json`.
+On the 60-frame stress, fallback-on uses about **1242 quadric** vs **12 plane**
+correspondences/frame (`plane_fallback_ratio=0.0094`). Disabling plane fallback
+keeps ATE/RPE effectively unchanged (**0.0689 m / 0.6117%** to
+**0.0699 m / 0.6088%**), confirming the point-to-quadric path dominates this
+curved synthetic scene. This remains mechanism stress evidence, not public
+curved-object/non-urban dataset validation.
+
+## Public KITTI seq02 validation
+
+Residential/suburban public KITTI Odometry seq02 full (4661 frames, no GT seed):
+
+```bash
+python3 evaluation/scripts/run_quadric_lo_kitti_seq02_validation.py
+```
+
+| Variant | RPE | ATE | Artifact |
+|---|---:|---:|---|
+| fallback on (+ KISS) | 0.933% | 31.0 m | [`quadric_lo_fallback_on.json`](../../docs/benchmarks/kitti_seq02_public/quadric_lo_fallback_on.json) |
+| fallback off | 1.446% | 57.1 m | [`quadric_lo_fallback_off.json`](../../docs/benchmarks/kitti_seq02_public/quadric_lo_fallback_off.json) |
+
+Paired summary: [`quadric_lo_kitti_seq02_validation_summary.json`](../../docs/benchmarks/kitti_seq02_public/quadric_lo_kitti_seq02_validation_summary.json).
+Fallback-on uses **2863 quadric / 19 plane** correspondences/frame (>99% quadric).
+Unlike the near-neutral seq00/07 ablation, disabling plane fallback on
+seq02 worsens RPE by about **55%** and ATE by about **84%**, showing the rare
+plane fallback carries more weight on this vegetation-rich suburban sequence.
+Dedicated orchard or non-urban multi-beam benchmarks remain open before T0
+promotion.
+
+<!-- FIXED-KITTI-RESULTS:START -->
+
+## Full KITTI comparison with one configuration
+
+Fixed variant: `dense_profile`.
+
+The existing dense profile is frozen from the 00/07 paper comparisons; both are treated as development data. No correction or parameter is selected on the added sequences.
+
+This pipeline never uses per-frame GT seeding; GT is used only for the initial rigid evaluation anchor. Keep the original variant arguments verbatim, including an explicit --no-gt-seed where present.
+
+Sequence 02 also has earlier fallback-validation evidence in this README; it is not claimed as previously unseen. The reference is the paper scan-to-submap table.
+
+No new estimator behavior or default change is introduced by this coverage run.
+
+Exact fixed-setting CLI (substitute the sequence for NN):
+
+```bash
+./build/evaluation/pcd_dogfooding dogfooding_results/kitti_seq_NN_full experiments/reference_data/kitti_seq_NN_full_gt.csv 0 --methods quadric_lo --no-gt-seed --quadric-lo-dense-profile --summary-json quadric_lo_seq_NN.json
+```
+
+Full sequences, official KITTI translational RTE (100-800 m), no GT seed.
+Existing committed results are reused on 00, 07.
+The other rows are added full-sequence runs. Every row uses the same variant.
+
+
+| Seq | Paper RTE [%] | Fixed RTE [%] | Repo / paper | FPS |
+|---|---:|---:|---:|---:|
+| 00 (reused) | 0.920 | 0.966 | 1.05x | 0.807 |
+| 01 | 2.610 | 2.060 | 0.79x | 0.316 |
+| 02 | 1.160 | 1.176 | 1.01x | 0.390 |
+| 03 | 1.450 | 1.236 | 0.85x | 0.397 |
+| 04 | 0.870 | 0.680 | 0.78x | 0.433 |
+| 05 | 0.760 | 0.588 | 0.77x | 0.558 |
+| 06 | 0.550 | 0.560 | 1.02x | 0.405 |
+| 07 (reused) | 1.090 | 0.662 | 0.61x | 0.885 |
+| 08 | 1.680 | 1.128 | 0.67x | 0.289 |
+| 09 | 0.850 | 0.933 | 1.10x | 0.255 |
+| 10 | 1.760 | 1.556 | 0.88x | 0.286 |
+
+Geometric mean over all sequences with paper values: **0.85x**
+with the fixed setting. Table 6 is restricted to this same variant by
+`repo_variants` in `evaluation/data/paper_reported_numbers.json`.
+Historical ablations remain available in their original
+result aggregates.
+
+FPS describes the recorded execution: the new runs use one OpenMP
+thread per method and may overlap on the same sequence. Reused FPS
+comes from historical runs on their recorded hosts.
+
+Source aggregates and all unrounded rows are recorded in
+`experiments/results/remaining_kitti_coverage/summary.json`.
+New per-run summaries, host records, logs, estimated poses, evaluated GT
+and step diagnostics are committed under the corresponding
+`experiments/results/runs/` directory. Exact execution commands and the
+isolated-output launcher used for overlapping methods are recorded
+in `experiments/results/remaining_kitti_coverage/`.
+
+### Sequences above twice the paper value
+
+No sequence exceeds twice its paper value with this fixed setting.
+
+Saved-pose diagnostics are generated with
+`evaluation/scripts/diagnose_kitti_steps.py --estimate <trajectory_kitti.txt>
+--gt <evaluated_gt_kitti.txt> --summary <summary.json> --method "Quadric-LO"
+--output <step_diagnostics.json>`; each JSON records the exact command.
+The script checks its full-sequence RTE against the original run summary.
+
+<!-- FIXED-KITTI-RESULTS:END -->
+
+<!-- SHARED_NEAR_RANGE_REPLAY -->
+## Shared-loader full KITTI replay
+
+All 11 selected stored Quadric-LO full-sequence cells complete with native exits 0. 11 match historical 100 m RPE, ATE and frame count; 0 differ. Each cell uses its original recorded arguments, which may differ by sequence. This audit does not select a new fixed setting or paper value. The optional near-range cut still defaults to zero/off.
+
+[Complete report and commands](../../experiments/results/shared_near_range/completion/03/report/summary.json) retain all original audit exits, summaries, logs, saved poses, frozen comparisons and verified input cleanup. KITTI replay does not establish fresh NCLT accuracy.
+<!-- /SHARED_NEAR_RANGE_REPLAY -->

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>二次曲面拟合 · 点云叠加</title>
+  <link rel="stylesheet" href="./viewer.css?v=2">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+  <main>
+    <header>
+      <div><a class="back" href="../quadric-terrain/">← 地形测试报告</a><h1>看见拟合的二次曲面</h1>
+      <p>下面右图的蓝色实面就是拟合结果。下方三维视图默认显示曲面，可切换点云对照。</p></div>
+      <a class="outline" href="./fit-compare.png" target="_blank">放大拟合对照图 ↗</a>
+    </header>
+    <section class="fit-preview" aria-label="点云与二次曲面拟合的并排对比">
+      <div class="preview-heading"><strong>丘陵示例：输入点云 → 拟合曲面</strong><span>同一帧、同一视角 · 点击图片放大</span></div>
+      <a href="./fit-compare.png" target="_blank"><img src="./fit-compare.png" alt="左侧是丘陵输入点云，右侧蓝色实面是从这些点分割并拟合得到的二次曲面，灰色是平面分支。" width="2160" height="1008"></a>
+      <p>蓝色块是各个分割面片拟合出的二次曲面；面片之间保留空隙。下方可旋转或单独放大一个面片。</p>
+    </section>
+    <div class="quick-actions" aria-label="一键查看拟合效果">
+      <strong>交互查看</strong><button data-display="points">① 输入点云</button><button data-display="surface" class="active">② 拟合实面</button><button data-display="overlay">③ 叠加对照</button><button id="detail">④ 放大局部二次曲面</button><button id="all-patches">查看整体</button>
+    </div>
+    <section class="toolbar" aria-label="可视化控制">
+      <label>场景<select id="scene"></select></label>
+      <label>观测帧<select id="frame"></select></label>
+      <label>显示方式<select id="mode">
+        <option value="surface" selected>拟合实面（无点云）</option><option value="overlay">曲面 + 点云</option>
+        <option value="points">仅原始点云</option><option value="residual">残差着色 + 曲面</option>
+        <option value="segments">分割面片 + 曲面</option>
+      </select></label>
+      <label>面片<select id="patch"><option value="all">全部面片</option></select></label>
+      <label class="check"><input id="isolate" type="checkbox">只看选中面片</label>
+      <div class="buttons"><button data-view="orbit" class="active">立体</button><button data-view="side">侧面</button><button data-view="top">俯视</button></div>
+    </section>
+    <div class="stats" id="stats" aria-live="polite"></div>
+    <section class="workspace">
+      <div class="viewport-wrap">
+        <div id="viewport" aria-label="可交互三维点云和拟合曲面"></div>
+        <div id="status" class="status">正在读取拟合结果…</div>
+        <div id="display-label" class="display-label">拟合实面 · 蓝色二次曲面 / 灰色平面</div>
+        <div class="legend"><span><i class="dot"></i>观测点</span><span><i class="quadric"></i>二次曲面</span><span><i class="plane"></i>平面分支</span><span><i class="selected"></i>选中面片</span><span id="unassigned-legend" hidden><i class="dot" style="background:#b5bfcb"></i>未分配点</span></div>
+        <div id="colorbar" hidden><div class="gradient"></div><div class="ticks"><span>0</span><span>2</span><span>5</span><span>≥10 cm</span></div><span>Taubin 近似距离 |F| / ‖∇F‖</span></div>
+      </div>
+      <aside>
+        <h2>查看拟合细节</h2><p id="selection-hint">点击一个蓝色曲面，或从上方选择面片。</p>
+        <div id="patch-info"></div>
+        <label class="slider">曲面不透明度 <output id="opacity-value">100%</output><input id="opacity" type="range" min="10" max="100" value="100"></label>
+        <label class="check"><input id="wireframe" type="checkbox">曲面网格线</label>
+        <label class="check"><input id="lines" type="checkbox">显示投影连线</label>
+        <label class="slider">点大小 <output id="point-value">3.5 px</output><input id="point-size" type="range" min="15" max="80" value="35"></label>
+        <p class="muted">橙线连接观测点与法向迭代投影点，每面片最多显示 40 条。投影并非精确最近点距离。</p>
+        <div class="formula"><strong>实际绘制的曲面</strong><p>F(u,v,w) = a₁u² + a₂v² + a₃w² + a₄uv + a₅vw + a₆uw + a₇u + a₈v + a₉w + a₁₀ = 0</p><p>u,v,w 是以面片原点平移后的 XYZ，单位 m。系数列于选中面片下方。</p></div>
+      </aside>
+    </section>
+    <footer>
+      <p>沿用上一轮实验的 7 个官方示例、每场景 8 帧，共 56 帧。重建使用保存的点云、分割标签与同一组 Taubin 参数；蓝色曲面由 F=0 求根得到。</p>
+      <p>输入包含 0.06 m 稀疏化、15% 随机丢点和 1.5 cm 附加 Z 噪声；这些属于本地诊断设置。只绘制有观测支持的曲面区域，空白可能来自分割间隙或无效曲面分支。未分配点以浅灰色显示，不计入距离统计。Taubin 是此前对比中的拟合方案。</p>
+      <div class="links"><a href="./fit-detail.png" target="_blank">局部拟合放大图 ↗</a><a href="./audit.json" target="_blank">56 帧重建校验</a><a id="source" target="_blank" rel="noreferrer">官方场景来源 ↗</a></div>
+    </footer>
+  </main>
+  <script type="module" src="./viewer.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+% Compile twice with pdfLaTeX, XeLaTeX, or LuaLaTeX.
+% Default: a marked revision followed by a clean reading copy.
+% For only the marked revision: change \cleansectiontrue to \cleansectionfalse.
+% For only the clean revision: change \markedsectiontrue to \markedsectionfalse.
+% Citation numbers are copied verbatim; the source did not include a bibliography.
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=23mm]{geometry}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+\usepackage{microtype}
+\usepackage{fancyhdr}
+\definecolor{deletion}{HTML}{B00020}
+\definecolor{insertion}{HTML}{1453A0}
+\newcommand{\deleted}[1]{{\color{deletion}\sout{#1}}}
+\newcommand{\added}[1]{{\color{insertion}\uline{#1}}}
+\newif\ifmarkedsection
+\newif\ifcleansection
+\markedsectiontrue
+\cleansectiontrue
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65\baselineskip}
+\linespread{1.08}
+\setlength{\emergencystretch}{3em}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\small GE6001\quad |\quad \thepage}
+\renewcommand{\headrulewidth}{0pt}
+\begin{document}
+\ifmarkedsection
+{\Large\bfseries GE6001 | Academic Writing, Norms and Ethics\par}
+{\large\bfseries Introduction --- Tracked Revision\par}
+{\small \deleted{Deleted text}\quad |\quad \added{Inserted text}\par}
+{\small All reference numbers are retained from the supplied text.\par}
+
+% BEGIN MARKED INTRODUCTION
+Cloud computing \deleted{is a fast-growing business which }provides \deleted{broad categories of IT }\added{applications, computing }resources, \added{and data storage over the Internet. Enterprises deploy software and data on platforms }such as \deleted{applications, computing power, data storage, over the internet. Enterprises deploy their software systems and data with the support from cloud venders, like AWS, }\added{Amazon Web Services (AWS), Microsoft }Azure, Google \deleted{Cloud }\added{Cloud, }and Alibaba \deleted{Cloud, taking the advantage of lower IT cost, scalability }\added{Cloud to reduce infrastructure costs, scale resources, }and \deleted{collaboration efficiency. The major technology to build cloud system and deliver cloud }\added{support collaboration. Virtualization supports these }services \deleted{is virtualization technology, which encapsulates hardwares of servers and provides complete }\added{by abstracting physical server resources into }virtual \deleted{solutions for multiple needs. And cloud networking, as the basic communicating infrastructure among all of }\added{environments. Cloud networking connects }the virtual \deleted{nodes, influences operation benefits directly --- when connection fails, service is shutdown. The goal }\added{nodes in these environments; connectivity failures can therefore interrupt application services. In large cloud deployments, the number }of \deleted{analyzing connection status in cloud networking is to provide materials for networking diagnosis. Commercial cloud computing system }\added{virtual nodes and the complexity }of \deleted{major vendors provide services to millions of tenants, the situation leads to an especially complex structure of the }\added{their }communication relationships \deleted{between virtual nodes, }\added{make faults difficult to localize. Tracing packet forwarding paths helps administrators determine where communication fails. Tenants can also use connection-status information to guide load-balancing }and \deleted{understanding the performance and correctness of cloud networking becomes a growing challenge. Thus, making transmission processes be more transparent and traceable will significantly support networking debugging, which is a high-intensity burden for network administrators. In addition, from the perspective of tenants, with the ability to obtain information of connection status between each pair of nodes, they can easily take advantage of load balancing and fault tolerance.}\added{fault-tolerance decisions.}
+
+\deleted{Unfortunately, network traceback analysis is never an easy work. }In traditional \deleted{network, administrator debugs network with rudimentary tools, }\added{networks, administrators diagnose connectivity problems by inspecting router configurations and using tools }such as ping and traceroute. \deleted{When there is trouble on the connectivity, administrator firstly examines router configurations one by one, and then }\added{Repeating these }checks \deleted{connection status between each pair of nodes }\added{across networks }with \deleted{ping and traceroute, to hunt down trouble devices. Imagining that there are }millions of nodes \deleted{in the network, the debugging work will become unacceptable. However, }\added{is labor-intensive and difficult to scale. In cloud networks built }with \deleted{the rapid development of Software Defined Network }\added{software-defined networking }(SDN) and Virtual Extensible LAN (VXLAN) [4], \deleted{original problem has been transferred }\added{the diagnostic task extends }to \deleted{a new background --- analyzing connectivity }\added{communication }between virtual nodes in the \deleted{overlay network. This provides the possibility to simplify these high-intensity tasks. Different with traditional network, }\added{overlay. }SDN provides \deleted{more flexibility and network-wide visibility to administrator, as well as }a centralized controller \deleted{which }\added{with network-wide visibility and the ability to configure virtual switches and routers. The controller }can \deleted{issue configurations to all of }\added{therefore coordinate tracing across }virtual \deleted{nodes (such as virtual switches, virtual routers) in the network. Thus, it is possible to design a network-wide debugging tool to measure the connectivity. }\added{forwarding devices.}
+
+\deleted{And we developed VTrace. VTrace is a }\added{SDN research has addressed }network \deleted{debugging tool for figuring out the state of the virtual path, it is designed to trace the virtual flow between nodes and to pinpoint where the cause of a communication failure is. After the breakthrough of SDN, while plenty of works focus on refining the networking system [6, 7, 9, 35], multiple techniques have been proposed to solve }\added{operation [6, 7, 9, 35] as well as }monitoring and \deleted{debugging issue. Consider the flexibility and scalability }\added{debugging. Some diagnostic systems require substantial network instrumentation [3, 11, 12, 37], which can complicate deployment }in \deleted{cloud-scale network, systems with strong demands on network instrumentations are unsuitable [3, 11, 12, 37]. Taking the advantage of programmable features of SDN, several systems have been published to trace packets by reforming }\added{large cloud networks. Packet-tracing methods include modifying }virtual forwarding devices [13, 33], deploying \deleted{end-host }decision \deleted{engine [8, 27] }\added{engines on end hosts [8, 27], }and \deleted{implementing packet }mirroring \added{packets }[1, 15]\deleted{. }\added{.}
+
+\added{We present VTrace, a network debugging tool for tracing virtual flows in cloud overlay networks. VTrace uses the SDN controller to configure virtual forwarding devices for flow tracing. It then reconstructs forwarding paths from the collected tracing information to help locate connectivity failures.}
+
+The contributions of this paper are as \deleted{follows. }\added{follows:}
+
+(1) \deleted{To the best of our knowledge, VTrace is the first noninvasive }\added{We develop VTrace, a }network traceback \deleted{analysis }system \deleted{focus on extremely }\added{for }large-scale \added{cloud }overlay \deleted{network for cloud computing. }\added{networks. The system uses forwarding-path information to help localize connectivity failures.}
+
+(2) We \deleted{leverage the }\added{describe a controller-based mechanism that uses }network-wide visibility \deleted{of SDN controller }to configure \deleted{every }virtual forwarding \deleted{device in the cloud-scale overlay network to trace }\added{devices for tracing }arbitrary virtual \deleted{flow in a low-cost way. This process induces negligible effect on the }\added{flows. The mechanism is designed to limit tracing overhead and interference with }production \deleted{traffic. }\added{traffic.}
+
+(3) We \deleted{build }\added{implement }a distributed \deleted{stream computing }\added{stream-processing }system \deleted{to reconstruct }and \deleted{analyze }\added{algorithms for reconstructing and analyzing }virtual \deleted{flows timely with efficient algorithms. Even with multiple VTrace tasks, each task will be processed in a short time.}\added{flows. The system supports concurrent tracing tasks.}
+% END MARKED INTRODUCTION
+
+\fi
+\ifcleansection
+\ifmarkedsection\clearpage\fi
+{\Large\bfseries GE6001 | Academic Writing, Norms and Ethics\par}
+{\large\bfseries Introduction --- Clean Revision\par}
+{\small All reference numbers are retained from the supplied text.\par}
+
+% BEGIN CLEAN INTRODUCTION
+Cloud computing provides applications, computing resources, and data storage over the Internet. Enterprises deploy software and data on platforms such as Amazon Web Services (AWS), Microsoft Azure, Google Cloud, and Alibaba Cloud to reduce infrastructure costs, scale resources, and support collaboration. Virtualization supports these services by abstracting physical server resources into virtual environments. Cloud networking connects the virtual nodes in these environments; connectivity failures can therefore interrupt application services. In large cloud deployments, the number of virtual nodes and the complexity of their communication relationships make faults difficult to localize. Tracing packet forwarding paths helps administrators determine where communication fails. Tenants can also use connection-status information to guide load-balancing and fault-tolerance decisions.
+
+In traditional networks, administrators diagnose connectivity problems by inspecting router configurations and using tools such as ping and traceroute. Repeating these checks across networks with millions of nodes is labor-intensive and difficult to scale. In cloud networks built with software-defined networking (SDN) and Virtual Extensible LAN (VXLAN) [4], the diagnostic task extends to communication between virtual nodes in the overlay. SDN provides a centralized controller with network-wide visibility and the ability to configure virtual switches and routers. The controller can therefore coordinate tracing across virtual forwarding devices.
+
+SDN research has addressed network operation [6, 7, 9, 35] as well as monitoring and debugging. Some diagnostic systems require substantial network instrumentation [3, 11, 12, 37], which can complicate deployment in large cloud networks. Packet-tracing methods include modifying virtual forwarding devices [13, 33], deploying decision engines on end hosts [8, 27], and mirroring packets [1, 15].
+
+We present VTrace, a network debugging tool for tracing virtual flows in cloud overlay networks. VTrace uses the SDN controller to configure virtual forwarding devices for flow tracing. It then reconstructs forwarding paths from the collected tracing information to help locate connectivity failures.
+
+The contributions of this paper are as follows:
+
+(1) We develop VTrace, a network traceback system for large-scale cloud overlay networks. The system uses forwarding-path information to help localize connectivity failures.
+
+(2) We describe a controller-based mechanism that uses network-wide visibility to configure virtual forwarding devices for tracing arbitrary virtual flows. The mechanism is designed to limit tracing overhead and interference with production traffic.
+
+(3) We implement a distributed stream-processing system and algorithms for reconstructing and analyzing virtual flows. The system supports concurrent tracing tasks.
+% END CLEAN INTRODUCTION
+\fi
+\end{document}

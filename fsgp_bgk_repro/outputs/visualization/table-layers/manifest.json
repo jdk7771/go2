@@ -1,0 +1,93 @@
+{
+  "settings": {
+    "neighbors": 30,
+    "radius_m": 0.75,
+    "nearest_xy_m": 0.2,
+    "height_gate_m": 0.04,
+    "histogram_bin_m": 0.02,
+    "histogram_sigma_bins": 0.7,
+    "mode_refinement_m": 0.04,
+    "max_triangle_height_jump_m": 0.04,
+    "rank_ratio": 1e-10,
+    "relative_ridge": 1e-10,
+    "grid_step_m": 0.05
+  },
+  "sources": {
+    "scan": {
+      "name": "原页面同一帧 · 2125 点（含噪声）",
+      "path": "outputs/table_cpu/table_m125_evidence.npz",
+      "sha256": "f4f45c3849c8e9dc7e9bc48e6970e8f3dd95c09bb9f974bee7f1067224fb4748",
+      "n": 2125
+    },
+    "full": {
+      "name": "完整合成点云 · 32683 点（无噪声）",
+      "path": "outputs/visualization/large-table/large_table.npz",
+      "sha256": "16270c5fcfc3fa8da0ef725a0da502dbf0d536ab6f895d477f3c276df791cb9a",
+      "n": 32683
+    },
+    "sparse": {
+      "name": "论文筛选后 M=125 · 稀疏性对照",
+      "path": "outputs/table_cpu/table_m125_fsgp.npz",
+      "sha256": "0bbc50e3627e19bc7da7cae385f80df06c13ac3b30e4638657364bb9c9194f1b",
+      "n": 125
+    }
+  },
+  "cases": [
+    {
+      "key": "scan_02cm",
+      "source": "scan",
+      "height_gate_m": 0.02,
+      "file": "cases/scan_02cm.json"
+    },
+    {
+      "key": "scan_03cm",
+      "source": "scan",
+      "height_gate_m": 0.03,
+      "file": "cases/scan_03cm.json"
+    },
+    {
+      "key": "scan_04cm",
+      "source": "scan",
+      "height_gate_m": 0.04,
+      "file": "cases/scan_04cm.json"
+    },
+    {
+      "key": "full_02cm",
+      "source": "full",
+      "height_gate_m": 0.02,
+      "file": "cases/full_02cm.json"
+    },
+    {
+      "key": "full_03cm",
+      "source": "full",
+      "height_gate_m": 0.03,
+      "file": "cases/full_03cm.json"
+    },
+    {
+      "key": "full_04cm",
+      "source": "full",
+      "height_gate_m": 0.04,
+      "file": "cases/full_04cm.json"
+    },
+    {
+      "key": "sparse_02cm",
+      "source": "sparse",
+      "height_gate_m": 0.02,
+      "file": "cases/sparse_02cm.json"
+    },
+    {
+      "key": "sparse_03cm",
+      "source": "sparse",
+      "height_gate_m": 0.03,
+      "file": "cases/sparse_03cm.json"
+    },
+    {
+      "key": "sparse_04cm",
+      "source": "sparse",
+      "height_gate_m": 0.04,
+      "file": "cases/sparse_04cm.json"
+    }
+  ],
+  "method": "User-requested multilayer quadratic diagnostic; not an FSGP paper method.",
+  "code_sha256": "bcbeb30f0e956d7ab6a72335bee5bc98728484ce305f92b250647fd19a0219f3"
+}

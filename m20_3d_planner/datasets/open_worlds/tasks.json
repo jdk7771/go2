@@ -1,0 +1,325 @@
+{
+  "tasks": [
+    {
+      "name": "open_warehouse_shelf",
+      "label": "仓库·货架支脚",
+      "description": "开源 AWS warehouse 世界局部任务：仓库·货架支脚；原始碰撞网格、原尺寸。初值为未经避障的 25 mm 轻微 S 弯。",
+      "source_repository": "https://github.com/aws-robotics/aws-robomaker-small-warehouse-world",
+      "source_archive_sha256": "02b269a68e0deaeb6b903499eb409360e069ad04f9d27d59ab3a7160f06a4d99",
+      "source_world": "warehouse/worlds/no_roof_small_warehouse/no_roof_small_warehouse.world",
+      "source_model": "aws_robomaker_warehouse_ShelfD_01_001",
+      "source_license": "MIT-0",
+      "source_world_sha256": "bd05d247e4715b7810c1f1edd8353a907af5bd8b81391c126dcb73803b7906bf",
+      "world_origin_m": [
+        2.7724,
+        -1.4424,
+        0.03422591999999999
+      ],
+      "heading_rad": 0.0,
+      "geometry_scale": 1.0,
+      "crop_lower_m": [
+        -1.95,
+        -1.15,
+        -0.15
+      ],
+      "crop_upper_m": [
+        1.95,
+        1.15,
+        2.05
+      ],
+      "truth_surface_cover_radius_m": 0.012000001,
+      "surface_kind": "imported_collision_mesh",
+      "sensor_spacing_m": 0.025,
+      "truth_spacing_m": 0.012,
+      "analytic_tessellation_error_bound_m": 0.0,
+      "initial_center_collision_margin_m": 0.005,
+      "endpoints_inflated_body_clearance_m": 0.04,
+      "default_view": "iso",
+      "default_zoom": 1.0,
+      "triangle_count": 42,
+      "sensor_points": 182662,
+      "truth_points": 734087
+    },
+    {
+      "name": "open_warehouse_clutter",
+      "label": "仓库·堆放箱群",
+      "description": "开源 AWS warehouse 世界局部任务：仓库·堆放箱群；原始碰撞网格、原尺寸。初值为未经避障的 25 mm 轻微 S 弯。",
+      "source_repository": "https://github.com/aws-robotics/aws-robomaker-small-warehouse-world",
+      "source_archive_sha256": "02b269a68e0deaeb6b903499eb409360e069ad04f9d27d59ab3a7160f06a4d99",
+      "source_world": "warehouse/worlds/no_roof_small_warehouse/no_roof_small_warehouse.world",
+      "source_model": "aws_robomaker_warehouse_ClutteringC_01_027",
+      "source_license": "MIT-0",
+      "source_world_sha256": "bd05d247e4715b7810c1f1edd8353a907af5bd8b81391c126dcb73803b7906bf",
+      "world_origin_m": [
+        2.2919,
+        3.3775,
+        0.03422591999999999
+      ],
+      "heading_rad": 2.356194490192345,
+      "geometry_scale": 1.0,
+      "crop_lower_m": [
+        -1.95,
+        -1.15,
+        -0.15
+      ],
+      "crop_upper_m": [
+        1.95,
+        1.15,
+        2.05
+      ],
+      "truth_surface_cover_radius_m": 0.012000001,
+      "surface_kind": "imported_collision_mesh",
+      "sensor_spacing_m": 0.025,
+      "truth_spacing_m": 0.012,
+      "analytic_tessellation_error_bound_m": 0.0,
+      "initial_center_collision_margin_m": 0.005,
+      "endpoints_inflated_body_clearance_m": 0.04,
+      "default_view": "iso",
+      "default_zoom": 1.0,
+      "triangle_count": 22,
+      "sensor_points": 150466,
+      "truth_points": 594460
+    },
+    {
+      "name": "open_warehouse_bucket",
+      "label": "仓库·桶组",
+      "description": "开源 AWS warehouse 世界局部任务：仓库·桶组；原始碰撞网格、原尺寸。初值为未经避障的 25 mm 轻微 S 弯。",
+      "source_repository": "https://github.com/aws-robotics/aws-robomaker-small-warehouse-world",
+      "source_archive_sha256": "02b269a68e0deaeb6b903499eb409360e069ad04f9d27d59ab3a7160f06a4d99",
+      "source_world": "warehouse/worlds/no_roof_small_warehouse/no_roof_small_warehouse.world",
+      "source_model": "aws_robomaker_warehouse_Bucket_01_020",
+      "source_license": "MIT-0",
+      "source_world_sha256": "bd05d247e4715b7810c1f1edd8353a907af5bd8b81391c126dcb73803b7906bf",
+      "world_origin_m": [
+        0.9113,
+        10.1059,
+        0.03422591999999999
+      ],
+      "heading_rad": 2.356194490192345,
+      "geometry_scale": 1.0,
+      "crop_lower_m": [
+        -1.95,
+        -1.15,
+        -0.15
+      ],
+      "crop_upper_m": [
+        1.95,
+        1.15,
+        2.05
+      ],
+      "truth_surface_cover_radius_m": 0.012000001,
+      "surface_kind": "imported_collision_mesh",
+      "sensor_spacing_m": 0.025,
+      "truth_spacing_m": 0.012,
+      "analytic_tessellation_error_bound_m": 0.0,
+      "initial_center_collision_margin_m": 0.005,
+      "endpoints_inflated_body_clearance_m": 0.04,
+      "default_view": "iso",
+      "default_zoom": 1.0,
+      "triangle_count": 80,
+      "sensor_points": 245637,
+      "truth_points": 981726
+    },
+    {
+      "name": "open_warehouse_pallet_jack",
+      "label": "仓库·搬运车",
+      "description": "开源 AWS warehouse 世界局部任务：仓库·搬运车；原始碰撞网格、原尺寸。初值为未经避障的 25 mm 轻微 S 弯。",
+      "source_repository": "https://github.com/aws-robotics/aws-robomaker-small-warehouse-world",
+      "source_archive_sha256": "02b269a68e0deaeb6b903499eb409360e069ad04f9d27d59ab3a7160f06a4d99",
+      "source_world": "warehouse/worlds/no_roof_small_warehouse/no_roof_small_warehouse.world",
+      "source_model": "aws_robomaker_warehouse_PalletJackB_01_001",
+      "source_license": "MIT-0",
+      "source_world_sha256": "bd05d247e4715b7810c1f1edd8353a907af5bd8b81391c126dcb73803b7906bf",
+      "world_origin_m": [
+        -0.7428,
+        -9.5355,
+        0.03422591999999999
+      ],
+      "heading_rad": 0.0,
+      "geometry_scale": 1.0,
+      "crop_lower_m": [
+        -1.95,
+        -1.15,
+        -0.15
+      ],
+      "crop_upper_m": [
+        1.95,
+        1.15,
+        2.05
+      ],
+      "truth_surface_cover_radius_m": 0.012000001,
+      "surface_kind": "imported_collision_mesh",
+      "sensor_spacing_m": 0.025,
+      "truth_spacing_m": 0.012,
+      "analytic_tessellation_error_bound_m": 0.0,
+      "initial_center_collision_margin_m": 0.005,
+      "endpoints_inflated_body_clearance_m": 0.04,
+      "default_view": "iso",
+      "default_zoom": 1.0,
+      "triangle_count": 710,
+      "sensor_points": 251046,
+      "truth_points": 973931
+    },
+    {
+      "name": "open_house_chairs",
+      "label": "住宅·餐椅与桌边",
+      "description": "开源 AWS house 世界局部任务：住宅·餐椅与桌边；原始碰撞网格、原尺寸。初值为未经避障的 25 mm 轻微 S 弯。",
+      "source_repository": "https://github.com/aws-robotics/aws-robomaker-small-house-world",
+      "source_archive_sha256": "0ae293a5378e51f7bea9d26d98d73d1cf612a0dec8275d87d4159e6e54c727ab",
+      "source_world": "house/worlds/small_house.world",
+      "source_model": "ChairA_01_001",
+      "source_license": "MIT-0",
+      "source_world_sha256": "8eef40841c462e3f015dc092f24a1b696ea10f8f05b662b529b76ddd720b544f",
+      "world_origin_m": [
+        6.8721,
+        0.2933,
+        0.0
+      ],
+      "heading_rad": 0.0,
+      "geometry_scale": 1.0,
+      "crop_lower_m": [
+        -1.95,
+        -1.15,
+        -0.15
+      ],
+      "crop_upper_m": [
+        1.95,
+        1.15,
+        2.05
+      ],
+      "truth_surface_cover_radius_m": 0.012000001,
+      "surface_kind": "imported_collision_mesh",
+      "sensor_spacing_m": 0.025,
+      "truth_spacing_m": 0.012,
+      "analytic_tessellation_error_bound_m": 0.0,
+      "initial_center_collision_margin_m": 0.005,
+      "endpoints_inflated_body_clearance_m": 0.04,
+      "default_view": "iso",
+      "default_zoom": 1.0,
+      "triangle_count": 413,
+      "sensor_points": 154827,
+      "truth_points": 680118
+    },
+    {
+      "name": "open_house_coffee_table",
+      "label": "住宅·低茶几",
+      "description": "开源 AWS house 世界局部任务：住宅·低茶几；原始碰撞网格、原尺寸。初值为未经避障的 25 mm 轻微 S 弯。",
+      "source_repository": "https://github.com/aws-robotics/aws-robomaker-small-house-world",
+      "source_archive_sha256": "0ae293a5378e51f7bea9d26d98d73d1cf612a0dec8275d87d4159e6e54c727ab",
+      "source_world": "house/worlds/small_house.world",
+      "source_model": "CoffeeTable_01_001",
+      "source_license": "MIT-0",
+      "source_world_sha256": "8eef40841c462e3f015dc092f24a1b696ea10f8f05b662b529b76ddd720b544f",
+      "world_origin_m": [
+        1.6084,
+        -1.3938,
+        0.0
+      ],
+      "heading_rad": 2.356194490192345,
+      "geometry_scale": 1.0,
+      "crop_lower_m": [
+        -1.95,
+        -1.15,
+        -0.15
+      ],
+      "crop_upper_m": [
+        1.95,
+        1.15,
+        2.05
+      ],
+      "truth_surface_cover_radius_m": 0.012000001,
+      "surface_kind": "imported_collision_mesh",
+      "sensor_spacing_m": 0.025,
+      "truth_spacing_m": 0.012,
+      "analytic_tessellation_error_bound_m": 0.0,
+      "initial_center_collision_margin_m": 0.005,
+      "endpoints_inflated_body_clearance_m": 0.04,
+      "default_view": "iso",
+      "default_zoom": 1.0,
+      "triangle_count": 457,
+      "sensor_points": 223726,
+      "truth_points": 921416
+    },
+    {
+      "name": "open_house_sofa",
+      "label": "住宅·沙发转角",
+      "description": "开源 AWS house 世界局部任务：住宅·沙发转角；原始碰撞网格、原尺寸。初值为未经避障的 25 mm 轻微 S 弯。",
+      "source_repository": "https://github.com/aws-robotics/aws-robomaker-small-house-world",
+      "source_archive_sha256": "0ae293a5378e51f7bea9d26d98d73d1cf612a0dec8275d87d4159e6e54c727ab",
+      "source_world": "house/worlds/small_house.world",
+      "source_model": "SofaC_01_001",
+      "source_license": "MIT-0",
+      "source_world_sha256": "8eef40841c462e3f015dc092f24a1b696ea10f8f05b662b529b76ddd720b544f",
+      "world_origin_m": [
+        -0.8949,
+        -2.6121,
+        0.0
+      ],
+      "heading_rad": 2.356194490192345,
+      "geometry_scale": 1.0,
+      "crop_lower_m": [
+        -1.95,
+        -1.15,
+        -0.15
+      ],
+      "crop_upper_m": [
+        1.95,
+        1.15,
+        2.05
+      ],
+      "truth_surface_cover_radius_m": 0.012000001,
+      "surface_kind": "imported_collision_mesh",
+      "sensor_spacing_m": 0.025,
+      "truth_spacing_m": 0.012,
+      "analytic_tessellation_error_bound_m": 0.0,
+      "initial_center_collision_margin_m": 0.005,
+      "endpoints_inflated_body_clearance_m": 0.04,
+      "default_view": "iso",
+      "default_zoom": 1.0,
+      "triangle_count": 621,
+      "sensor_points": 188348,
+      "truth_points": 833747
+    },
+    {
+      "name": "open_house_cabinet",
+      "label": "住宅·柜体与墙边",
+      "description": "开源 AWS house 世界局部任务：住宅·柜体与墙边；原始碰撞网格、原尺寸。初值为未经避障的 25 mm 轻微 S 弯。",
+      "source_repository": "https://github.com/aws-robotics/aws-robomaker-small-house-world",
+      "source_archive_sha256": "0ae293a5378e51f7bea9d26d98d73d1cf612a0dec8275d87d4159e6e54c727ab",
+      "source_world": "house/worlds/small_house.world",
+      "source_model": "Wardrobe_01_001",
+      "source_license": "MIT-0",
+      "source_world_sha256": "8eef40841c462e3f015dc092f24a1b696ea10f8f05b662b529b76ddd720b544f",
+      "world_origin_m": [
+        -3.437,
+        2.8528,
+        0.0
+      ],
+      "heading_rad": 1.5707963267948966,
+      "geometry_scale": 1.0,
+      "crop_lower_m": [
+        -1.95,
+        -1.15,
+        -0.15
+      ],
+      "crop_upper_m": [
+        1.95,
+        1.15,
+        2.05
+      ],
+      "truth_surface_cover_radius_m": 0.012000001,
+      "surface_kind": "imported_collision_mesh",
+      "sensor_spacing_m": 0.025,
+      "truth_spacing_m": 0.012,
+      "analytic_tessellation_error_bound_m": 0.0,
+      "initial_center_collision_margin_m": 0.005,
+      "endpoints_inflated_body_clearance_m": 0.04,
+      "default_view": "iso",
+      "default_zoom": 1.0,
+      "triangle_count": 156,
+      "sensor_points": 280865,
+      "truth_points": 1195405
+    }
+  ],
+  "selection": "first collision-containing task with free endpoints; no planner results consulted"
+}

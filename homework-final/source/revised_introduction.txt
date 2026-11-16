@@ -1,0 +1,15 @@
+Cloud computing provides applications, computing resources, and data storage over the Internet. Enterprises deploy software and data on platforms such as Amazon Web Services (AWS), Microsoft Azure, Google Cloud, and Alibaba Cloud to reduce infrastructure costs, scale resources, and support collaboration. Virtualization supports these services by abstracting physical server resources into virtual environments. Cloud networking connects the virtual nodes in these environments; connectivity failures can therefore interrupt application services. In large cloud deployments, the number of virtual nodes and the complexity of their communication relationships make faults difficult to localize. Tracing packet forwarding paths helps administrators determine where communication fails. Tenants can also use connection-status information to guide load-balancing and fault-tolerance decisions.
+
+In traditional networks, administrators diagnose connectivity problems by inspecting router configurations and using tools such as ping and traceroute. Repeating these checks across networks with millions of nodes is labor-intensive and difficult to scale. In cloud networks built with software-defined networking (SDN) and Virtual Extensible LAN (VXLAN) [4], the diagnostic task extends to communication between virtual nodes in the overlay. SDN provides a centralized controller with network-wide visibility and the ability to configure virtual switches and routers. The controller can therefore coordinate tracing across virtual forwarding devices.
+
+SDN research has addressed network operation [6, 7, 9, 35] as well as monitoring and debugging. Some diagnostic systems require substantial network instrumentation [3, 11, 12, 37], which can complicate deployment in large cloud networks. Packet-tracing methods include modifying virtual forwarding devices [13, 33], deploying decision engines on end hosts [8, 27], and mirroring packets [1, 15].
+
+We present VTrace, a network debugging tool for tracing virtual flows in cloud overlay networks. VTrace uses the SDN controller to configure virtual forwarding devices for flow tracing. It then reconstructs forwarding paths from the collected tracing information to help locate connectivity failures.
+
+The contributions of this paper are as follows:
+
+(1) We develop VTrace, a network traceback system for large-scale cloud overlay networks. The system uses forwarding-path information to help localize connectivity failures.
+
+(2) We describe a controller-based mechanism that uses network-wide visibility to configure virtual forwarding devices for tracing arbitrary virtual flows. The mechanism is designed to limit tracing overhead and interference with production traffic.
+
+(3) We implement a distributed stream-processing system and algorithms for reconstructing and analyzing virtual flows. The system supports concurrent tracing tasks.

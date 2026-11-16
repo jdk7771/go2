@@ -1,0 +1,40 @@
+{
+  "odometry": {
+    "kitti_translation_error_percent": 52.81262266081161,
+    "kitti_rotation_error_deg_per_100m": 20.5181580027311,
+    "kitti_segments": 43,
+    "official_devkit_crosscheck": true,
+    "ape_rmse_m_no_alignment": 141.03044437233197,
+    "final_position_error_m": 289.80700943104733
+  },
+  "mapping": {
+    "kitti_translation_error_percent": 35.48139654273581,
+    "kitti_rotation_error_deg_per_100m": 9.952803372768104,
+    "kitti_segments": 43,
+    "official_devkit_crosscheck": true,
+    "ape_rmse_m_no_alignment": 87.8357833317767,
+    "final_position_error_m": 158.70957388474125
+  },
+  "localization": {
+    "translation_error_m": 0.1993519563216091,
+    "rotation_error_deg": 2.926619192137531,
+    "runtime_ms": 8.907897001336096,
+    "hash_lookup_ms": 7.157898002333241,
+    "queries": 11
+  },
+  "timing": {
+    "feature_ms": 73.41065500077093,
+    "scan_to_scan_ms": 101.89680599978601,
+    "scan_to_map_ms": 114.70209999970393,
+    "map_update_ms": 88.15215449794778,
+    "odometry_total_ms": 175.97225250028714,
+    "mapping_total_ms": 381.47144799768284
+  },
+  "storage": {
+    "raw_xyz_float32_bytes": 408834684,
+    "serialized_map_bytes": 584838,
+    "serialized_map_patches": 1699,
+    "raw_xyz_to_npz_ratio": 699.0562925117725,
+    "note": "full input XYZ float32 payload vs compressed moments-only NPZ; includes geometric approximation and ZIP compression"
+  }
+}

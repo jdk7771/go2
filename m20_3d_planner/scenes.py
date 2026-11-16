@@ -291,6 +291,30 @@ def open_entry_channel(nominal_height: float) -> Scene:
     )
 
 
+def tall_obstacle_scene() -> Scene:
+    """Grounded block taller than every permitted body pose; lateral detour.
+
+    Its small lateral offset breaks the left/right symmetry of the geometry,
+    not the straight initialization. Display boxes never reach the optimizer.
+    """
+    center = np.array([0.0, 0.08, 0.70])
+    size = np.array([0.34, 0.44, 1.40])
+    return make_box_scene(
+        "tall_obstacle_detour",
+        "tall_obstacle",
+        [(center, size, np.zeros(3))],
+        {
+            "description": "绕过 1.40 m 高的落地障碍物（长 0.34 m、宽 0.44 m，中心 y=0.08 m）。从 z=0.4 m 的零姿态直线开始；高度边界不允许翻越，观察是否自行横移绕行并回到终点。实验横移边界须显式放宽，建议 ±0.60 m。半透明外形仅作显示，规划仍只使用带噪点云。",
+            "obstacle_height_m": float(size[2]),
+            "obstacle_center_m": center.tolist(),
+            "obstacle_size_m": size.tolist(),
+            "default_view": "top",
+            "default_zoom": 1.0,
+            "display_boxes": [{"center": center.tolist(), "size": size.tolist(), "rpy": [0, 0, 0]}],
+        },
+    )
+
+
 def build_scenes(nominal_height: float, half: np.ndarray) -> list[Scene]:
     scenes: list[Scene] = []
 
@@ -407,7 +431,7 @@ def build_scenes(nominal_height: float, half: np.ndarray) -> list[Scene]:
     return (
         scenes
         + nonparallel_scenes(nominal_height)
-        + [open_entry_channel(nominal_height)]
+        + [open_entry_channel(nominal_height), tall_obstacle_scene()]
     )
 
 

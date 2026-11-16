@@ -1,2 +1,5 @@
 __pycache__/
 outputs/
+datasets/open_worlds/prepared/
+datasets/open_worlds/witnesses/
+datasets/open_worlds/grid_references/

@@ -1,0 +1,130 @@
+{
+  "name": "large_table",
+  "units": "m",
+  "up_axis": "z",
+  "description": "Complete synthetic surfaces; no simulated sensor occlusion or noise.",
+  "floor": {
+    "label": 0,
+    "name": "floor",
+    "min": [
+      -3.0,
+      -3.0,
+      0.0
+    ],
+    "max": [
+      3.0,
+      3.0,
+      0.0
+    ]
+  },
+  "tabletop": {
+    "label": 1,
+    "name": "tabletop",
+    "min": [
+      -1.5,
+      -1.0,
+      1.1
+    ],
+    "max": [
+      1.5,
+      1.0,
+      1.2
+    ]
+  },
+  "legs": [
+    {
+      "label": 2,
+      "name": "leg_1",
+      "min": [
+        -1.3800000000000001,
+        -0.8799999999999999,
+        0.0
+      ],
+      "max": [
+        -1.26,
+        -0.76,
+        1.1
+      ]
+    },
+    {
+      "label": 3,
+      "name": "leg_2",
+      "min": [
+        -1.3800000000000001,
+        0.76,
+        0.0
+      ],
+      "max": [
+        -1.26,
+        0.8799999999999999,
+        1.1
+      ]
+    },
+    {
+      "label": 4,
+      "name": "leg_3",
+      "min": [
+        1.26,
+        -0.8799999999999999,
+        0.0
+      ],
+      "max": [
+        1.3800000000000001,
+        -0.76,
+        1.1
+      ]
+    },
+    {
+      "label": 5,
+      "name": "leg_4",
+      "min": [
+        1.26,
+        0.76,
+        0.0
+      ],
+      "max": [
+        1.3800000000000001,
+        0.8799999999999999,
+        1.1
+      ]
+    }
+  ],
+  "dimensions": {
+    "table_length": 3.0,
+    "table_width": 2.0,
+    "table_height": 1.2,
+    "tabletop_thickness": 0.1,
+    "clear_height": 1.1,
+    "leg_width": 0.12,
+    "gap_between_legs_x": 2.52,
+    "gap_between_legs_y": 1.52
+  },
+  "point_count": 32683,
+  "max_surface_spacing_m": 0.04,
+  "point_counts_by_label": {
+    "0": 22759,
+    "1": 8310,
+    "2": 403,
+    "3": 404,
+    "4": 403,
+    "5": 404
+  },
+  "point_buffer": {
+    "url": "points.bin",
+    "dtype": "little-endian float32",
+    "columns": [
+      "x",
+      "y",
+      "z",
+      "label"
+    ]
+  },
+  "checks": {
+    "forbidden_points_under_table": 0,
+    "duplicate_points": 0,
+    "finite_points": true,
+    "floor_under_table_present": true,
+    "all_points_on_component_surfaces": true
+  },
+  "pcd_sha256": "a95b02c4577eb325e15f8a07fad950e3215f9af7a06ee9d739741b3254349a6d"
+}

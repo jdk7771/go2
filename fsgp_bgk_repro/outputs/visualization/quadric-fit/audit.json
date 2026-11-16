@@ -1,0 +1,911 @@
+{
+  "passed": true,
+  "frames": [
+    {
+      "frame": "hill_000",
+      "input_sha256": "45376b2ad812cbdc2545910a4b5d9f4879fbcbc1794eca67772e47503e489791",
+      "output_sha256": "3cf7e9bb913e69d0df9e2af80c61b5855b2197dd7c55035131512988880df71f",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7389,
+      "mesh_triangles": 12850,
+      "mesh_zero_set_max_error_m": 6.284092908838867e-16,
+      "serialized_zero_set_max_error_m": 7.334130304791535e-07,
+      "facet_sample_max_error_m": 0.0029622487383429907,
+      "patch_types": {
+        "quadric": 16,
+        "plane": 4,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "hill_001",
+      "input_sha256": "4be22e5dce48808324ecca73f96cdb3c8bc03431de09c8932a591e7f6af13112",
+      "output_sha256": "621a3a281e4ab21336474e89126864b8b25e67c6debf828bcacc1c9fefe10d32",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7608,
+      "mesh_triangles": 13093,
+      "mesh_zero_set_max_error_m": 7.721230615125223e-16,
+      "serialized_zero_set_max_error_m": 7.383007163980412e-07,
+      "facet_sample_max_error_m": 0.0029989779146524314,
+      "patch_types": {
+        "quadric": 18,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "hill_002",
+      "input_sha256": "fa529b6a0b70bc2f59709eb8ab12e0a364b9120e6336bd33a23501c3b6e4cc3a",
+      "output_sha256": "b04ed86a52809b2d23c172dd4e0c592e9a11a46e377db6b930e085fb492d4f59",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7227,
+      "mesh_triangles": 12699,
+      "mesh_zero_set_max_error_m": 4.653393590618394e-16,
+      "serialized_zero_set_max_error_m": 7.116176385044321e-07,
+      "facet_sample_max_error_m": 0.0029989162626982997,
+      "patch_types": {
+        "quadric": 18,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "hill_003",
+      "input_sha256": "d45357ac72f8ead06e4dfbed7d973023200684c05489594dc8928239870941c5",
+      "output_sha256": "35651e721c3e74b5b1764dc9844703eb3ef266be0ac50877f38888f172a78c4f",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7723,
+      "mesh_triangles": 13744,
+      "mesh_zero_set_max_error_m": 5.286569638994792e-16,
+      "serialized_zero_set_max_error_m": 7.651679000887712e-07,
+      "facet_sample_max_error_m": 0.0029946331723406682,
+      "patch_types": {
+        "quadric": 14,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "hill_004",
+      "input_sha256": "481baae22d47eaefe1b78414c7cc019dbac9a11faf7719972865c6b9546f7a29",
+      "output_sha256": "7e7776764daf208cead34605d5a92e18c6cd0f11f6e916a799f812da484c1c59",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7370,
+      "mesh_triangles": 12989,
+      "mesh_zero_set_max_error_m": 7.651281998718716e-16,
+      "serialized_zero_set_max_error_m": 7.918853508454131e-07,
+      "facet_sample_max_error_m": 0.0029843758298956796,
+      "patch_types": {
+        "quadric": 13,
+        "plane": 3,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "hill_005",
+      "input_sha256": "9759c2605ddfef9287c7c48a378fafbe4a6af1c4f8ec22632c848d426bade696",
+      "output_sha256": "7c0ec526af6e5b1734d011d0e4343760aa80a529c55fdcad92a09f0652321f31",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7258,
+      "mesh_triangles": 12802,
+      "mesh_zero_set_max_error_m": 5.418510478342353e-16,
+      "serialized_zero_set_max_error_m": 7.838300956003293e-07,
+      "facet_sample_max_error_m": 0.0029964590609074444,
+      "patch_types": {
+        "quadric": 16,
+        "plane": 3,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "hill_006",
+      "input_sha256": "aba11422b5accdf0f7c9f7d76b52591bbb6e34fa0a83042cf145364a4b211015",
+      "output_sha256": "8b1b43d793688baef3252d815fbb912d79f89064aa89dc6df9cb48b8eabc6a1f",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7257,
+      "mesh_triangles": 12608,
+      "mesh_zero_set_max_error_m": 6.768559902592869e-16,
+      "serialized_zero_set_max_error_m": 7.643023314990582e-07,
+      "facet_sample_max_error_m": 0.002960797737918512,
+      "patch_types": {
+        "quadric": 16,
+        "plane": 4,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "hill_007",
+      "input_sha256": "1551f6c5abf1f45a09250089aab348354e527c342411212eec3c2af12df92f33",
+      "output_sha256": "fbdb3be0188f9170159824606f9ad2af5fe1d22b070d342870ec3b0bfdbaa2f4",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7061,
+      "mesh_triangles": 12102,
+      "mesh_zero_set_max_error_m": 4.2344050064849133e-16,
+      "serialized_zero_set_max_error_m": 7.642273367249532e-07,
+      "facet_sample_max_error_m": 0.0029617792001091006,
+      "patch_types": {
+        "quadric": 17,
+        "plane": 3,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "forest_000",
+      "input_sha256": "b2378e4ed0cecec5af85564f31e5b8360e9e3983672fcf6dffd77f374cf87836",
+      "output_sha256": "f33f84418221459b677823e2703960c81e00e617df5f7cc3ef0e4145339c96cc",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7722,
+      "mesh_triangles": 13147,
+      "mesh_zero_set_max_error_m": 2.939973464333412e-16,
+      "serialized_zero_set_max_error_m": 7.951121069800739e-07,
+      "facet_sample_max_error_m": 0.002996084481082973,
+      "patch_types": {
+        "quadric": 16,
+        "plane": 13,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "forest_001",
+      "input_sha256": "37663ec8befa6d4b8047e42ee9284feb33eaaeb7a24f1c1993ba52a2020e90f1",
+      "output_sha256": "35ee834691a5dec225c83f33d40d9901f07cd6f530dba9573dbe7022ad9eedcf",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7564,
+      "mesh_triangles": 13171,
+      "mesh_zero_set_max_error_m": 4.1832740536950966e-16,
+      "serialized_zero_set_max_error_m": 7.842217662130723e-07,
+      "facet_sample_max_error_m": 0.002978702258166711,
+      "patch_types": {
+        "quadric": 12,
+        "plane": 12,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "forest_002",
+      "input_sha256": "27a7b50e556798421d921e16f132700f8ca70939ceb660a526671236efbe6988",
+      "output_sha256": "2b207a6472e724c03b8dd758302874002c6a00cd286ab9db9c62e257c4755e41",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 8057,
+      "mesh_triangles": 14141,
+      "mesh_zero_set_max_error_m": 2.8106277062508847e-16,
+      "serialized_zero_set_max_error_m": 7.482043252356867e-07,
+      "facet_sample_max_error_m": 0.002957795938878906,
+      "patch_types": {
+        "quadric": 10,
+        "plane": 14,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "forest_003",
+      "input_sha256": "68282113699178503967de6d7c56fba5b200da2711e995cd079e6a37d04f34ea",
+      "output_sha256": "e4bb2fffb08890d1e41e196496c486c6a75778f771aead1792fa7f9488af57dd",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7482,
+      "mesh_triangles": 12964,
+      "mesh_zero_set_max_error_m": 3.430432774933261e-16,
+      "serialized_zero_set_max_error_m": 7.214468698139119e-07,
+      "facet_sample_max_error_m": 0.0029741958539090734,
+      "patch_types": {
+        "quadric": 11,
+        "plane": 13,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "forest_004",
+      "input_sha256": "4c254892e58a5785c9d83972b9ac6fe0fdc6b8770010b362df071a6681d726a3",
+      "output_sha256": "0f0e21f2a168c4b79dc542a44066a81863f9fe12278112b76d2e683e69e29955",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7489,
+      "mesh_triangles": 12825,
+      "mesh_zero_set_max_error_m": 2.6244824400445677e-16,
+      "serialized_zero_set_max_error_m": 7.312103475623882e-07,
+      "facet_sample_max_error_m": 0.002953602111960377,
+      "patch_types": {
+        "quadric": 14,
+        "plane": 14,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "forest_005",
+      "input_sha256": "6e02106e9e10b1bb7f318cf6d004ee53009a1dfc856dbee80ce8a5180fd186a7",
+      "output_sha256": "b2c35cc704e6290b7e7b6dea09414a45ba5f2ddfe9d4c11969026d5b4135f376",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7509,
+      "mesh_triangles": 12628,
+      "mesh_zero_set_max_error_m": 3.4619794162129105e-16,
+      "serialized_zero_set_max_error_m": 7.153516386303752e-07,
+      "facet_sample_max_error_m": 0.002923654338593742,
+      "patch_types": {
+        "quadric": 16,
+        "plane": 11,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "forest_006",
+      "input_sha256": "46d7d804e317de4958bda226d1d2c5f928da904ee3049f2ab96f4a1d8986bce3",
+      "output_sha256": "d87e7c00e645566058e86ca5c7564cf4c8ab7374c56cd6f5804a270d6ab01b6d",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7255,
+      "mesh_triangles": 12142,
+      "mesh_zero_set_max_error_m": 5.077032750536113e-16,
+      "serialized_zero_set_max_error_m": 6.898920995764032e-07,
+      "facet_sample_max_error_m": 0.002975450606656369,
+      "patch_types": {
+        "quadric": 13,
+        "plane": 10,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "forest_007",
+      "input_sha256": "2c60790e29b7df5beac5d08200b91965c49e12710cdd38e1a468309af947c2b7",
+      "output_sha256": "25c0a3894f5a0dcccda635acc6193e6628e5a3b244895bc9e6148593f95a118f",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7810,
+      "mesh_triangles": 13091,
+      "mesh_zero_set_max_error_m": 5.28657998064448e-16,
+      "serialized_zero_set_max_error_m": 8.328158847651606e-07,
+      "facet_sample_max_error_m": 0.0029931043837718827,
+      "patch_types": {
+        "quadric": 14,
+        "plane": 12,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "quick_000",
+      "input_sha256": "711f915c16f1f580e174908d59fe8bdcf5e4779d8fa84d4a77520379e933d54e",
+      "output_sha256": "e441be2adc40da83ab22ea46968ed87b63f81c6eb4f2fa5ab08b4700187b0929",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 6943,
+      "mesh_triangles": 12130,
+      "mesh_zero_set_max_error_m": 3.84669144325897e-16,
+      "serialized_zero_set_max_error_m": 6.77163292980964e-07,
+      "facet_sample_max_error_m": 0.0029786084056015877,
+      "patch_types": {
+        "quadric": 5,
+        "plane": 15,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "quick_001",
+      "input_sha256": "d77b8de664d18970c9b0b4a23745076946a4ca8f8e93139a898483fb3e5f78bf",
+      "output_sha256": "ebdaf494a5b8ac4b7bb0bb8fd812354486952c18a526daece456746ea451cca8",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 6950,
+      "mesh_triangles": 12582,
+      "mesh_zero_set_max_error_m": 3.096704657304041e-16,
+      "serialized_zero_set_max_error_m": 6.891872652617711e-07,
+      "facet_sample_max_error_m": 6.052954430280451e-07,
+      "patch_types": {
+        "quadric": 0,
+        "plane": 16,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "quick_002",
+      "input_sha256": "ea7e323e8b7399c8ae1dd6fe47a0ea62c4af66cb3d9816430a3dc245e95480cb",
+      "output_sha256": "dc6c2c41e5e3255325e93fa3753d455613b71256d72a8b7024fbe1bee62dc31a",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7231,
+      "mesh_triangles": 13111,
+      "mesh_zero_set_max_error_m": 2.904674214218087e-16,
+      "serialized_zero_set_max_error_m": 6.685569283598127e-07,
+      "facet_sample_max_error_m": 5.849631139186627e-07,
+      "patch_types": {
+        "quadric": 0,
+        "plane": 16,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "quick_003",
+      "input_sha256": "1994d872bcb8df2c55f4d116241a6475efa9a565ae5ee60d47aa2c4dde5f8db1",
+      "output_sha256": "3a41c2e9bee96d97453b4d7a705ee370c43420c0b88dc5d61ec2f952d80ef999",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 6968,
+      "mesh_triangles": 12618,
+      "mesh_zero_set_max_error_m": 2.8597456000232197e-16,
+      "serialized_zero_set_max_error_m": 6.393651237314814e-07,
+      "facet_sample_max_error_m": 5.979215898196278e-07,
+      "patch_types": {
+        "quadric": 0,
+        "plane": 16,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "quick_004",
+      "input_sha256": "9666bb2220034509b6ed0f7dbb439e179a101d48359326d70ef6bcebf77356fa",
+      "output_sha256": "eb7e0916d67da43959d0c4ad022d3572c8da324ea2acde927772204e2dd118e3",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 6596,
+      "mesh_triangles": 11919,
+      "mesh_zero_set_max_error_m": 2.613549761100874e-16,
+      "serialized_zero_set_max_error_m": 6.37051398033774e-07,
+      "facet_sample_max_error_m": 5.680384396298079e-07,
+      "patch_types": {
+        "quadric": 0,
+        "plane": 16,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "quick_005",
+      "input_sha256": "dba92f1d3b0fd9f9bd34d4b5d1b6cf9c9699a71a30a1835f0adae0f2a83d552f",
+      "output_sha256": "013f11d200a3b41708f5fe5eebd5432518ae7e588ea0bb9e1ddf07be6356b7c2",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 6803,
+      "mesh_triangles": 12201,
+      "mesh_zero_set_max_error_m": 2.474086930279768e-16,
+      "serialized_zero_set_max_error_m": 6.43811217315503e-07,
+      "facet_sample_max_error_m": 5.805662455459857e-07,
+      "patch_types": {
+        "quadric": 0,
+        "plane": 19,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "quick_006",
+      "input_sha256": "2814a3ed4a6850677e346f8869d2e81611b4186f13e328e72e3dcc3deab4ecd2",
+      "output_sha256": "b9790e487ec5ea819fd3cee9adf67d3f9448c83b19453719557675544793a97e",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 6806,
+      "mesh_triangles": 12101,
+      "mesh_zero_set_max_error_m": 1.823312546218645e-16,
+      "serialized_zero_set_max_error_m": 6.559015995545255e-07,
+      "facet_sample_max_error_m": 0.00011306468031954109,
+      "patch_types": {
+        "quadric": 1,
+        "plane": 19,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "quick_007",
+      "input_sha256": "602b42c60d54a8062e1852ab7b656b145837d4104d33346bc49da620a4bb7cad",
+      "output_sha256": "a9148ffdfef4471bafb52ac18678b5df653823314c102bb1d2d47241b2cc51ee",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 6550,
+      "mesh_triangles": 11838,
+      "mesh_zero_set_max_error_m": 1.6900831508836237e-16,
+      "serialized_zero_set_max_error_m": 6.675415173077582e-07,
+      "facet_sample_max_error_m": 5.524006206723808e-07,
+      "patch_types": {
+        "quadric": 0,
+        "plane": 16,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "desert_000",
+      "input_sha256": "4a7bf5030e13c114c82c4dd570ce8cf659083ba515c0b45f0b8f37a0f83a4fe9",
+      "output_sha256": "ee0b9915ccfc2a79f459a7e8236a9b81399ce76a4373471eb68f55747a21f8ec",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7670,
+      "mesh_triangles": 13384,
+      "mesh_zero_set_max_error_m": 3.4782365751374805e-16,
+      "serialized_zero_set_max_error_m": 7.136958022114782e-07,
+      "facet_sample_max_error_m": 0.0029620805403056134,
+      "patch_types": {
+        "quadric": 16,
+        "plane": 4,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "desert_001",
+      "input_sha256": "8758b7b65733319bb53dbd386ddf06ba070c9af125439fefc6548f8cb77a44aa",
+      "output_sha256": "03f3da5d7612052ccfe4c235b48840c3a874e05482e2ad3867c07fe72f1251cc",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7514,
+      "mesh_triangles": 13026,
+      "mesh_zero_set_max_error_m": 4.3943100026915923e-16,
+      "serialized_zero_set_max_error_m": 7.156643392164608e-07,
+      "facet_sample_max_error_m": 0.0029708123005274456,
+      "patch_types": {
+        "quadric": 17,
+        "plane": 3,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "desert_002",
+      "input_sha256": "c681334ffcca2808cec4e6cd9d935206a69daceea120bcb337f9b7dd9293aaf4",
+      "output_sha256": "f50fdb652072e09caa40c73b32ff648404828af9abc8b314b3fbe02dd3a35036",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7846,
+      "mesh_triangles": 13832,
+      "mesh_zero_set_max_error_m": 6.034733941777128e-16,
+      "serialized_zero_set_max_error_m": 7.346771998364572e-07,
+      "facet_sample_max_error_m": 0.0029485746851008396,
+      "patch_types": {
+        "quadric": 14,
+        "plane": 5,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "desert_003",
+      "input_sha256": "244574ff3e08697b08454493850bf8294ea3fd0d1992399a840094bb9938da1d",
+      "output_sha256": "03b1b766f5aecf748a4ca7a9467e791f9a4977f57328f182ad36c8ef76fffd19",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 8050,
+      "mesh_triangles": 14359,
+      "mesh_zero_set_max_error_m": 5.695452803679372e-16,
+      "serialized_zero_set_max_error_m": 7.500493832994408e-07,
+      "facet_sample_max_error_m": 0.0029331466213097387,
+      "patch_types": {
+        "quadric": 13,
+        "plane": 3,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "desert_004",
+      "input_sha256": "a806ec241c262b5f93722e917983b93e52813e1ef5b40caa4908a110a2a9ebe0",
+      "output_sha256": "d41aff12f9a2373704f1001c21b97fe05cebbd5aa6346ad5b942fcc0b2b04eba",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7562,
+      "mesh_triangles": 13264,
+      "mesh_zero_set_max_error_m": 1.826989105307535e-15,
+      "serialized_zero_set_max_error_m": 7.3026509848081e-07,
+      "facet_sample_max_error_m": 0.0029887221567599757,
+      "patch_types": {
+        "quadric": 15,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "desert_005",
+      "input_sha256": "c6a4e8cb0f5f87c15063ecbcc044db6f65dcc9a3873a21857ca8cf3e9a03d191",
+      "output_sha256": "a3c40bc5ff79f3801ec321e83eb74bad418c4059fa253f63452f18f9095995b4",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7733,
+      "mesh_triangles": 13650,
+      "mesh_zero_set_max_error_m": 4.2852408369097823e-16,
+      "serialized_zero_set_max_error_m": 7.252018041440559e-07,
+      "facet_sample_max_error_m": 0.002891114626101754,
+      "patch_types": {
+        "quadric": 14,
+        "plane": 6,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "desert_006",
+      "input_sha256": "eb882dea3548292ee5596f93b58643ccae5a1c70d2cf69d6c994b3059780c949",
+      "output_sha256": "bb6d8dcba6eae8904b879af90d4edd10087fc31e2cad99c63c4f9c3fcfd5c64f",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7659,
+      "mesh_triangles": 13254,
+      "mesh_zero_set_max_error_m": 1.1786333266100515e-15,
+      "serialized_zero_set_max_error_m": 7.407186878857785e-07,
+      "facet_sample_max_error_m": 0.002957809281462013,
+      "patch_types": {
+        "quadric": 14,
+        "plane": 6,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "desert_007",
+      "input_sha256": "207b53118401c433a1c7213f2c47964ecb995a411f46cdaec8ad33c2456ee722",
+      "output_sha256": "c27227df722faebfbac6443fbb5cf8c3df91c8ba5811e92085d904245ebe705d",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7765,
+      "mesh_triangles": 13563,
+      "mesh_zero_set_max_error_m": 9.479875934044248e-16,
+      "serialized_zero_set_max_error_m": 7.057201872713696e-07,
+      "facet_sample_max_error_m": 0.0029877445291451375,
+      "patch_types": {
+        "quadric": 14,
+        "plane": 6,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "mountain_000",
+      "input_sha256": "a7328632fc4033d2999dcfd938fd778811becaac7d4f59f1623293321bdbbbbf",
+      "output_sha256": "5061f0c56eabc4302a228af9fdd490236337c0c93de68f88632cd23ac646f81d",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7233,
+      "mesh_triangles": 12633,
+      "mesh_zero_set_max_error_m": 1.9782999588614925e-15,
+      "serialized_zero_set_max_error_m": 6.983310601319486e-07,
+      "facet_sample_max_error_m": 0.002953196816158321,
+      "patch_types": {
+        "quadric": 9,
+        "plane": 10,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "mountain_001",
+      "input_sha256": "d8fa0d08d87be783943adf601879114305c9bd5aa228c2a0e812d1239e7aa985",
+      "output_sha256": "84b0b829cc4874d5ba7312d06a99b6362b27be948ebd2918f6a13bb40a7a491c",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7253,
+      "mesh_triangles": 12693,
+      "mesh_zero_set_max_error_m": 1.264161496208244e-15,
+      "serialized_zero_set_max_error_m": 7.58685678758837e-07,
+      "facet_sample_max_error_m": 0.002861598300637727,
+      "patch_types": {
+        "quadric": 8,
+        "plane": 12,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "mountain_002",
+      "input_sha256": "1d15931a4c4be92eae5d634062a35ce58ec97027203c13c167478c7984e640ca",
+      "output_sha256": "72b09a94e9c43e3fe79ae79b136f1876bbdfe0f84c3f80ebaaff942e03b730e0",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7355,
+      "mesh_triangles": 12732,
+      "mesh_zero_set_max_error_m": 1.1250295598354787e-15,
+      "serialized_zero_set_max_error_m": 6.984309164193486e-07,
+      "facet_sample_max_error_m": 0.0029308959902760215,
+      "patch_types": {
+        "quadric": 10,
+        "plane": 9,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "mountain_003",
+      "input_sha256": "0153082d320dd3fc5b542eec47fc90c5b03a51634c828ac07f8db4146d9231b5",
+      "output_sha256": "0c76a003ddddc4fbeab5063df87feb56270a93c073ff1ee32cc512477d6dde05",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7564,
+      "mesh_triangles": 13340,
+      "mesh_zero_set_max_error_m": 5.03838049698482e-16,
+      "serialized_zero_set_max_error_m": 7.515929480563777e-07,
+      "facet_sample_max_error_m": 0.002998611385371437,
+      "patch_types": {
+        "quadric": 9,
+        "plane": 10,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "mountain_004",
+      "input_sha256": "f6fb85ac882bb2a1201f0819c41847c72b639d0fb1e9d903b9528196b2e186c4",
+      "output_sha256": "c19d33d6fb07e1dc3a9da3c60c671f8437a7228de756144e12cf89fc893fd3e5",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7575,
+      "mesh_triangles": 13501,
+      "mesh_zero_set_max_error_m": 3.5204469706084812e-16,
+      "serialized_zero_set_max_error_m": 7.494746181204418e-07,
+      "facet_sample_max_error_m": 0.0029091572024171224,
+      "patch_types": {
+        "quadric": 6,
+        "plane": 10,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "mountain_005",
+      "input_sha256": "f2abc34b84fde24768ce708cefadb7c3e8ac95d231aad990d6cb3db82ea020e2",
+      "output_sha256": "1083ed12227dfeec03dcdffe3f96955ad1100a98cec7d63e18d33a94891db639",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7510,
+      "mesh_triangles": 13402,
+      "mesh_zero_set_max_error_m": 4.2452759816641723e-16,
+      "serialized_zero_set_max_error_m": 7.293327363244421e-07,
+      "facet_sample_max_error_m": 0.0029921890910779556,
+      "patch_types": {
+        "quadric": 7,
+        "plane": 10,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "mountain_006",
+      "input_sha256": "4fd2d007783ba2217db2af631b47d4cac319104a6cc5d3caab433b31062e803e",
+      "output_sha256": "b004b8efc735bbe5b17e07fe0c64b5ae7f61add2aebfcef62b1cd619842c464a",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7418,
+      "mesh_triangles": 12934,
+      "mesh_zero_set_max_error_m": 2.7539233650079515e-15,
+      "serialized_zero_set_max_error_m": 7.233486334530217e-07,
+      "facet_sample_max_error_m": 0.0029417517497433957,
+      "patch_types": {
+        "quadric": 9,
+        "plane": 10,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "mountain_007",
+      "input_sha256": "cb46461b3b2a67074c7292b83de80a62bf631bc70d12b6f330e4461339d2f98b",
+      "output_sha256": "b4599cd8b2e3b4ccb8630ca924234138063b465b27b4eb17b339ce1aef406135",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7289,
+      "mesh_triangles": 12515,
+      "mesh_zero_set_max_error_m": 8.851079768414791e-16,
+      "serialized_zero_set_max_error_m": 6.912832091202964e-07,
+      "facet_sample_max_error_m": 0.0029902482618206,
+      "patch_types": {
+        "quadric": 9,
+        "plane": 10,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "snow_000",
+      "input_sha256": "141b01e0261a3d13a202af72b2fc3214057c113b898d57cde2ca7de381ab7031",
+      "output_sha256": "5e0f7ca0e4773e63b3fc4794a6e84eb2b998e543427a2b6dc778dbd5b96e4e26",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7812,
+      "mesh_triangles": 12680,
+      "mesh_zero_set_max_error_m": 2.2514494882205783e-15,
+      "serialized_zero_set_max_error_m": 7.85522412573615e-07,
+      "facet_sample_max_error_m": 0.002981284878557528,
+      "patch_types": {
+        "quadric": 19,
+        "plane": 1,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "snow_001",
+      "input_sha256": "b1de5705ad434942f0faaad8ce4d1c5d66f92eb5f2e79e2f0dae9429424669b1",
+      "output_sha256": "5f324e0bf4cf45549c0dc99321c76dc14662322ecbe25d530a41049b037d76df",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 8154,
+      "mesh_triangles": 13293,
+      "mesh_zero_set_max_error_m": 2.618035526057626e-15,
+      "serialized_zero_set_max_error_m": 7.854053053099073e-07,
+      "facet_sample_max_error_m": 0.002997051750639025,
+      "patch_types": {
+        "quadric": 17,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "snow_002",
+      "input_sha256": "0124e29b14d0459bfefca9a3053fdc0a62707de3df3a82e2be578d8454b0c190",
+      "output_sha256": "57b19e57d569d9bb3d36a7c3d246a0ea3207dd7fa5964f6edfce067a7cc387eb",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 8328,
+      "mesh_triangles": 13640,
+      "mesh_zero_set_max_error_m": 1.4844384242012547e-15,
+      "serialized_zero_set_max_error_m": 7.316542106718076e-07,
+      "facet_sample_max_error_m": 0.0029446085157276095,
+      "patch_types": {
+        "quadric": 16,
+        "plane": 3,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "snow_003",
+      "input_sha256": "941e21a29feabbe944c6200a996c740858e31e513ec91142f4f3dfe2dcd8598f",
+      "output_sha256": "b8c4c1759c25f0e33ccb1b177e56be42923ca4929d5dd2727b22e551e54b4cb8",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7901,
+      "mesh_triangles": 12891,
+      "mesh_zero_set_max_error_m": 1.081000056974794e-15,
+      "serialized_zero_set_max_error_m": 7.813252576219171e-07,
+      "facet_sample_max_error_m": 0.002977597576279288,
+      "patch_types": {
+        "quadric": 18,
+        "plane": 3,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "snow_004",
+      "input_sha256": "cd724626850eca90b772b215e8179b27b9a3a5e73eb5f206cda7d4efe33bed69",
+      "output_sha256": "7d0b7e6ba5d44f5fd87b43926f1570a63c3993d5f2425e680ad318ebf26d9ce6",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 8294,
+      "mesh_triangles": 13368,
+      "mesh_zero_set_max_error_m": 1.5955155242533463e-15,
+      "serialized_zero_set_max_error_m": 7.767241312142043e-07,
+      "facet_sample_max_error_m": 0.0029648976292960144,
+      "patch_types": {
+        "quadric": 21,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "snow_005",
+      "input_sha256": "0174e319d56420eddad48e326fb3304edff4d2d5d5a9870a4d8f1e7b48492438",
+      "output_sha256": "47ef105a690f2b0db80d7e87a74c27c27ad3463686578c056d16ec13ff5dd474",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 8143,
+      "mesh_triangles": 13032,
+      "mesh_zero_set_max_error_m": 2.6196217772704784e-15,
+      "serialized_zero_set_max_error_m": 7.891139500846062e-07,
+      "facet_sample_max_error_m": 0.0029652418301055823,
+      "patch_types": {
+        "quadric": 21,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "snow_006",
+      "input_sha256": "96bc113efdd95c378e7fd04071554ad4c9c475f79a143d52685a7cfbf958fb6d",
+      "output_sha256": "0abad74cbf07f42201a5605e45bd108f81c15c2fadebb253711cbf7f4778a7b5",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7828,
+      "mesh_triangles": 12378,
+      "mesh_zero_set_max_error_m": 1.832035710611853e-15,
+      "serialized_zero_set_max_error_m": 7.661390933424661e-07,
+      "facet_sample_max_error_m": 0.0029821344833167165,
+      "patch_types": {
+        "quadric": 20,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "snow_007",
+      "input_sha256": "a0b59feea9f4c63c0c2a0309cd63c1b66bfb14de63ebe128e9319ff4e6b266d6",
+      "output_sha256": "870cc74b6ea509b8793b3ef5f99d60817ed266d6c80fd7b6c8c8f79ef89a5302",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 8008,
+      "mesh_triangles": 13272,
+      "mesh_zero_set_max_error_m": 1.8188469940662487e-15,
+      "serialized_zero_set_max_error_m": 7.4634390453807e-07,
+      "facet_sample_max_error_m": 0.002881914386990336,
+      "patch_types": {
+        "quadric": 17,
+        "plane": 3,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "vocano_000",
+      "input_sha256": "1c8ba8d845c64f954dd1c5fcb34b2d2417f24806ab3822b19bbbfe291e227169",
+      "output_sha256": "9eb321652c62f9ab82ea353ec1ba977c99fcc5100fe2866d8c7aabba83f86b4c",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7214,
+      "mesh_triangles": 11941,
+      "mesh_zero_set_max_error_m": 6.485408071531323e-16,
+      "serialized_zero_set_max_error_m": 7.525689128647964e-07,
+      "facet_sample_max_error_m": 0.0029442332573955043,
+      "patch_types": {
+        "quadric": 15,
+        "plane": 5,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "vocano_001",
+      "input_sha256": "accd3c2f66a71fa35c25d014edeaa8db0d6c66102592a90637ba684de97b7d8b",
+      "output_sha256": "10b079eb93cfd5b6a965b8f858c989fa5e63b539dd1056972c81eb986d418b90",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7221,
+      "mesh_triangles": 11743,
+      "mesh_zero_set_max_error_m": 6.082169856235853e-16,
+      "serialized_zero_set_max_error_m": 7.433847314030641e-07,
+      "facet_sample_max_error_m": 0.002958171362583,
+      "patch_types": {
+        "quadric": 19,
+        "plane": 1,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "vocano_002",
+      "input_sha256": "9c40285d0936eceeb0433baa344764c3d19c09cd7069b43bbe5fa8f69dc53ead",
+      "output_sha256": "a2216a0e585be66328ef1e6fe03d280fc9d6e64e7fc4288572f17b0028473ef7",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7089,
+      "mesh_triangles": 11972,
+      "mesh_zero_set_max_error_m": 5.110959333307953e-16,
+      "serialized_zero_set_max_error_m": 7.312515746150375e-07,
+      "facet_sample_max_error_m": 0.0029984064041308654,
+      "patch_types": {
+        "quadric": 15,
+        "plane": 2,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "vocano_003",
+      "input_sha256": "6ccc3894dc3d8b8d5e0cf710d486685bcaa363ed3b143a24f7ea75f86503e400",
+      "output_sha256": "84439f590fef4315530a187dd1ddbfdbeb28a7445b386073669e6d19bc092992",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7249,
+      "mesh_triangles": 12184,
+      "mesh_zero_set_max_error_m": 1.4133293630975305e-15,
+      "serialized_zero_set_max_error_m": 7.01236403840498e-07,
+      "facet_sample_max_error_m": 0.0029027720449313977,
+      "patch_types": {
+        "quadric": 16,
+        "plane": 0,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "vocano_004",
+      "input_sha256": "e746bc57a5e74fbe2fefa6973dcd63eacccac5c08c3648009a00ae5581a91375",
+      "output_sha256": "73402d4fceea5d140cdeaf7e176a2f0a70e065362932f8aaba84b36b2a53397f",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7098,
+      "mesh_triangles": 11874,
+      "mesh_zero_set_max_error_m": 9.473945822377112e-16,
+      "serialized_zero_set_max_error_m": 7.057713342111572e-07,
+      "facet_sample_max_error_m": 0.002978122282676331,
+      "patch_types": {
+        "quadric": 15,
+        "plane": 1,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "vocano_005",
+      "input_sha256": "7115d4845b11ab15a056ddb1db37eb897761f0c2651aebe0d306ec22c5abd924",
+      "output_sha256": "219a453c6884e7beab92cd1bf591a46394f47af5af1a824fa72cd25f91bc0a28",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 6950,
+      "mesh_triangles": 11375,
+      "mesh_zero_set_max_error_m": 5.312015680223659e-16,
+      "serialized_zero_set_max_error_m": 7.170360692612007e-07,
+      "facet_sample_max_error_m": 0.0029398841217173053,
+      "patch_types": {
+        "quadric": 20,
+        "plane": 0,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "vocano_006",
+      "input_sha256": "43ccd17148b84925aea380ec5ebfe04c697947c5ea8d773fd6b16c1ca31bcd47",
+      "output_sha256": "f01c53c40a6657933fe6b051bf74c6e27bbcb87fb956d7ff6249d91bdab8b016",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7252,
+      "mesh_triangles": 11958,
+      "mesh_zero_set_max_error_m": 5.629414394840959e-16,
+      "serialized_zero_set_max_error_m": 7.294734096613704e-07,
+      "facet_sample_max_error_m": 0.0029979754493050207,
+      "patch_types": {
+        "quadric": 19,
+        "plane": 1,
+        "distribution": 0
+      }
+    },
+    {
+      "frame": "vocano_007",
+      "input_sha256": "b9ca6be7f0dac79072c6247714add2fd794fc8a3d923061e109acaf17bbd1f1c",
+      "output_sha256": "ac4ec0c50fb674dac0fac50a706f373887fa327f72edb1a46ecd165eaf1c24a1",
+      "grid_reconstruction_max_error_m": 0.0,
+      "mesh_vertices": 7255,
+      "mesh_triangles": 12039,
+      "mesh_zero_set_max_error_m": 6.892496137754333e-16,
+      "serialized_zero_set_max_error_m": 7.256132456418105e-07,
+      "facet_sample_max_error_m": 0.0029992153524859553,
+      "patch_types": {
+        "quadric": 20,
+        "plane": 0,
+        "distribution": 0
+      }
+    }
+  ],
+  "checks": [
+    "Frozen experiment source hashes match",
+    "All reconstructed valid masks and height predictions match the saved benchmark (<1e-10m)",
+    "All analytic mesh vertices satisfy |F|/|grad F|<1e-7m before serialization",
+    "Serialized mesh vertices satisfy |F|/|grad F|<2e-6m",
+    "Each facet's centroid and edge midpoints satisfy |F|/|grad F|<=0.003002m",
+    "Mesh is limited to each patch's tangent convex hull and measured 3D support; edges <=0.22m"
+  ],
+  "exporter_sha256": "275ef8d65cdbbb420d2c9be0f854be3c476fdf81649c6793315da3631c7fd110",
+  "source_protocol_sha256": "98f27d2d1338eb14a96709f92b69375e74d91605b0db1e4a6864885e3a461926"
+}

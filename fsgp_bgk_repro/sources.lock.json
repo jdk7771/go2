@@ -1,0 +1,74 @@
+{
+  "repository": "https://github.com/ZJU-FAST-Lab/FSGP_BGK",
+  "commit": "6e5976957734b90f367f8460a6eea6a0fc18c1cc",
+  "paper": "https://arxiv.org/abs/2503.04134v2",
+  "license": "MIT (notices in upstream Python source headers)",
+  "files": [
+    {
+      "upstream_path": "readme.md",
+      "local_path": "third_party/FSGP_BGK/readme.md",
+      "sha256": "fed9c02ac0d685fbd3365c5b0a6bbfc7e1c2ef3787c68fcd9539d81b06d78537",
+      "bytes": 4985
+    },
+    {
+      "upstream_path": "src/fsgp_bgk/config/params.yaml",
+      "local_path": "third_party/FSGP_BGK/src/fsgp_bgk/config/params.yaml",
+      "sha256": "e1873e650ab96f3ed9cea95950a09d8e70e4ae79a19560da09cab3a396587cf8",
+      "bytes": 873
+    },
+    {
+      "upstream_path": "src/fsgp_bgk/python/f_sgp_bgk.py",
+      "local_path": "third_party/FSGP_BGK/src/fsgp_bgk/python/f_sgp_bgk.py",
+      "sha256": "32500f3e9d483440eee748b4b404e200548788c5cd713263e15f7ddd24a2b646",
+      "bytes": 10402
+    },
+    {
+      "upstream_path": "src/fsgp_bgk/python/node_ros1.py",
+      "local_path": "third_party/FSGP_BGK/src/fsgp_bgk/python/node_ros1.py",
+      "sha256": "eab8bba44692657bef756f0684e469b08abdad3c817d7d65f99d450653019572",
+      "bytes": 11970
+    },
+    {
+      "upstream_path": "src/fsgp_bgk/python/node_ros2.py",
+      "local_path": "third_party/FSGP_BGK/src/fsgp_bgk/python/node_ros2.py",
+      "sha256": "f878cbf53eac909103ea5181be9dd35698942c66bb7b3bba10bc8cc0d7eb38d1",
+      "bytes": 11737
+    },
+    {
+      "upstream_path": "src/fsgp_bgk/python/traversability_lib/choose_point.py",
+      "local_path": "third_party/FSGP_BGK/src/fsgp_bgk/python/traversability_lib/choose_point.py",
+      "sha256": "09a20947e7047e4d85ed04c88cd47c496798b6d7f7d27c6bd18c88397ccb2cef",
+      "bytes": 4222
+    },
+    {
+      "upstream_path": "src/fsgp_bgk/python/traversability_lib/point_cloud_tool.py",
+      "local_path": "third_party/FSGP_BGK/src/fsgp_bgk/python/traversability_lib/point_cloud_tool.py",
+      "sha256": "021acdaa0685ab43c8dae8c49e4c86007b705951007669dd7c6dc12461272a6b",
+      "bytes": 4557
+    },
+    {
+      "upstream_path": "src/fsgp_bgk/python/traversability_lib/sgp_model.py",
+      "local_path": "third_party/FSGP_BGK/src/fsgp_bgk/python/traversability_lib/sgp_model.py",
+      "sha256": "cb171d748b88b3e621e0114605a2316d761e95bf84b7e4a70d223bc76a382c13",
+      "bytes": 2327
+    },
+    {
+      "upstream_path": "src/fsgp_bgk/python/traversability_lib/traversability.py",
+      "local_path": "third_party/FSGP_BGK/src/fsgp_bgk/python/traversability_lib/traversability.py",
+      "sha256": "9889fd0c6a4f7ccce98f8a5a112ab483213b0149a99ad8854b4e44d5fb87eac7",
+      "bytes": 9483
+    },
+    {
+      "upstream_path": "src/simulation_env_ros2/PCD/hill.pcd",
+      "local_path": "data/hill.pcd",
+      "sha256": "d18fcc97609b5a7fcd4cac2ce14d6876a7bee6b77c15c2eb9e8c8e0a1b092c56",
+      "bytes": 4800219
+    },
+    {
+      "upstream_path": "src/simulation_env_ros2/PCD/quick.pcd",
+      "local_path": "data/quick.pcd",
+      "sha256": "8d358bd27597c45f529d4d7b76c9cd3c4931fb711f073cab9e3725473c818264",
+      "bytes": 2400219
+    }
+  ]
+}

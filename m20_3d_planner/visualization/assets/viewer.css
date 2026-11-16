@@ -230,6 +230,10 @@ input[type=range] {
   margin:14px 0;
   color:#61778d;
 }
+.result-values { margin:0; font-size:11px; }
+.result-values>div { display:flex; justify-content:space-between; gap:8px; margin:10px 0; }
+.result-values dt { color:var(--muted); }
+.result-values dd { margin:0; text-align:right; font-variant-numeric:tabular-nums; }
 #angle-chart {
   width:100%;
   height:90px;
@@ -321,6 +325,15 @@ h1 {
 }
 .clearance-card span {
   font-size:10px;
+}
+.validation-status {
+  margin-top:8px;
+  padding-top:5px;
+  border-top:1px solid var(--line);
+}
+.validation-status span {
+  display:block;
+  margin-top:4px;
 }
 .danger {
   color:#ba514b;

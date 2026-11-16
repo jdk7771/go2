@@ -1,0 +1,768 @@
+{
+  "repository": "https://github.com/aws-robotics/aws-robomaker-small-house-world",
+  "branch": "ros2",
+  "archive_url": "https://codeload.github.com/aws-robotics/aws-robomaker-small-house-world/zip/refs/heads/ros2",
+  "archive_sha256": "0ae293a5378e51f7bea9d26d98d73d1cf612a0dec8275d87d4159e6e54c727ab",
+  "files": [
+    {
+      "path": "LICENSE",
+      "size": 931,
+      "sha256": "ddf9b5d9dd2fded18653e0ca4c5934008d4faea1161d754493b54a23c25eac14"
+    },
+    {
+      "path": "README.md",
+      "size": 3400,
+      "sha256": "6da3ad43a78087236c21222ddf9e2bf85c3dfc3b7b03b91f3a9fee5f3cef1b95"
+    },
+    {
+      "path": "models/aws_robomaker_residential_AirconditionerA_01/model.sdf",
+      "size": 810,
+      "sha256": "3f620ac82b8cef89cca52b28afea7d6033e8e9bd875e07eab1b1a0d0cfd4bf46"
+    },
+    {
+      "path": "models/aws_robomaker_residential_AirconditionerB_01/model.sdf",
+      "size": 780,
+      "sha256": "ea1151f9afbb33537ab50b379564984cc72ebb496daa933c7d938b73c4ada1b2"
+    },
+    {
+      "path": "models/aws_robomaker_residential_BalconyTable_01/model.sdf",
+      "size": 775,
+      "sha256": "5fdcba0fb2f957db01ec53c7737b9f680d4f5fea3a85975dd47ebe1b7b31cdb0"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Ball_01/model.sdf",
+      "size": 2054,
+      "sha256": "72bb65019185626e9772e77b7715747ffa4c72de09113fc7d398e34032cc07c0"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Bed_01/model.sdf",
+      "size": 754,
+      "sha256": "0ce182082a584e1bd5bd69ddcfeab124c3eb2b8c928928135615fe9e8fa4fefc"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Board_01/model.sdf",
+      "size": 769,
+      "sha256": "ec29e1e646a610ecce25e9b1029551937bb59c0153ad1fce12855c253a413841"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Carpet_01/model.sdf",
+      "size": 1201,
+      "sha256": "ef87534968bb110a78a91c1bf26256caaf23a271ea2b771f6615c783bae10f69"
+    },
+    {
+      "path": "models/aws_robomaker_residential_ChairA_01/model.sdf",
+      "size": 961,
+      "sha256": "145737f636315b7db89591e62f72ffa3c8e4cd8db9cb14337b4d6d8d7c52078b"
+    },
+    {
+      "path": "models/aws_robomaker_residential_ChairD_01/model.sdf",
+      "size": 1006,
+      "sha256": "39939f76d3185018f310c45f1f13d2fe00544e499b9d1d644ccef409fb092ea5"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Chandelier_01/model.sdf",
+      "size": 785,
+      "sha256": "19c264eaef6902d0bd2926db676c7f1744f041cc5f114efb007306ebc6546c07"
+    },
+    {
+      "path": "models/aws_robomaker_residential_CoffeeTable_01/model.sdf",
+      "size": 1185,
+      "sha256": "0f097fc06b55a3fa22ffb2645a82d0e700b1a1db156b27b215ffdfc94c983bb1"
+    },
+    {
+      "path": "models/aws_robomaker_residential_CookingBench_01/model.sdf",
+      "size": 774,
+      "sha256": "ced95a89fec4223ec3ea5863a577bc2b28d7d1f516cdfea3d9301c2eaebbf550"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Curtain_01/model.sdf",
+      "size": 770,
+      "sha256": "38871934b30a018d0a9ff800cc7fe18229ada591714b5b945743cd8eacbbe407"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitA_01/model.sdf",
+      "size": 994,
+      "sha256": "5193c9c33299c5b7a5a5d775f1d4968ac896fec7555450640e2802f1d0e63885"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitA_02/model.sdf",
+      "size": 994,
+      "sha256": "63e785f0e611023e92535d700a8d42227cef9aaa8118f883cddf5813247974fc"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitB_01/model.sdf",
+      "size": 1234,
+      "sha256": "0558782080105028cfef538010b7b608b03737b5d4d8cbd320b18efac9dad48c"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitB_02/model.sdf",
+      "size": 998,
+      "sha256": "49d1e2d8b8126ae5278d66473c2602f3820f6b1a1e8ac5551f46c172a2c8b798"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitC_01/model.sdf",
+      "size": 988,
+      "sha256": "603ac9e16ebafe638888c7332341f72cbee98537a93bbf9b2c167790e4ce0e9f"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitC_02/model.sdf",
+      "size": 988,
+      "sha256": "2fe2cb039b52b4dd888f23dc49c651152370d88fa0cb0beaa7d05e7fc0e5e7d5"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitD_01/model.sdf",
+      "size": 1724,
+      "sha256": "287f6a8e560d1bfd4e3fc3f32b59b66e9091b72e30fd7a1bbd783729bf7a34d5"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitD_02/model.sdf",
+      "size": 1724,
+      "sha256": "0a741b6758eadef687feaf65f72c0e8910a971447d7506f74ba0013974739d53"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitD_03/model.sdf",
+      "size": 1724,
+      "sha256": "8da6f1e0478af475c903beb2b60ccf012b0ce648e21c8be1bdc46e50a653cddc"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitD_04/model.sdf",
+      "size": 1724,
+      "sha256": "bf8b0d82d0456d2a10d367713271af7bfbffe82864217f29a8d10b3b992a10b2"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Door_01/model.sdf",
+      "size": 755,
+      "sha256": "492ffa16c8c320e917072960f49a3f60e06382f164751069a2524d07a5826c9f"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Dumbbell_01/model.sdf",
+      "size": 1363,
+      "sha256": "bb6f3d0a78a9e525b7a27c870e6511e064795908e08cf67907a298b811c1afc7"
+    },
+    {
+      "path": "models/aws_robomaker_residential_FitnessEquipment_01/model.sdf",
+      "size": 817,
+      "sha256": "2dbd6f8867095556df549d521a743f1e28443a7186ef4f6caa483a5278193eec"
+    },
+    {
+      "path": "models/aws_robomaker_residential_FloorB_01/model.sdf",
+      "size": 977,
+      "sha256": "ab2c536adaee6490efaf7e3c825b67312b772c80827310ee4143991405e22d8b"
+    },
+    {
+      "path": "models/aws_robomaker_residential_FoldingDoor_01/model.sdf",
+      "size": 790,
+      "sha256": "67f95e8735b0cfe8b86964d5599c26483627daa516ae4410e622e5295cbb50ad"
+    },
+    {
+      "path": "models/aws_robomaker_residential_FoldingDoor_02/model.sdf",
+      "size": 789,
+      "sha256": "2a46e34a2886d96e444e698f4c7d45f9cc25e7c5e3947bd953a0ed835e6462e2"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Handle_01/model.sdf",
+      "size": 765,
+      "sha256": "753ad97063c29852465fe35e52896abd0d839199181065b09661741a467d3d6d"
+    },
+    {
+      "path": "models/aws_robomaker_residential_HouseWallB_01/model.sdf",
+      "size": 784,
+      "sha256": "30fd630ea6e671cb5699ca4701970c2bdb641a0fc698360cbabbca1f33d90f45"
+    },
+    {
+      "path": "models/aws_robomaker_residential_KitchenCabinet_01/model.sdf",
+      "size": 1832,
+      "sha256": "215fe51f7a37c6f7980fe3fb9667b93a79b05624ca1fb321eeaf050d3a69654f"
+    },
+    {
+      "path": "models/aws_robomaker_residential_KitchenTable_01/model.sdf",
+      "size": 777,
+      "sha256": "fba7b235381ef025b99a9853127c60211e93394d2267bbf45697d97b233fa2be"
+    },
+    {
+      "path": "models/aws_robomaker_residential_KitchenUtensils_01/model.sdf",
+      "size": 810,
+      "sha256": "6874c44e52a666174f450a0c7ba333e9370f3148a7b147d04ee2f7cfe165d6f8"
+    },
+    {
+      "path": "models/aws_robomaker_residential_LightC_01/model.sdf",
+      "size": 765,
+      "sha256": "13aedde6d38bb69abddda5e96504f63aa5e077759dfa918000a62ae6ceeefab3"
+    },
+    {
+      "path": "models/aws_robomaker_residential_NightStand_01/model.sdf",
+      "size": 994,
+      "sha256": "8360355351ce5d93fbd84e7297fe1a10e70a532f1237806ed1cd6d45c697fe4b"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Pillow_01/model.sdf",
+      "size": 744,
+      "sha256": "a43c86bf53be411ba6461a47c9009f2e2a38906a9f0248334a8e4b67207d6fed"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitA_01/model.sdf",
+      "size": 780,
+      "sha256": "14f02d79e5ac6fda00a08760b705659feeec9109081e2dda32bb97b7f4e96d3c"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitA_02/model.sdf",
+      "size": 780,
+      "sha256": "f203d89e8cd626f3e55d0238a11d383546678806e0bcf9c22eb6cba9d59dc11b"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitB_01/model.sdf",
+      "size": 780,
+      "sha256": "9de440aa71a0a13ee2bfb29bb9dc8ace54e964de1e53defefe7256d43f6f7d30"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitB_02/model.sdf",
+      "size": 780,
+      "sha256": "069d2dad5e50feffa8b8bcef4c08a74df08403d5b4b63d0478a49fc656fcf45d"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitB_03/model.sdf",
+      "size": 780,
+      "sha256": "19a60232648ed018337d748065454d2d206bfd8cb0f1c3a7815252575239c837"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitC_01/model.sdf",
+      "size": 780,
+      "sha256": "1f65d4a17fe64783f7fe5f3787b20b42ca87da1e26b5005561277d72438ca3a5"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitD_01/model.sdf",
+      "size": 792,
+      "sha256": "c6f91b5f8db5bd6947be676af7d62f7809b2e6c2ee627710d60019cd51aece80"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitD_02/model.sdf",
+      "size": 792,
+      "sha256": "43b7d859fa6f6a26f0691346d54bdff47be4d3bd2d68d43dbac7e7c4e41e0836"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitE_01/model.sdf",
+      "size": 780,
+      "sha256": "1a724de26b45e80058d707bde670b4d50252b9c22f6a95938cfe3a9efb423556"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitE_02/model.sdf",
+      "size": 780,
+      "sha256": "4fa0d31763fadf52dcd707c282f2c9de612013d87e8904815a7dc5f390c0f926"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Quilt_01/model.sdf",
+      "size": 739,
+      "sha256": "ac7f683237d37ef16b35d6e90f643195072570fe9653b8b3615a98f5d68c5c6c"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Rangehood_01/model.sdf",
+      "size": 780,
+      "sha256": "28a345bb27e227b40c4d18ed192869305e500681ae5a673dee3224f5978d35cc"
+    },
+    {
+      "path": "models/aws_robomaker_residential_ReadingDesk_01/model.sdf",
+      "size": 985,
+      "sha256": "6a8d0f772f7a14d7972c61a9ce85ee8f62954371fb7bab760755ec59b5145f36"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Refrigerator_01/model.sdf",
+      "size": 798,
+      "sha256": "35d7e5f4a7ba1d2cf074ac91a41573e66fda6aa3d0847225f2d354aaf1560f98"
+    },
+    {
+      "path": "models/aws_robomaker_residential_RoomCeiling_01/model.sdf",
+      "size": 808,
+      "sha256": "9b2900a3225d888ffb4bd0f817c04b8c30b19709ed86c7da94e7319ff4685566"
+    },
+    {
+      "path": "models/aws_robomaker_residential_RoomWall_01/model.sdf",
+      "size": 778,
+      "sha256": "1f79d2d40832176b19fbb36d977b79a042972524c96fc4d614383ee57892e4e0"
+    },
+    {
+      "path": "models/aws_robomaker_residential_RoomWindow_01/model.sdf",
+      "size": 785,
+      "sha256": "843d2c28d5fefa683bbacb5187c0f54c4857ee1875a5124a9a96b5e4564a5e6e"
+    },
+    {
+      "path": "models/aws_robomaker_residential_SeasoningBox_01/model.sdf",
+      "size": 774,
+      "sha256": "1c021f3ca5e3476f7025205a4318a02d14080ffe92f7a0a665ca3edc99fa4fb4"
+    },
+    {
+      "path": "models/aws_robomaker_residential_SecurityCamera_01/model.sdf",
+      "size": 1014,
+      "sha256": "a3780507cdb14ff00fec8a5ab8f929595141b33ece5ecf1c60151bd3f5438c71"
+    },
+    {
+      "path": "models/aws_robomaker_residential_ShoeRack_01/model.sdf",
+      "size": 1272,
+      "sha256": "ff996b09be1ee9ffe403bb671e7113c63d20acec25899ff0c552817252d8858c"
+    },
+    {
+      "path": "models/aws_robomaker_residential_SofaB_01/model.sdf",
+      "size": 756,
+      "sha256": "75babb14df18de680c125f37f41f46cbbc15def670e2f93c4b9c4f01f04c6025"
+    },
+    {
+      "path": "models/aws_robomaker_residential_SofaC_01/model.sdf",
+      "size": 740,
+      "sha256": "030cf71ce4f3787e560836cc58856901eb7518d54bb5b4b24b8ec57f21e88613"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Sofa_01/model.sdf",
+      "size": 751,
+      "sha256": "e127f19352ba2d12435fc24c88dcd86735c0b27c2e1128ded3b2958530fde04d"
+    },
+    {
+      "path": "models/aws_robomaker_residential_TVCabinet_01/model.sdf",
+      "size": 993,
+      "sha256": "5555192a8cc8975d047184ab986d1b812bf9fa229eaaee504f6373fac1c78d12"
+    },
+    {
+      "path": "models/aws_robomaker_residential_TV_01/model.sdf",
+      "size": 745,
+      "sha256": "4f8d83d54e325b87d7601bff48d90a7426de4e902f0cd85421d59f2610e462b4"
+    },
+    {
+      "path": "models/aws_robomaker_residential_TV_02/model.sdf",
+      "size": 745,
+      "sha256": "294d01c9ea66a6976a3de683dfa7a457374c718f16dd414b4570f1dc10f094f5"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Tablet_01/model.sdf",
+      "size": 996,
+      "sha256": "0eda1a07db396654b43a84e07572ba668b07d32ff7eccd1396b26919c3e34832"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Tableware_01/model.sdf",
+      "size": 759,
+      "sha256": "f3dfbe5ee62902f45446875af3ab920a9b70755c8ca0b5772f2189b589385648"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Trash_01/model.sdf",
+      "size": 1082,
+      "sha256": "12bcb2979814cf5b9df23f53801e1508f7ecf680de25da12460d2aa083c8b93b"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Vase_01/model.sdf",
+      "size": 734,
+      "sha256": "8b4b512b8bade1d5f59db59c60044a6fad50b320aee44eb10b86daa5a4f99923"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Wardrobe_01/model.sdf",
+      "size": 781,
+      "sha256": "f33876499121fc7c148832b3c2b22a892132eeee0040e09fd041a735e99a7a9c"
+    },
+    {
+      "path": "worlds/small_house.world",
+      "size": 29365,
+      "sha256": "8eef40841c462e3f015dc092f24a1b696ea10f8f05b662b529b76ddd720b544f"
+    }
+  ],
+  "collision_mesh_downloads": [
+    {
+      "path": "models/aws_robomaker_residential_AirconditionerA_01/meshes/aws_AirconditionerA_01_collision.DAE",
+      "size": 8725,
+      "sha256": "368f5c40e819afb1d9ba5c87c805f5ac430cbfc18b5148eb50471ea55090283a",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_AirconditionerA_01/meshes/aws_AirconditionerA_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_AirconditionerB_01/meshes/aws_AirconditionerB_01_collision.DAE",
+      "size": 5231,
+      "sha256": "5011f5a17c9b23e1250d6e9a35d36c717bfe7f91ef2c09e700755e68bece4a7e",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_AirconditionerB_01/meshes/aws_AirconditionerB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_BalconyTable_01/meshes/aws_BalconyTable_01_collision.DAE",
+      "size": 8387,
+      "sha256": "c40aa457df15d22096cea4d6fc9ea226774ae0a833ca4294bb666f99ed454a3c",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_BalconyTable_01/meshes/aws_BalconyTable_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Bed_01/meshes/aws_Bed_01_collision.DAE",
+      "size": 13837,
+      "sha256": "a4b8e8c8fb129a0e3e984743f066254febf7492dbd11634b7ecd2e846263e464",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Bed_01/meshes/aws_Bed_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Board_01/meshes/aws_Board_01_collision.DAE",
+      "size": 6402,
+      "sha256": "2e1d2bbfe35207b6aa59772f3bc5744c175bba4d1f6e29bfbab6ef073839312b",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Board_01/meshes/aws_Board_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Carpet_01/meshes/aws_Carpet_01_collision.DAE",
+      "size": 5435,
+      "sha256": "44f3ee9d4be182016f4e20a01cd18cd7f5e61c24d76e2e2ef181a281c5438d42",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Carpet_01/meshes/aws_Carpet_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_ChairA_01/meshes/aws_ChairA_01_collision.DAE",
+      "size": 18377,
+      "sha256": "2763098ea4411dc89256ecde2b2df4646520b0b9a5f89a9101750648e09dcba4",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_ChairA_01/meshes/aws_ChairA_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_ChairD_01/meshes/aws_ChairD_01_collision.DAE",
+      "size": 12461,
+      "sha256": "4cb613af05615762143bc21272cd75058ad7dc9ff9abd07269464c432e199434",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_ChairD_01/meshes/aws_ChairD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Chandelier_01/meshes/aws_Chandelier_01_collision.DAE",
+      "size": 5750,
+      "sha256": "09bdf383d60196ef61cd495cf6e43a0ae7bd257473028f3776dea35c6b45581f",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Chandelier_01/meshes/aws_Chandelier_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_CoffeeTable_01/meshes/aws_CoffeeTable_01_collision.DAE",
+      "size": 10819,
+      "sha256": "96d855fbd04032b9eb55f38ad66cf4d8e989fccc9d889eaa43943a75b6f62385",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_CoffeeTable_01/meshes/aws_CoffeeTable_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_CookingBench_01/meshes/aws_CookingBench_01_collision.DAE",
+      "size": 5161,
+      "sha256": "094106327ad818bf79f338ce9aa0b29df481664bdb4d717f491da414074739c0",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_CookingBench_01/meshes/aws_CookingBench_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Curtain_01/meshes/aws_Curtain_01_collision.DAE",
+      "size": 14822,
+      "sha256": "f67d458a949a4a95f0453f3e28fb5ec897eb5caa9cb2d9ebeb1a43f0b5efbf0b",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Curtain_01/meshes/aws_Curtain_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitA_01/meshes/aws_DeskPortraitA_01_collision.DAE",
+      "size": 6053,
+      "sha256": "15623c054ecfc72a78bae6d2c219bcb196908e1671916472f6ec872348b42894",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitA_01/meshes/aws_DeskPortraitA_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitA_02/meshes/aws_DeskPortraitA_01_collision.DAE",
+      "size": 6053,
+      "sha256": "15623c054ecfc72a78bae6d2c219bcb196908e1671916472f6ec872348b42894",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitA_02/meshes/aws_DeskPortraitA_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitB_01/meshes/aws_DeskPortraitB_01_collision.DAE",
+      "size": 9330,
+      "sha256": "12913e1bfa0272fc6aceccb36225e8a8e30733ca214f0158c6283b31f5768c3d",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitB_01/meshes/aws_DeskPortraitB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitB_02/meshes/aws_DeskPortraitB_01_collision.DAE",
+      "size": 9330,
+      "sha256": "12913e1bfa0272fc6aceccb36225e8a8e30733ca214f0158c6283b31f5768c3d",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitB_02/meshes/aws_DeskPortraitB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitC_01/meshes/aws_DeskPortraitC_01_collision.DAE",
+      "size": 9566,
+      "sha256": "dadf3e39f67b424c289473d467de560e8e9b714933ed23308b0fc1c6d48fe555",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitC_01/meshes/aws_DeskPortraitC_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitC_02/meshes/aws_DeskPortraitC_01_collision.DAE",
+      "size": 9566,
+      "sha256": "dadf3e39f67b424c289473d467de560e8e9b714933ed23308b0fc1c6d48fe555",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitC_02/meshes/aws_DeskPortraitC_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitD_01/meshes/aws_DeskPortraitD_01_collision.DAE",
+      "size": 9320,
+      "sha256": "a8f503041861bd94df453015bff2d53dbfd83813fc3faa2d1951d9413496a6a9",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitD_01/meshes/aws_DeskPortraitD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitD_02/meshes/aws_DeskPortraitD_01_collision.DAE",
+      "size": 9320,
+      "sha256": "a8f503041861bd94df453015bff2d53dbfd83813fc3faa2d1951d9413496a6a9",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitD_02/meshes/aws_DeskPortraitD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitD_03/meshes/aws_DeskPortraitD_01_collision.DAE",
+      "size": 9320,
+      "sha256": "a8f503041861bd94df453015bff2d53dbfd83813fc3faa2d1951d9413496a6a9",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitD_03/meshes/aws_DeskPortraitD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_DeskPortraitD_04/meshes/aws_DeskPortraitD_01_collision.DAE",
+      "size": 9320,
+      "sha256": "a8f503041861bd94df453015bff2d53dbfd83813fc3faa2d1951d9413496a6a9",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_DeskPortraitD_04/meshes/aws_DeskPortraitD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Door_01/meshes/aws_Door_01_collision.DAE",
+      "size": 5367,
+      "sha256": "e88bde13dbcbfcdd16c15611a68ebfbb70baf8428b8ad3eff1104c62e4cd727b",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Door_01/meshes/aws_Door_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Dumbbell_01/meshes/aws_Dumbbell_01_collision.DAE",
+      "size": 14567,
+      "sha256": "96588c7cec38bcf6abe8123a3d1899ac23a4d81f1a7902c5e02e179307dd88a5",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Dumbbell_01/meshes/aws_Dumbbell_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_FitnessEquipment_01/meshes/aws_FitnessEquipment_01_collision.DAE",
+      "size": 15180,
+      "sha256": "3deb8d43b411c0725894cddc358cf5d4e0917ffe5010e095790d9c0330c99f85",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_FitnessEquipment_01/meshes/aws_FitnessEquipment_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_FloorB_01/meshes/aws_FloorB_01_collision.DAE",
+      "size": 8609,
+      "sha256": "ed8283a0860e18b97b0607a5d8e92fd32bc985a925cdce62a548ee210db36c8d",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_FloorB_01/meshes/aws_FloorB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_FoldingDoor_01/meshes/aws_FoldingDoor_01_collision.DAE",
+      "size": 5567,
+      "sha256": "cd3152a9dbea869d37efb013f4a040a94c70946919330d3b5196721fdae05e2e",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_FoldingDoor_01/meshes/aws_FoldingDoor_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_FoldingDoor_02/meshes/aws_FoldingDoor_02_collision.DAE",
+      "size": 5534,
+      "sha256": "5800c1ff33f973219eb830a9c63e274cbd41c759dea2c834b0fafa81b5dc9d93",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_FoldingDoor_02/meshes/aws_FoldingDoor_02_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Handle_01/meshes/aws_Handle_01_collision.DAE",
+      "size": 11613,
+      "sha256": "58bf9f3bcb1d7aae36d41d1762dfdfdab8142b99d99b37d9dd12c4faed220c34",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Handle_01/meshes/aws_Handle_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_HouseWallB_01/meshes/aws_HouseWallB_01_collision.DAE",
+      "size": 63090,
+      "sha256": "206d5f29afce56beddd82d1ecf75c0494c090c12a8994b3bb5efc8cc1d709a39",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_HouseWallB_01/meshes/aws_HouseWallB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_KitchenCabinet_01/meshes/aws_KitchenCabinet_01_collision.DAE",
+      "size": 12138,
+      "sha256": "32357200643818e37dc1ea27f419dbb8d4acd6e0a4e485f2a93239365b18740f",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_KitchenCabinet_01/meshes/aws_KitchenCabinet_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_KitchenTable_01/meshes/aws_KitchenTable_01_collision.DAE",
+      "size": 16846,
+      "sha256": "2bc587c03b78dcd9515bb2dde969a262bc9299d593c2e41f0e025b113705b949",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_KitchenTable_01/meshes/aws_KitchenTable_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_KitchenUtensils_01/meshes/aws_KitchenUtensils_01_collision.DAE",
+      "size": 22849,
+      "sha256": "2ae42dd8221451228f2b51349221f87360a040ed7fa6f3da0a63acc148919948",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_KitchenUtensils_01/meshes/aws_KitchenUtensils_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_LightC_01/meshes/aws_LightC_01_collision.DAE",
+      "size": 6636,
+      "sha256": "81170c680b9acac72b33faf39bdc8776ba989652d4f3efe1fab793bf1caaef5d",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_LightC_01/meshes/aws_LightC_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_NightStand_01/meshes/aws_NightStand_01_collision.DAE",
+      "size": 7796,
+      "sha256": "08411370aa61fa499c31e75963b01eea4a6c2d16746547ef8d4ada9cbeb2af34",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_NightStand_01/meshes/aws_NightStand_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Pillow_01/meshes/aws_Pillow_01_collision.DAE",
+      "size": 14581,
+      "sha256": "a2545ccccc9d76d38f40d73a35189a85ceb5e7d3ea64768cb1ad226bdd04abc1",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Pillow_01/meshes/aws_Pillow_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitA_01/meshes/aws_PortraitA_01_collision.DAE",
+      "size": 4455,
+      "sha256": "bbd1e639e1b858f9ada90d122410bb54954150a4121b98b5cc502ced9054ac9d",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitA_01/meshes/aws_PortraitA_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitA_02/meshes/aws_PortraitA_01_collision.DAE",
+      "size": 4455,
+      "sha256": "bbd1e639e1b858f9ada90d122410bb54954150a4121b98b5cc502ced9054ac9d",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitA_02/meshes/aws_PortraitA_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitB_01/meshes/aws_PortraitB_01_collision.DAE",
+      "size": 7138,
+      "sha256": "3fe4bb9e27002eeb15506a9b88fea3f8b5bbfe24275c158271b4caef65db6cbe",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitB_01/meshes/aws_PortraitB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitB_02/meshes/aws_PortraitB_01_collision.DAE",
+      "size": 7138,
+      "sha256": "3fe4bb9e27002eeb15506a9b88fea3f8b5bbfe24275c158271b4caef65db6cbe",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitB_02/meshes/aws_PortraitB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitB_03/meshes/aws_PortraitB_01_collision.DAE",
+      "size": 7138,
+      "sha256": "3fe4bb9e27002eeb15506a9b88fea3f8b5bbfe24275c158271b4caef65db6cbe",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitB_03/meshes/aws_PortraitB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitC_01/meshes/aws_PortraitC_01_collision.DAE",
+      "size": 7137,
+      "sha256": "b22c209c7240f796dde85de4192e482c0b901d4395d01160399e7abf503c09e0",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitC_01/meshes/aws_PortraitC_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitD_01/meshes/aws_PortraitD_01_collision.DAE",
+      "size": 7143,
+      "sha256": "0ac6e26f0f3824fd59d9cba632753c22fda0c4b76d207c2a8a7e8a504a3dd9ba",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitD_01/meshes/aws_PortraitD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitD_02/meshes/aws_PortraitD_01_collision.DAE",
+      "size": 7143,
+      "sha256": "0ac6e26f0f3824fd59d9cba632753c22fda0c4b76d207c2a8a7e8a504a3dd9ba",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitD_02/meshes/aws_PortraitD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitE_01/meshes/aws_PortraitE_01_collision.DAE",
+      "size": 5550,
+      "sha256": "4df38d5be895416e925f0f09664bc53e0ddfe889ff236dd22f6b3c7acb36d754",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitE_01/meshes/aws_PortraitE_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_PortraitE_02/meshes/aws_PortraitE_01_collision.DAE",
+      "size": 5550,
+      "sha256": "4df38d5be895416e925f0f09664bc53e0ddfe889ff236dd22f6b3c7acb36d754",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_PortraitE_02/meshes/aws_PortraitE_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Quilt_01/meshes/aws_Quilt_01_collision.DAE",
+      "size": 7226,
+      "sha256": "13c0a5d4c1067d516a9431edfbdf1a202fa29185664a4cb25feb0c9f8da0af14",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Quilt_01/meshes/aws_Quilt_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Rangehood_01/meshes/aws_Rangehood_01_collision.DAE",
+      "size": 8684,
+      "sha256": "7a38053ee97d3058b16e4361967d47f27048f4e50f4d8a98bef7cae1a0a158bc",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Rangehood_01/meshes/aws_Rangehood_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_ReadingDesk_01/meshes/aws_ReadingDesk_01_collision.DAE",
+      "size": 15025,
+      "sha256": "2e07ecffd6748046f2ab44b13ec45a88c3a05a91f2d56c481b2d2113820dfe86",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_ReadingDesk_01/meshes/aws_ReadingDesk_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Refrigerator_01/meshes/aws_Refrigerator_01_collision.DAE",
+      "size": 15619,
+      "sha256": "5e77d4d3040da42f95c602e202fad7ac5e2ac19ab1da6a31ae66465074ba5bdb",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Refrigerator_01/meshes/aws_Refrigerator_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_RoomCeiling_01/meshes/aws_RoomCeiling_01_collision.DAE",
+      "size": 9615,
+      "sha256": "3c9c5d450ced87a4bc98b225de863e39cc6d21c1eb4149cff8a7aedf97912e61",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_RoomCeiling_01/meshes/aws_RoomCeiling_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_RoomWall_01/meshes/aws_RoomWall_01_collision.DAE",
+      "size": 5074,
+      "sha256": "6e642ca1fdaa7ef795c89eb86d4630b123a5266541a30c6a656e92afe8271907",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_RoomWall_01/meshes/aws_RoomWall_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_RoomWindow_01/meshes/aws_RoomWindow_01_collision.DAE",
+      "size": 5544,
+      "sha256": "f5abe4a46b922e6f00c206ad2bdab23209a0c41b86ebb618368104d07f644fa1",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_RoomWindow_01/meshes/aws_RoomWindow_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_SeasoningBox_01/meshes/aws_SeasoningBox_01_collision.DAE",
+      "size": 5596,
+      "sha256": "e286d937056dd5a146a54d70085d17fe1bb692f15fea4d5ab48cef9b4f6ac2ca",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_SeasoningBox_01/meshes/aws_SeasoningBox_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_SecurityCamera_01/meshes/aws_SecurityCamera_01_collision.DAE",
+      "size": 8723,
+      "sha256": "b1c1eab4ecd1c41824ef6b95224f5227bf2e30d73d04e2d7c271912dc143a900",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_SecurityCamera_01/meshes/aws_SecurityCamera_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_ShoeRack_01/meshes/aws_ShoeRack_01_collision.DAE",
+      "size": 20961,
+      "sha256": "85222bdf2247bd57e8f557c677e2e8f20e0d63d7175c6a6f23d78e568ef1953f",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_ShoeRack_01/meshes/aws_ShoeRack_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_SofaB_01/meshes/aws_SofaB_01_collision.DAE",
+      "size": 9910,
+      "sha256": "195a3c2709ddbd15c9806d8a3c066ce5c79eaa5a4cfae9b2019986e4ec30c59b",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_SofaB_01/meshes/aws_SofaB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_SofaC_01/meshes/aws_SofaC_01_collision.DAE",
+      "size": 104557,
+      "sha256": "74f3953205c9243c023692930e945ca5151a4264577487b12cae2c1300e0cc9d",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_SofaC_01/meshes/aws_SofaC_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Sofa_01/meshes/aws_Sofa_01_collision.DAE",
+      "size": 142175,
+      "sha256": "d48913dfce3db467b24f0f9703d48543860b3709d48b105e39030a93dc08f31e",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Sofa_01/meshes/aws_Sofa_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_TVCabinet_01/meshes/aws_TVCabinet_01_collision.DAE",
+      "size": 31615,
+      "sha256": "b0318e75b88dda614af95997dcc96608bc0804e6490ca81dc2fcfbbbbd3500f4",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_TVCabinet_01/meshes/aws_TVCabinet_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_TV_01/meshes/aws_TV_01_collision.DAE",
+      "size": 4925,
+      "sha256": "b4701986e4d0e4091643c738a72ca4cf04b8f5a2f337dab7e1e1b25784e862d3",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_TV_01/meshes/aws_TV_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_TV_02/meshes/aws_TV_01_collision.DAE",
+      "size": 4925,
+      "sha256": "b4701986e4d0e4091643c738a72ca4cf04b8f5a2f337dab7e1e1b25784e862d3",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_TV_02/meshes/aws_TV_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Tablet_01/meshes/aws_Tablet_01_collision.DAE",
+      "size": 4995,
+      "sha256": "02f6b5210a5cfa6c0c418c80a32b0b8c80089af6c2debf6b523b7acc12621cd2",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Tablet_01/meshes/aws_Tablet_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Tableware_01/meshes/aws_Tableware_01_collision.DAE",
+      "size": 16293,
+      "sha256": "98b160d133bcada49bf069e11d9402926693c39543c74d7fa29d8f2f8e401e35",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Tableware_01/meshes/aws_Tableware_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Trash_01/meshes/aws_Trash_01_collision.DAE",
+      "size": 12215,
+      "sha256": "ac7024fbbc1e1745c9385203285e5b5f0186a50d00fa8e3d82fd5d17265b6f52",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Trash_01/meshes/aws_Trash_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Vase_01/meshes/aws_Vase_01_collision.DAE",
+      "size": 13481,
+      "sha256": "3a1b268b56dc41cbe3c0ebfb8ae9bd2de1a1e5e359c74c5cc6abf1d5a0fb7577",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Vase_01/meshes/aws_Vase_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_residential_Wardrobe_01/meshes/aws_Wardrobe_01_collision.DAE",
+      "size": 13914,
+      "sha256": "d8951bbaac273ae27e5d258492de82fb892e1c1c9ba1d9706bc93210c935628a",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-house-world/ros2/models/aws_robomaker_residential_Wardrobe_01/meshes/aws_Wardrobe_01_collision.DAE"
+    }
+  ],
+  "source_commit": "ff9631ca6d1db9c1ba656498151464b5ab74aafe"
+}

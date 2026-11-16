@@ -1,0 +1,343 @@
+{
+  "environment": {
+    "python": "3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]",
+    "executable": "/usr/bin/python3",
+    "numpy": "1.21.5",
+    "scipy": "1.8.0",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "processor": "AMD Ryzen 9 7945HX with Radeon Graphics",
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "backend": "CPU / NumPy + SciPy",
+    "cuda_used": false
+  },
+  "settings": {
+    "neighbors": 30,
+    "radius_m": 0.75,
+    "seed_height_gate_m": 0.04,
+    "rank_ratio": 1e-10,
+    "relative_ridge": 1e-10,
+    "max_fit_rmse_m": 0.02,
+    "connect_radius_m": 0.35,
+    "max_model_disagreement_m": 0.02,
+    "max_normal_angle_deg": 15.0,
+    "min_component_points": 30,
+    "patch_half_width_m": 0.12,
+    "patch_grid_size": 5
+  },
+  "repeats": 31,
+  "warmups": 5,
+  "input_path": "outputs/table_cpu/table_m125_evidence.npz",
+  "input_sha256": "f4f45c3849c8e9dc7e9bc48e6970e8f3dd95c09bb9f974bee7f1067224fb4748",
+  "source_sha256": {
+    "table_local_surfaces.py": "c6678ed1c8cc3e1e75c1d8e5bc5ed192e6e33ffcb8f24405c4f7c12804dba709",
+    "benchmark_table_local_surfaces.py": "d15a74e15124a24c6012d9197c6bca0843e98e56cabbd1a1ed0eee3c730fcdae"
+  },
+  "function_sha256": {
+    "select_neighbors": "c685dadc6cca5607278451870056e912cda794a60f248d405a0e60cbbd62b41b",
+    "fit_seeds": "9956c2f3a652d870fdfd5b07f6da560c96fc28bbf8fe3b706b21748df1250777",
+    "assemble": "caf14171a7c057175096051cec498919727a8ab850b3da14e9c795e5deee4922",
+    "reconstruct": "5001c44cc71ab6a9ac056c16c0e5ea60de456db157f728839ed7b8e07968b4b5",
+    "patch_mesh": "531ad0b42e1e0d9ab5cc10458a0d9472c5004c4ffc02572f1882c85b27e3dfbb"
+  },
+  "input_points": 2125,
+  "viewer_array_equality": true,
+  "outputs": {
+    "valid_fits": 1955,
+    "major_components": 3,
+    "triangles": 3388
+  },
+  "timings": {
+    "neighbors_only": {
+      "median_ms": 36.519159,
+      "p95_ms": 37.553897000000006,
+      "minimum_ms": 35.905321,
+      "samples_ms": [
+        39.315264,
+        36.084604,
+        35.905321,
+        36.500162,
+        36.789865,
+        36.459794,
+        36.377869,
+        36.636702,
+        36.39093,
+        36.252016,
+        36.488289,
+        36.686569,
+        37.137746,
+        36.519159,
+        37.231543,
+        37.062946,
+        37.053448,
+        37.876251,
+        36.773243,
+        36.824298,
+        36.208086,
+        36.573776,
+        36.297134,
+        36.166531,
+        36.22827,
+        36.608208,
+        36.211648,
+        36.589212,
+        35.961126,
+        36.548843,
+        36.305445
+      ]
+    },
+    "fitting_with_neighbors": {
+      "median_ms": 47.172857,
+      "p95_ms": 48.056212,
+      "minimum_ms": 46.189766,
+      "samples_ms": [
+        46.189766,
+        46.225385,
+        46.846346,
+        47.24172,
+        47.481556,
+        46.738302,
+        46.377362,
+        47.601474,
+        46.548333,
+        46.256256,
+        46.836849,
+        47.927983,
+        47.50174,
+        47.418629,
+        47.948167,
+        48.164257,
+        47.945794,
+        47.635906,
+        47.178794,
+        48.902762,
+        47.172857,
+        46.934208,
+        46.55902,
+        47.615723,
+        46.389235,
+        46.650443,
+        47.197792,
+        47.062438,
+        46.702685,
+        47.417443,
+        46.623136
+      ]
+    },
+    "assembly_on_ready_fits": {
+      "median_ms": 9.119698,
+      "p95_ms": 9.3737815,
+      "minimum_ms": 8.667335,
+      "samples_ms": [
+        9.307292,
+        9.364283,
+        9.320353,
+        8.695829,
+        8.840681,
+        9.120885,
+        9.338162,
+        9.203996,
+        8.913106,
+        8.840681,
+        9.262175,
+        9.220619,
+        9.119698,
+        8.694642,
+        9.119698,
+        8.72195,
+        8.995031,
+        9.393966,
+        9.055584,
+        8.717201,
+        9.38328,
+        8.957037,
+        9.284733,
+        9.145819,
+        9.027088,
+        9.147006,
+        8.667335,
+        9.29067,
+        9.265737,
+        8.939228,
+        8.77063
+      ]
+    },
+    "complete_xyz_to_mesh": {
+      "median_ms": 56.418409,
+      "p95_ms": 57.708418,
+      "minimum_ms": 55.447194,
+      "samples_ms": [
+        56.305614,
+        56.463526,
+        56.00285,
+        57.304139,
+        56.507456,
+        56.804282,
+        55.7084,
+        56.11802,
+        56.49677,
+        56.968131,
+        55.977918,
+        55.719085,
+        56.975255,
+        56.464713,
+        56.781725,
+        56.252186,
+        58.496195,
+        56.807845,
+        56.418409,
+        56.81022,
+        55.873436,
+        55.926865,
+        55.964859,
+        56.887396,
+        55.881747,
+        56.156015,
+        55.447194,
+        57.74938,
+        56.072904,
+        55.865126,
+        57.667456
+      ]
+    },
+    "complete_with_independent_patch_geometry": {
+      "median_ms": 337.365885,
+      "p95_ms": 341.88358949999997,
+      "minimum_ms": 333.977314,
+      "samples_ms": [
+        334.783492,
+        335.117126,
+        337.486989,
+        333.977314,
+        337.365885,
+        336.164332,
+        338.042651,
+        334.91885,
+        339.675197,
+        335.730968,
+        338.272991,
+        335.964868,
+        336.191644,
+        336.513405,
+        337.27803,
+        338.069964,
+        351.013975,
+        344.091982,
+        336.682005,
+        338.575758,
+        337.802823,
+        337.952424,
+        337.699528,
+        337.040574,
+        336.500351,
+        337.411014,
+        337.133186,
+        337.865754,
+        337.826573,
+        336.037304,
+        337.862194
+      ]
+    }
+  },
+  "holes": {
+    "components": [
+      {
+        "component": 0,
+        "seeds": 1373,
+        "median_z_m": -0.00026597557105593507,
+        "candidate_triangles": 2695,
+        "kept_triangles": 2443,
+        "observed_seed_xy_hull_area_m2": 29.671200131225575,
+        "kept_area_m2": 23.542000376611924,
+        "kept_area_fraction_of_seed_hull": 0.7934293278496893,
+        "first_failure_reasons": {
+          "edge_length": {
+            "triangles": 184,
+            "area_m2": 5.379199778753535
+          },
+          "model_agreement": {
+            "triangles": 68,
+            "area_m2": 0.7499999758601144
+          },
+          "normal_angle": {
+            "triangles": 0,
+            "area_m2": 0.0
+          },
+          "centroid_agreement": {
+            "triangles": 0,
+            "area_m2": 0.0
+          }
+        }
+      },
+      {
+        "component": 1,
+        "seeds": 298,
+        "median_z_m": 1.1021062875864105,
+        "candidate_triangles": 568,
+        "kept_triangles": 466,
+        "observed_seed_xy_hull_area_m2": 5.70819999717474,
+        "kept_area_m2": 4.140399966380002,
+        "kept_area_fraction_of_seed_hull": 0.7253424842208198,
+        "first_failure_reasons": {
+          "edge_length": {
+            "triangles": 50,
+            "area_m2": 1.091799991127848
+          },
+          "model_agreement": {
+            "triangles": 52,
+            "area_m2": 0.4760000396668899
+          },
+          "normal_angle": {
+            "triangles": 0,
+            "area_m2": 0.0
+          },
+          "centroid_agreement": {
+            "triangles": 0,
+            "area_m2": 0.0
+          }
+        }
+      },
+      {
+        "component": 2,
+        "seeds": 283,
+        "median_z_m": 1.1996288162186544,
+        "candidate_triangles": 541,
+        "kept_triangles": 479,
+        "observed_seed_xy_hull_area_m2": 5.77359996333122,
+        "kept_area_m2": 4.675999937146904,
+        "kept_area_fraction_of_seed_hull": 0.8098933017259081,
+        "first_failure_reasons": {
+          "edge_length": {
+            "triangles": 41,
+            "area_m2": 0.9408000185161787
+          },
+          "model_agreement": {
+            "triangles": 21,
+            "area_m2": 0.1568000076681374
+          },
+          "normal_angle": {
+            "triangles": 0,
+            "area_m2": 0.0
+          },
+          "centroid_agreement": {
+            "triangles": 0,
+            "area_m2": 0.0
+          }
+        }
+      }
+    ],
+    "near_ground_band_m": [
+      -0.06,
+      0.06
+    ],
+    "near_ground_seeds": 1396,
+    "near_ground_under_30": 22,
+    "near_ground_invalid_fit": 22,
+    "near_ground_median_candidates": 70.0,
+    "independent_patch_display_width_m": 0.24,
+    "independent_patch_display_convex_hull_clipped": true
+  }
+}

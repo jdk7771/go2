@@ -1,0 +1,110 @@
+[
+  {
+    "frame": 0,
+    "representation": "full",
+    "initialization": "identity",
+    "translation_error_m": 0.9785223727405572,
+    "rotation_error_deg": 0.7202974859257121,
+    "selected_points": 4000,
+    "accepted_steps": 16
+  },
+  {
+    "frame": 0,
+    "representation": "full",
+    "initialization": "ground_truth_diagnostic",
+    "translation_error_m": 0.11544682496407413,
+    "rotation_error_deg": 0.10037445589345217,
+    "selected_points": 4000,
+    "accepted_steps": 16
+  },
+  {
+    "frame": 0,
+    "representation": "planes_only",
+    "initialization": "identity",
+    "translation_error_m": 0.21145479571265408,
+    "rotation_error_deg": 1.6072493274742523,
+    "selected_points": 3902,
+    "accepted_steps": 24
+  },
+  {
+    "frame": 0,
+    "representation": "planes_only",
+    "initialization": "ground_truth_diagnostic",
+    "translation_error_m": 0.2284442316087958,
+    "rotation_error_deg": 1.810012104120001,
+    "selected_points": 3902,
+    "accepted_steps": 22
+  },
+  {
+    "frame": 50,
+    "representation": "full",
+    "initialization": "identity",
+    "translation_error_m": 1.4812491793378202,
+    "rotation_error_deg": 0.4569252364048798,
+    "selected_points": 3935,
+    "accepted_steps": 14
+  },
+  {
+    "frame": 50,
+    "representation": "full",
+    "initialization": "ground_truth_diagnostic",
+    "translation_error_m": 0.15702609099790152,
+    "rotation_error_deg": 0.6718258765651991,
+    "selected_points": 4000,
+    "accepted_steps": 15
+  },
+  {
+    "frame": 50,
+    "representation": "planes_only",
+    "initialization": "identity",
+    "translation_error_m": 1.4597977359492407,
+    "rotation_error_deg": 0.045699535091857445,
+    "selected_points": 3962,
+    "accepted_steps": 24
+  },
+  {
+    "frame": 50,
+    "representation": "planes_only",
+    "initialization": "ground_truth_diagnostic",
+    "translation_error_m": 0.3800023377940593,
+    "rotation_error_deg": 0.11774013179284541,
+    "selected_points": 3962,
+    "accepted_steps": 21
+  },
+  {
+    "frame": 100,
+    "representation": "full",
+    "initialization": "identity",
+    "translation_error_m": 1.3405421789547411,
+    "rotation_error_deg": 0.12617340777980016,
+    "selected_points": 4000,
+    "accepted_steps": 15
+  },
+  {
+    "frame": 100,
+    "representation": "full",
+    "initialization": "ground_truth_diagnostic",
+    "translation_error_m": 1.336709360493566,
+    "rotation_error_deg": 0.14633098732488434,
+    "selected_points": 4000,
+    "accepted_steps": 19
+  },
+  {
+    "frame": 100,
+    "representation": "planes_only",
+    "initialization": "identity",
+    "translation_error_m": 1.7584246118128215,
+    "rotation_error_deg": 0.09325925866746938,
+    "selected_points": 4000,
+    "accepted_steps": 22
+  },
+  {
+    "frame": 100,
+    "representation": "planes_only",
+    "initialization": "ground_truth_diagnostic",
+    "translation_error_m": 0.43134320424170725,
+    "rotation_error_deg": 0.14801713891044133,
+    "selected_points": 4000,
+    "accepted_steps": 17
+  }
+]

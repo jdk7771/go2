@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "defaultSolidSurface": true,
+  "homepageEntry": true,
+  "localDetailButton": true,
+  "staticComparison": true,
+  "initial": {
+    "scene": "hill",
+    "frame": 7,
+    "points": 2125,
+    "patches": 20,
+    "meshes": 20,
+    "renderer": {
+      "frame": 30,
+      "calls": 22,
+      "triangles": 12102,
+      "points": 0,
+      "lines": 33
+    },
+    "webgl": true,
+    "overflow": false
+  },
+  "isolated": {
+    "meshes": 1,
+    "points": 1,
+    "lines": 1,
+    "wire": 1
+  },
+  "visited": [
+    {
+      "scene": "forest",
+      "meshCount": 26
+    },
+    {
+      "scene": "quick",
+      "meshCount": 16
+    },
+    {
+      "scene": "desert",
+      "meshCount": 20
+    },
+    {
+      "scene": "mountain",
+      "meshCount": 19
+    },
+    {
+      "scene": "snow",
+      "meshCount": 20
+    },
+    {
+      "scene": "vocano",
+      "meshCount": 20
+    },
+    {
+      "scene": "hill",
+      "meshCount": 20
+    }
+  ],
+  "mobileForeground": {
+    "count": 25979,
+    "width": 364,
+    "height": 430
+  },
+  "mobileOverflow": false,
+  "errors": [],
+  "failed": []
+}

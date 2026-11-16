@@ -1,0 +1,343 @@
+<div id="fsgp-results-explorer">
+  <style>
+    #fsgp-results-explorer { color: var(--foreground); width: 100%; }
+    #fsgp-results-explorer .fsgp-blocks { display: grid; gap: calc(var(--font-size-base) * 1); }
+    #fsgp-results-explorer .fsgp-heading { display: grid; gap: calc(var(--font-size-base) * .25); padding-right: 90px; }
+    #fsgp-results-explorer .fsgp-maps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--font-size-base) * 1); }
+    #fsgp-results-explorer .fsgp-maps section { min-width: 0; }
+    #fsgp-results-explorer .fsgp-cloud { width: 100%; height: 320px; display: block; touch-action: none; }
+    #fsgp-results-explorer .fsgp-cloud-tools { display: flex; flex-wrap: wrap; align-items: center; gap: calc(var(--font-size-base) * .75); }
+    #fsgp-results-explorer .fsgp-colorbar { display: inline-block; width: 96px; height: 8px; background: linear-gradient(90deg, color-mix(in srgb, var(--viz-series-1) 20%, var(--background)), var(--viz-series-1)); }
+    #fsgp-results-explorer .fsgp-spatial { width: 100%; display: block; overflow: visible; }
+    #fsgp-results-explorer .fsgp-angles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--font-size-base) * 1); }
+    #fsgp-results-explorer .fsgp-chart-note { margin-top: calc(var(--font-size-base) * .25); }
+    #fsgp-results-explorer canvas { max-width: 100%; }
+    #fsgp-results-explorer [data-experiment][hidden], #fsgp-results-explorer [data-table-only][hidden] { display: none; }
+    @media (max-width: 600px) {
+      #fsgp-results-explorer .fsgp-maps { grid-template-columns: minmax(0, 1fr); }
+      #fsgp-results-explorer .fsgp-cloud { height: 280px; }
+      #fsgp-results-explorer .fsgp-angles { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+  <div class="fsgp-blocks">
+    <div class="fsgp-heading">
+      <h2>FSGP-BGK：场景与结果</h2>
+      <div class="text-small text-muted" data-value="scene-summary">第 8 帧地图 · 8 帧误差 · CPU 方法诊断，非论文原始基准</div>
+    </div>
+    <div class="viz-controls">
+      <label class="form-label">场景
+        <select class="form-select" data-control="scene" disabled aria-label="选择测试场景">
+          <option value="flat">平地</option><option value="ramp">斜坡</option>
+          <option value="steps">台阶与凸起</option><option value="hill" selected>丘陵 hill</option><option value="quick">官方 quick</option>
+          <option value="table">大桌子（桌下空旷）</option>
+        </select>
+      </label>
+      <label class="form-label" data-experiment>诱导点数量 M
+        <select class="form-select" data-control="count" disabled aria-label="选择诱导点数量">
+          <option value="50">50</option><option value="125" selected>125</option><option value="500">500</option>
+        </select>
+      </label>
+    </div>
+    <div>
+      <div class="fsgp-cloud-tools">
+        <h3>三维点云</h3>
+        <label class="form-label sr-only" for="fsgp-cloud-source">点云范围</label>
+        <select id="fsgp-cloud-source" class="form-select" data-control="view" aria-label="三维点云显示范围">
+          <option value="scan">末帧局部扫描</option><option value="terrain">完整地形概览</option>
+        </select>
+        <label class="form-check" data-experiment><input class="form-check-input" type="checkbox" data-control="inducing" checked><span class="form-check-label">标出诱导点</span></label>
+        <button class="btn" type="button" data-action="under-table" data-table-only hidden>桌底视角</button>
+      </div>
+      <canvas class="fsgp-cloud" aria-label="可旋转的地形点云，圆点为观测，叉号为诱导点" role="img">地形点云</canvas>
+      <div class="viz-row text-small">
+        <span data-value="point-count"></span><span>高程 / m</span><span class="tabular-nums" data-value="z-min"></span>
+        <span class="fsgp-colorbar" aria-hidden="true"></span><span class="tabular-nums" data-value="z-max"></span>
+      </div>
+      <div class="fsgp-angles">
+        <label class="form-label">方位角 <output class="tabular-nums" data-value="yaw">−35°</output><input class="form-range" type="range" data-control="yaw" min="-180" max="180" value="-35" aria-label="三维点云方位角"></label>
+        <label class="form-label">俯视角 <output class="tabular-nums" data-value="pitch">35°</output><input class="form-range" type="range" data-control="pitch" min="0" max="85" value="35" aria-label="三维点云俯视角"></label>
+      </div>
+      <div class="text-small fsgp-chart-note" data-table-only hidden>桌面 3 × 2 m · 总高 1.2 m · 桌下净空 1.1 m · 四条桌腿 12 × 12 cm · 桌下其余空间为空。</div>
+      <div class="text-small fsgp-chart-note" data-table-only data-value="table-diagnostics" aria-live="polite" hidden></div>
+    </div>
+    <div data-experiment>
+      <h3>通行代价地图</h3>
+      <div class="text-small text-muted" data-value="reference-note">共享色标 · 越高越难通行 · 空格为未知 · 参考由完整点云几何构造</div>
+      <div class="viz-row text-small"><span>代价</span><span class="tabular-nums">0</span><span class="fsgp-colorbar" aria-hidden="true"></span><span class="tabular-nums" data-value="cost-max"></span></div>
+    </div>
+    <div class="fsgp-maps" data-experiment>
+      <section aria-label="参考地图"><h3 data-value="reference-title">完整点云几何参考</h3><div data-spatial="reference"></div></section>
+      <section aria-label="SGP-XY 对照地图"><h3>SGP-XY</h3><div data-spatial="sgp"></div></section>
+      <section aria-label="FSGP 单帧地图"><h3>FSGP</h3><div data-spatial="fsgp"></div><div class="text-small tabular-nums fsgp-chart-note" data-value="fsgp-stat"></div></section>
+      <section aria-label="FSGP-BGK 融合地图"><h3>FSGP-BGK</h3><div data-spatial="bgk"></div><div class="text-small tabular-nums fsgp-chart-note" data-value="bgk-stat"></div></section>
+    </div>
+    <div class="text-small tabular-nums" data-value="comparison" data-experiment aria-live="polite"></div>
+    <section data-viz-composition data-experiment aria-label="八帧误差曲线"><div data-chart="error" data-viz-container></div></section>
+    <div hidden role="alert" data-value="error-message"></div>
+  </div>
+  <script type="application/octet-stream" data-fsgp-bank><!--FSGP_DATA--></script>
+  <!--FSGP_INITIAL_CHARTS-->
+  <script type="module">
+    const root = document.getElementById('fsgp-results-explorer');
+    const controls = Object.fromEntries(Array.from(root.querySelectorAll('[data-control]')).map(e => [e.dataset.control, e]));
+    const values = Object.fromEntries(Array.from(root.querySelectorAll('[data-value]')).map(e => [e.dataset.value, e]));
+    const charts = {};
+    const initialCharts = Object.fromEntries(Array.from(root.querySelectorAll('[data-viz-chart]')).map(e => [e.dataset.chartKey, JSON.parse(e.textContent)]));
+    const state = {scene: 'hill', count: '125', view: 'scan', inducing: true, yaw: -35, pitch: 35, zoom: 1};
+    const canvas = root.querySelector('canvas');
+    const context = canvas.getContext('2d');
+    let bank = null;
+    let drag = null;
+    let wheelTimer = null;
+
+    function restore(saved) {
+      const preferences = {...(saved?.modelContent || {}), ...(saved?.privateContent || {})};
+      if (['flat','ramp','steps','hill','quick','table'].includes(preferences.scene)) state.scene = preferences.scene;
+      if (['50','125','500'].includes(String(preferences.count))) state.count = String(preferences.count);
+      if (['scan','terrain'].includes(preferences.view)) state.view = preferences.view;
+      if (typeof preferences.inducing === 'boolean') state.inducing = preferences.inducing;
+      if (Number.isFinite(preferences.yaw)) state.yaw = Math.max(-180, Math.min(180, preferences.yaw));
+      if (Number.isFinite(preferences.pitch)) state.pitch = Math.max(0, Math.min(85, preferences.pitch));
+      if (Number.isFinite(preferences.zoom)) state.zoom = Math.max(.5, Math.min(3, preferences.zoom));
+    }
+    function persist() {
+      const scene = bank.scenes[state.scene], item = scene.configs[state.count];
+      window.openai?.setWidgetState?.({
+        modelContent: scene.inspection_only ? {scene: state.scene, point_count: scene.point_count, dimensions: scene.dimensions}
+          : {scene: state.scene, count: Number(state.count), map_frame: bank.frames,
+             fsgp_mae: item.stats.fsgp.mae, bgk_mae: item.stats.bgk.mae, bgk_ms: item.stats.bgk.ms},
+        privateContent: {view: state.view, inducing: state.inducing, yaw: state.yaw, pitch: state.pitch, zoom: state.zoom}
+      })?.catch(() => {});
+    }
+    function syncControls() {
+      controls.scene.value = state.scene;
+      controls.count.value = state.count;
+      controls.view.value = state.view;
+      controls.inducing.checked = state.inducing;
+      const inspection = !!bank?.scenes[state.scene]?.inspection_only;
+      controls.count.disabled = inspection;
+      controls.view.disabled = inspection;
+      controls.view.querySelector('[value="terrain"]').textContent = state.scene==='table' ? '完整桌子点云' : '完整地形概览';
+      controls.inducing.disabled = inspection;
+      controls.inducing.closest('label').hidden = inspection;
+      controls.yaw.value = String(state.yaw);
+      controls.pitch.value = String(state.pitch);
+      values.yaw.textContent = `${Math.round(state.yaw)}°`;
+      values.pitch.textContent = `${Math.round(state.pitch)}°`;
+    }
+    function color(variable) {
+      const probe = document.createElement('span');
+      probe.style.color = `var(${variable})`;
+      probe.hidden = true;
+      root.appendChild(probe);
+      const result = getComputedStyle(probe).color;
+      probe.remove();
+      return result;
+    }
+    function rgb(css) {
+      const swatch = document.createElement('canvas');
+      swatch.width = swatch.height = 1;
+      const ctx = swatch.getContext('2d', {willReadFrequently: true});
+      ctx.fillStyle = css; ctx.fillRect(0,0,1,1);
+      return Array.from(ctx.getImageData(0,0,1,1).data).slice(0,3);
+    }
+    function drawCloud() {
+      if (!bank) return;
+      const scene = bank.scenes[state.scene], item = scene.configs[state.count];
+      const points = scene.inspection_only || state.view === 'terrain' ? scene.terrain : scene.scan;
+      const width = canvas.clientWidth, height = canvas.clientHeight;
+      if (!width || !height) return;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
+      context.setTransform(dpr,0,0,dpr,0,0);
+      context.clearRect(0,0,width,height);
+      const low = [0,1,2].map(i => Math.min(...points.map(p => p[i])));
+      const high = [0,1,2].map(i => Math.max(...points.map(p => p[i])));
+      const origin = low.map((v,i) => (v+high[i])/2);
+      const yaw = state.yaw * Math.PI/180, pitch = state.pitch * Math.PI/180;
+      const cy = Math.cos(yaw), sy = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+      function project(p) {
+        const x=p[0]-origin[0], y=p[1]-origin[1], z=p[2]-origin[2];
+        const u=cy*x-sy*y, v=sy*x+cy*y;
+        return [u, cp*z-sp*v, cp*v+sp*z];
+      }
+      const projected = points.map(p => project(p));
+      const uMin = Math.min(...projected.map(p=>p[0])), uMax = Math.max(...projected.map(p=>p[0]));
+      const vMin = Math.min(...projected.map(p=>p[1])), vMax = Math.max(...projected.map(p=>p[1]));
+      const span = Math.max(high[0]-low[0], high[1]-low[1], high[2]-low[2], .01);
+      const scale = Math.min((width-72)/Math.max(uMax-uMin,span*.3), (height-54)/Math.max(vMax-vMin,span*.3)) * state.zoom;
+      const uCenter=(uMin+uMax)/2, vCenter=(vMin+vMax)/2;
+      function screen(p) { const q=project(p); return [width/2+(q[0]-uCenter)*scale,height/2-(q[1]-vCenter)*scale,q[2]]; }
+      const neutral = color('--border'), foreground = color('--foreground');
+      const series = rgb(color('--viz-series-1')), background = rgb(color('--background'));
+      const palette = Array.from({length:64},(_,i)=>{
+        const t=.2+.8*i/63;
+        return `rgb(${series.map((v,j)=>Math.round(background[j]*(1-t)+v*t)).join(',')})`;
+      });
+      function line(a,b,stroke=neutral) {
+        const p=screen(a),q=screen(b); context.strokeStyle=stroke; context.lineWidth=1;
+        context.beginPath(); context.moveTo(p[0],p[1]); context.lineTo(q[0],q[1]); context.stroke();
+      }
+      const floor=low[2]-span*.012;
+      for (let i=0;i<=4;i++) {
+        const x=low[0]+(high[0]-low[0])*i/4, y=low[1]+(high[1]-low[1])*i/4;
+        line([x,low[1],floor],[x,high[1],floor]);
+        line([low[0],y,floor],[high[0],y,floor]);
+      }
+      if (item) {
+        const [xmin,xmax,ymin,ymax]=item.window;
+        const perimeter=[[xmin,ymin,floor],[xmax,ymin,floor],[xmax,ymax,floor],[xmin,ymax,floor]];
+        perimeter.forEach((p,i)=>line(p,perimeter[(i+1)%4],foreground));
+      }
+      const size=scene.inspection_only?1.3:state.view==='scan'?1.8:1.5;
+      projected.map((p,i)=>({p,i})).sort((a,b)=>a.p[2]-b.p[2]).forEach(({p,i})=>{
+        const q=[width/2+(p[0]-uCenter)*scale,height/2-(p[1]-vCenter)*scale];
+        const t=(points[i][2]-low[2])/Math.max(high[2]-low[2],1e-9);
+        context.fillStyle=palette[Math.max(0,Math.min(63,Math.round(t*63)))];
+        context.beginPath(); context.arc(q[0],q[1],size,0,Math.PI*2); context.fill();
+      });
+      if (state.inducing && item) {
+        context.strokeStyle=color('--viz-series-2'); context.lineWidth=1.4;
+        for (const point of item.inducing) {
+          const q=screen(point),s=3.3;
+          context.beginPath(); context.moveTo(q[0]-s,q[1]-s); context.lineTo(q[0]+s,q[1]+s);
+          context.moveTo(q[0]-s,q[1]+s); context.lineTo(q[0]+s,q[1]-s); context.stroke();
+        }
+      }
+      const fontSize=parseFloat(getComputedStyle(root).fontSize);
+      context.font=`${fontSize}px ${getComputedStyle(root).fontFamily}`;
+      context.fillStyle=foreground;
+      const axisStart=[low[0],low[1],floor];
+      const ends=[[high[0],low[1],floor],[low[0],high[1],floor],[low[0],low[1],floor+span*.23]];
+      for (let i=0;i<ends.length;i++) {
+        line(axisStart,ends[i],foreground);
+        const q=screen(ends[i]);
+        context.fillText(['x / m','y / m','z / m'][i],Math.max(4,Math.min(width-55,q[0]+5)),Math.max(fontSize,Math.min(height-4,q[1]-5)));
+      }
+      values['z-min'].textContent=low[2].toFixed(2);
+      values['z-max'].textContent=high[2].toFixed(2);
+      values['point-count'].textContent=scene.point_count&&(scene.inspection_only||state.view==='terrain')?`显示 ${points.length} / ${scene.point_count} 个表面点`:state.view==='scan'?`显示 ${points.length} / ${scene.scan_count} 个观测点`:`全景显示 ${points.length} 点`;
+      canvas.setAttribute('aria-label',scene.inspection_only?`${scene.label}三维点云，桌面、桌底、四条桌腿和地面，桌下净空1.1米；方位${Math.round(state.yaw)}度，俯视${Math.round(state.pitch)}度。`:`${scene.label}三维点云，${state.view==='scan'?'末帧局部扫描':'全地形概览'}，方位${Math.round(state.yaw)}度，俯视${Math.round(state.pitch)}度；叉号为${state.count}个诱导点，地面框为5米局部地图。`);
+    }
+    function drawMaps() {
+      if (!bank) return;
+      if (bank.scenes[state.scene].inspection_only) return;
+      const configs=bank.scenes[state.scene].configs[state.count].charts;
+      const high=rgb(color('--viz-series-1')), low=rgb(color('--background'));
+      const foreground=color('--foreground'), grid=color('--border');
+      const svgNS='http://www.w3.org/2000/svg';
+      const fontSize=parseFloat(getComputedStyle(root).fontSize);
+      function element(tag,attributes={},content=null) {
+        const node=document.createElementNS(svgNS,tag);
+        for (const [key,value] of Object.entries(attributes)) node.setAttribute(key,String(value));
+        if(content!==null) node.textContent=content;
+        return node;
+      }
+      for(const key of ['reference','sgp','fsgp','bgk']) {
+        const container=root.querySelector(`[data-spatial="${key}"]`), config=configs[key];
+        const width=container.clientWidth;
+        if(!width) continue;
+        const left=fontSize*3.1, right=fontSize*.6, top=fontSize*.6, bottom=fontSize*3.1;
+        const side=Math.max(80,width-left-right), height=side+top+bottom;
+        const svg=element('svg',{class:'fsgp-spatial',viewBox:`0 0 ${width} ${height}`,width,height,role:'img','aria-label':`${config.title}，第8帧，正y朝上，米制坐标等比例，25乘25格；高代价较难通行。`});
+        svg.appendChild(element('title',{},`${config.title}：代价越高越难通行`));
+        const nx=config.x.length,ny=config.y.length,cell=side/nx;
+        const resolution=bank.resolution,xmin=config.x[0]-resolution/2,ymin=config.y[0]-resolution/2;
+        for(let j=0;j<ny;j++) for(let i=0;i<nx;i++) {
+          const value=config.values[j][i];
+          const fraction=value===null?0:Math.max(0,Math.min(1,value/config.domain[1]));
+          const t=.2+.8*fraction;
+          const fill=value===null?'transparent':`rgb(${high.map((v,k)=>Math.round(low[k]*(1-t)+v*t)).join(',')})`;
+          const label=`${config.title} · x ${config.x[i].toFixed(2)} m · y ${config.y[j].toFixed(2)} m · ${value===null?'未知':`代价 ${value.toFixed(5)}`}`;
+          const rect=element('rect',{x:left+i*cell,y:top+(ny-1-j)*cell,width:cell+.05,height:cell+.05,fill,'data-tooltip':label,'aria-label':label,class:'cursor-interaction'});
+          svg.appendChild(rect);
+        }
+        for(let k=0;k<=4;k++) {
+          const px=left+side*k/4,py=top+side-side*k/4;
+          const xValue=xmin+bank.length*k/4,yValue=ymin+bank.length*k/4;
+          svg.appendChild(element('text',{x:px,y:top+side+fontSize*1.35,fill:foreground,'text-anchor':'middle'},String(Number(xValue.toFixed(2)))));
+          svg.appendChild(element('text',{x:left-fontSize*.45,y:py+fontSize*.3,fill:foreground,'text-anchor':'end'},String(Number(yValue.toFixed(2)))));
+        }
+        svg.appendChild(element('path',{d:`M ${left} ${top} V ${top+side} H ${left+side}`,fill:'none',stroke:grid,'stroke-width':1}));
+        svg.appendChild(element('text',{x:left+side/2,y:height-fontSize*.3,fill:foreground,'text-anchor':'middle'},'世界 x / m'));
+        svg.appendChild(element('text',{x:fontSize*.85,y:top+side/2,fill:foreground,'text-anchor':'middle',transform:`rotate(-90 ${fontSize*.85} ${top+side/2})`},'世界 y / m'));
+        container.replaceChildren(svg);
+      }
+      values['cost-max'].textContent=configs.reference.domain[1].toFixed(3);
+    }
+    function refresh() {
+      if (!bank) return;
+      const scene=bank.scenes[state.scene], inspection=!!scene.inspection_only;
+      if(inspection) state.view='terrain';
+      syncControls();
+      root.querySelectorAll('[data-experiment]').forEach(el=>{el.hidden=inspection;});
+      root.querySelectorAll('[data-table-only]').forEach(el=>{el.hidden=state.scene!=='table';});
+      values['scene-summary'].textContent=inspection?'大桌子完整表面点云 · 仅场景展示，尚未运行算法评测':state.scene==='table'?'大桌子 · 8 帧实测 · 全部高度层保留 · CPU 公式参考实现':'第 8 帧地图 · 8 帧误差 · CPU 方法诊断，非论文原始基准';
+      root.dataset.scene=state.scene; root.dataset.count=state.count;
+      if(inspection){drawCloud();return;}
+      const item=bank.scenes[state.scene].configs[state.count];
+      values['reference-title'].textContent=scene.reference_label || '完整点云几何参考';
+      values['reference-note'].textContent=scene.reference_note || '共享色标 · 越高越难通行 · 空格为未知 · 参考由完整点云几何构造';
+      values['table-diagnostics'].textContent=state.scene==='table'?`桌下内部地面真实高程为 0；八帧预测高程中位数 ${item.stats.fsgp.under_height_median_m.toFixed(3)} m，坡度比均值 ${item.stats.fsgp.under_slope_mean.toFixed(3)}；FSGP / BGK 代价均值 ${item.stats.fsgp.under_cost_mean.toFixed(3)} / ${item.stats.bgk.under_cost_mean.toFixed(3)}。二维地图没有输出桌下净空。`:'';
+      for (const [key,chart] of Object.entries(charts)) chart.config=item.charts[key];
+      for (const key of ['fsgp','bgk']) {
+        const stats=item.stats[key];
+        values[`${key}-stat`].textContent=`8帧${state.scene==='table'?'平坦地面代价':'汇总'} MAE ${stats.mae.toFixed(5)} · 中位耗时 ${stats.ms.toFixed(2)} ms/帧`;
+      }
+      const relative=100*(item.stats.bgk.mae/item.stats.fsgp.mae-1);
+      const direction=relative<0?'降低':'增加';
+      values.comparison.textContent=`${bank.scenes[state.scene].label} · M=${state.count}：BGK 相对 FSGP 的 MAE ${direction} ${Math.abs(relative).toFixed(1)}%`;
+      root.dataset.scene=state.scene; root.dataset.count=state.count;
+      drawCloud();
+      drawMaps();
+    }
+    controls.scene.addEventListener('change',()=>{state.scene=controls.scene.value;state.zoom=state.scene==='table'?1.25:1; refresh(); persist();});
+    root.querySelector('[data-action="under-table"]').addEventListener('click',()=>{state.yaw=-35;state.pitch=5;state.zoom=1.35;syncControls();drawCloud();persist();});
+    controls.count.addEventListener('change',()=>{state.count=controls.count.value; refresh(); persist();});
+    controls.view.addEventListener('change',()=>{state.view=controls.view.value; drawCloud(); persist();});
+    controls.inducing.addEventListener('change',()=>{state.inducing=controls.inducing.checked; drawCloud(); persist();});
+    for (const key of ['yaw','pitch']) {
+      controls[key].addEventListener('input',()=>{state[key]=Number(controls[key].value); syncControls(); drawCloud();});
+      controls[key].addEventListener('change',persist);
+    }
+    canvas.addEventListener('pointerdown',event=>{drag={x:event.clientX,y:event.clientY,yaw:state.yaw,pitch:state.pitch};canvas.setPointerCapture(event.pointerId);});
+    canvas.addEventListener('pointermove',event=>{
+      if (!drag) return;
+      state.yaw=((drag.yaw+(event.clientX-drag.x)*.45+540)%360)-180;
+      state.pitch=Math.max(0,Math.min(85,drag.pitch+(event.clientY-drag.y)*.35));
+      syncControls();drawCloud();
+    });
+    canvas.addEventListener('pointerup',()=>{if(drag){drag=null;persist();}});
+    canvas.addEventListener('pointercancel',()=>{drag=null;});
+    canvas.addEventListener('wheel',event=>{event.preventDefault();state.zoom=Math.max(.5,Math.min(3,state.zoom*Math.exp(-event.deltaY*.001)));drawCloud();clearTimeout(wheelTimer);wheelTimer=setTimeout(persist,200);},{passive:false});
+    new ResizeObserver(drawCloud).observe(canvas);
+    new ResizeObserver(drawMaps).observe(root.querySelector('.fsgp-maps'));
+    const themeObserver=new MutationObserver(()=>{drawCloud();drawMaps();});
+    themeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{drawCloud();drawMaps();});
+    window.addEventListener('openai:set_globals',event=>{
+      const saved=event.detail?.globals?.widgetState;
+      if(saved){restore(saved);refresh();}
+    });
+    restore(window.openai?.widgetState);
+    try {
+      const encoded=root.querySelector('[data-fsgp-bank]').textContent.trim();
+      const bytes=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));
+      const decompressed=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate'));
+      bank=JSON.parse(await new Response(decompressed).text());
+      controls.scene.disabled=false; controls.count.disabled=false;
+      refresh();
+      const {mountChart}=await import('https://persistent.oaistatic.com/plugins/visualize/charts/1.2.3/element.js');
+      for (const key of ['error']) {
+        const config=bank.scenes[state.scene].inspection_only?initialCharts[key]:state.scene==='hill'&&state.count==='125'&&initialCharts[key]?initialCharts[key]:bank.scenes[state.scene].configs[state.count].charts[key];
+        charts[key]=mountChart(root.querySelector(`[data-chart="${key}"]`),config);
+      }
+      root.dataset.ready='true';
+    } catch(error) {
+      values['error-message'].textContent='图表加载失败，请刷新重试。';
+      values['error-message'].hidden=false;
+      root.dataset.error=String(error);
+      console.error(error);
+    }
+  </script>
+</div>

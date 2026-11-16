@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "input_points": 2125,
+  "seed_queries": 2125,
+  "valid_seed_fits": 1955,
+  "component_count": 3,
+  "triangles": 3388,
+  "exact_neighbors": 30,
+  "max_selected_height_delta_m": 0.039995897883492004,
+  "max_selected_distance_m": 0.7479227263126171,
+  "global_height_histogram_used": false,
+  "preset_surface_count": null,
+  "scene_labels_or_known_heights_used_for_fitting": false
+}

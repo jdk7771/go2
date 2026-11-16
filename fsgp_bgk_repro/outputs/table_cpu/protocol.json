@@ -1,0 +1,75 @@
+{
+  "scope": "paper-equation CPU reference; analytic floor diagnostic, not official benchmark",
+  "config": {
+    "resolution": 0.2,
+    "length": 5.0,
+    "neighbors": 20,
+    "interpolation_neighbors": 5,
+    "voxel_size": 0.1,
+    "curvature_threshold": 0.03,
+    "gradient_threshold": 0.03,
+    "inducing_points": 125,
+    "pca": true,
+    "lengthscale": 0.6,
+    "alpha": 10.0,
+    "signal_variance": 1.0,
+    "noise_variance": 0.0004,
+    "jitter": 1e-08,
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "support_radius": 0.45,
+    "max_variance": 0.8,
+    "decay_rate": 1.0,
+    "history_ttl": 60.0,
+    "smoothing_sigma": 0.8,
+    "seed": 7
+  },
+  "scenes": [
+    "table"
+  ],
+  "inducing_counts": [
+    50,
+    125,
+    500
+  ],
+  "frames": 8,
+  "frame_interval_seconds": 0.1,
+  "noise_z_std_m": 0.015,
+  "random_point_dropout": 0.15,
+  "sensor_points_before_dropout_cap": 2500,
+  "source_points": 32683,
+  "source_pcd": "/home/jiang/snap/go2/fsgp_bgk_repro/outputs/visualization/large-table/large_table.pcd",
+  "source_pcd_sha256": "a95b02c4577eb325e15f8a07fad950e3215f9af7a06ee9d739741b3254349a6d",
+  "reference": "analytic z=0 floor with zero ideal curvature, height variation and slope; leg-intersecting/out-of-floor cells excluded",
+  "evaluation_mask": "common SGP-XY/FSGP observed support and valid analytic floor reference",
+  "under_region": "|x| <= 1 m and |y| <= 0.5 m, observed cells only",
+  "input_preprocessing": "all surface layers retained; random dropout, no visibility ray simulation or ground segmentation",
+  "timing": "algorithm only, includes BGK for BGK; excludes scan preparation, IO, plotting, ROS",
+  "environment": {
+    "python": "3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]",
+    "executable": "/usr/bin/python3",
+    "numpy": "1.21.5",
+    "scipy": "1.8.0",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "processor": "AMD Ryzen 9 7945HX with Radeon Graphics",
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "backend": "CPU / NumPy + SciPy",
+    "cuda_used": false
+  },
+  "wall_seconds": 3.865531417002785,
+  "implementation_sha256": {
+    "core.py": "c176374d9d8bad4faa4841738a6798e24b3cb8bfe466e0cbe71b4974313009bb",
+    "experiment.py": "f07a7354a236d37589dad32feac65750ac32d8b88e23aaf2748b994ab131a254",
+    "io.py": "421ebfaf3dfca06090e80c49a0926abe2cfc472644e2fc6d9b5203f022d56da1",
+    "__main__.py": "24cde963564b16cf4efcbbf6a9080a471cea169497d592bc6bdffe5ad46f35c8",
+    "evaluate_table_scene.py": "1cd509ffa1870cfeb2b7770249e06e7c0dfd17308f24215ec2383ef8f59dcc5e"
+  },
+  "source_lock_sha256": "542e37304586d8ea5c3251b25db2136fb6000be7688c19f09310124b58b336df"
+}

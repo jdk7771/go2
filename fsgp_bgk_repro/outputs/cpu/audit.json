@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "frame_metric_rows": 360,
+  "summary_rows": 45,
+  "saved_maps_recomputed": 45,
+  "identical_scans_across_methods_and_m": true,
+  "unknown_masks_and_variances_valid": true,
+  "implementation_hashes_match": true
+}

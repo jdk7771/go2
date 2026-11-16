@@ -42,7 +42,8 @@ scene.add(grid);
 const worldAxes = new THREE.AxesHelper(0.24);
 worldAxes.position.set(-1.65, -0.68, 0.01);
 scene.add(worldAxes);
-let content, cloudPoints, floorPoints, initialPath, currentPath, body, initialBody, ghosts, crossSection;
+let content, cloudPoints, floorPoints, initialPath, currentPath, body, initialBody, ghosts, crossSection, obstacleGeometry;
+let forceArrow, torqueArrow;
 const matrix = new THREE.Matrix4(), quaternion = new THREE.Quaternion(), vector = new THREE.Vector3();
 const up = new THREE.Vector3(0, 1, 0);
 
@@ -146,6 +147,15 @@ function buildContent() {
   const floor = data.cloud.filter(point => point[2] <= 0.035);
   cloudPoints = makePoints(obstacles, 0.28, 3.1);
   floorPoints = makePoints(floor, 0.05, 2, true);
+  obstacleGeometry = new THREE.Group();
+  for (const box of data.displayBoxes || []) {
+    const group = new THREE.Group();
+    group.add(new THREE.Mesh(new THREE.BoxGeometry(...box.size),
+      new THREE.MeshStandardMaterial({ color: 0x617586, transparent: true, opacity: 0.12, depthWrite: false })));
+    group.add(wireBody(box.size.map(value => value / 2), 0x617586, 0.65));
+    setPose(group, [...box.center, ...box.rpy]);
+    obstacleGeometry.add(group);
+  }
   crossSection = new THREE.Group();
   for (const segment of data.crossSection || []) {
     const points = segment.yz.map(([y, z]) => new THREE.Vector3(0, y, z));
@@ -165,10 +175,12 @@ function buildContent() {
   initialPath.computeLineDistances();
   currentPath = makePath(trial().final);
   body = solidBody(data.half);
+  forceArrow = new THREE.ArrowHelper(new THREE.Vector3(1, 0, 0), new THREE.Vector3(), 0.3, 0xdc6656, 0.06, 0.03);
+  torqueArrow = new THREE.ArrowHelper(new THREE.Vector3(0, 0, 1), new THREE.Vector3(), 0.3, 0x7860c3, 0.06, 0.03);
   initialBody = wireBody(data.half, color.initial, 0.95);
   ghosts = new THREE.Group();
   for (let i = 0; i < 6; i++) ghosts.add(wireBody(data.half, color.final, 0.32));
-  content.add(cloudPoints, floorPoints, initialPath, currentPath, body, initialBody, ghosts, crossSection);
+  content.add(cloudPoints, floorPoints, initialPath, currentPath, body, initialBody, ghosts, crossSection, obstacleGeometry, forceArrow, torqueArrow);
   scene.add(content);
   updateVisibility();
   updateOpacity();
@@ -201,13 +213,59 @@ function updateFrame() {
   $('timeline').value = state.frame;
   $('timeline-label').textContent = optimizing ? `迭代 ${state.frame} / ${lastFrame()}` : `路径 ${(fraction*100).toFixed(0)}% · x ${pose[0].toFixed(2)} m`;
   $('phase-note').textContent = optimizing
-    ? `真实优化迭代 · 观察第 ${state.node+1} 个节点 · 目标值 ${selected.costs[state.frame].toPrecision(4)}`
+    ? `${['virtual_wrench', 'ray_dynamics'].includes(selected.metrics.solver) ? '虚拟刚体积分步' : '真实优化迭代'} · 观察第 ${state.node+1} 个节点 · 势能 ${selected.costs[state.frame].toPrecision(4)}`
     : state.phase === 'compare' ? '橙色虚线：初始路径 · 蓝色实线：优化后路径 · 可拖动进度检查任意位置' : '沿最终轨迹回放 · 姿态与位置同步变化';
   $('local-clearance').textContent = optimizing ? '' : `当前位姿真值间隙 ${(selected.clearance[state.frame]*1000).toFixed(1)} mm`;
   const node = optimizing ? state.node : Math.round(fraction*(state.data.initial.length-1));
   $('node').value = node;
   $('node-value').textContent = `${node+1} / ${state.data.initial.length}`;
+  updateDynamics(optimizing);
   drawChart(poses, pose);
+}
+
+function updateDynamics(optimizing) {
+  const dynamics = trial().dynamics;
+  const present = !!dynamics?.wrenches?.length;
+  $('dynamics-panel').hidden = !present;
+  forceArrow.visible = torqueArrow.visible = false;
+  if (!present) return;
+  const frame = optimizing ? Math.min(state.frame, dynamics.wrenches.length - 1) : dynamics.wrenches.length - 1;
+  const node = optimizing ? state.node : Math.round(state.frame / Math.max(1, lastFrame()) * (state.data.initial.length - 1));
+  const wrench = dynamics.wrenches[frame][node];
+  const twist = dynamics.twists[frame][node];
+  const format = values => values.map(value => value.toFixed(3)).join(', ');
+  $('dynamic-time').textContent = `${dynamics.times[frame].toFixed(3)} · ${optimizing ? '当前积分步' : '最终状态'}`;
+  $('dynamic-force').textContent = format(wrench.slice(0, 3));
+  $('dynamic-torque').textContent = format(wrench.slice(3));
+  $('dynamic-speed').textContent = `${Math.hypot(...twist.slice(0, 3)).toFixed(4)} / ${Math.hypot(...twist.slice(3)).toFixed(4)}`;
+  $('dynamic-kinetic').textContent = dynamics.kinetic[frame].toExponential(3);
+  $('dynamic-acceleration-row').hidden = !dynamics.accelerations;
+  $('dynamic-step-row').hidden = !dynamics.time_steps;
+  if (dynamics.accelerations) {
+    const acceleration = dynamics.accelerations[frame][node];
+    $('dynamic-acceleration').textContent = `${Math.hypot(...acceleration.slice(0, 3)).toFixed(4)} / ${Math.hypot(...acceleration.slice(3)).toFixed(4)}`;
+    $('dynamic-step').textContent = `${dynamics.time_steps[frame].toExponential(3)} / ${dynamics.scheduled_time_steps[frame].toExponential(3)}`;
+  }
+  $('dynamic-motion-row').hidden = !dynamics.motion_steps;
+  if (dynamics.motion_steps) {
+    const motion = dynamics.motion_steps[frame];
+    $('dynamic-motion').textContent = `${(1000 * motion[0]).toFixed(2)} mm / ${(motion[1] * 180 / Math.PI).toFixed(2)}°`;
+  }
+  const config = trial().metrics.dynamics_config;
+  const newtonEuler = trial().metrics.solver === 'ray_dynamics';
+  const limits = config.max_translation_step != null ? `单步平移 ≤${(1000 * config.max_translation_step).toFixed(1)} mm，转角 ≤${(config.max_rotation_step * 180 / Math.PI).toFixed(1)}°；超限缩步重算。` : (newtonEuler ? '历史版本未限制单步位移和转角。' : '');
+  $('dynamics-config').textContent = `虚拟质量 ${config.mass} · 箱体惯量 · 线阻尼 ${config.linear_damping} · 角阻尼 ${config.angular_damping}。${newtonEuler ? '半隐式积分；合力含阻尼，线加速度为世界系，角加速度为机身系。' : ''}${limits}${optimizing ? '' : '切换“优化过程”查看运动状态和箭头。'}`;
+  if (!optimizing || !$('show-wrench').checked || !$('show-final').checked) return;
+  [forceArrow, torqueArrow].forEach((arrow, i) => {
+    const direction = new THREE.Vector3(...wrench.slice(i * 3, i * 3 + 3));
+    const magnitude = direction.length();
+    arrow.visible = magnitude > 1e-8;
+    if (arrow.visible) {
+      arrow.position.fromArray(state.pose);
+      arrow.setDirection(direction.normalize());
+      arrow.setLength(0.12 + 0.25 * magnitude / (1 + magnitude), 0.055, 0.025);
+    }
+  });
 }
 
 function drawChart(poses, pose) {
@@ -236,6 +294,8 @@ function updateVisibility() {
   currentPath.visible = body.visible = $('show-final').checked;
   ghosts.visible = $('show-ghosts').checked && $('show-final').checked;
   crossSection.visible = $('show-section').checked;
+  obstacleGeometry.visible = $('show-geometry').checked;
+  if (state.data) updateDynamics(state.phase === 'optimize');
 }
 function updateOpacity() {
   const opacity = Number($('opacity').value)/100;
@@ -258,11 +318,35 @@ function setPhase(phase) {
 }
 function setMode(mode) {
   setPlaying(false); state.mode = mode; $('method').value = mode;
-  const value = trial().metrics.minimum_signed_distance_m;
-  const classification = value < 0 ? 'danger' : value < 0.020 ? 'caution' : 'safe';
+  const metrics = trial().metrics;
+  const initialClearance = metrics.baseline_min_distance_m;
+  $('result-initial-clearance').textContent = Number.isFinite(initialClearance)
+    ? `${(initialClearance * 1000).toFixed(2)} mm · ${initialClearance < 0 ? '有碰撞' : '未检出采样碰撞'}` : '未记录';
+  $('result-initial-clearance').className = initialClearance < 0 ? 'danger' : '';
+  const value = metrics.minimum_signed_distance_m;
+  const lower = metrics.continuous_lower_bound_against_synthetic_surfaces_m;
+  const hasLower = Number.isFinite(lower);
+  const continuousFree = value >= 0 && hasLower && lower >= 0;
+  const clearancePassed = continuousFree && lower >= 0.020;
+  const converged = metrics.formal_success === true;
+  const classification = value < 0 ? 'danger' : clearancePassed && converged ? 'safe' : 'caution';
   $('minimum').textContent = `${(value*1000).toFixed(2)} mm`;
-  $('minimum').className = $('safety-label').className = classification;
-  $('safety-label').textContent = value < 0 ? '存在碰撞' : value < 0.020 ? '未达到 20 mm 目标' : '达到 20 mm 间隙目标';
+  $('minimum').className = value < 0 ? 'danger' : '';
+  $('safety-label').className = classification;
+  $('safety-label').textContent = value < 0 ? '存在碰撞' : clearancePassed && converged
+    ? '连续间隙达标 · 已收敛' : continuousFree ? '路径无碰撞 · 仍有未达指标' : '采样无碰撞 · 连续状态待确认';
+  $('collision-status').textContent = continuousFree ? '连续无碰撞：已确认' : value < 0 ? '碰撞检查：存在碰撞' : '连续无碰撞：尚未确认';
+  $('collision-status').className = continuousFree ? 'safe' : value < 0 ? 'danger' : 'caution';
+  $('clearance-status').textContent = `连续 ≥20 mm：${clearancePassed ? '通过' : '未通过'}`;
+  $('clearance-status').className = clearancePassed ? 'safe' : 'caution';
+  $('convergence-status').textContent = `${['ray_dynamics', 'virtual_wrench'].includes(metrics.solver) ? '动力学' : '求解器'}收敛：${converged ? '已达到' : '未达到'}`;
+  $('convergence-status').className = converged ? 'safe' : 'caution';
+  const y = trial().final.map(pose => pose[1]);
+  $('result-offset').textContent = `${Math.min(...y).toFixed(3)} ～ ${Math.max(...y).toFixed(3)} m`;
+  $('result-cost').textContent = `${metrics.initial_cost.toFixed(2)} → ${metrics.final_cost.toFixed(2)}`;
+  $('result-solver').textContent = `${metrics.iterations} 次 · ${metrics.formal_success ? '已收敛' : '未正式收敛'}`;
+  $('result-bound').textContent = `±${(metrics.lateral_limit_m ?? 0.16).toFixed(2)} m`;
+  $('result-certificate').textContent = hasLower ? `${(lower * 1000).toFixed(2)} mm · ${clearancePassed ? '达到' : '未达'} 20 mm` : '未记录';
   const hasHistory = !!trial().history.length;
   document.querySelector('[data-phase="optimize"]').disabled = !hasHistory;
   document.querySelector('[data-phase="optimize"]').title = hasHistory ? '' : '该场景未记录优化过程，可查看初始/最终轨迹';
@@ -309,12 +393,16 @@ async function setScene(name) {
       $('dataset').add(new Option(item.selectionLabel || item.run, item.id));
     });
     $('dataset').value = name;
+    $('dataset-group').hidden = manifest.scenes.filter(item => item.sourceScene === entry.sourceScene).length <= 1;
     $('scene-name').textContent = data.label;
-    $('run-name').textContent = data.sourceRun || manifest.run;
+    $('run-name').textContent = data.experimentLabel || data.sourceRun || manifest.run;
     $('report-link').href = data.report || 'report/REPORT.md';
     $('scene-description').textContent = data.description || '';
     $('scene-description').hidden = !data.description;
+    $('scene-source').hidden = !data.sourceURL;
+    if (data.sourceURL) $('scene-source').href = data.sourceURL;
     $('section-toggle').hidden = $('section-key').hidden = !data.crossSection?.length;
+    $('geometry-toggle').hidden = !data.displayBoxes?.length;
     $('node').max = data.initial.length-1;
     buildContent(); setMode(state.mode);
     setView(data.defaultView || 'iso', data.defaultZoom || 1);
@@ -339,7 +427,8 @@ $('dataset').onchange = event => setScene(event.target.value);
 $('method').onchange = event => setMode(event.target.value);
 document.querySelectorAll('[data-phase]').forEach(button => button.onclick = () => setPhase(button.dataset.phase));
 document.querySelectorAll('[data-view]').forEach(button => button.onclick = () => setView(button.dataset.view));
-['show-cloud', 'show-initial', 'show-final', 'show-ghosts', 'show-section'].forEach(id => { $(id).onchange = updateVisibility; });
+['show-cloud', 'show-initial', 'show-final', 'show-ghosts', 'show-section', 'show-geometry'].forEach(id => { $(id).onchange = updateVisibility; });
+$('show-wrench').onchange = () => updateDynamics(state.phase === 'optimize');
 $('opacity').oninput = updateOpacity;
 $('focus-body').onclick = focusBody; $('reset-view').onclick = () => setView('iso');
 $('play').onclick = () => setPlaying(!state.playing);
@@ -393,6 +482,9 @@ window.plannerViewer = {
     camera: camera.position.toArray(), zoom: camera.zoom, target: controls.target.toArray(),
     cloudVisible: cloudPoints?.visible, initialVisible: initialPath?.visible,
     finalVisible: currentPath?.visible, sectionVisible: crossSection?.visible,
+    geometryVisible: obstacleGeometry?.visible, displayBoxes: state.data?.displayBoxes || [],
+    solver: state.data?.trials[state.mode]?.metrics.solver || 'lbfgsb',
+    forceVisible: forceArrow?.visible, torqueVisible: torqueArrow?.visible,
     crossSection: state.data?.crossSection || [], playing: state.playing }; },
 };
 setView('iso'); requestAnimationFrame(animate);

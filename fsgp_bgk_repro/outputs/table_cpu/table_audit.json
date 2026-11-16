@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "saved_frame_maps_recomputed": 72,
+  "floor_reference_uses_cell_leg_intersection": true,
+  "interior_statistics_recomputed": true,
+  "input_pcd_hash_matches": true,
+  "multilayer_ambiguity_verified_from_geometry": true,
+  "floor_only_zero_control_verified": true
+}

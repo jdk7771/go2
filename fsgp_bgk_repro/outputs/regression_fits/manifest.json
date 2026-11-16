@@ -1,0 +1,108 @@
+{
+  "scenes": [
+    {
+      "id": "hill",
+      "name": "丘陵",
+      "frames": [
+        7
+      ]
+    },
+    {
+      "id": "flat",
+      "name": "平地",
+      "frames": [
+        7
+      ]
+    },
+    {
+      "id": "ramp",
+      "name": "斜坡",
+      "frames": [
+        7
+      ]
+    },
+    {
+      "id": "steps",
+      "name": "台阶",
+      "frames": [
+        7
+      ]
+    },
+    {
+      "id": "quick",
+      "name": "Quick 地形",
+      "frames": [
+        7
+      ]
+    },
+    {
+      "id": "table",
+      "name": "大桌子",
+      "frames": [
+        7
+      ]
+    },
+    {
+      "id": "flat_ramp",
+      "name": "平地—斜坡—高处平地",
+      "frames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "counts": [
+    50,
+    125,
+    500
+  ],
+  "default_scene": "flat_ramp",
+  "default_frame": 7,
+  "default_count": 125,
+  "config": {
+    "resolution": 0.2,
+    "length": 5.0,
+    "neighbors": 20,
+    "interpolation_neighbors": 5,
+    "voxel_size": 0.1,
+    "curvature_threshold": 0.03,
+    "gradient_threshold": 0.03,
+    "inducing_points": 125,
+    "pca": true,
+    "lengthscale": 0.6,
+    "alpha": 10.0,
+    "signal_variance": 1.0,
+    "noise_variance": 0.0004,
+    "jitter": 1e-08,
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "support_radius": 0.45,
+    "max_variance": 0.8,
+    "decay_rate": 1.0,
+    "history_ttl": 60.0,
+    "smoothing_sigma": 0.8,
+    "seed": 7
+  },
+  "source_implementation_sha256": {
+    "core.py": "c176374d9d8bad4faa4841738a6798e24b3cb8bfe466e0cbe71b4974313009bb",
+    "experiment.py": "f07a7354a236d37589dad32feac65750ac32d8b88e23aaf2748b994ab131a254",
+    "io.py": "421ebfaf3dfca06090e80c49a0926abe2cfc472644e2fc6d9b5203f022d56da1",
+    "__main__.py": "24cde963564b16cf4efcbbf6a9080a471cea169497d592bc6bdffe5ad46f35c8"
+  },
+  "paper_url": "https://arxiv.org/html/2503.04134v2",
+  "paper_code": "https://github.com/ZJU-FAST-Lab/FSGP_BGK",
+  "method": "KNN feature extraction, threshold feature/non-feature partition, voxel representatives for non-features, union and random cap M. No geometric region-growing segmentation.",
+  "quadratic_controls": "Global z=a*u^2+b*u*v+c*v^2+d*u+e*v+f; local quadratic uses 20 nearest retained 3D points anchored at nearest XY height. Both fit the same M retained points as GP; neither is a paper method.",
+  "scope": "Equation-based CPU reference, not author GPU code or the complete 2500-scene benchmark. Dense plots evaluate the fitted model anew; they are not interpolation of saved coarse height grids.",
+  "sensor": "Existing homepage final-frame scans preserved. New combined scene: cap 2500, random dropout 15%, added Z noise std 0.015m, 8 moving windows at 0.1s; random dropout is not ray-traced occlusion.",
+  "combined_scene": "z=0.3*clip(x+1,0,2): low flat x<=-1, ramp -1<x<1 (16.70 degrees), high flat z=0.6m x>=1; no height step at seams."
+}

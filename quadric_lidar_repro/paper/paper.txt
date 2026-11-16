@@ -1,0 +1,978 @@
+                                                        Quadric Representations for
+                                                  LiDAR Odometry, Mapping and Localization
+                                                                    Chao Xia*, Chenfeng Xu*, Patrick Rim, Mingyu Ding, Nanning Zheng†
+                                                                           Kurt Keutzer, Masayoshi Tomizuka, and Wei Zhan
+
+
+                                            Abstract—Current LiDAR odometry, mapping and localization
+                                         methods leverage point-wise representations of 3D scenes and
+                                         achieve high accuracy in autonomous driving tasks. However, the
+                                         space-inefficiency of methods that use point-wise representations
+arXiv:2304.14190v1 [cs.CV] 27 Apr 2023
+
+
+
+
+                                         limits their development and usage in practical applications. In
+                                         particular, scan-submap matching and global map representation
+                                         methods are restricted by the inefficiency of nearest neighbor
+                                         searching (NNS) for large-volume point clouds. To improve space-
+                                         time efficiency, we propose a novel method of describing scenes
+                                         using quadric surfaces, which are far more compact representa-
+                                         tions of 3D objects than conventional point clouds. In contrast                 (a) Original point cloud        (b) Normal distribution representation
+                                         to point cloud-based methods, our quadric representation-based
+                                         method decomposes a 3D scene into a collection of sparse quadric
+                                         patches, which improves storage efficiency and avoids the slow
+                                         point-wise NNS process. Our method first segments a given point
+                                         cloud into patches and fits each of them to a quadric implicit
+                                         function. Each function is then coupled with other geometric
+                                         descriptors of the patch, such as its center position and covariance
+                                         matrix. Collectively, these patch representations fully describe a
+                                         3D scene, which can be used in place of the original point cloud
+                                         and employed in LiDAR odometry, mapping and localization
+                                         algorithms. We further design a novel incremental growing
+                                         method for quadric representations, which eliminates the need to              (c) Manhattan representation           (d) Quadric representation
+                                         repeatedly re-fit quadric surfaces from the original point cloud.
+                                         Extensive odometry, mapping and localization experiments on               Fig. 1. Different representations of a 3D scene. The depicted example is an
+                                         large-volume point clouds in the KITTI and UrbanLoco datasets             entrance of an underground parking lot.
+                                         demonstrate that our method maintains low latency and memory
+                                         utility while achieving competitive, and even superior, accuracy.         promising performance of recent point-wise LiDAR-based
+                                                                                                                   methods, they suffer from 1) the restrictive memory
+                                                                I. INTRODUCTION
+                                                                                                                   constraints due to the high volume required to store the
+                                            Real-time odometry, mapping and localization in                        global map and 2) the heavy overhead of point-wise nearest
+                                         perceptually-challenging environments are critical capabilities           neighboring searching (NNS), especially on tasks that require
+                                         for robotics and autonomous driving vehicles. Owing                       large-volume point-clouds, such as mapping and localization.
+                                         to the high accuracy and long-range detection ability                        To tackle these challenges, more compact scene (map)
+                                         of 3D Light Detection and Ranging (LiDAR), recent                         representation methods were proposed [19]. For example,
+                                         odometry [20, 31, 36, 43, 40], mapping, [39, 10, 21, 17, 8]               voxelization is the most common point cloud down-sampling
+                                         Simultaneous Localization and Mapping (SLAM) [15, 9, 25],                 method (see Fig. 1 (a)), and it is usually combined with the
+                                         and localization [18, 19, 38, 7] methods have made notable                normal distribution method [22, 38] that represents a scene
+                                         progress. Compared to vision-based methods [24, 23, 6, 28],               using normal distribution parameters for each voxel, as shown
+                                         LiDAR-based methods achieve higher accuracy and better                    in Fig. 1 (b). However, these voxel and normal distribution
+                                         robustness to adverse illumination effects. Despite the                   representations are prone to losing fine-grained information
+                                                                                                                   in the 3D scenes, and thus they result in unsatisfactory
+                                            C. Xia and N. Zheng are with the Institute of Artificial In-
+                                         telligence and Robotics, Xi’an Jiaotong University, Xi’an, Shaanxi        performance when used. Previous works also introduce the
+                                         710049, P.R. China; Email: xc06210417@stu.xjtu.edu.cn;                    Manhattan representation of scenes [3, 39, 30]. An example of
+                                         nnzheng@mail.xjtu.edu.cn                                                  the Manhattan representation is shown in Fig. 1 (c). However,
+                                           C. Xu, M. Ding, K. Keutzer, M. Tomizuka and W. Zhan are with the Uni-
+                                         versity of California, Berkeley, USA; Email: {xuchenfeng, myding,         real 3D scenes are full of curved and rounded objects, meaning
+                                         keutzer, tomizuka, wzhan}@berkeley.edu                                    that the Manhattan representation cannot sufficiently describe
+                                           P. Rim is with the California Institute of Technology, USA; Email:      3D scenes, such as curving roads and walls.
+                                         prim@caltech.edu
+                                           † N. Zheng is the corresponding author.                                    As an alternative, we propose an efficient quadric rep-
+                                           ∗ C. Xia and C. Xu contributed equally to this work.                    resentation [34] of scenes that can be used for odometry,
+mapping, and localization tasks. Compared to dense point-                eration. This method allows for the gradual expansion of
+wise representations, our quadric representation is a sparse             quadric surfaces, eliminating the need for the computa-
+representation that decomposes 3D scenes into a collection of            tionally expensive task of repeatedly re-fitting quadratic
+quadric surfaces, each of which is represented by a quadric              surface implicit functions from the original point cloud.
+implicit function. As opposed to voxel and Manhattan repre-            • Through experiments on the KITTI [12] and Urban-
+sentations, the quadric representations are more compact and             Loco [37] datasets, we demonstrate that our method
+fit more closely to real 3D scenes, as shown in Fig. 1 (d). The          provides a significant improvement in efficiency, as well
+overview of our proposed quadric representation-based LiDAR              as promising performance on map compression, LiDAR
+odometry approach is depicted in Fig. 2. Firstly, the raw 3D             odometry, mapping, and localization tasks.
+point cloud from a LiDAR scan is projected onto a spherical
+range image to facilitate patch segmentation [5]. Then, quadric                         II. RELATED WORK
+implicit functions are fitted on the extracted patches in an opti-      LiDAR-based odometry, mapping and localization are chal-
+mal manner, where multi-thread parallel computing is applied         lenging tasks that require the integration of various tech-
+for acceleration. For each patch, the center location, covariance    niques from computer vision, robotics, and machine learning.
+matrix, and other geometric information are calculated and           Different kinds of scene representation methods demonstrate
+saved with the patch’s quadric implicit function. Finally, the       different advantages.
+quadric patches replace the original point cloud to perform             Point-wise representation methods achieve high accuracy
+scan-scan matching (odometry). In addition, we also propose          for odometry and mapping tasks. For example, LOAM [39],
+an incremental quadric growing method for submap and global          uses a feature-based registration between consecutive scans,
+map generation, which allows quadric surfaces to be re-used          and a least-squares optimization to compute the motion of
+in mapping (scan-submap matching) and localization (scan-            the LiDAR. It is currently the best-performing LiDAR SLAM
+global map matching) tasks, avoiding the slow process of             (Simultaneous Localization and Mapping) algorithm on the
+repeated generation.                                                 KITTI odometry benchmark. Similarly, MULLS [26] ex-
+   We perform extensive experiments on the KITTI and Urban-          tracts roughly classified feature points (ground, facade, pillar,
+Loco datasets to demonstrate that even as the volume of point        beam, etc.) from each frame, and then uses joint linear least
+clouds increases, our proposed quadric representation-based          square optimization in these geometric feature points. LeGO-
+framework is able to maintain low latency and memory utility,        LOAM [31] applies an image-based segmentation method [5]
+while still achieving competitive or superior performance, for       to the range image to group points into many clusters. Then, it
+odometry, mapping and localization tasks. Specifically, our          finds correspondences for the same object and narrows down
+proposed method achieves better performance in odometry              potential candidates for correspondences, improving matching
+task (scan-scan) in terms of Average Transition Error (ATE)          accuracy. It also uses a pose graph to create the surrounding
+and Average Orientation Error (ARE) with similar latency rel-        submap for scan-submap matching. LIO-SAM [32], a tightly
+ative to the current state-of-the-art method [39]. For mapping       coupled optimization framework fusing LiDAR odometry and
+tasks, our proposed quadric representation method can run at         GPS/IMU measurements, improves SLAM accuracy and ro-
+10 HZ with comparable accuracy since there is no point-wise          bustness with a multi-sensor fusion system.
+NNS and less residuals for pose estimation. For localization            Besides the geometry-based method discussed above, 3D
+tasks, the quadric representation can greatly reduces the stor-      feature registration [14, 29] and deep-learning-based meth-
+age occupancy for global map storing compared with point             ods [2, 42, 20] are built on the principle of extracting dis-
+cloud from 16.9 GB to 11.2 MB for a real-world global map,           criminative descriptors from a given point cloud and then
+where each quadric center location is encoded to a binary            estimating a rigid transformation matrix using the Iterative
+code for fast local map searching. To summarize, the main            Closest Point (ICP) algorithm. These methods can achieve
+contributions of this paper are as follows:                          high compression ratios but have heavy overhead, such that
+                                                                     they cannot be applied to LiDAR localization tasks in large-
+  • We propose a quadric representation-based method that            scale scenarios due to the large volume of memory required for
+    approximately represents a scene, where surfaces from            global map storage and the time-inefficiency of finding feature
+    point-cloud representations of 3D scenes are extracted           correspondences. Even using an efficient KD-tree, the time
+    and fitted to a different type of quadrics. These quadric-       complexity of the NNS algorithm used for correspondence
+    based representations can be used in place of the original       searching is still O(log(n)).
+    point clouds for LiDAR odometry, mapping and localiza-              Due to these issues of time and space inefficiency, many
+    tion. Our representation significantly reduces the space         novel scene representation methods were proposed to reduce
+    needed for global map storage and improves the time-             the space required to store the map while ensuring that using
+    efficiency of feature association, and maintains current         a compressed representation could maintain sufficient accu-
+    accuracy benchmarks when used in scan-scan and scan-             racy. Mesh-based reconstruction methods [41] are proposed
+    map registration tasks.                                          to increase point cloud density while reducing its storage
+  • We propose an incremental growing method for quadric             and transmitting size. Gaussian distributions as volumetric
+    representations, which speeds up submap and map gen-             primitives [11] present scenes accurately and efficiently for
+                                                                                Association          P2Q Residuals     P2D Residuals
+
+
+
+
+                                                                                  Quadric                                                    Odometry
+            Consecutive                   Range Image-Based
+                                                                               Representation                    Pose Estimation             Mapping
+            Point Clouds                  Patch Segmentation
+                                                                                Generation
+
+
+                                                                                                               Incremental Quadric
+          Re-project Patches to           Quadric Description                                                     Representation
+              Point Clouds                   for a Frame                                                            Growing
+
+
+
+                                                                                                                 Submap Update
+
+
+
+
+                                                                                                               Global Map Saving
+
+
+Fig. 2. Quadric Representation Overview. Our framework can be applied to LiDAR odometry, mapping and localization tasks, where the LiDAR pose will
+be estimated by optimizing the point cloud-to-quadric representation (P2Q) or point cloud-to-degenerated quadric representation (P2D) projection distance.
+Using our incremental growing method, the quadric surfaces will grow as new points are sampled. Our space-efficient quadric representation can be utilized
+for scan-submap matching (mapping) and scan-map matching (localization) in place of dense point-wise representations.
+
+
+dense multi-fidelity 3D mapping. Surfel-based methods [3]                     be the quadric implicit function, where c = [c0 , c1 , · · · , c9 ]T
+estimate a robot’s pose by exploiting the projective data asso-               and q = [x2 , y2 , z2 , xy, yz, xz, x, y, z, 1]T . q can be separated into
+ciation between the current scan and a rendered model view                    three parts: the quadratic term η = [x2 , y2 , z2 , xy, yz, xz]T , the
+from a surfel map. Poisson surface-based methods [35, 16]                     linear term p = [x, y, z]T and the constant term. The quadratic
+represent maps as a triangle mesh computed via Poisson                        coefficient vector can be separated into c η = [c0 , · · · , c5 ]T ,
+surface reconstruction and achieve accurate registration of                   c p = [c6 , c7 , c8 ]T , and c9 correspondingly. Then, we can rewrite
+the scans with the model using a novel frame-to-mesh reg-                     the quadric implicit function as f(cc, q ) = c Tη η + c Tp p + c9 . In
+istration algorithm. But triangular-mesh-based representation                 matrix form, we can write f(cc, q ) = p T A p + b T p + c = 0,
+methods are usually inefficient in single frame processing due                where:
+to the complex model fitting. Hierarchical map-building and
+encoding algorithms [38] divide a given LiDAR scan into                                   
+                                                                                          c0   c3 /2 c5 /2
+                                                                                                           
+voxels and calculate the normal distribution parameters for the                     A = c3 /2 c1    c4 /2 , b = [c6 , c7 , c8 ]T , c = c9 .
+valid voxels, and an improved Normal Distribution Transform                              c5 /2 c4 /2 c2
+algorithm is used for pose estimation.
+   In this paper, we propose the novel quadric representation                   As defined by Taubin [33], the distance from a point to a
+that is efficient and fits well to various 3D scenes. Our novel               quadric surface is:
+method leverages quadric representations to improve space-
+time efficiency for LiDAR odometry, mapping and localization                                                                   f2 (cc, q )
+                                                                                                   dq (cc, p ) ≈ s(cc, q ) =                            (1)
+tasks without trading off accuracy.                                                                                            g2 (cc, q )
+                                                                                                                      2
+          III. NOTATION AND PRELIMINARIES                                        where g2 (cc, q ) = ∇ p f(cc, q )) .
+A. Notation                                                                   B. Quadric Representation
+  We will estimate the transformation matrix,                                    We propose a quadric representation of 3D scenes. As
+            
+              R t
+                                                                             shown in Fig. 2, we first project the point cloud as a spherical
+       T= T           ∈ SE(3)|R ∈ SO(3),tt ∈ R3×1 ,                           range image, and then we utilize the range-map segmentation
+              0   1
+                                                                              algorithm [5] to classify the label for each point. Afterward,
+which aligns the source point cloud M = {m       m j = [x, y, z]| j =         we apply the quadric fitting to the patches and we use a
+1, 2, · · · , Nm } and target point cloud N = {nn j = [x, y, z]| j =          threshold to select the fitted quadric patches based on mean
+1, 2, · · · , Nn }. We use n = Tm m = Rm m + t to indicate a co-              square error (MSE). If the corresponding MSE does not exceed
+ordinate transformation from a point m to a point n using                     the threshold, we preserve the valid patches with its MSE
+a transformation matrix T. We define f(cc, q ) = c T q = 0 to                 (mse), point size (k), implicit function (cc), center location
+(µ
+ µ ), covariance matrix (S), and other intermediate information       and localization (scan-map matching). We will derive the pose
+matrices such as the quadratic center η , Q, and P, as defined        Jacobian matrix from the point-to-patch distance and present
+in [34]. The data structure of the quadric representation is          the quadric association and quadric growing methods.
+shown in the bottom part of Fig. 2. Experiments demonstrate
+that tens (up to hundreds) of quadric surfaces can be extracted       A. Quadric Representation-Based Point Cloud Registration
+from a frame of a LiDAR scan in common urban scenes and                  Quadric association is the basis of scan-scan registration.
+that all of them are important basic primitives for scan-scan         Assume that we have already obtained the quadric corre-
+and scan-submap matching.                                             spondences, where each quadric surface from the source scan
+    However, due to measurement error, segmented surfaces             is perfectly corresponding to a quadric surface from the
+with an MSE that exceeds the threshold cannot be successfully         target scan. Optimizing a point transformation matrix between
+fitted to a quadric. In addition, regular flat planes and curved      two consecutive LiDAR scans, the residual of the projected
+surfaces are not as common in unstructured scenes such as             distance between a point and its corresponding quadric is
+countryside roads as they are in man-made scenes. To improve
+                                                                                                     resqi = dq (cc j , Tppi ).                             (2)
+the registration robustness and avoid mismatching, “invalid
+patches” (patches that fail to be fitted to a quadric) will also be      The residual of the projected distance between a point and
+saved with the same information, which we call degenerated            its corresponding degenerated quadric surface is
+quadric surface. In a degenerated quadric surface, a zero                                                     T              
+vector is assigned as the implicit function, and we propose to            resdi = dd (N j , Tppi ) = Tppi − µ j S−1
+                                                                                                                  j    p
+                                                                                                                      Tp i − µ j . (3)
+approximate the surface with a normal distribution, in which
+we keep the center location and covariance matrix. We then                Stacking all of the residuals r e s = [rr e sq ; r e sd ], where
+apply them to the point-distribution residual generation and          r e sq = [resq1 , resq2 , · · · , resqm ]T and r e sd = [resd1 , resd2 , · · · , resdn ]T ,
+registration procedure manually.                                      a nonlinear cost function can be obtained. A Lie algebra
+                                                                      perturbation model is used to compute the Jacobian matrix
+                    IV. METHODOLOGY                                   of Eq. 2 with respect to T, as follows:
+   It is quite common to use point-line-plane features for                       ∂ resqi    ∂ resqi ∂ (Tppi ) 2 f · f0 · g2 −2 gT · g0 · f2
+LiDAR odometry, mapping and localization. However, point-               Jq =             =                   =                              , (4)
+                                                                                  ∂ξ       ∂ (Tppi ) ∂ ξ                    g4
+wise operations are time-consuming. Intuitively, the environ-
+ment description obtained by LiDAR scanning is actually a             where ξ ∈ R6×1 is the Lie algebra vector with respect to the
+surface sampling process. If all the surfaces can be extracted        transformation matrix, f0 = f0 (cc j , Tppi ) = [2A · Tppi + b ]T · T0p ,
+and fitted to accurate implicit functions, then the scanning          and g0 = g0 (cc, Tppi ) = 2A · T0p . T0p is the perturbation increment
+points of the next frame are projected to the corresponding sur-      in Lie algebra:
+faces such that inter-frame pose estimation can be conducted
+                                                                                                   ∂ (Tppi ) 
+                                                                                          T0p =             = I, −(Rppi + t )∧ .
+                                                                                                                              
+by minimizing the projection distance.                                                                                                                      (5)
+                                                                                                      ∂ ξ
+   While in theory, an infinite order polynomial could describe
+a surface with arbitrary accuracy, in practice, this is com-             The Jacobian matrix of Eq. 3 with respect to T is
+putationally infeasible and may lead to poor generalization
+                                                                                               Jd = 2 (Tpp − µ )T S−1 · T0p .                               (6)
+and poor performance on new, unseen data. Thus, it is more
+common to use lower-order polynomials or other types of                  Then, the Hessian matrix H can be approximated as H =
+surface representations that provide a good trade-off between         JT J, and the Levenberg-Marquardt method can be used to
+accuracy and computational feasibility. We choose to use              compute the gradient. For simplicity, the “AutoDiff” method
+quadrics to describe and represent surfaces, which can be             by Ceres Solver [1] can be used to compute the gradient.
+considered an extension of linear features such as points, lines,     Experiments show that the difference between the two solution
+and planes.                                                           methods is negligible.
+   Quadrics can approximate most surface features, even when
+they are incompletely sampled, or only a small part of them           B. Quadric Representation-Based LiDAR Odometry
+is visible. For example, walls, the ground, tree trunks, tree            As previously discussed, it is clear that the accuracy of the
+crowns, and other structures that frequently appear in traffic        quadric correspondence process plays an essential role in scan-
+scenes can be approximated using different types of quadrics.         scan matching. Generally, tens of quadric patches are extracted
+We show that quadrics preserve enough information for ac-             from a LiDAR scan and a double loop is used to calculate the
+curate pose estimation. Moreover, the quadric fitting process         distance between the quadric   patches from the source and the
+                                                                      target, in which di, j = ni=1 dq (cc j , p i ) is the distance between
+                                                                                              P
+is quick and efficient, and its time complexity only grows
+incrementally. This is extremely beneficial, especially in the        the i-th quadric patch in the source and the j-th quadric patch
+process of map/submap generation.                                     in the target.
+   In the following section, we demonstrate how to apply the             However, since most quadric surfaces are infinite, points
+quadric representation-based pose estimation to LiDAR odom-           may be projected to the incorrect quadric if it is nearest to the
+etry (scan-scan matching), mapping (scan-submap matching),            extended region of a distantly-centered quadric. As depicted
+                                                                                3, 4 for clarity) in the blue circle are zoomed in, where we
+                                                                                can see that the blue and green walls actually belong to a
+                                                                                coincident plane that is split into two parts due to a small gap.
+                                                                                Because they are parallel, planes 1 and 3 are fitted to near-
+                                                                                identical plane functions, which means that source patches 2
+                                                                                and 4 could correspond to any one of the two target planes. In
+                                                                                other words, if the projection distances of points to quadrics
+        Surface B                      Surface A                                are not weighted, then for plane 2 (equivalently, plane 4), the
+                                                                                projection distances to 1 and 3 are almost the same, and it
+                                                                                is very likely that false associations will occur. If the wrong
+(a) Mismatched projection of the green point due to the infinite extension      association happens to two distant patches due to the quadric
+of Surface B. For the sake of clarity, 2D points and surfaces are used in       infinite extension, there will inevitably be registration failure.
+this illustration.                                                              Our proposed patch association method ensures that planes 2
+                                                                                and 4 are associated with their corresponding planes (planes
+                                   1                                            1 and 3, respectively) correctly.
+                                                             3
+                                                                                   2) Patch Selection Strategy: Quadric surfaces exist in a
+                                   2                         4                  large number of man-made scenes, such as the ground (plane),
+                                                                                building surfaces (planes and other quadrics), tree trunks
+                                                                                (cylinders), and tree crowns (half-spheres). Indeed, the number
+                                                                                and the size of the extracted patches vary drastically in
+                                                                                different scenarios. Plenty of regular and complete quadric
+                                                                                patches can be extracted from urban scenes, but many quadric
+                                                                                patches extracted from countryside scenes are fragmented. To
+                                                                                maintain the efficiency and robustness of the algorithm, we
+                                                                                propose an adaptive-resolution patch selection strategy, where
+                                                                                we define a scale factor (s = kr , where k is the point size of a
+     (b) Quadric patch association in real consecutive LiDAR frames.            patch and r is the distance from the center location of a patch
+                                                                                to the origin) and successively select patches from decreasing
+                Fig. 3. Quadric patch association method.
+                                                                                scale factors, starting from the largest scale factor, until the
+                                                                                point size reaches a threshold.
+in Fig. 3(a), Surface A and Surface B are quadrics fitted by
+corresponding color points. The surface may only exist in the
+vicinity of the points (the solid part of the curve) but not in
+                                                                                C. Quadric Representation-Based LiDAR Mapping
+the dotted part, which is the curve’s infinite extension. We see
+that the new green point from the subsequent LiDAR scan
+                                                                                   In point-wise LiDAR odometry methods, the feature points
+should be projected to Surface A. Unfortunately, the green
+                                                                                extracted from each scan are simply merged into a submap
+point is actually closer, in terms of projection distance, to the
+                                                                                and then downsampled by a voxel grid algorithm, and the
+extended region of Surface B than to Surface A. In this way,
+                                                                                NNS algorithm using KD-trees is used to find correspondences
+mismatched projections can occur due to the infinite extension
+                                                                                with respect to points from a real-time scan. Unfortunately,
+of most quadrics.
+                                                                                this process is not suitable for patch-wise methods. On the
+   1) Quadric Association: According to the characteristics                     one hand, reserving all the patches directly from several
+of the quadric representation, we design a novel quadric                        consecutive frames may lead to redundancy due to patches
+patch association method to drastically reduce the number of                    in different frames describing the same surface. On the other
+mismatched projections. We use a weighted quadric patch-to-                     hand, saving all the points to a submap and then re-extracting
+patch distance:                                                                 patches not only increases the runtime of the algorithm, but
+                    n
+                    X                α · dq (cc j , p i )                       also causes a decline in the stability of the algorithm. Thus,
+  dweight(i, j) =                                                       . (7)   we propose an incremental map construction method, where
+                        β + γ · exp(−(ppi − µ j )T S−1       pi − µ j )
+                                                          j (p
+                    i=1                                                         corresponding patches from consecutive scans are merged and
+   When the Euclidean distance between two patches is large,                    their implicit functions, center location vectors, and covariance
+the projection distance from the point to the quadric surface                   matrices are updated incrementally.
+increases rapidly, up to αβ times the original distance. An                        1) Quadric Patch Growing: As demonstrated in [34], the
+example of a quadric patch association result is shown in                       quadric coefficient vector c can easily solved using three
+Fig. 3(b). All the patches in red circles are corresponding                     intermediate matrices S, P, and Q. In fact, all of the parameters
+patch pairs, whose points are the same color. In addition,                      in a quadric surface are updated incrementally, including its
+two patch pairs (the plane-shaped patched are labeled 1, 2,                     MSE, point size, and center location. The parameters µ and
+                        (a) First scan.                                  (b) Second scan.                           (c) Last scan.
+
+Fig. 4. Quadric representation growing method. For the sake of simplicity, we use a 2D bird-eye view of the 3D point cloud, where the circle represents a
+static object, such as a tree trunk or pole, which is sampled using consecutive LiDAR scans by the moving vehicle.
+
+
+η are incremented as follows:                                                      pole-like object, which is represented using a circle from a
+                                   µ k + p k+1
+                                  kµ                                               bird-eye view. In the first scan of the object, only a small
+                          µ k+1 =              ,                          (8a)     part of the surface is sampled, and the fitted quadric implicit
+                                      k+1
+                                                                                   function is quite different from the object surface shape. As
+                                   η k + η k+1
+                                  kη
+                          η k+1 =              .                          (8b)     the vehicle moves, more parts of the object are sampled and
+                                     k+1                                           the quadric implicit function is incrementally updated. We see
+ The three intermediate matrices are incremented as follows:                       that in successive scans, the fitted quadric implicit function
+                                                                                   increasingly resembles the surface of the object. In the last
+   Sk+1 = Sk + p k+1 p Tk+1 − (k + 1)µ
+                                     µ k+1 µ Tk+1 + kµ
+                                                     µ k µ Tk ,           (9a)
+                                                                                   scan, the fitted quadric implicit function exactly resembles the
+  Qk+1 = Qk + η k+1 η Tk+1 − (k + 1)ηη k+1 η Tk+1 + kη
+                                                     η k η Tk ,           (9b)     surface of the object. We note that the process of incrementing
+  Pk+1 = Pk + η k+1 p Tk+1 − (k + 1)η
+                                    η k+1 µ Tk+1 + kη
+                                                    η k µ Tk .            (9c)     the parameters of a quadric representation depends only on the
+                                                                                   parameters of the previous quadric representation and the point
+                                                                                   cloud in the current frame. It does not depend on the point
+   We can update all of the parameters of the quadric represen-                    clouds in any previous frame, which is a key advantage of our
+tation of two corresponding patches from a scan-scan matching                      proposed incremental updating method.
+on the source and target scans using Eq. 8 and Eq. 9. Then, we                        2) Scan-Submap Matching: The scan-submap matching
+can re-calculate the implicit function using the updated values                    process very closely resembles the scan-scan matching pro-
+of S, P, and Q. After incrementing the parameters for one                          cess. For a new scan, we perform scan-scan matching, project
+iteration, new points may be involved in the corresponding                         the result to the map coordinate system, and then match it with
+quadric planes, such that a valid quadric patch turns into a                       the submap. Finally, the points from the scan are added to the
+degenerated quadric patch, and vice versa. The process of                          submap using the proposed incremental updating method. In
+updating a plane’s MSE is shown in [27], which we extend to                        contrast with the patch selection strategy for LiDAR odometry,
+quadrics:                                                                          the smallest patch threshold is increased to 50 points.
+          1
+    msek = (S0k + 2P0k + Q0k ) + 2ccTp · µ k + 2ccTη · η k + c29          (10)
+          k                                                                        D. Quadric Representation-Based LiDAR Localization
+where S0 = c Tp · (Sk + kµ
+                         µ k µ Tk ) · c p , P0 = c Tη · (P + kη
+                                                              η k µ Tk ) · c p ,      The patches generated in the mapping module can also
+       0    T                T
+and Q = c η · (Qk + kη η k η k ) · c η . For example, the MSE of a                 be stored as a global map for localization tasks, as illus-
+degenerated quadric patch may be smaller than the threshold                        trated in the lower right corner of Fig. 2. The proposed
+after updating the parameters of the patch growing, such that                      approach represents the world using quadric representations
+it becomes a quadric patch with a valid implicit function (no                      instead of point clouds, which serves as an efficient way of
+longer a zero vector). Similarly, a quadric patch may become                       information extraction and a down-sampling method for the
+a degenerated quadric patch if its MSE is increased during the                     original point cloud scene. Compared “dense” point cloud,
+incremental updating process. Submap updating is supposed to                       this “sparse” representation method significantly reduces the
+prune those patches that are far away from the current vehicle                     memory requirement as large-volume point clouds are avoided.
+position. Compared with point-wise processing methods, our                         For localization tasks, both valid and degenerated quadric
+method produces a number of patches that is far smaller than                       patches can be loaded from a saved checkpoint to re-create the
+the number of original points. Experiments demonstrate that                        global map. Following the GeoHash-based encoding method
+our method usually produces only tens, and at most hundreds,                       proposed in [38], the center location of each quadric represen-
+of patches in a submap. Thus, we can tractably traverse all of                     tation can be encoded into a binary code, allowing for easy
+the patches and delete ones too far away from the vehicle. We                      retrieval of the quadric representation through a double hash
+see that as a direct result of using the incremental updating                      function with O(1) time complexity. This reduces the time
+method, the submap updating process can be run in real-time.                       consumption for NNS on a global navigation map by only
+   An example of the quadric patch growing is shown in Fig. 4,                     searching neighboring quadric patches within a certain radius
+which depicts consecutive LiDAR scans of a tree trunk or                           of the vehicle’s current position.
+              4                                                                                                        2
+                                                                         O LOAM (Odometry)                                                                                        O LOAM (Odometry)
+                                                                         O Ours (Odometry)                                                                                        O Ours (Odometry)
+             3.5
+                                                                      M LOAM (Mapping)                                                                                         M LOAM (Mapping)
+                                                                                                                      1.5
+                                                   1.46x ATE                                                                                                  1.24x ARE        M Ours (Mapping)
+                                                                      M Ours (Mapping)
+
+
+
+
+                                                                                                     ARE (deg/100m)
+              3        14.13x Feature
+                       Association Latency                                 Feature Extraction                                                                                       Feature Extraction
+   ATE (%)
+
+
+
+
+                                                                           Feature Association                                                                                      Feature Association
+             2.5                                                           Optimization                                1        14.13x Feature                                      Optimization
+                                                                           Submap Update                                        Association Latency                                 Submap Update
+                                                                           Total Score                                                                                              Total Score
+              2
+
+                                                                                                                      0.5                                                                            M
+             1.5                                         3.05x Total Latency                                                                                       3.05x Total Latency
+
+                                                                                             M
+              1                                                                                                        0
+                   0            50           100       150         200         250           300                            0            50           100        150        200         250         300
+                                                   Latency (ms)                                                                                              Latency (ms)
+
+                                     (a) ATE (%) vs. Latency (ms)                                                                        (b) ARE (deg/100m) vs. Latency (ms)
+                                        Fig. 5. Comparing both accuracy and latency of our method vs. LOAM for odometry and mapping.
+
+                                                                               TABLE I
+                                                               ODOMETRY RESULTS ON KITTI 00-10 SEQUENCES
+
+               Sequence                 Metric        00U      01H           02C          03C      04C                      05C           06U         07U        08U        09C        10C         Avg.
+             LOAM [39]                                4.08     3.31         3.43          4.63     1.52                     4.09          1.97        3.17       4.92       5.93       3.80        3.71
+                                         ATE
+               OURS                                   2.64     5.05         3.31          1.34     1.66                     1.97          1.30        2.56       2.57       3.32       2.21        2.54
+             LOAM [39]                                1.69     0.92         1.19          2.16     1.14                     1.68          0.82        1.87       2.12       1.91       1.83        1.58
+                                        ARE
+               OURS                                   1.30     1.03         1.39          1.27     1.22                     1.01          0.77        2.04       1.19       1.40       1.34        1.27
+                       ATE (%), ARE (deg/100m); U: urban, H: highway, C: countryside. We obtain results for LOAM [39] using their official source code.
+
+                                                                                  TABLE II
+                                                                  MAPPING RESULTS ON KITTI 00-10 SEQUENCES
+
+               Sequence                 Metric        00U      01H           02C          03C      04C                      05C           06U         07U        08U        09C        10C         Avg.
+        ICP-po2po [4]                                 6.88     11.21        8.21          11.07    6.64                     3.97          1.95        5.17       10.04      6.93       8.91        7.36
+         ICP-po2pl [4]                                3.80     13.53        9.00          2.72     2.96                     2.29          1.77        1.55       4.42       3.95       6.13        4.74
+           GICP [30]                                  1.29     4.39         2.53          1.68     3.76                     1.02          0.92        0.64       1.58       1.97       1.31        1.92
+                                         ATE
+        LODONET [42]                                  1.43     0.96         1.46          2.12     0.65                     1.07          0.62        1.86       2.04       0.63       1.18        1.27
+          LOAM [39]                                   0.83     1.96         1.75          1.32     0.60                     0.76          0.72        1.25       1.47       1.42       1.78        1.26
+            OURS                                      0.92     2.61         1.16          1.45     0.87                     0.76          0.55        1.09       1.68       0.85       1.76        1.25
+        ICP-po2po [4]                                 2.99     2.58         3.39          5.05     4.02                     1.93          1.59        3.35       4.93       2.89       4.74        3.41
+         ICP-po2pl [4]                                1.73     2.58         2.74          1.63     2.58                     1.08          1.00        1.42       2.14       1.71       2.60        1.93
+           GICP [30]                                  0.64     0.91         0.77          1.08     1.07                     0.54          0.46        0.45       0.75       0.77       0.62        0.73
+                                        ARE
+        LODONET [42]                                  0.69     0.28         0.57          0.98     0.45                     0.59          0.34        1.64       0.97       0.35       0.45        0.66
+          LOAM [39]                                   0.32     0.49         0.63          0.64     0.39                     0.35          0.37        0.64       0.54       0.60       0.69        0.51
+            OURS                                      0.53     0.51         0.45          0.81     0.51                     0.33          0.30        0.87       0.71       0.57       0.92        0.59
+                       ATE (%), ARE (deg/100m); U: urban, H: highway, C: countryside. We obtain results for LOAM [39] using their official source code.
+
+
+
+                                     V. EXPERIMENTS                                                     2) UrbanLoco is a more challenging dataset consisting of
+                                                                                                     data collected in highly urbanized areas with a full sensor
+Datasets. We evaluate the proposed quadric representation                                            suite. It covers a wide range of urban terrains such as urban
+for LiDAR odometry, mapping and localization both quali-                                             canyons, bridges, tunnels, and sharp turns. In this work, we se-
+tatively and quantitatively on the KITTI [12] (Velodyne64E)                                          lect 4 sequences (CA-20190828155828, CA-20190828173350,
+and UrbanLoco [37] (RoboSense32) datasets. 1) KITTI is a                                             CA-20190828184706, and CA-20190828190411) from the
+commonly used dataset for autonomous driving, containing                                             UrbanLoco dataset collected in San Francisco, and omit the
+various scenes such as urban, rural, and highways. We conduct                                        other 3 sequences with challenging long and straight tunnel
+experiments on the odometry subset (KITTI 00-10 sequences),                                          scenarios that are not suitable for LiDAR odometry, mapping
+which provides standard data and evaluation metrics for visual                                       and localization tasks.
+LiDAR SLAM.
+Implementation details. In our experiments, we set α =
+1.0, β = 0.1, γ = 1.9 (in Eq. 7), and mse = 0.04. All ex-
+periments are conducted on a PC equipped with an Intel
+Core i7-7820HQ@2.90GHz×8 core CPU and 32 GB memory.
+To measure the accuracy of our method, we use average
+translation error (ATE, %) and average rotation error (ARE,
+deg/100m) as defined in [12]. Latency (ms) is used to evaluate
+time consumption.
+   As a baseline for comparison, we choose LOAM [39], a
+state-of-the-art representation-based method for LiDAR odom-
+etry and mapping that uses the same evaluation standards as
+we do for our approach. Additionally, while our main focus is
+                                                                       (a) Odometry trajectories on KITTI 09   (b) Mapping trajectories on KITTI 09
+not on learning-based methods, we include a comparison with
+LODONET [42] for comprehensiveness. More details can be              Fig. 6. Comparison results of LiDAR odometry and mapping on the KITTI
+found in the supplementary material.                                 09 sequence.
+
+A. LiDAR Odometry and Mapping on KITTI                               planar points and 15000 edge points saved in a submap for
+   We conduct empirical experiments on the KITTI odometry            mapping fine-tuning. This “dense” point cloud registration
+set and provide the time cost analysis of our quadric repre-         method matches real-time scan and submap with sufficient
+sentation against previous works that use point representations.     accuracy but is calculation-intensive and time-consuming. This
+We use average translation error (ATE) and average rotation          results in a low mapping frequency in LOAM of only 1 Hz
+error (ARE) as the evaluation metrics.                               compared to the 10 Hz in the odometry module. However, ben-
+Odometry. We first evaluate the proposed quadric representa-         efiting from the proposed submap generation method which
+tion on LiDAR odometry with our scan-scan matching frame-            uses quadric representations instead of points, our work offers
+work. The experimental results are presented in Tab. I, showing      a simpler and more time-efficient paradigm. We provide a
+the superior results of our method when compared to the              detailed time efficiency comparison in Fig. 5.
+previous state-of-the-art method, LOAM [39]. For example,            Time cost analysis. We have divided the odometry module
+the average ATE and ARE (over 11 sequences) of our work              and mapping module into three distinct sub-modules. The
+are 2.54 and 1.27, respectively, presenting an improvement of        first sub-module of odometry focuses on feature extraction,
+46.1% and 24.4% compared to the previous SOTA (3.71 and              the second sub-module deals with associating selected feature
+1.58). An example of a qualitative odometry trajectory [13]          points with the target scan, and the third sub-module performs
+(KITTI sequence 09) comparison of our method and LOAM                pose estimation. On the other hand, the mapping sub-module
+is shown in Fig. 6 (a).                                              consists of associating feature points with the submap, estimat-
+   The improved performance can be attributed to the fol-            ing the pose, and updating the submap. Most LiDAR odometry
+lowing factors. 1) We eliminate possible mismatches and              algorithms are composed of these sub-modules.
+reduce the scan-scan registration error by leveraging quadric           Point-wise registration methods, like LOAM odometry
+representation association in the projection of points to sur-       methods, can often achieve a high frequency in the scan-scan
+faces. 2) To reduce the over-fitting caused by the excessive         matching process due to the relatively low point cloud density
+ground size, we further divide the extracted ground points           in a single frame.
+into 4-6 parts along the x-axis evenly, which proved to be              However, when considering the mapping module, the direct
+effective for z-axis accuracy. 3) We follow the idea of two-         impact of the increase of point cloud size in the submap is the
+step optimization [31], where ground quadric representations         decrease in frame rate. Experiments show that the average time
+are used for the estimation of [pitch, roll, z] while the rest are   consumption of scan-submap matching for LOAM is around
+used for the estimation of [yaw, x, y].                              300 ms, whereas our method’s time is around 100 ms.
+Mapping. We then evaluate the mapping performance of our                The detailed time consumption of each module comparison
+proposed quadric representation on KITTI with both scan-scan         between LOAM and the proposed algorithm is shown in Fig. 5.
+matching and scan-submap correction modules. We compare                 The number of selected feature points successfully asso-
+our method with point-based works including LODONET [42]             ciated with a target quadric representation by our method is
+and LOAM [39]. As shown in Tab. II, our method outperforms           around 5000 to 10000 points in the KITTI odometry dataset.
+them in ATE and achieves competitive performance in ARE,             This is far larger than the number selected by LOAM, which
+demonstrating its effectiveness in LiDAR mapping. The ex-            is no more than 1224 planar points and 612 edge points.
+ample of mapping trajectory comparison on KITTI sequence             We see that for odometry, our proposed method consumes
+09 is shown in Fig. 6 (b).                                           more time for feature extraction than LOAM. However, the
+   Note that, typically, around 12000 planar points and 5000         advantage of our patch/surface-wise method is reflected in the
+edge points are selected from a scan, along with around 50000        quadric representation association sub-module. We see that
+                  (a) CA-20190828155828                       (b) CA-20190828173550                    (c) CA-20190828184706            (d) CA-20190828190411
+
+                                 Fig. 7. Comparison results of LiDAR odometry and mapping on UrbanLoco sub-dataset.
+
+                                                            TABLE III
+                                     COMPARISON RESULTS OF ODOMETRY ON URBANLOCO ROSBAGS
+
+                                                                  Mean Translation Error (m)                          Mean Rotation Error (degree)
+       ROSBAG          Length (km)        Method
+                                                          X            Y              Z         Ave.          Yaw          Pitch        Roll         Ave.
+                                          LOAM          123.84       103.79       340.17       189.27         12.89        8.73         5.95         9.19
+   CA-20190828155828       5.9
+                                          OURS           58.67       102.46       239.43       133.52         10.99       13.84         4.58         9.80
+                                          LOAM          69.38         98.57       179.89        99.28         23.93       15.89         19.94        19.92
+   CA-20190828173350       3.2
+                                          OURS          76.38         62.64       191.93       106.98         10.54       20.12         22.35        17.67
+                                          LOAM          50.01         14.61        87.35       50.69          8.17         6.90         9.30         8.12
+   CA-20190828184706       1.8
+                                          OURS          14.72          7.13        63.32       28.39          6.64         9.29         7.10         7.68
+                                          LOAM           4.34         48.16        11.10       21.20          4.54        10.24         1.38         5.44
+   CA-20190828190411       1.0
+                                          OURS           5.83         38.42        35.24       26.50          4.83         6.05         5.61         5.49
+
+
+                                                            TABLE IV
+                                      COMPARISON RESULTS OF MAPPING ON URBANLOCO ROSBAGS
+
+                                                                  Mean Translation Error (m)                          Mean Rotation Error (degree)
+       ROSBAG          Length (km)        Method
+                                                          X            Y              Z         Ave.          Yaw          Pitch        Roll         Ave.
+                                          LOAM          29.24         51.23       119.71       66.73          7.39         8.55         4.58         6.84
+   CA-20190828155828       5.9
+                                          OURS          36.57         12.69        98.48       49.24          5.63         6.92         2.13         4.89
+                                          LOAM          18.13         45.47        90.02       51.21          4.37         1.05         10.50        5.31
+   CA-20190828173350       3.2
+                                          OURS          25.37         39.01        79.82       48.01          4.08         1.02          6.60        3.9
+                                          LOAM          9.30          8.01         46.31       21.21          2.40         1.87         1.27         1.85
+   CA-20190828184706       1.8
+                                          OURS          18.83         6.29         35.25       20.12          2.73         1.78         1.66         2.06
+                                          LOAM           6.53         31.26        23.85       20.55          4.34         3.53         0.86         2.91
+   CA-20190828190411       1.0
+                                          OURS           3.94         28.67        28.50       20.37          4.30         5.95         4.47         4.91
+
+
+
+
+our proposed method is very efficient in the quadric-quadric                  (“/novatel_data/inspvax”, 20 HZ) message from WGS84 to the
+association process, as the number of quadric representations                 UTM coordinate system and assume that the vehicle maintains
+is much smaller than in point clouds. This advantage is further               constant motion between two consecutive Novatel messages
+amplified in scan-submap registration, where the average time                 (about a period of 50 ms). Thus we obtained the ground truth
+consumption for feature association is increased from 1.68 ms                 pose information of each LiDAR frame (“/rslidar_points”,
+to 2.56 ms for our method, but is increased to 63.69 ms in                    10 HZ) according to the time stamps by performing linear
+LOAM scan-submap registration. In addition, our method is                     interpolation between the preceding and succeeding Novatel
+more efficient than LOAM’s point-wise operation in terms of                   frames. Mean Translation Error (MTE) and Mean Rotation
+submap updating, as it can directly add point clouds from                     Error (MRE) are used as evaluation metrics for this dataset.
+the current scan to their corresponding quadric representation
+incrementally after the scan-submap association sub-module.                   Odometry. We present the LiDAR odometry results of our
+                                                                              method and LOAM on UrbanLoco in Tab. III. Due to the more
+B. LiDAR Odometry and Mapping on UrbanLoco                                    complex and dynamic environment captured in the UrbanLoco
+   We also evaluate our proposed quadric representation-based                 dataset, the LiDAR odometry accuracy decreases as compared
+method for LiDAR odometry and mapping on the UrbanLoco                        to KITTI odometry accuracy. We observe that, in this more
+Dataset. The ground truth is provided by Novatel SPAN-                        challenging setting, our quadric representation-based method
+CPT, a GNSS-IMU navigation system. Since the frequency                        is still superior to its point-based counterpart. For example,
+of LiDAR and navigation system messages are different, here                   our method outperforms LOAM by large margins on (CA-
+we simply synchronize them. We first convert the ground truth                 20190828)155828 and 184706, especially in terms of MTE
+                                                   TABLE V
+                COMPARISON OF MAP REPRESENTATION METHODS FOR NNS AND POSE ESTIMATION ACCURACY
+
+           Element           Occupation    NNS Method      complexity     Lnns (ms)   Registration Method     Et (cm)    Er (degree)   Lreg (ms)
+         Point Cloud          16.9 GB       KD-TREE         O(log(n))       290            GICP [30]            7.90        0.051        691
+            Voxel             29.4 MB        Traverse         O(n)           13             NDT [22]            8.29        0.049        189
+    Quadric Representation   11.2 MB       Double Hash        O(1)           1.2             OURS               7.43        0.042         94
+                       Lnns : Average time consumption for once NNS (ms). Lreg : Average time consumption for once registration.
+                                    Et : Translation Root Mean Square Error. Er : Orientation Root Mean Square Error.
+
+
+
+(e.g. 58.67 vs. 123.84, and 14.72 vs. 50.01 on the x-axis).                leverage a GeoHash-based encoding technique [38] for fast
+   On the other two sequences, we observe comparable per-                  correspondence searching, where the quadric representation
+formance.                                                                  center location is encoded to a binary code (encoding reso-
+Mapping. We evaluate the LiDAR mapping results on Ur-                      lution is set to 1.5m × 1.5m × 1.5m, (x − y − z)). In order to
+banLoco with the same setting as the LiDAR odometry.                       ensure the uniqueness of each binary code, only one quadric
+As shown in Tab. IV, our method consistently shows large                   with the smallest mse is reserved.
+improvements over LOAM on all four sequences in terms                         We follow [38] to conduct the localization experiment. We
+of MTE, demonstrating the effectiveness of our proposed                    add random noise on the basis of the ground truth pose
+quadric representations. As for MTE, our method shows its                  to generate the initial pose for scan-map registration. The
+superiority on (CA-20190828)155828 and 173350, which are                   noise is subjected to a uniform distribution: U(−0.2, 0.2) (m)
+the two longest sequences, indicating the proposed quadric                 in the x and y axis, while the noise in the yaw direction
+representation works better on longer trajectories.                        is: U(−5.0, 5.0) (degree). As shown in Tab. V, our quadric
+   The trajectory comparisons for both odometry and mapping                representation occupies 11.2MB of storage, saving 2.6× and
+on all four sequences are presented in Fig. 7. Our method                  1508.9× respectively compared to voxel and point cloud rep-
+demonstrates consistent improvements over LOAM. This can                   resentations. Moreover, the computational complexity of our
+be attributed to the advantage of quadric representations in               method for correspondence searching is only O(1), providing
+complex and dynamic environments: In the presence of the                   a significant advantage over voxel (O(log(n))) and point cloud
+complex plane and surface features of man-made constructs                  (O(n)) based methods. The quantitative results in Tab. V show
+in highly-urbanized scenes, our quadric representation-based               that our scan-map registration outperforms two classical point-
+method is able to maintain high performance.                               wise (GICP) and voxel-wise (NDT) registration algorithms.
+   Compared with Velodyne64E, RoboSense32 LiDAR obtains
+                                                                                                   VI. CONCLUSION
+sparser and rougher local feature information for each point
+due to fewer scan lines, which is not friendly to the point-wise              We propose a quadric representation-based method for
+method. Coupled with the increase of dynamic objects, the                  LiDAR odometry, mapping and localization tasks. In our
+registration error will increase as well. However, our method              method, patches are extracted from 3D scenes and then fitted
+finds surfaces more consistently on a larger scale than the                to different types of quadrics, after which point-to-quadric
+point-wise method, and surface information will not be blurred             representation registration is utilized for LiDAR pose estima-
+due to the sparseness of the sampled points. In this way, our              tion. We also present a novel incremental growing method
+proposed representation demonstrates stronger generalization               for quadric representations, which eliminates the need for the
+abilities than previous works.                                             time-consuming process of re-fitting quadric surfaces. Experi-
+                                                                           ments on KITTI and UrbanLoco datasets demonstrate that our
+C. Map Compression and LiDAR Localization                                  quadric representation-based method has a significantly better
+                                                                           time-efficiency than point-wise methods (e.g. 3.05× LOAM
+   We have demonstrated that the proposed quadric repre-
+                                                                           for mapping total latency), while achieving superior accuracy
+sentation provides accurate LiDAR odometry and mapping
+                                                                           on odometry tasks and competitive accuracy on mapping
+results while being more efficient compared to state-of-the-art
+                                                                           tasks (e.g. 1.64× LOAM for odometry ATE). Furthermore,
+methods, which suggests this representation method is capable
+                                                                           quadric representations, encoded by a GeoHash-based method,
+of providing sufficient information for pose estimation. For
+                                                                           can be saved for future localization tasks to avoid repeated
+map compression and LiDAR localization, as the scale of
+                                                                           iterations of NNS, which is the most time-consuming module
+the scene increases, the marginal efficiency advantage of the
+                                                                           for localization in large-scale scenarios.
+proposed quadric representations over point representations
+will increase. This is because feature association in LiDAR
+localization becomes increasingly challenging due to the high
+volume of global navigation maps. Thus, quadric representa-
+tions boast a substantial advantage over point representations
+for storage efficiency and correspondence searching. We also
+                                                                APPENDIX
+sentations                                         Types of Representations
+
+
+
+
+                 (a) Quadric representation.                (b) Plane representation.                 (c) Distribution representation.
+
+                                         Fig. 8. DEPICTION OF VARIOUS WAYS TO REPRESENT 3D SCENES.
+
+
+
+                VII. M ORE ILLUSTRATION OF QUADRIC                                      VIII. A BLATION S TUDY ON O DOMETRY
+                         R EPRESENTATIONS
+                                                                           A. Impact of Different Representations
+                                                                              As explained in the above section, our method uses three
+         In this section, we provide additional illustrations of the
+                                                                           different representations of 3D scenes: quadrics, planes, and
+      three different representations of 3D scenes we use in our
+                                                                           normal distributions. Note that planes and normal distributions
+      work, as enumerated in Fig. 8.
+                                                                           can be considered as two special cases of our proposed
+      Quadric Representation. Referring to Sec. 3A, the coeffi-            quadric representations. In this sub-section, we study how
+      cients of quadric functions c consist of two parts, the quadratic    the different representations affect performance, as shown in
+      parts and linear parts. In practice, if any one of the quadric       Tab. VI. Specifically, we investigate five cases:
+      parts is not zero, the patches are quadric planes.                     • Normal distributions (denoted as D). We process all
+      Plane representation. In practice, we find that fitting large            patches as a normal distribution. That is, given the points
+      “patches” such as walls and roads to normal quadric planes is            in a patch, we do not fit them into either patches or planes,
+      computationally expensive and yields suboptimal performance              but rather, we directly preserve the mean and the variance
+      in downstream tasks. In fact, a plane is a special case of a             of these points.
+      quadric where the quadratic coefficient c q is set to zeros. To        • Planes and normal distributions (denoted as P+D). In this
+
+      reduce the computation cost, we propose to use planes to rep-            case, we first select the patches with mse lower than
+      resent large “patches”. We first classify patch types according          the threshold and then classify them into “plane” and
+      to a 3 × 3 covariance matrix, in which we perform eigenvalue             “quadric” patches. After that, we use normal distributions
+      decomposition for each patch. We consider patches with an                to represent the “quadric” patches rather than fitting them
+      eigenvalue much smaller than the other two eigenvalues as                to quadric functions. We still represent patches with mse
+      planes. Then, we assign the minimum eigenvector to the linear            higher than the threshold as normal distributions.
+      coefficient c p , and the constant term is assigned by easily          • Quadrics and normal distributions (denoted as Q+D).
+
+      calculating c p and the center location µ of the patch.                  Similarly, after classifying the patches, we use normal dis-
+                                                                               tributions to represent “plane” patches rather than linear
+      Distribution representation. As illustrated in Sec. 3A, if the           functions, i.e., quadric functions the quadric coefficients
+      mse of a patch is higher than a threshold, we represent such             equal to zeros.
+      a patch as neither a quadric nor a plane. Instead, we consider         • Quadrics, planes, and normal distributions (denoted as
+      it a degenerate plane, and all the coefficients of its quadric           Q+P+D (default)). This is our default setting. For the
+      function are set to zero. In this case, we represent such a              patches with mse lower than the threshold, we classify
+      plane as a normal distribution.                                          some as “quadric” patches and others as “plane” patches,
+         For convenience, the aforementioned three classifications             using the process described above. Then, we fit them to
+      for patches will be called quadrics, planes, and normal dis-             quadric functions and linear functions, respectively. As
+      tributions in the following illustrations. Each of these three           for the patches with mse higher than the threshold, we
+      different representations has a unique residual, namely point-           represent them as normal distributions.
+      to-quadratic, point-to-plane, and point-to-distribution distance,      • Besides exploring the combinations of quadrics, planes,
+      respectively. In addition, unless otherwise stated, our experi-          and normal distributions, we also introduce point clouds
+      mental results for odometry are scan-scan matching results. We           into our method (denoted as Default+PC). Specifically,
+      use odometry experiments rather than mapping experiments                 we preserve all points belonging to each patch along with
+      for our ablation experiments because they are more sensitive             the quadric representation. After quadric association, we
+      to parameter adjustments, making it easier to observe the effect         additionally plug in the point-point distance loss, which
+      of each component of the system.                                         is calculated as the distance between the points in the
+                                                                  TABLE VI
+                                                   ODOMETRY RESULTS ON KITTI 00-10 SEQUENCES
+
+            Method              Metric      00U      01H       02C     03C       04C      05C       06U        07U     08U          09C     10C      Avg.
+               D                            4.24     7.00      4.28    3.76      1.74     2.41      1.67       3.87    4.16     3.30        4.43     3.71
+             P+D                            2.73     10.13     3.91    2.07      2.18     2.91      1.68       2.56    2.97     3.15        5.00     3.57
+             Q+D                 ATE        3.08     10.65     2.27    1.76      2.04     2.31      1.43       2.78    3.16     2.30        3.75     3.23
+       Q + P + D (default)                  2.64     5.05      3.31    1.34      1.66     1.97      1.30       2.56    2.57     3.32        2.21     2.54
+          Default + PC                      1.74     7.92      2.42    2.67      2.12     2.23      1.37       1.93    1.77     2.21        3.10     2.68
+
+               D                            1.94     1.27      2.75    2.58      1.29     1.36      1.78       2.65    2.08     1.81        2.49     2.00
+             P+D                            1.30     1.49      2.14    2.24      1.55     1.81      1.38       2.10    1.97     1.93        2.54     1.86
+             Q+D                 ARE        1.44     1.37      2.34    2.10      1.54     1.53      2.28       1.48    1.58     1.60        2.42     1.79
+
+
+
+tributions
+       Q + P + D (default)                  1.30     1.03      1.39    1.27      1.22     1.01      0.77       2.04    1.19     1.40        1.34     1.27
+
+
+
+tributions
+          Default + PC                      0.76     0.87      0.93    1.56      1.00     1.00      0.77       1.02    0.94     1.07        1.79     1.06
+        ATE (%), ARE (deg/100m), U: urban, H: highway, C: countryside. FULL: quadrics, planes and distributions. P: planes. D: distribution. Q: quadrics.
+                                                              Dense: point-point residuals.
+
+
+
+                                                                                                        TABLE VII
+                                                                                    LATENCY ( MS ) COMPARISON BETWEEN FULL AND ADD
+                                                                                              RESULTS ON KITTI SEQUENCE 00
+
+                                                                                    Method       Feature Extraction   Association     Optimization   Total
+                                                                                   Default             60.32             1.63             39.86      101.81
+                                                                                  Default+PC           60.32            31.27             88.05      179.64
+
+
+
+
+             (a) Representing a quadric with a normal distribution.             an ellipse (normal distribution in 2D) can represent a plane
+                  Quadric Distribution                                          well as long as the semiminor axis of the ellipse is short
+                  Quadric Distribution                                          enough. Yet for a curved surface (Fig. 9.(a)), especially when
+                                                                                the patch has a large surface area and a small curvature, it is
+                                                                                hard for a normal-distribution ellipse to fit a curved surface
+                                                                                (in 2D) well.
+                                                                                Quadrics and normal distributions. As we can see in
+                                                                                Tab. VI, Q + D achieves 3.23 ATE and 1.79 ARE respectively.
+                                                                                Although the performance of Q + D is better than P +
+                                                                                D, we observe that the main performance gains are present
+                                                                                in countryside scenarios. Indeed, different from the urban
+              (b) Representing a plane with a normal distribution.
+                                                                                scenarios which are full of human-made “Manhattan”-shaped
+          Fig. 9. ILLUSTRATION OF NORMAL DISTRIBUTIONS.                         objects, countryside scenarios have objects with more diverse
+                                                                                shapes, thus yielding notable improvements when our method
+                                                                                is applied to them.
+          source patches and the corresponding nearest neighbors                Quadrics, planes, normal distributions, and point-clouds.
+          in the target patches.                                                It can be seen that after plugging in “dense” point-point
+    Normal distributions. Using only normal distributions (D)                   residuals, both the ATE and ARE of the proposed method are
+    for LiDAR odometry yields the worst performance of all                      lower when applied to urban scenes, while they are compa-
+    representations, as shown in Tab. VI. Indeed, the purely normal             rable or even higher when applied to countryside scenes. We
+    distribution representations of the scenes are prone to losing              hypothesize that the point-point correlation does not provide
+    fine-grained information which is critical for scan-to-scan                 a completely correct gradient direction in countryside scenes
+    matching. As a result, the ATE and the ARE are higher than                  due to the noisier environments with fewer structural features.
+    our default setting by 1.17 and 0.73, respectively.                         This hypothesis also aligns with the results of the odometry
+    Planes and normal distributions. As we can see in Tab. VI,                  experiment of ICP-po2po [4]. Moreover, the addition of dense
+    using P + D to represent the 3D scenes achieves 3.57 ATE and                points inevitably gives rise to much higher latency, as shown
+    1.86 ARE, respectively. We observe that the accuracy drops                  in Tab. VII. It can be observed that the main additional
+    by a large margin relative to Q+D (10.53% for ATE, 3.91                     overhead comes from point-point association and optimization.
+    deg/100m for ARE), and we hypothesize that normal distri-                   Particularly, point-point association heavily relies on KDtree-
+    butions are a more compact alternative to planes compared to                based NNS, such that the computation cost is drastically
+    quadrics, as shown in Fig. 9. Regarding the planes (Fig. 9.(b)),            increased. Meanwhile, due to the increasing residuals, the
+                                                                3.4                                                                                         1.7
+
+                                                                           Max. point size limitation                                                                  Max. point size limitation
+                                                                3.2                                                                                         1.6
+                                                                                                                               100                                                                                        100
+
+                                                                 3                                                                                          1.5
+
+
+
+
+                                                                                                                                           ARE (deg/100m)
+                                                      ATE (%)
+                                                                2.8                                                                                         1.4
+                                                                                                                                                                                                                    250
+                                                                                         4000
+                                                                                                                         250                                                         4000
+                                                                2.6                                                                                         1.3                                           500
+                                                                              NONE                                                                                       NONE
+                                                                                                              500
+                                                                2.4                 2000                                                                    1.2
+                                                                                                                                                                                2000
+                                                                                                   1000                                                                                        1000
+                                                                2.2                                                                                         1.1
+
+
+
+                                                                 2                                                                                           1
+                                                                      80           100          120         140        160     180   200                          80           100          120         140        160    180   200
+                                                                                                        Latency (ms)                                                                                Latency (ms)
+
+                  (a) Trajectories.                                                      (b) ATE vs. Latency.                                                                        (c) ARE vs. Latency.
+
+                                        Fig. 10. Ablation experiment with different maximum point sizes in a patch.
+
+
+
+
+Fig. 11. Visualization. White point cloud is map; Colored point cloud is real-time scan; Green trajectory is ground truth; Yellow trajectory is mapping result;
+Red trajectory is odometry result.
+
+
+
+optimization of solving for optimal poses is much harder,                                                    performance. This phenomenon can be attributed primarily to
+resulting in further increased latency.                                                                      the patch segmentation process. In this process, we segment a
+                                                                                                             patch based on the geometric consistency between a point and
+B. Impact of Point Size                                                                                      its neighboring points. When the number of points in a patch is
+                                                                                                             artificially restricted, less geometric information is preserved.
+   In this section, we investigate how different point size
+                                                                                                             Thus, the shape of a patch is more likely to be randomly
+limitations affect performance. We define the point size of
+                                                                                                             segmented, leading to a higher number of mismatches in the
+a patch as the number of points in it. We experiment with
+                                                                                                             patch association module. To further improve performance,
+point size limitations of 100, 250, 500, 1000, 2000, and 4000
+                                                                                                             modifications need to be made to both the patch segmentation
+maximum points in a patch, and evaluate the corresponding
+                                                                                                             method and the patch selection process.
+performance on the KITTI 00 sequence.
+                                                                                                             Visualization. In Fig. 11, we present trajectories from odome-
+   Intuitively, the local fitting accuracy is higher when the point
+                                                                                                             try and mapping experiments, along with the ground truth.
+size is smaller, while the computation cost is also larger. We
+study the trade-off between the latency and the performance
+as the point size changes, as shown in Fig. 10. We observe
+                                                                                                                                                              R EFERENCES
+that limiting the maximum point size to 4000 points leads
+to a slight drop in terms of both ATE and ARE compared                                                            [1] Sameer Agarwal, Keir Mierle, and The Ceres Solver
+to that when there is no maximum point size limitation.                                                               Team. Ceres Solver, 3 2022. URL https://github.com/
+Many large patches in urban scenes, such as large walls and                                                           ceres-solver/ceres-solver.
+bushes, typically include around 5000 points. Thus, limiting                                                      [2] Sheng Ao, Qingyong Hu, Bo Yang, Andrew Markham,
+the point size to 4000 may thus result in incomplete planes                                                           and Yulan Guo. Spinnet: Learning a general surface
+and undermine scan-to-scan matching accuracy.                                                                         descriptor for 3d point cloud registration. In Proceedings
+   Furthermore, as maximum point size decreases, perfor-                                                              of the IEEE/CVF Conference on Computer Vision and
+mance gradually improves. The accuracy reaches its peak                                                               Pattern Recognition, pages 11753–11762, 2021.
+with a point size of 1000. However, a further decrease in the                                                     [3] Jens Behley and Cyrill Stachniss. Efficient surfel-based
+maximum point size from 1000 causes a gradual decline in                                                              slam using 3d laser range data in urban environments. In
+     Robotics: Science and Systems, volume 2018, page 59,        [17] Kenji Koide, Masashi Yokozuka, Shuji Oishi, and At-
+     2018.                                                            suhiko Banno. Globally consistent 3d lidar mapping
+ [4] Paul J Besl and Neil D McKay. Method for registration            with gpu-accelerated gicp matching cost factors. IEEE
+     of 3-d shapes. In Sensor fusion IV: control paradigms            Robotics and Automation Letters, 6(4):8591–8598, 2021.
+     and data structures, volume 1611, pages 586–606. Spie,      [18] Jesse Levinson and Sebastian Thrun. Robust vehicle
+     1992.                                                            localization in urban environments using probabilistic
+ [5] Igor Bogoslavskyi and Cyrill Stachniss. Fast range               maps. In 2010 IEEE international conference on robotics
+     image-based segmentation of sparse 3d laser scans for            and automation, pages 4372–4378. IEEE, 2010.
+     online operation. In 2016 IEEE/RSJ International Con-       [19] Jesse Levinson, Michael Montemerlo, and Sebastian
+     ference on Intelligent Robots and Systems (IROS), pages          Thrun. Map-based precision vehicle localization in urban
+     163–169. IEEE, 2016.                                             environments. In Robotics: science and systems, page 1.
+ [6] Carlos Campos, Richard Elvira, Juan J Gómez Ro-                  Atlanta, GA, USA, 2007.
+     dríguez, José MM Montiel, and Juan D Tardós. Orb-           [20] Qing Li, Shaoyang Chen, Cheng Wang, Xin Li, Chenglu
+     slam3: An accurate open-source library for visual,               Wen, Ming Cheng, and Jonathan Li. Lo-net: Deep real-
+     visual–inertial, and multimap slam. IEEE Transactions            time lidar odometry. In Proceedings of the IEEE/CVF
+     on Robotics, 37(6):1874–1890, 2021.                              Conference on Computer Vision and Pattern Recognition,
+ [7] Xieyuanli Chen, Ignacio Vizzo, Thomas Läbe, Jens                 pages 8473–8482, 2019.
+     Behley, and Cyrill Stachniss. Range image-based lidar       [21] Zheng Liu and Fu Zhang. Balm: Bundle adjustment for
+     localization for autonomous vehicles. In 2021 IEEE               lidar mapping. IEEE Robotics and Automation Letters,
+     International Conference on Robotics and Automation              6(2):3184–3191, 2021.
+     (ICRA), pages 5802–5808. IEEE, 2021.                        [22] Martin Magnusson. The three-dimensional normal-
+ [8] Igor Cvišić, Ivan Marković, and Ivan Petrović. Soft2:         distributions transform: an efficient representation for
+     Stereo visual odometry for road vehicles based on a              registration, surface analysis, and loop detection. PhD
+     point-to-epipolar-line metric. IEEE Transactions on              thesis, Örebro universitet, 2009.
+     Robotics, 2022.                                             [23] Raul Mur-Artal and Juan D Tardós. Orb-slam2: An
+ [9] Pierre Dellenbach, Jean-Emmanuel Deschaud, Bastien               open-source slam system for monocular, stereo, and rgb-
+     Jacquet, and François Goulette. Ct-icp: Real-time elastic        d cameras. IEEE transactions on robotics, 33(5):1255–
+     lidar odometry with loop closure. In 2022 International          1262, 2017.
+     Conference on Robotics and Automation (ICRA), pages         [24] Raul Mur-Artal, Jose Maria Martinez Montiel, and
+     5580–5586. IEEE, 2022.                                           Juan D Tardos. Orb-slam: a versatile and accurate
+[10] Jean-Emmanuel Deschaud. Imls-slam: Scan-to-model                 monocular slam system. IEEE transactions on robotics,
+     matching based on 3d data. In 2018 IEEE International            31(5):1147–1163, 2015.
+     Conference on Robotics and Automation (ICRA), pages         [25] Frank Neuhaus, Tilman Koß, Robert Kohnen, and Diet-
+     2480–2485. IEEE, 2018.                                           rich Paulus. Mc2slam: Real-time inertial lidar odometry
+[11] Aditya Dhawale and Nathan Michael. Efficient paramet-            using two-scan motion compensation. In Pattern Recog-
+     ric multi-fidelity surface mapping. In Robotics: Science         nition: 40th German Conference, GCPR 2018, Stuttgart,
+     and Systems, 2020.                                               Germany, October 9-12, 2018, Proceedings 40, pages
+[12] Andreas Geiger, Philip Lenz, and Raquel Urtasun. Are             60–72. Springer, 2019.
+     we ready for autonomous driving? the kitti vision bench-    [26] Yue Pan, Pengchuan Xiao, Yujie He, Zhenlei Shao,
+     mark suite. In Conference on Computer Vision and                 and Zesong Li. Mulls: Versatile lidar slam via multi-
+     Pattern Recognition (CVPR), 2012.                                metric linear least square. In 2021 IEEE International
+[13] Michael Grupp. evo: Python package for the evaluation            Conference on Robotics and Automation (ICRA), pages
+     of odometry and slam. https://github.com/MichaelGrupp/           11633–11640. IEEE, 2021.
+     evo, 2017.                                                  [27] Jann Poppinga, Narunas Vaskevicius, Andreas Birk, and
+[14] Yulan Guo, Ferdous Sohel, Mohammed Bennamoun, Min                Kaustubh Pathak. Fast plane detection and polygonaliza-
+     Lu, and Jianwei Wan. Rotational projection statistics            tion in noisy 3d range images. In 2008 IEEE/RSJ Inter-
+     for 3d local surface description and object recognition.         national Conference on Intelligent Robots and Systems,
+     International journal of computer vision, 105:63–86,             pages 3378–3383. IEEE, 2008.
+     2013.                                                       [28] Tong Qin, Peiliang Li, and Shaojie Shen. Vins-mono:
+[15] Wolfgang Hess, Damon Kohler, Holger Rapp, and Daniel             A robust and versatile monocular visual-inertial state
+     Andor. Real-time loop closure in 2d lidar slam. In               estimator. IEEE Transactions on Robotics, 34(4):1004–
+     2016 IEEE international conference on robotics and               1020, 2018.
+     automation (ICRA), pages 1271–1278. IEEE, 2016.             [29] Radu Bogdan Rusu, Nico Blodow, and Michael Beetz.
+[16] Michael Kazhdan and Hugues Hoppe. Screened poisson               Fast point feature histograms (fpfh) for 3d registration.
+     surface reconstruction. ACM Transactions on Graphics             In 2009 IEEE international conference on robotics and
+     (ToG), 32(3):1–13, 2013.                                         automation, pages 3212–3217. IEEE, 2009.
+[30] Aleksandr Segal, Dirk Haehnel, and Sebastian Thrun.         [42] Ce Zheng, Yecheng Lyu, Ming Li, and Ziming Zhang.
+     Generalized-icp. In Robotics: science and systems, page          Lodonet: A deep neural network with 2d keypoint match-
+     435. Seattle, WA, 2009.                                          ing for 3d lidar odometry estimation. In Proceedings of
+[31] Tixiao Shan and Brendan Englot.              Lego-loam:          the 28th ACM International Conference on Multimedia,
+     Lightweight and ground-optimized lidar odometry and              pages 2391–2399, 2020.
+     mapping on variable terrain. In 2018 IEEE/RSJ Inter-        [43] Xin Zheng and Jianke Zhu. Efficient lidar odometry
+     national Conference on Intelligent Robots and Systems            for autonomous driving. IEEE Robotics and Automation
+     (IROS), pages 4758–4765. IEEE, 2018.                             Letters, 6(4):8458–8465, 2021.
+[32] Tixiao Shan, Brendan Englot, Drew Meyers, Wei Wang,
+     Carlo Ratti, and Daniela Rus. Lio-sam: Tightly-coupled
+     lidar inertial odometry via smoothing and mapping. In
+     2020 IEEE/RSJ international conference on intelligent
+     robots and systems (IROS), pages 5135–5142. IEEE,
+     2020.
+[33] Gabriel Taubin. Estimation of planar curves, surfaces,
+     and nonplanar space curves defined by implicit equations
+     with applications to edge and range image segmentation.
+     IEEE Transactions on Pattern Analysis & Machine In-
+     telligence, 13(11):1115–1138, 1991.
+[34] Narunas Vaskevicius, Kaustubh Pathak, Razvan Pascanu,
+     and Andreas Birk. Extraction of quadrics from noisy
+     point-clouds using a sensor noise model. In 2010 IEEE
+     International Conference on Robotics and Automation,
+     pages 3466–3471. IEEE, 2010.
+[35] Ignacio Vizzo, Xieyuanli Chen, Nived Chebrolu, Jens
+     Behley, and Cyrill Stachniss. Poisson surface reconstruc-
+     tion for lidar odometry and mapping. In 2021 IEEE
+     International Conference on Robotics and Automation
+     (ICRA), pages 5624–5630. IEEE, 2021.
+[36] Han Wang, Chen Wang, Chun-Lin Chen, and Lihua Xie.
+     F-loam: Fast lidar odometry and mapping. In 2021
+     IEEE/RSJ International Conference on Intelligent Robots
+     and Systems (IROS), pages 4390–4396. IEEE, 2021.
+[37] Weisong Wen, Yiyang Zhou, Guohao Zhang, Saman
+     Fahandezh-Saadi, Xiwei Bai, Wei Zhan, Masayoshi
+     Tomizuka, and Li-Ta Hsu. Urbanloco: A full sensor suite
+     dataset for mapping and localization in urban scenes.
+     In 2020 IEEE international conference on robotics and
+     automation (ICRA), pages 2310–2316. IEEE, 2020.
+[38] Chao Xia, Yanqing Shen, Yuedong Yang, Xiaodong
+     Deng, Shitao Chen, Jingmin Xin, and Nanning Zheng.
+     Onboard sensors-based self-localization for autonomous
+     vehicle with hierarchical map. IEEE Transactions on
+     Cybernetics, 2022.
+[39] Ji Zhang and Sanjiv Singh. Loam: Lidar odometry and
+     mapping in real-time. In Robotics: Science and Systems,
+     pages 1–9. Berkeley, CA, 2014.
+[40] Ji Zhang and Sanjiv Singh. Visual-lidar odometry and
+     mapping: Low-drift, robust, and fast. In 2015 IEEE
+     International Conference on Robotics and Automation
+     (ICRA), pages 2174–2181. IEEE, 2015.
+[41] Kaicheng Zhang, Ziyang Hong, Shida Xu, and Sen
+     Wang. CURL: Continuous, Ultra-compact Representa-
+     tion for LiDAR. In Proceedings of Robotics: Science
+     and Systems, New York City, NY, USA, June 2022. doi:
+     10.15607/RSS.2022.XVIII.005.
+

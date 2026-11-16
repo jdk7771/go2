@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "official_clouds_verified": 7,
+  "source_hashes_verified": true,
+  "prior_quadric_core_unchanged": true,
+  "input_scans": 56,
+  "method_frame_rows": 280,
+  "per_frame_metrics_recomputed_from_npz": true,
+  "shared_inputs_and_current_query_masks_verified": true,
+  "summary_and_latency_statistics_recomputed": true,
+  "latency_samples": 2023,
+  "served_artifacts_match": true,
+  "unit_tests_passed": 17,
+  "browser": {
+    "status": "passed",
+    "images": 10,
+    "tables": 4,
+    "mobile_overflow": false,
+    "page_errors": []
+  }
+}

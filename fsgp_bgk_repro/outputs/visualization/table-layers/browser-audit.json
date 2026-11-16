@@ -1,0 +1,85 @@
+{
+  "passed": true,
+  "initial": {
+    "key": "scan_04cm",
+    "panels": 3,
+    "error": null,
+    "centres": [
+      -0.0000833,
+      1.1014795,
+      1.1997527
+    ],
+    "centre": [
+      {
+        "height": 0.0023308,
+        "neighbors": 30
+      },
+      {
+        "height": 1.0978071,
+        "neighbors": 30
+      },
+      {
+        "height": 1.1965676,
+        "neighbors": 30
+      }
+    ],
+    "meshes": [
+      {
+        "type": "cloud",
+        "triangles": 0,
+        "points": 2155
+      },
+      {
+        "type": "old",
+        "triangles": 18868,
+        "points": 30
+      },
+      {
+        "type": "multi",
+        "triangles": 27187,
+        "points": 30
+      }
+    ],
+    "sharedCamera": true
+  },
+  "visited": [
+    "scan_04cm",
+    "scan_03cm",
+    "scan_02cm",
+    "full_04cm",
+    "full_03cm",
+    "full_02cm",
+    "sparse_04cm",
+    "sparse_03cm",
+    "sparse_02cm"
+  ],
+  "heightLayerToggles": true,
+  "profileSlider": true,
+  "probeNeighbors": true,
+  "unknownSparseInput": true,
+  "sharedCameraInteraction": true,
+  "homepageEntry": true,
+  "mobileOverflow": false,
+  "mobileForeground": [
+    {
+      "type": "cloud",
+      "width": 364,
+      "height": 290,
+      "pixels": 13097
+    },
+    {
+      "type": "old",
+      "width": 364,
+      "height": 290,
+      "pixels": 17939
+    },
+    {
+      "type": "multi",
+      "width": 364,
+      "height": 290,
+      "pixels": 17346
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

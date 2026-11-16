@@ -1,0 +1,18 @@
+{
+  "odometry": {
+    "kitti_translation_error_percent": 64.58622847876978,
+    "kitti_rotation_error_deg_per_100m": 33.898181694672274,
+    "kitti_segments": 43,
+    "official_devkit_crosscheck": true,
+    "ape_rmse_m_no_alignment": 196.60818696935877,
+    "final_position_error_m": 342.21538947965377
+  },
+  "mapping": {
+    "kitti_translation_error_percent": 58.733162006686044,
+    "kitti_rotation_error_deg_per_100m": 17.18349015165743,
+    "kitti_segments": 43,
+    "official_devkit_crosscheck": true,
+    "ape_rmse_m_no_alignment": 160.80879214192697,
+    "final_position_error_m": 296.48576402403927
+  }
+}

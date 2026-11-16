@@ -1,0 +1,272 @@
+[
+  {
+    "case": "scan_02cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 9213,
+        "max_neighbor_height_delta_m": 0.01999648449805924,
+        "max_neighbor_distance_m": 0.7212684048502482,
+        "triangles": 17805,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 2166,
+        "max_neighbor_height_delta_m": 0.019961474980356053,
+        "max_neighbor_distance_m": 0.7498628927644645,
+        "triangles": 4100,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 2144,
+        "max_neighbor_height_delta_m": 0.01995695560097932,
+        "max_neighbor_distance_m": 0.7488714253755773,
+        "triangles": 4054,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "619ebaf8dbcb523a2eb900fd4034b9cc2d725990886833c565e507acc2bb914c"
+  },
+  {
+    "case": "scan_03cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 9343,
+        "max_neighbor_height_delta_m": 0.02997480299582333,
+        "max_neighbor_distance_m": 0.6815638837592688,
+        "triangles": 18236,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 2298,
+        "max_neighbor_height_delta_m": 0.029869699818597217,
+        "max_neighbor_distance_m": 0.7474680685860475,
+        "triangles": 4389,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 2294,
+        "max_neighbor_height_delta_m": 0.029891778946104397,
+        "max_neighbor_distance_m": 0.7498646651760084,
+        "triangles": 4356,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "8f991d583f8b0e5960d23184c0ecc313a7747e8fa225602d79c782395f82e80e"
+  },
+  {
+    "case": "scan_04cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 9351,
+        "max_neighbor_height_delta_m": 0.039293983113931764,
+        "max_neighbor_distance_m": 0.6685497828344655,
+        "triangles": 18273,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 2359,
+        "max_neighbor_height_delta_m": 0.03977388943648186,
+        "max_neighbor_distance_m": 0.7475142547971909,
+        "triangles": 4511,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 2313,
+        "max_neighbor_height_delta_m": 0.03989259235467091,
+        "max_neighbor_distance_m": 0.7468336714383528,
+        "triangles": 4403,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "62f02ffdc1792fc5fb35b304d9a507a6422f5633561484f51b17532a5c0a5c51"
+  },
+  {
+    "case": "full_02cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 10201,
+        "max_neighbor_height_delta_m": 0.0,
+        "max_neighbor_distance_m": 0.1303840426182922,
+        "triangles": 20000,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 2501,
+        "max_neighbor_height_delta_m": 0.0,
+        "max_neighbor_distance_m": 0.21540659715543878,
+        "triangles": 4800,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 2501,
+        "max_neighbor_height_delta_m": 0.0,
+        "max_neighbor_distance_m": 0.2154066303603508,
+        "triangles": 4800,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "471e055e25300445583fbd3134d7dc4754c98c31848c448ba107c3fbc184ef49"
+  },
+  {
+    "case": "full_03cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 10201,
+        "max_neighbor_height_delta_m": 0.0,
+        "max_neighbor_distance_m": 0.1303840426182922,
+        "triangles": 20000,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 2501,
+        "max_neighbor_height_delta_m": 0.0,
+        "max_neighbor_distance_m": 0.21540659715543878,
+        "triangles": 4800,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 2501,
+        "max_neighbor_height_delta_m": 0.0,
+        "max_neighbor_distance_m": 0.2154066303603508,
+        "triangles": 4800,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "5904c82c2e470ee9f5577cbb9cd3cac0f8a376f0da32cedc0317faa40e61e969"
+  },
+  {
+    "case": "full_04cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 10201,
+        "max_neighbor_height_delta_m": 0.03928571566939354,
+        "max_neighbor_distance_m": 0.12649111206132946,
+        "triangles": 20000,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 2501,
+        "max_neighbor_height_delta_m": 0.03928577899932861,
+        "max_neighbor_distance_m": 0.1741934979280297,
+        "triangles": 4800,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 2501,
+        "max_neighbor_height_delta_m": 0.033333420753479004,
+        "max_neighbor_distance_m": 0.17888540088157268,
+        "triangles": 4800,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "37c5e8a5d97177ba92e259d9edcb226bfe074effd67951f3fd896c5b067711e4"
+  },
+  {
+    "case": "sparse_02cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "91916e35ab83780451d41ea9ade3d5e0a8efc9a0006b1e9b1dca974c3d1a421d"
+  },
+  {
+    "case": "sparse_03cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "3aaf5ae9008bfea51915901fc6c63666e643b08515f5a0462dacfb62d804c343"
+  },
+  {
+    "case": "sparse_04cm",
+    "checks": [
+      {
+        "layer": 0,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 1,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      },
+      {
+        "layer": 2,
+        "valid_queries": 0,
+        "max_neighbor_height_delta_m": null,
+        "max_neighbor_distance_m": null,
+        "triangles": 0,
+        "cross_layer_triangles": 0
+      }
+    ],
+    "case_sha256": "d84af17c7ea11627b8e1e1ef944a5180712e507db5cbf8c87e9857f1f5a7cbf4"
+  }
+]

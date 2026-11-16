@@ -1,0 +1,185 @@
+{
+  "repository": "https://github.com/aws-robotics/aws-robomaker-small-warehouse-world",
+  "branch": "ros2",
+  "archive_url": "https://codeload.github.com/aws-robotics/aws-robomaker-small-warehouse-world/zip/refs/heads/ros2",
+  "archive_sha256": "02b269a68e0deaeb6b903499eb409360e069ad04f9d27d59ab3a7160f06a4d99",
+  "files": [
+    {
+      "path": "LICENSE",
+      "size": 927,
+      "sha256": "ef47b4ae2a1a8d38ef87b38dc5927967e7b472ffa3f7d125e89dbc8353a1e7af"
+    },
+    {
+      "path": "README.md",
+      "size": 3797,
+      "sha256": "7efcc16e9bbb586a7b125150b75435f34982004838684c8f096d2bcee41581d7"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_Bucket_01/model.sdf",
+      "size": 1853,
+      "sha256": "cba2afedc8566553a652e571344c91572be8f9eddc8c9621d75ac1cc99c710b7"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ClutteringA_01/model.sdf",
+      "size": 1591,
+      "sha256": "8a4174e8a9a0fe58c6b67564b2b15d97a629344c379ebae9dc58cfbd08f34538"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ClutteringC_01/model.sdf",
+      "size": 1582,
+      "sha256": "d2c2d44e634228c673f4569af3e16259242cef1c5fde970bc239131d2927c878"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ClutteringD_01/model.sdf",
+      "size": 1576,
+      "sha256": "4b6751b65cecf74e3e7166ef61e2ddf227167d8c35b0cef02285a197a805c843"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_DeskC_01/model.sdf",
+      "size": 1229,
+      "sha256": "2e723fa25b3c47df9a76d78d5eeae9d310135d6d407f1a73751631b3d8a2643b"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_GroundB_01/model.sdf",
+      "size": 1256,
+      "sha256": "12ef0d4d7ed2bbf18e5ca552c08d1cc1a69b49331f1cf6eaa41f2a0e53fcd0ac"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_Lamp_01/model.sdf",
+      "size": 1231,
+      "sha256": "beb3e7865bebb64ecaa966639d28fc56dc3cd12439a9f8d7770966c7aacfb9f5"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_PalletJackB_01/model.sdf",
+      "size": 1259,
+      "sha256": "f716574a2e2b000fb843d34f3f3c485fe880d10bd2b587c2e2a77fda878b4d7b"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_RoofB_01/model.sdf",
+      "size": 1609,
+      "sha256": "e0c967137288a9067286faf9e4e4959799893ed9956d39d52175760016401d23"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ShelfD_01/model.sdf",
+      "size": 1241,
+      "sha256": "9c93f0cab2a1eac18f01c4042677e78d2321c7c8cde02db6bbb7fdd23da1271e"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ShelfE_01/model.sdf",
+      "size": 1241,
+      "sha256": "94f7e3d97eac34b99ef40e7b56a9140adee7c119bf8e444ef2d5c033aa04d548"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ShelfF_01/model.sdf",
+      "size": 1241,
+      "sha256": "b10f60c2cb88f0aebf87e0bfe18c55d800392c87990fc4cf0d03adbf6e745f94"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_TrashCanC_01/model.sdf",
+      "size": 1249,
+      "sha256": "95334d565445a9bda3d15b5f422e3753713d2676b7400d792060365ca7dc0c69"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_WallB_01/model.sdf",
+      "size": 1244,
+      "sha256": "c921007e19c3c0d162902e063a4e9a49078233c66c8e52bd6d499ec8704b10a4"
+    },
+    {
+      "path": "worlds/no_roof_small_warehouse/no_roof_small_warehouse.world",
+      "size": 8002,
+      "sha256": "bd05d247e4715b7810c1f1edd8353a907af5bd8b81391c126dcb73803b7906bf"
+    },
+    {
+      "path": "worlds/small_warehouse/small_warehouse.world",
+      "size": 7732,
+      "sha256": "4a7d96866367df85668b09a71c60ce3a2807e7d3fe05df77a0edc62a1fa8e263"
+    }
+  ],
+  "collision_mesh_downloads": [
+    {
+      "path": "models/aws_robomaker_warehouse_Bucket_01/meshes/aws_robomaker_warehouse_Bucket_01_collision.DAE",
+      "size": 8723,
+      "sha256": "c619575cdd23ec8f42fb583317f619ff8b74f287dc7a46ebb5b9837e76d3c28b",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_Bucket_01/meshes/aws_robomaker_warehouse_Bucket_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_collision.DAE",
+      "size": 11934,
+      "sha256": "f2e592215a2e3fef5161da3e0a53339f83c7ccc059a75bce6dfc52e23eafa024",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ClutteringC_01/meshes/aws_robomaker_warehouse_ClutteringC_01_collision.DAE",
+      "size": 5906,
+      "sha256": "17ea0446b4310bc2828ba9abe48a86bed674f410611c389ff60cd7ff199b2440",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_ClutteringC_01/meshes/aws_robomaker_warehouse_ClutteringC_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ClutteringD_01/meshes/aws_robomaker_warehouse_ClutteringD_01_collision.DAE",
+      "size": 5913,
+      "sha256": "602a9683515439e085c8af2f9e2dca905210c7daeff093f1d74a5175d57f6ee0",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_ClutteringD_01/meshes/aws_robomaker_warehouse_ClutteringD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_DeskC_01/meshes/aws_robomaker_warehouse_DeskC_01_collision.DAE",
+      "size": 42466,
+      "sha256": "6066f9babcd950baf35bf2933a3e9d707d2fd2f7ac218d62882b75ab818c203f",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_DeskC_01/meshes/aws_robomaker_warehouse_DeskC_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_GroundB_01/meshes/aws_robomaker_warehouse_GroundB_01_collision.DAE",
+      "size": 5847,
+      "sha256": "82482bea3e67f61b43dd385f83e9478142310a88f6c407cec550c523d547891d",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_GroundB_01/meshes/aws_robomaker_warehouse_GroundB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_Lamp_01/meshes/aws_robomaker_warehouse_Lamp_01_collision.DAE",
+      "size": 5730,
+      "sha256": "262dccf5d5ff7d1859db119ff438c975bdf14e09fdcb8d36184c8afeca6f7be0",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_Lamp_01/meshes/aws_robomaker_warehouse_Lamp_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_PalletJackB_01/meshes/aws_robomaker_warehouse_PalletJackB_01_collision.DAE",
+      "size": 125470,
+      "sha256": "ca7886559e76cad6700c37f726b2285abdaa7364265042a639ebc70c31b9993e",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_PalletJackB_01/meshes/aws_robomaker_warehouse_PalletJackB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_RoofB_01/meshes/aws_robomaker_warehouse_RoofB_01_collision.DAE",
+      "size": 5814,
+      "sha256": "474e36bc7625611c0c45e947ae712e20a0deaa0890890f56fe3446a5873344d1",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_RoofB_01/meshes/aws_robomaker_warehouse_RoofB_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ShelfD_01/meshes/aws_robomaker_warehouse_ShelfD_01_collision.DAE",
+      "size": 12011,
+      "sha256": "1ecb3254a361230311251886165dab5150ba006088e5f1ad94284ae5c2fc6364",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_ShelfD_01/meshes/aws_robomaker_warehouse_ShelfD_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ShelfE_01/meshes/aws_robomaker_warehouse_ShelfE_01_collision.DAE",
+      "size": 12011,
+      "sha256": "ae1d25d5770ab46af26d27f60e36a5cab3fd506401a3e07b73b44eb0b4cdf920",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_ShelfE_01/meshes/aws_robomaker_warehouse_ShelfE_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_ShelfF_01/meshes/aws_robomaker_warehouse_ShelfF_01_collision.DAE",
+      "size": 20869,
+      "sha256": "2a1fb6e3429942f77d959aefdc608a6c0d9655759524e8921f8a4e9671660bb8",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_ShelfF_01/meshes/aws_robomaker_warehouse_ShelfF_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_TrashCanC_01/meshes/aws_robomaker_warehouse_TrashCanC_01_collision.DAE",
+      "size": 25282,
+      "sha256": "83741a96a3181a38c68cedd03a43c723275dfc448bffaaae8af8674d3572540e",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_TrashCanC_01/meshes/aws_robomaker_warehouse_TrashCanC_01_collision.DAE"
+    },
+    {
+      "path": "models/aws_robomaker_warehouse_WallB_01/meshes/aws_robomaker_warehouse_WallB_01_collision.DAE",
+      "size": 13127,
+      "sha256": "25abc9a936e6c94075847eb15f689dde08c43807fff9f40ec471acfb80021280",
+      "url": "https://raw.githubusercontent.com/aws-robotics/aws-robomaker-small-warehouse-world/ros2/models/aws_robomaker_warehouse_WallB_01/meshes/aws_robomaker_warehouse_WallB_01_collision.DAE"
+    }
+  ],
+  "source_commit": "ee0af733315e78432408c3cd98d378ecee5f767c"
+}

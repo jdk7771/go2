@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "input_frames_hashed": 271,
+  "auxiliary_hashes_verified": 8,
+  "algorithm_hashes_verified": true,
+  "trajectory_se3_and_coordinates_valid": true,
+  "official_kitti_metric_crosscheck": true,
+  "timing_medians_recomputed": true,
+  "saved_map_has_moments_and_no_historic_points": true,
+  "localization_queries": 11,
+  "accuracy_claim": "numerical consistency only; not a claim of matching paper accuracy"
+}

@@ -1,0 +1,61 @@
+{
+  "config": {
+    "resolution": 0.2,
+    "length": 5.0,
+    "neighbors": 20,
+    "interpolation_neighbors": 5,
+    "voxel_size": 0.1,
+    "curvature_threshold": 0.03,
+    "gradient_threshold": 0.03,
+    "inducing_points": 125,
+    "pca": true,
+    "lengthscale": 0.6,
+    "alpha": 10.0,
+    "signal_variance": 1.0,
+    "noise_variance": 0.0004,
+    "jitter": 1e-08,
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ],
+    "support_radius": 0.45,
+    "max_variance": 0.8,
+    "decay_rate": 1.0,
+    "history_ttl": 60.0,
+    "smoothing_sigma": 0.8,
+    "seed": 7
+  },
+  "input": "/home/jiang/snap/go2/fsgp_bgk_repro/data/hill.pcd",
+  "input_sha256": "d18fcc97609b5a7fcd4cac2ce14d6876a7bee6b77c15c2eb9e8c8e0a1b092c56",
+  "center": [
+    0,
+    0
+  ],
+  "raw_points": 200000,
+  "scan_points": 4000,
+  "known_coverage": 1.0,
+  "timing_ms": {
+    "features": 15.747172999908798,
+    "gp_and_score": 6.156156000088231,
+    "total": 23.31027999980506,
+    "bgk": 1.404576999902929
+  },
+  "note": "one frame only: BGK has no temporal evidence yet",
+  "environment": {
+    "python": "3.10.12 (main, Mar  3 2026, 11:56:32) [GCC 11.4.0]",
+    "executable": "/usr/bin/python3",
+    "numpy": "1.21.5",
+    "scipy": "1.8.0",
+    "platform": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+    "processor": "AMD Ryzen 9 7945HX with Radeon Graphics",
+    "thread_environment": {
+      "OPENBLAS_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "backend": "CPU / NumPy + SciPy",
+    "cuda_used": false
+  }
+}
+Map: fsgp_bgk_repro/outputs/hill_map/map.png

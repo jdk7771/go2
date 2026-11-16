@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "initial": {
+    "scene": "flat_ramp",
+    "frame": 7,
+    "count": 125,
+    "panels": 3,
+    "error": null,
+    "partition": {
+      "input": 2125,
+      "feature": 745,
+      "non_feature": 1380,
+      "voxel_representatives": 1250,
+      "candidates": 1995,
+      "retained": 125
+    },
+    "renders": [
+      {
+        "type": "cloud",
+        "points": 2250,
+        "triangles": 0
+      },
+      {
+        "type": "gp",
+        "points": 0,
+        "triangles": 20000
+      },
+      {
+        "type": "quad",
+        "points": 0,
+        "triangles": 20000
+      }
+    ]
+  },
+  "visited": [
+    "flat:50",
+    "flat:125",
+    "flat:500",
+    "ramp:50",
+    "ramp:125",
+    "ramp:500",
+    "steps:50",
+    "steps:125",
+    "steps:500",
+    "hill:50",
+    "hill:125",
+    "hill:500",
+    "quick:50",
+    "quick:125",
+    "quick:500",
+    "table:50",
+    "table:125",
+    "table:500",
+    "flat_ramp:50",
+    "flat_ramp:125",
+    "flat_ramp:500"
+  ],
+  "combinedFrames": 8,
+  "profileSlider": true,
+  "quadraticControls": true,
+  "sharedCameraInteraction": true,
+  "homepageEntry": true,
+  "mobileOverflow": false,
+  "mobileForeground": [
+    {
+      "type": "cloud",
+      "width": 364,
+      "height": 310,
+      "pixels": 12752
+    },
+    {
+      "type": "gp",
+      "width": 364,
+      "height": 310,
+      "pixels": 11328
+    },
+    {
+      "type": "quad",
+      "width": 364,
+      "height": 310,
+      "pixels": 11525
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

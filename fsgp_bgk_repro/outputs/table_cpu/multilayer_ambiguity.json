@@ -1,0 +1,33 @@
+{
+  "columns": [
+    "x",
+    "y",
+    "target_z",
+    "curvature",
+    "height_variation"
+  ],
+  "center_surface_features": [
+    [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.100000023841858,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.2000000476837158,
+      0.0,
+      0.0
+    ]
+  ],
+  "explanation": "The three layers have the same (x,y,kappa,g) input but different target heights. A single GP prediction for this query does not encode all three layers or clearance."
+}

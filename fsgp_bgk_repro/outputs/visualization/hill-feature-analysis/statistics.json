@@ -1,0 +1,204 @@
+{
+  "scene": "official hill point cloud",
+  "method": "FSGP",
+  "inducing_points": 125,
+  "frame": 8,
+  "timestamp_seconds": 0.7000000000000001,
+  "shape_yx": [
+    25,
+    25
+  ],
+  "resolution_m": 0.2,
+  "primary": {
+    "n_cells": 625,
+    "pearson_r": 0.766223724030299,
+    "spearman_rho": 0.7490930941263211,
+    "linear_fit_g_m": {
+      "intercept_m": 0.02484578033890573,
+      "coefficient_m_per_slope": 0.05595186439308792,
+      "in_sample_r_squared": 0.5870987952668588
+    },
+    "slope_range": [
+      0.021564943263911313,
+      1.816974264189518
+    ],
+    "height_variation_m_range": [
+      0.014466687999523,
+      0.14591545927527805
+    ]
+  },
+  "examples": [
+    {
+      "label": "A",
+      "grid_index": 451,
+      "xy_m": [
+        -1.3,
+        1.3
+      ],
+      "gp_slope": 1.2231036054489104,
+      "gp_angle_degrees": 50.73083420837484,
+      "height_variation_m": 0.04382962494561117,
+      "height_variation_cm": 4.382962494561117,
+      "local_plane_slope": 0.3977092812902564,
+      "mean_horizontal_neighbor_distance_m": 0.187953899343596,
+      "gp_latent_variance": 0.0010623255091711803,
+      "curvature": 0.015829994975819665
+    },
+    {
+      "label": "B",
+      "grid_index": 528,
+      "xy_m": [
+        -0.9,
+        1.9000000000000001
+      ],
+      "gp_slope": 1.300763538736372,
+      "gp_angle_degrees": 52.44766500060806,
+      "height_variation_m": 0.14591545927527805,
+      "height_variation_cm": 14.591545927527804,
+      "local_plane_slope": 2.3298709291524795,
+      "mean_horizontal_neighbor_distance_m": 0.14453582145221722,
+      "gp_latent_variance": 0.007742919410194782,
+      "curvature": 0.004704157807659282
+    }
+  ],
+  "example_selection": "A=min negative OLS residual; B=max positive residual within +/-10% of A's GP slope",
+  "example_height_variation_ratio_B_over_A": 3.3291514462272196,
+  "common_mask_inducing_sensitivity": {
+    "50": {
+      "n_cells": 622,
+      "pearson_r": 0.7942824598214723,
+      "spearman_rho": 0.8134673233421773,
+      "linear_fit_g_m": {
+        "intercept_m": 0.026103199170429154,
+        "coefficient_m_per_slope": 0.06229148895717819,
+        "in_sample_r_squared": 0.6308846259800492
+      },
+      "slope_range": [
+        0.0069009128913517116,
+        1.7880226020286567
+      ],
+      "height_variation_m_range": [
+        0.014466687999523,
+        0.14591545927527805
+      ]
+    },
+    "125": {
+      "n_cells": 622,
+      "pearson_r": 0.7658019518150686,
+      "spearman_rho": 0.7495692446314247,
+      "linear_fit_g_m": {
+        "intercept_m": 0.02491088616706476,
+        "coefficient_m_per_slope": 0.05589023232050859,
+        "in_sample_r_squared": 0.5864526294037695
+      },
+      "slope_range": [
+        0.021564943263911313,
+        1.816974264189518
+      ],
+      "height_variation_m_range": [
+        0.014466687999523,
+        0.14591545927527805
+      ]
+    },
+    "500": {
+      "n_cells": 622,
+      "pearson_r": 0.882214628457983,
+      "spearman_rho": 0.8816074183398648,
+      "linear_fit_g_m": {
+        "intercept_m": 0.022232602758385452,
+        "coefficient_m_per_slope": 0.06560603360741911,
+        "in_sample_r_squared": 0.7783026506652586
+      },
+      "slope_range": [
+        0.013320750820295331,
+        1.9533313428949322
+      ],
+      "height_variation_m_range": [
+        0.014466687999523,
+        0.14591545927527805
+      ]
+    }
+  },
+  "one_meter_block_means": {
+    "n_cells": 25,
+    "pearson_r": 0.8986629209162488,
+    "spearman_rho": 0.9030769230769231,
+    "linear_fit_g_m": {
+      "intercept_m": 0.018744160753771236,
+      "coefficient_m_per_slope": 0.0703715012269782,
+      "in_sample_r_squared": 0.807595045429724
+    },
+    "slope_range": [
+      0.13203938550311747,
+      1.1030322539551514
+    ],
+    "height_variation_m_range": [
+      0.022129299165865618,
+      0.09567040311560804
+    ]
+  },
+  "same_scan_local_plane_slope": {
+    "n_cells": 625,
+    "pearson_r": 0.8990972902576896,
+    "spearman_rho": 0.9453976898500861,
+    "linear_fit_g_m": {
+      "intercept_m": 0.023327483531615283,
+      "coefficient_m_per_slope": 0.06723197913021606,
+      "in_sample_r_squared": 0.8083759373487183
+    },
+    "slope_range": [
+      0.028618650718381523,
+      2.3298709291524795
+    ],
+    "height_variation_m_range": [
+      0.014466687999523,
+      0.14591545927527805
+    ]
+  },
+  "definitions": {
+    "gp_slope": "norm of GP XY partial derivatives with interpolated kappa,g held fixed; m/m",
+    "height_variation": "20-neighbor mean(abs(z_neighbor-z_point)), including self, interpolated with 5-neighbor XY IDW; metres"
+  },
+  "limits": [
+    "One scene and one frame; no population-wide inference",
+    "Adjacent cells share neighborhoods; no iid significance tests",
+    "g is itself a GP input; these are statistically coupled features",
+    "The local-plane estimator is a diagnostic, not independent ground truth",
+    "OLS R-squared is in-sample, not predictive validation"
+  ],
+  "validation": {
+    "height_variation_recomputed_exactly": true,
+    "correlations_and_OLS_independently_reconciled": true,
+    "duplicate_world_cells": 0
+  },
+  "sources": [
+    {
+      "path": "outputs/cpu/hill_m50_fsgp.npz",
+      "sha256": "e0791b75ce169dd9475e5636d2536f27e9e11abb155349a9deeda5dacb571e04"
+    },
+    {
+      "path": "outputs/cpu/hill_m125_fsgp.npz",
+      "sha256": "66a36bf97e764a9010e367cf48f58639afc941d1a9d579195e2f3198a81f855e"
+    },
+    {
+      "path": "outputs/cpu/hill_m500_fsgp.npz",
+      "sha256": "4e5291d1587307fecd2fb3b887283c6b6f08c4db7b76a291b85f8af5dfb11937"
+    },
+    {
+      "path": "outputs/cpu/hill_m125_evidence.npz",
+      "sha256": "f88ec4c1c4324a7b7e60af2578bc8dddace522caa0cc9bb4b892142ccd3d8613"
+    },
+    {
+      "path": "core.py",
+      "sha256": "c176374d9d8bad4faa4841738a6798e24b3cb8bfe466e0cbe71b4974313009bb"
+    },
+    {
+      "path": "outputs/cpu/protocol.json",
+      "sha256": "99132a0ee4eee0a0cf7aad5660bd0c7de6de5c9d189160690d86513c1da945b9"
+    },
+    {
+      "path": "analyze_feature_correlation.py",
+      "sha256": "c2b1b38a07e0676d9d62ace3278b5eea755bb5551698227cfd85f9e7ad3354a5"
+    }
+  ]
+}

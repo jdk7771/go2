@@ -1,0 +1,6 @@
+{
+  "repository": "https://github.com/rsasaki0109/localization_zoo",
+  "revision_observed_after_inspection": "5673888a0030c64f94c8e840bddab7d13fafa62b",
+  "used_in_implementation": false,
+  "purpose": "read-only cross-check; this implementation uses point-wise voxel neighborhoods and a signed-distance approximation, so it is not a drop-in author implementation"
+}

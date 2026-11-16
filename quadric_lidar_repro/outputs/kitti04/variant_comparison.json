@@ -1,0 +1,17 @@
+[
+  {
+    "variant": "Schur LS + normal gate + Cauchy (current)",
+    "odometry_percent": 633.1113417484303,
+    "mapping_percent": 626.670858679942
+  },
+  {
+    "variant": "Taubin + normal gate + Cauchy",
+    "odometry_percent": 52.81262266081161,
+    "mapping_percent": 35.48139654273581
+  },
+  {
+    "variant": "Taubin, direct formula residuals",
+    "odometry_percent": 64.58622847876978,
+    "mapping_percent": 58.733162006686044
+  }
+]

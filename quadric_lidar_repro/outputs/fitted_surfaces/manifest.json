@@ -1,0 +1,51 @@
+{
+  "scenes": [
+    {
+      "id": "hill",
+      "name": "丘陵",
+      "frames": 8,
+      "source": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/hill.pcd"
+    },
+    {
+      "id": "forest",
+      "name": "森林",
+      "frames": 8,
+      "source": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/forest.pcd"
+    },
+    {
+      "id": "quick",
+      "name": "Quick 地形",
+      "frames": 8,
+      "source": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/quick.pcd"
+    },
+    {
+      "id": "desert",
+      "name": "沙漠",
+      "frames": 8,
+      "source": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/desert.pcd"
+    },
+    {
+      "id": "mountain",
+      "name": "山地",
+      "frames": 8,
+      "source": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/mountain.pcd"
+    },
+    {
+      "id": "snow",
+      "name": "雪地",
+      "frames": 8,
+      "source": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/snow.pcd"
+    },
+    {
+      "id": "vocano",
+      "name": "火山",
+      "frames": 8,
+      "source": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/vocano.pcd"
+    }
+  ],
+  "default_scene": "hill",
+  "default_frame": 7,
+  "detail_patch_id": 12,
+  "source_protocol_sha256": "98f27d2d1338eb14a96709f92b69375e74d91605b0db1e4a6864885e3a461926",
+  "note": "Saved experimental scans include 0.06m thinning, 15% dropout and 1.5cm added Z noise. Same labels and Taubin fitting as frozen benchmark; not the paper's original quadric solver or a complete FSGP reproduction."
+}

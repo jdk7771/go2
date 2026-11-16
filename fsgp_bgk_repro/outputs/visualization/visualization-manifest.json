@@ -1,0 +1,34 @@
+{
+  "input_run": "/home/jiang/snap/go2/fsgp_bgk_repro/outputs/cpu",
+  "protocol_sha256": "99132a0ee4eee0a0cf7aad5660bd0c7de6de5c9d189160690d86513c1da945b9",
+  "scenes": [
+    "flat",
+    "ramp",
+    "steps",
+    "hill",
+    "quick",
+    "table"
+  ],
+  "experiment_scenes": [
+    "flat",
+    "ramp",
+    "steps",
+    "hill",
+    "quick",
+    "table"
+  ],
+  "inspection_scenes": [],
+  "input_table_run": "/home/jiang/snap/go2/fsgp_bgk_repro/outputs/table_cpu",
+  "table_protocol_sha256": "789a9414aca9e74d90d8693c50e7c5c5e458ef2abbc98b02f8415270e8b6e9f9",
+  "counts": [
+    50,
+    125,
+    500
+  ],
+  "map_frame": 8,
+  "cost_grid": "full 25x25 saved values, no rounding or imputation",
+  "point_display": "deterministic subsample, max 900 scan points / 1200 terrain points; table: 6000 points stratified by component",
+  "shared_color_scale": "shared across all methods and M within each scene",
+  "fragment_bytes": 928624,
+  "raw_json_bytes": 2133952
+}

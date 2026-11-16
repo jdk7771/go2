@@ -68,6 +68,54 @@ class AblationChecks(unittest.TestCase):
         )
         np.testing.assert_allclose(actual, [0.0, 0.0, -0.2, 0.3])
 
+    def test_lateral_bound_is_explicit_and_does_not_change_other_bounds(self):
+        original = self.problem("full")
+        wide = core.TrajectoryProblem(
+            self.cloud, original.point_weights, self.initial, self.half,
+            0.4, suite.PLANNING_CLEARANCE, "full", suite.planner_weights(),
+            lateral_limit=0.6,
+        )
+        bounds = np.array(original.bounds()).reshape(-1, 6, 2)
+        expanded = np.array(wide.bounds()).reshape(-1, 6, 2)
+        np.testing.assert_array_equal(bounds[:, 1], np.tile([-0.16, 0.16], (3, 1)))
+        np.testing.assert_array_equal(expanded[:, 1], np.tile([-0.6, 0.6], (3, 1)))
+        np.testing.assert_array_equal(bounds[:, [0, 2, 3, 4, 5]], expanded[:, [0, 2, 3, 4, 5]])
+        np.testing.assert_array_equal(original.initial, wide.initial)
+        self.assertEqual(original.cost_grad(original.pack(self.initial))[0], wide.cost_grad(wide.pack(self.initial))[0])
+        for value in (0, -0.1, np.inf, np.nan):
+            with self.subTest(value=value), self.assertRaises(ValueError):
+                core.TrajectoryProblem(
+                    self.cloud, original.point_weights, self.initial, self.half,
+                    0.4, suite.PLANNING_CLEARANCE, "full", suite.planner_weights(),
+                    lateral_limit=value,
+                )
+
+    def test_tall_block_requires_a_detour_and_preserves_old_scene_seeds(self):
+        scene = scenes.tall_obstacle_scene()
+        center = np.array(scene.params["obstacle_center_m"])
+        size = np.array(scene.params["obstacle_size_m"])
+        self.assertAlmostEqual(center[2] - size[2] / 2, 0)
+        # Even the bounding sphere of a body at the upper z bound cannot top it.
+        self.assertGreater(size[2], 0.52 + np.linalg.norm(self.half))
+        initial = scenes.initial_trajectory(0.4)
+        for pose in initial[[0, -1]]:
+            distance = core.obb_signed_distance(scene.truth_surface, pose[:3], np.eye(3), self.half)[0].min()
+            self.assertGreater(distance, 0.02)
+        pose = initial[len(initial) // 2].copy()
+        self.assertLess(core.obb_signed_distance(scene.truth_surface, pose[:3], np.eye(3), self.half)[0].min(), 0)
+        # Neither side fits in the historical y interval, but the wider interval
+        # admits a level, zero-angle route on either side of the block.
+        lower_edge, upper_edge = center[1] - size[1] / 2, center[1] + size[1] / 2
+        self.assertLess(lower_edge - self.half[1] - 0.02, -0.16)
+        self.assertGreater(upper_edge + self.half[1] + 0.02, 0.16)
+        for y in (-0.4, 0.55):
+            pose[1] = y
+            self.assertGreater(core.obb_signed_distance(scene.truth_surface, pose[:3], np.eye(3), self.half)[0].min(), 0.02)
+        names = [item.name for item in scenes.build_scenes(0.4, self.half)]
+        self.assertEqual(len(names), 21)
+        self.assertEqual(names[19:], ["open_entry_flat_floor_channel_30deg", scene.name])
+        self.assertEqual(len(set(names)), len(names))
+
     def test_uniform_start_does_not_call_scene_seed(self):
         from unittest.mock import patch
 

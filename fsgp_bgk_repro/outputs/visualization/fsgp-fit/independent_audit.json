@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "cases": 42,
+  "shared_input_frames": 14,
+  "combined_region_method_metrics_recomputed": 360,
+  "pooled_rows_recomputed": 45,
+  "max_serialized_polynomial_error_m": 7.091686066718061e-07,
+  "max_metric_difference_m": 8.999999995262797e-08,
+  "checks": [
+    "Exporter and original mapping source hashes match",
+    "Case hashes and original NPZ inputs match",
+    "M variants share the same XYZ input",
+    "Displayed retained points match the actual fitted observations",
+    "All global quadratic displays match their explicit polynomial",
+    "All composite truth values, region metrics and 8-frame pooled metrics independently recomputed"
+  ]
+}

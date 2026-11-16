@@ -1,0 +1,62 @@
+{
+  "repository": "https://github.com/ZJU-FAST-Lab/FSGP_BGK",
+  "revision": "6e5976957734b90f367f8460a6eea6a0fc18c1cc",
+  "files": [
+    {
+      "path": "src/simulation_env_ros2/PCD/desert.pcd",
+      "size": 2400219,
+      "sha": "51ddcd62a51565f5e2c758e3df23c33d19cf6b0a",
+      "local_path": "quadric_lidar_repro/data/fsgp_terrain/desert.pcd",
+      "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/desert.pcd",
+      "sha256": "d8d9ebb2d2d7ec6901ee93c7234a4b60cf7839f61c2f4e7ee04b4b3173d76d4f"
+    },
+    {
+      "path": "src/simulation_env_ros2/PCD/forest.pcd",
+      "size": 1692990,
+      "sha": "60c9964059db5cffe8d6c2f92e83cacdc1d8c014",
+      "local_path": "quadric_lidar_repro/data/fsgp_terrain/forest.pcd",
+      "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/forest.pcd",
+      "sha256": "31c09a96b84f85e0ab07d0735226de6103593a3781d60891a926d8d86d054903"
+    },
+    {
+      "path": "src/simulation_env_ros2/PCD/hill.pcd",
+      "size": 4800219,
+      "sha": "32490e5f2a090b83e943a5c6da7d4bc0c68504f6",
+      "local_path": "fsgp_bgk_repro/data/hill.pcd",
+      "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/hill.pcd",
+      "sha256": "d18fcc97609b5a7fcd4cac2ce14d6876a7bee6b77c15c2eb9e8c8e0a1b092c56"
+    },
+    {
+      "path": "src/simulation_env_ros2/PCD/mountain.pcd",
+      "size": 1200217,
+      "sha": "0e733b088fa0b4fc716537a000be7d4e4327db42",
+      "local_path": "quadric_lidar_repro/data/fsgp_terrain/mountain.pcd",
+      "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/mountain.pcd",
+      "sha256": "73eef197c44a7a067d64c740a302f6d1d80aaccd27b8b05d593928e167bd5cca"
+    },
+    {
+      "path": "src/simulation_env_ros2/PCD/quick.pcd",
+      "size": 2400219,
+      "sha": "1b67e7e0b5fad1b94175658d433f5f43b8279bb2",
+      "local_path": "fsgp_bgk_repro/data/quick.pcd",
+      "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/quick.pcd",
+      "sha256": "8d358bd27597c45f529d4d7b76c9cd3c4931fb711f073cab9e3725473c818264"
+    },
+    {
+      "path": "src/simulation_env_ros2/PCD/snow.pcd",
+      "size": 12000219,
+      "sha": "d73534666096cd6795e533ef0fc1e5a94030a322",
+      "local_path": "quadric_lidar_repro/data/fsgp_terrain/snow.pcd",
+      "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/snow.pcd",
+      "sha256": "ee0331a8543cf3bb99f799764aec38faf189f67f29c2aae509f09a7da1dea7a1"
+    },
+    {
+      "path": "src/simulation_env_ros2/PCD/vocano.pcd",
+      "size": 2400219,
+      "sha": "f3e97edb9c89f89f400943fcc0aa867a7cd63a83",
+      "local_path": "quadric_lidar_repro/data/fsgp_terrain/vocano.pcd",
+      "url": "https://raw.githubusercontent.com/ZJU-FAST-Lab/FSGP_BGK/6e5976957734b90f367f8460a6eea6a0fc18c1cc/src/simulation_env_ros2/PCD/vocano.pcd",
+      "sha256": "84b0450e7c4fed69874a2cbbb8374e5a0e35108b1817c471c39351c308e958e2"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>大桌子：30 近邻与多层二次曲面</title>
+<link rel="stylesheet" href="./viewer.css?v=1">
+<script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
+</head><body><main>
+<header><a href="../">← 原场景首页</a><a href="../fsgp-fit/">原拟合对照 ↗</a><h1>一张桌子，三个独立高度层</h1><p>先限制高度，再取该层的 30 个近邻。地面、桌底、桌面分别拟合，同一 XY 同时保留多个 Z。</p></header>
+<div class="notice"><b>更新：不预设分层</b><span><a href="../table-local/?v=1">打开只按局部 30 点拟合，再按几何一致性组合的结果 →</a> 没有全局高度峰和曲面数量假设。</span></div>
+<div class="notice"><b>本页为全局分层对照</b><span>本页先按整帧高度峰分层，再做多层局部二次拟合。FSGP 原论文没有这一步二次曲面分割。桌腿、桌边等竖直表面保留为点云。</span></div>
+<section class="toolbar">
+<label>拟合输入<select id="source"><option value="scan">同一帧 2125 点 · 含噪声</option><option value="full">完整点云 32683 点 · 无噪声</option><option value="sparse">原 M=125 · 稀疏性对照</option></select></label>
+<label>每层高度门限<select id="gate"><option value="04">±4 cm</option><option value="03">±3 cm</option><option value="02">±2 cm</option></select></label>
+<div class="presets"><button data-view="orbit" class="active">立体</button><button data-view="side">侧面</button><button data-view="under">桌底</button><button data-view="top">俯视</button></div>
+<span id="status" role="status">正在读取拟合结果…</span></section>
+<div id="summary" class="summary"></div>
+<div class="view-tools"><div id="layer-toggles"></div><label><input type="checkbox" id="overlay">曲面叠加输入点</label><label><input type="checkbox" id="wire">显示网格</label><label><input type="checkbox" id="explode">展开高度层（仅显示位移）</label></div>
+<p id="explode-note" class="muted">三维与剖面均为真实高度；三个视角同步，拖动旋转、滚轮缩放。</p>
+<section class="panels">
+<article><h2>① 输入点云与高度分层</h2><div id="cloud-view" class="viewport"></div><p>绿：地面 · 蓝：桌底 · 橙：桌面 · 灰：带外观测</p></article>
+<article><h2>② 单层局部二次对照</h2><div id="old-view" class="viewport"></div><p>同一输入，K=30；每个 XY 只留一个 Z，无高度门限</p></article>
+<article><h2>③ 多层局部二次拟合</h2><div id="multi-view" class="viewport"></div><p>每层独立取 30 点，独立建网，不跨层连接</p></article>
+</section>
+<section class="profile-section"><div class="section-heading"><h2>看剖面：同一 X 有三条高度曲线</h2><a href="./profile.png" target="_blank">默认剖面图 ↗</a></div>
+<div class="profile-controls"><label>剖面 Y = <output id="slice-value">0.00 m</output><input id="slice" type="range" min="0" max="100" value="50"></label><label><input id="show-old" type="checkbox" checked>显示单层对照</label></div>
+<div id="profile" role="img" aria-label="三层拟合与输入点的真实高度剖面"></div><p id="profile-value" class="muted">移动到曲线上读取同一 X 的各层拟合高度。</p>
+<p class="muted">附近输入点取剖面 ±0.10 m 带。所有曲线均为实际拟合值；无效处断开，不插值补线。“展开高度层”不改变这里的数值。</p></section>
+<section class="details"><article><h2>查一下这次用了哪 30 个点</h2><div class="probe-controls"><label>查询位置<select id="probe"></select></label><label>查看高度层<select id="probe-layer"></select></label><label><input id="show-neighbors" type="checkbox" checked>高亮近邻</label></div><p id="probe-info"></p><p id="probe-details" class="muted"></p><div id="probe-heights"></div><p class="muted">红色圆点是该层选取的近邻；红色十字是查询位置。查询在局部 XY 凸包外、缺少支持或不足 30 点时留空。</p></article>
+<article><h2>拟合效果与覆盖率</h2><div id="metrics"></div><p class="muted">误差使用合成场景几何真值，真值仅参与评估。覆盖率分母为该层在整个窗口内的真实范围；MAE 只统计有效且位于真实表面内的查询。</p><p id="outside-note" class="muted"></p></article></section>
+<section class="method"><h2>这次为什么不会连成一张面</h2><ol><li>只从 XYZ 的高度直方图检测密度峰，再以最近峰和高度门限分层，每个点最多属于一层。</li><li>先筛高度，再取半径 0.75 m 内的 30 个 3D 近邻。每个 XY 对每层分别拟合六系数二次函数；不足 30 点留空。</li><li>最近 XY 观测需在 0.20 m 内，查询需在这 30 点的 XY 凸包内；拟合退化或预测超出本层高度带时留空。</li><li>每层单独保存网格，只连接同层三个有效顶点；三角形顶点高差超过 4 cm 时不画。没有跨层连线或补洞。</li></ol><p>这是针对桌子近水平层的诊断。全局高度峰分层不能直接替代任意斜坡、竖直面或复杂曲面的通用分割。原同帧含噪声及随机丢点，完整点云没有模拟激光遮挡。</p></section>
+<section class="static-preview"><div class="section-heading"><h2>默认同帧 · ±4 cm 静态对比</h2><a href="./surfaces.png" target="_blank">放大 ↗</a></div><img src="./surfaces.png" alt="同一输入的点云、单层二次拟合与三层独立二次拟合对比"></section>
+<footer><a href="./REPORT.md" target="_blank">方法与结果说明</a><a href="./speed/REPORT.md" target="_blank">当前多层拟合速度实测</a><a href="./manifest.json" target="_blank">输入来源与完整参数</a><a href="./metrics.json" target="_blank">全部九组指标</a><a href="./independent-audit.json" target="_blank">独立近邻与网格校验</a><span>5×5 m 窗口 · 5 cm 网格 · CPU 离线拟合结果</span></footer>
+</main><script type="module" src="./viewer.js?v=1"></script></body></html>

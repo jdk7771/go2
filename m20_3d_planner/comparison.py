@@ -35,6 +35,13 @@ def compare(paths: list[Path], output: Path, mode: str = "full") -> dict:
     )
     tables = []
     for run in runs:
+        for key, default in (("solver", "lbfgsb"), ("dynamics_config", None)):
+            if run.metadata.get(key, default) != reference.metadata.get(key, default):
+                raise ValueError(f"Unmatched protocol {key}: {run.path}")
+        if run.metadata.get("lateral_limit_m", 0.16) != reference.metadata.get(
+            "lateral_limit_m", 0.16
+        ):
+            raise ValueError(f"Unmatched protocol lateral_limit_m: {run.path}")
         if run.scenes != names:
             raise ValueError("Runs must contain the same ordered scenes")
         for key in matched_keys:

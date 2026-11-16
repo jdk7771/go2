@@ -110,6 +110,21 @@ class SavedRun:
         prefix = self.path / "trials" / f"{name}__{mode}"
         with np.load(prefix.with_suffix(".npz")) as data:
             result = {"final": data["optimized_trajectory"], "metrics": row}
+            if "iteration_wrenches" in data:
+                result["dynamics"] = {
+                    "wrenches": data["iteration_wrenches"],
+                    "twists": data["iteration_twists"],
+                    "times": data["iteration_times"],
+                    "kinetic": data["iteration_kinetic_energy"],
+                }
+                if "iteration_accelerations" in data:
+                    result["dynamics"].update(
+                        accelerations=data["iteration_accelerations"],
+                        time_steps=data["iteration_time_steps"],
+                        scheduled_time_steps=data["iteration_scheduled_time_steps"],
+                    )
+                if "iteration_motion_steps" in data:
+                    result["dynamics"]["motion_steps"] = data["iteration_motion_steps"]
         with np.load(prefix.with_suffix(".validation.npz")) as data:
             result.update(dense=data["dense_poses"], clearance=data["dense_clearance"])
         if history_path(self.path, name, mode).exists():
@@ -124,12 +139,6 @@ def replay_trial(task: tuple[str, str, str]) -> dict:
     if history_path(run, scene, mode).exists():
         return verify_replay(run, scene, mode)
     protocol = json.loads((run / "protocol.json").read_text())
-    if protocol["weights"] != asdict(settings.planner_weights()):
-        raise ValueError("Refusing to replay with different objective weights")
-    if protocol["activation_distance_m"] != settings.PLANNING_CLEARANCE:
-        raise ValueError(
-            "Refusing to replay with different collision activation distance"
-        )
     if any(protocol[key] != value for key, value in settings.SOLVER_OPTIONS.items()):
         raise ValueError("Refusing to replay with different solver stopping settings")
     with np.load(run / "scenes" / f"{scene}.npz") as data:
@@ -139,6 +148,12 @@ def replay_trial(task: tuple[str, str, str]) -> dict:
             data["body_half_extents"],
         )
     snapshots = []
+    config_values = dict(protocol.get("dynamics_config") or {})
+    if protocol.get("solver") == "ray_dynamics" and not {"max_translation_step", "max_rotation_step"} & config_values.keys():
+        # Preserve the original uncapped dynamics when explicitly replaying v1.
+        config_values.update(max_translation_step=None, max_rotation_step=None)
+    if protocol.get("solver") == "ray_dynamics":
+        config_values.setdefault("time_step_growth", 1.)
     _, _, history, _ = experiment.optimize_from_cloud(
         cloud,
         initial,
@@ -148,6 +163,11 @@ def replay_trial(task: tuple[str, str, str]) -> dict:
         protocol["maxiter"],
         pose_history=snapshots,
         point_selection=PointSelection(**protocol.get("point_selection", {})),
+        lateral_limit=protocol.get("lateral_limit_m", 0.16),
+        solver=protocol.get("solver", "lbfgsb"),
+        dynamics_config=(experiment.RayDynamicsConfig if protocol.get("solver") == "ray_dynamics" else experiment.DynamicsConfig)(**config_values),
+        weights=core.PlannerWeights(**protocol["weights"]),
+        activation_distance=protocol["activation_distance_m"],
     )
     costs = np.array([entry["cost"] for entry in history])
     destination = run / "replay" / f"{scene}__{mode}.npz"

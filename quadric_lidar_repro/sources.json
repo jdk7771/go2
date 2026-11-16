@@ -1,0 +1,19 @@
+{
+  "paper": {
+    "url": "https://arxiv.org/pdf/2304.14190v1",
+    "sha256": "9743d14ad7f4dde12798ca13b99fb43876ae8d6cf8552fcd211c6d0039e206d9"
+  },
+  "paper_html": {
+    "url": "https://arxiv.org/html/2304.14190v1",
+    "sha256": "895737a75e72954da9724108d3cd14f2b429330b1d506d4e67b7127723b56652"
+  },
+  "author_publications": "https://patrickrim.com/publications/",
+  "author_repository": "not found in paper, author publication link, or public repository search",
+  "quadric_fitting_reference": {
+    "title": "Extraction of Quadrics From Noisy Point-Clouds Using a Sensor Noise Model",
+    "doi": "10.1109/ROBOT.2010.5509463",
+    "source": "https://www.researchgate.net/publication/221076381_Extraction_of_Quadrics_From_Noisy_Point-Clouds_Using_a_Sensor_Noise_Model",
+    "content": "author-uploaded full text, Sec III LS, Schur complement"
+  },
+  "kitti_manifest_sha256": "0adadf754b3c9ed8b64fffdcbb318460c772d37eb2eee690cf8ca18255a37e48"
+}
