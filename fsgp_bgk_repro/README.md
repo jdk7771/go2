@@ -11,7 +11,87 @@
 [丘陵方法对照](outputs/cpu/hill_m125.png) · [逐帧指标](outputs/cpu/per_frame.csv) ·
 [结果复核记录](outputs/cpu/audit.json)。
 
+## 当前点云实验与 FSGP 对比（2026-11-17）
+
+新增严格 20×20 cm 局部二次拟合、三种边界跳变指标、10–60 cm 净空、
+50×80 cm 机身几何评估，以及 Q20 与本地 FSGP CPU 参考的 81 组配对测评。
+
+- [方法、计算公式和 17 场景结果](../step.md)
+- [Q20 / FSGP 效果测评与限制](outputs/visualization/fsgp-q20/report.md)
+- [共同支持误差、覆盖率、危险排序与计时总览](outputs/visualization/fsgp-q20/comparison.png)
+- [逐场景／逐图耗时记录](outputs/visualization/assessment/timing/report.md)
+
+当前仓库保存源码、测试和选定的实测报告；新增的大型点云、NPZ、渲染二进制和逐例网页数据
+由脚本生成，不随本次源码提交。已有历史数据继续保留。**首次检出此版本，需要先生成新场景和查看数据，
+再启动下方的 42482 服务**；只有报告文件不足以运行所有交互窗口。所有新旧查看器均沿用 42482。
+
+```bash
+cd /path/to/go2
+# Python 需要 requirements.txt 中的 NumPy、SciPy、Matplotlib。
+# 本机可用 /usr/bin/python3，其他机器应使用已装齐依赖的 Python。
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export MPLCONFIGDIR=/tmp/fsgp-bgk-matplotlib
+
+# 单个大场景、三个独立通道、多级台阶，随后生成全部 17 场景拟合与评估。
+/usr/bin/python3 -m fsgp_bgk_repro.composite_scene
+/usr/bin/python3 -m fsgp_bgk_repro.corridor_scenes
+/usr/bin/python3 -m fsgp_bgk_repro.mixed_steps_scene
+/usr/bin/python3 -m fsgp_bgk_repro.scene_fit_catalog
+/usr/bin/python3 -m fsgp_bgk_repro.assessment_export
+
+# 9 场景 × 3 噪声／密度 × 3 种子，含 8 帧时序小实验。
+/usr/bin/python3 -m fsgp_bgk_repro.compare_fsgp_q20
+/usr/bin/python3 -m fsgp_bgk_repro.compare_fsgp_q20_report
+/usr/bin/python3 -m fsgp_bgk_repro.plot_fsgp_q20
+/usr/bin/python3 -m fsgp_bgk_repro.audit_fsgp_q20
+
+# 本轮完整 Python 单元测试：42 项。
+/usr/bin/python3 -m unittest discover -s fsgp_bgk_repro/tests -v
+
+# 服务若已在运行，直接刷新原页面，不再启动第二个服务。
+/usr/bin/python3 fsgp_bgk_repro/serve_visualization.py
+```
+
+访问 `http://127.0.0.1:42482/`、`http://127.0.0.1:42482/assessment/` 或
+`http://127.0.0.1:42482/fsgp-q20/`。仓库中的耗时与截图是本机历史实测，
+重新生成后的时间会因机器和运行条件变化；训练残差与独立测试误差分别记录。
+
 ## 立即运行
+
+所有场景的统一拟合与可视化入口：**http://127.0.0.1:42482/**。今后沿用此端口。
+首页可切换 17 个地形/构造场景，查看完整输入、独立局部二次函数、组合曲面、剖面、
+逐函数训练残差和每场景 3 次端到端耗时。原有论文流程与单帧实验从“历史实验”进入。
+本页全景测试从完整原始点云取 30 近邻，以 0.12 m 体素选拟合中心，不是此前 2125 点单帧的工作量。
+
+```bash
+# 启动 / 重启统一页面（安装好的用户服务，用户登录后自动启动）
+systemctl --user start go2-pointcloud-viewer.service
+systemctl --user restart go2-pointcloud-viewer.service
+
+# 也可在终端直接运行，使用相同固定端口（服务已运行时无须重复启动）
+/usr/bin/python3 fsgp_bgk_repro/serve_visualization.py
+
+# 从完整点云重新测试全部 17 个场景
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+  /usr/bin/python3 -m fsgp_bgk_repro.scene_fit_catalog
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 \
+  /usr/bin/python3 -m fsgp_bgk_repro.audit_scene_fit_catalog
+```
+
+[全景汇总 CSV](outputs/visualization/scene-fits/summary.csv) ·
+[全部场景计算校验](outputs/visualization/scene-fits/catalog-audit.json) ·
+[全部场景浏览器验证](outputs/visualization/scene-fits/browser-audit.json)。
+原首页完整保留于 [历史页面](outputs/visualization/legacy-results.html)。
+
+[拟合失败与组合缺口统计](http://127.0.0.1:42482/scene-fits/fit-assembly-stats/) 按局部函数统一计数：
+未得到有效拟合、有效但完全未进入最终三角面、至少参与一个三角面的函数。
+最后一类另外统计“仍有邻接三角形被删除”的数量，避免漏掉部分拼接失败形成的白块。
+统计从当前保存结果读取，不更改拟合或连接规则，可用以下命令重新生成：
+
+```bash
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
+  /usr/bin/python3 -m fsgp_bgk_repro.summarize_fit_assembly
+```
 
 在仓库根目录执行，无需下载模型、安装 PyTorch 或启动 ROS：
 
@@ -324,6 +404,73 @@ PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
 [逐次计时与来源](outputs/table_local_speed/metrics.json) ·
 [逐组件缺口诊断](outputs/table_local_speed/holes.json)。
 
+每个局部函数的误差与实际 30 点覆盖范围，可在页面“查看每个曲面的误差”中点选，
+并切换中图为逐函数 RMSE 着色。训练残差与解析场景几何距离分别展示，未求解项留空；
+1964 个已求解函数包含 9 个最终未通过的函数，避免只看筛选后的结果。
+
+```bash
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+  MPLCONFIGDIR=/tmp/fsgp-bgk-matplotlib \
+  /usr/bin/python3 -m fsgp_bgk_repro.analyze_table_local_errors
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 \
+  /usr/bin/python3 -m fsgp_bgk_repro.audit_table_local_errors
+```
+
+[逐曲面误差图](outputs/table_local_errors/per-curve-errors.png) ·
+[三维逐曲面误差着色](outputs/table_local_errors/error-map.png) ·
+[真实候选三角形预测分歧示例](outputs/table_local_errors/triangle-example.png) ·
+[全部 2125 个种子误差与邻域范围 CSV](outputs/table_local_errors/per-curve.csv) ·
+[误差定义与统计](outputs/table_local_errors/REPORT.md)。
+解析几何只用于事后评价，不参与拟合；它是在原拟合邻点 XY 位置计算的最近真实表面距离，
+不是独立新扫描测试或对应面的高度误差。误差分析和新图形不改变已计时的原算法结果。
+
+## 丘陵、森林和桌子的大场景
+
+打开 **http://127.0.0.1:42482/combined-scene/**，首页顶部也提供入口。
+场景名义范围 **32 × 12 m**，共 **439,501 点**：保留全部 200,000 个丘陵点、
+141,068 个森林点和原桌子 32,683 个点，另补中央空地、两条 2 m 过渡带及丘陵边沿地面。
+丘陵沿 X 平移 −10 m，森林沿 X 平移 +11 m，原始地形不缩放、不改变高度。
+桌子仍为 3 × 2 m、总高 1.20 m，桌下净空 1.10 m；原地面、桌底和桌面三层都保留。
+
+```bash
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+  MPLCONFIGDIR=/tmp/fsgp-bgk-matplotlib \
+  /usr/bin/python3 -m fsgp_bgk_repro.composite_scene
+```
+
+[完整 PCD](outputs/visualization/combined-scene/combined_scene.pcd) ·
+[带来源索引的 NPZ](outputs/visualization/combined-scene/combined_scene.npz) ·
+[场景来源与变换](outputs/visualization/combined-scene/scene.json) ·
+[静态预览](outputs/visualization/combined-scene/overview.png) ·
+[保存文件校验](outputs/visualization/combined-scene/audit.json) ·
+[浏览器验证](outputs/visualization/combined-scene/browser-audit.json)。
+
+网页完整加载全部点，支持来源或高度着色、分图层隐藏及桌底视角。
+这是构造场景，过渡带属于新增几何；未模拟传感器遮挡或噪声，未在该新场景上运行拟合算法。
+来源色并非分割标签；过渡带的边界地面估计方法和逐点来源字段见输出目录 README。
+
+## 三个不同净空的通道场景
+
+新增 [0.40 m 通道](http://127.0.0.1:42482/corridor-040/)、
+[0.60 m 通道](http://127.0.0.1:42482/corridor-060/)、
+[0.80 m 通道](http://127.0.0.1:42482/corridor-080/)。首页和原拼接场景均有入口。
+三个通道是独立小场景，只包含通道和 6 × 4 m 地面，沿 X 方向长 4 m、净宽 2 m，
+两端敞开，墙厚与顶板厚度均为 0.12 m。丘陵、森林、桌子拼接大场景单独保留一个。
+**净高指地面到顶板底面的距离**，上表面高度分别为 0.52 / 0.72 / 0.92 m。
+三个独立通道分别有 30,761 / 32,841 / 34,921 点。
+
+```bash
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+  MPLCONFIGDIR=/tmp/fsgp-bgk-matplotlib \
+  /usr/bin/python3 -m fsgp_bgk_repro.corridor_scenes
+```
+
+三个场景的地面逐点相同，只改变通道结构高度。
+构造时检查内部和两端开口的空体积、中心多层高度、独立场景部件及范围，
+并回读校验 PCD、NPZ 和网页二进制缓冲。统一首页的曲面拟合已使用这三份独立点云重算。
+网页提供统一比例尺的截面对照图、相同入口相机、内部视角、顶板隐藏及完整点云下载。
+各目录保存 `scene.json`、`audit.json`、`browser-audit.json`，当前未执行拟合或通行性判定。
+
 ## 官方源码复核
 
 未修改的官方源码在 `third_party/FSGP_BGK`，固定提交：
@@ -349,3 +496,22 @@ PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
 将 `src/simulation_env_ros1/COLCON_IGNORE` 创建后按上游说明构建，
 并把 ROS 2 配置中的 `pcd_file_path` 改成实际绝对路径。
 当前快照仅包含评估所需文件，不是完整 ROS 仿真工作区。
+
+## 高低组合多级台阶（2026-11-17）
+
+统一入口 `http://127.0.0.1:42482/?scene=steps&view=stairs&color=uniform`。8 × 6 m 地面、3 m 宽台阶、最高 1 m；上升高差 8/18/12/30/10/22 cm，下降高差 25/10/40/25 cm。包含实际踏面、立面和侧壁，约 4 cm 点间距。原单级场景保留为 `scene=steps-single`。
+
+生成与重新测试：
+
+```bash
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 /usr/bin/python3 -m fsgp_bgk_repro.mixed_steps_scene
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /usr/bin/python3 -m fsgp_bgk_repro.scene_fit_catalog --scenes steps --repeats 3
+```
+
+生成代码为 `mixed_steps_scene.py`；页面可切换侧视、最大误差着色，并下载 PCD/NPZ。`outputs/visualization/mixed-steps/` 保存场景元数据、剖面图和浏览器检查结果。几何标签只用于导出说明，不进入 30 近邻拟合或兼容分组。
+
+## 拟合／组合状态对照
+
+“着色”新增 `fit-status`（有效拟合为蓝，其余白）和 `assembly-status`（中心至少参与一个最终三角形为蓝，其余白）。状态对照使用全部有效函数的独立面片并绘制全部中心，不采用 3,000 面片的抽样上限；未求解、无效函数用白色中心表示，不生成假曲面。两种状态只改变颜色，组合状态不表示所有邻接面都被保留。图例提供返回实际组合网格的按钮。
+
+既有结果可运行 `python3 -m fsgp_bgk_repro.export_scene_status_patches` 生成状态面片；新场景导出时自动生成。文件只在进入状态模式时由浏览器加载，原始拟合结果保持不变。

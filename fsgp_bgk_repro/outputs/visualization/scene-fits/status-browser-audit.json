@@ -1,0 +1,493 @@
+{
+  "passed": true,
+  "sceneCount": 17,
+  "allValidPatchesIncluded": true,
+  "noRefitting": true,
+  "actualMeshMembership": true,
+  "sameGeometryAndCamera": true,
+  "invalidCentersWhite": true,
+  "whiteUnusedFunction": 106,
+  "shareable": true,
+  "restoreActualMesh": true,
+  "mobileOverflow": false,
+  "records": [
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "corridor-040",
+        "centers": 3366,
+        "valid": 3050,
+        "assembled": 2922,
+        "blueCenters": 3050,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3050,
+        "sameGeometry": true,
+        "meshTriangles": 38027,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "corridor-040",
+        "centers": 3366,
+        "valid": 3050,
+        "assembled": 2922,
+        "blueCenters": 2922,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3050,
+        "sameGeometry": true,
+        "meshTriangles": 38027,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "corridor-060",
+        "centers": 3638,
+        "valid": 3118,
+        "assembled": 3045,
+        "blueCenters": 3118,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3118,
+        "sameGeometry": true,
+        "meshTriangles": 38454,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "corridor-060",
+        "centers": 3638,
+        "valid": 3118,
+        "assembled": 3045,
+        "blueCenters": 3045,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3118,
+        "sameGeometry": true,
+        "meshTriangles": 38454,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "corridor-080",
+        "centers": 3774,
+        "valid": 3037,
+        "assembled": 2923,
+        "blueCenters": 3037,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3037,
+        "sameGeometry": true,
+        "meshTriangles": 36893,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "corridor-080",
+        "centers": 3774,
+        "valid": 3037,
+        "assembled": 2923,
+        "blueCenters": 2923,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3037,
+        "sameGeometry": true,
+        "meshTriangles": 36893,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "combined",
+        "centers": 38625,
+        "valid": 36498,
+        "assembled": 32901,
+        "blueCenters": 36498,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 36498,
+        "sameGeometry": true,
+        "meshTriangles": 461728,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "combined",
+        "centers": 38625,
+        "valid": 36498,
+        "assembled": 32901,
+        "blueCenters": 32901,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 36498,
+        "sameGeometry": true,
+        "meshTriangles": 461728,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "table",
+        "centers": 3665,
+        "valid": 3537,
+        "assembled": 3499,
+        "blueCenters": 3537,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3537,
+        "sameGeometry": true,
+        "meshTriangles": 43051,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "table",
+        "centers": 3665,
+        "valid": 3537,
+        "assembled": 3499,
+        "blueCenters": 3499,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3537,
+        "sameGeometry": true,
+        "meshTriangles": 43051,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "hill",
+        "centers": 9874,
+        "valid": 9872,
+        "assembled": 9351,
+        "blueCenters": 9872,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 9872,
+        "sameGeometry": true,
+        "meshTriangles": 114248,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "hill",
+        "centers": 9874,
+        "valid": 9872,
+        "assembled": 9351,
+        "blueCenters": 9351,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 9872,
+        "sameGeometry": true,
+        "meshTriangles": 114248,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "forest",
+        "centers": 17019,
+        "valid": 14958,
+        "assembled": 12058,
+        "blueCenters": 14958,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 14958,
+        "sameGeometry": true,
+        "meshTriangles": 178063,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "forest",
+        "centers": 17019,
+        "valid": 14958,
+        "assembled": 12058,
+        "blueCenters": 12058,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 14958,
+        "sameGeometry": true,
+        "meshTriangles": 178063,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "flat",
+        "centers": 4624,
+        "valid": 4624,
+        "assembled": 4624,
+        "blueCenters": 4624,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 4624,
+        "sameGeometry": true,
+        "meshTriangles": 142578,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "flat",
+        "centers": 4624,
+        "valid": 4624,
+        "assembled": 4624,
+        "blueCenters": 4624,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 4624,
+        "sameGeometry": true,
+        "meshTriangles": 142578,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "ramp",
+        "centers": 5158,
+        "valid": 5144,
+        "assembled": 5144,
+        "blueCenters": 5144,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 5144,
+        "sameGeometry": true,
+        "meshTriangles": 140266,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "ramp",
+        "centers": 5158,
+        "valid": 5144,
+        "assembled": 5144,
+        "blueCenters": 5144,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 5144,
+        "sameGeometry": true,
+        "meshTriangles": 140266,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "steps",
+        "centers": 4270,
+        "valid": 3780,
+        "assembled": 3390,
+        "blueCenters": 3780,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3780,
+        "sameGeometry": true,
+        "meshTriangles": 45614,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "steps",
+        "centers": 4270,
+        "valid": 3780,
+        "assembled": 3390,
+        "blueCenters": 3390,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 3780,
+        "sameGeometry": true,
+        "meshTriangles": 45614,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "steps-single",
+        "centers": 4636,
+        "valid": 4636,
+        "assembled": 4636,
+        "blueCenters": 4636,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 4636,
+        "sameGeometry": true,
+        "meshTriangles": 140784,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "steps-single",
+        "centers": 4636,
+        "valid": 4636,
+        "assembled": 4636,
+        "blueCenters": 4636,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 4636,
+        "sameGeometry": true,
+        "meshTriangles": 140784,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "flat_ramp",
+        "centers": 4760,
+        "valid": 4760,
+        "assembled": 4760,
+        "blueCenters": 4760,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 4760,
+        "sameGeometry": true,
+        "meshTriangles": 145248,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "flat_ramp",
+        "centers": 4760,
+        "valid": 4760,
+        "assembled": 4760,
+        "blueCenters": 4760,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 4760,
+        "sameGeometry": true,
+        "meshTriangles": 145248,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "quick",
+        "centers": 98837,
+        "valid": 13587,
+        "assembled": 13220,
+        "blueCenters": 13587,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 13587,
+        "sameGeometry": true,
+        "meshTriangles": 430957,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "quick",
+        "centers": 98837,
+        "valid": 13587,
+        "assembled": 13220,
+        "blueCenters": 13220,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 13587,
+        "sameGeometry": true,
+        "meshTriangles": 430957,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "desert",
+        "centers": 12910,
+        "valid": 12908,
+        "assembled": 12905,
+        "blueCenters": 12908,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 12908,
+        "sameGeometry": true,
+        "meshTriangles": 156743,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "desert",
+        "centers": 12910,
+        "valid": 12908,
+        "assembled": 12905,
+        "blueCenters": 12905,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 12908,
+        "sameGeometry": true,
+        "meshTriangles": 156743,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "mountain",
+        "centers": 5336,
+        "valid": 5310,
+        "assembled": 5011,
+        "blueCenters": 5310,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 5310,
+        "sameGeometry": true,
+        "meshTriangles": 61587,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "mountain",
+        "centers": 5336,
+        "valid": 5310,
+        "assembled": 5011,
+        "blueCenters": 5011,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 5310,
+        "sameGeometry": true,
+        "meshTriangles": 61587,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "snow",
+        "centers": 43281,
+        "valid": 43265,
+        "assembled": 34848,
+        "blueCenters": 43265,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 43265,
+        "sameGeometry": true,
+        "meshTriangles": 375760,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "snow",
+        "centers": 43281,
+        "valid": 43265,
+        "assembled": 34848,
+        "blueCenters": 34848,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 43265,
+        "sameGeometry": true,
+        "meshTriangles": 375760,
+        "basic": true
+      }
+    },
+    {
+      "fit-status": {
+        "mode": "fit-status",
+        "scene": "vocano",
+        "centers": 10315,
+        "valid": 10315,
+        "assembled": 9834,
+        "blueCenters": 10315,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 10315,
+        "sameGeometry": true,
+        "meshTriangles": 117980,
+        "basic": true
+      },
+      "assembly-status": {
+        "mode": "assembly-status",
+        "scene": "vocano",
+        "centers": 10315,
+        "valid": 10315,
+        "assembled": 9834,
+        "blueCenters": 9834,
+        "difference": 1.2596031939704488e-8,
+        "allValidOwners": 10315,
+        "sameGeometry": true,
+        "meshTriangles": 117980,
+        "basic": true
+      }
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

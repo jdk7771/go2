@@ -1,0 +1,1 @@
+{"passed":true,"cases":81,"main_methods":["Q20","FSGP-125","FSGP-500"],"queries_per_case":625,"train_test_index_disjoint":true,"identical_primary_inputs":true,"common_support_denominators_equal":true,"no_unknown_zero_fill":true,"source_code_unchanged":true,"auxiliary_controls_excluded_from_primary":true}

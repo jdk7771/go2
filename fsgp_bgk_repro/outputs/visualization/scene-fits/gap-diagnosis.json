@@ -1,0 +1,1782 @@
+{
+  "description": "First failure counts, not pixel or 3D missing-area fractions. Triangle candidates are per-major-component XY Delaunay faces. All retained triangle arrays match the published output exactly. Part labels are used only for post-evaluation, never as fitting input.",
+  "scenes": [
+    {
+      "id": "corridor-040",
+      "seeds": 3366,
+      "valid": 3050,
+      "fit_first_failures": {
+        "insufficient": 0,
+        "rank_deficient": 248,
+        "height_shift_after_rank": 0,
+        "rmse_after_rank_and_shift": 68,
+        "valid_small_components": 27
+      },
+      "mesh_first_failures": {
+        "edge_length": 14,
+        "model_agreement": 149,
+        "normal_angle": 63,
+        "centroid_agreement": 0
+      },
+      "components": [
+        {
+          "id": 0,
+          "seeds": 1734,
+          "median_z_m": 0.0,
+          "candidate_triangles": 3300,
+          "kept_triangles": 3162,
+          "kept_xy_area_fraction_of_seed_hull": 0.9442857146205194,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "model_agreement": {
+              "triangles": 138,
+              "xy_area_m2": 1.3103999777793973
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 1,
+          "seeds": 627,
+          "median_z_m": 0.5199999809265137,
+          "candidate_triangles": 1152,
+          "kept_triangles": 1148,
+          "kept_xy_area_fraction_of_seed_hull": 0.9965277783424024,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 4,
+              "xy_area_m2": 0.028294731310793964
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 2,
+          "seeds": 596,
+          "median_z_m": 0.4000000059604645,
+          "candidate_triangles": 1106,
+          "kept_triangles": 1022,
+          "kept_xy_area_fraction_of_seed_hull": 0.9266136696247184,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 14,
+              "xy_area_m2": 0.06602108920749927
+            },
+            "model_agreement": {
+              "triangles": 11,
+              "xy_area_m2": 0.07604210793930122
+            },
+            "normal_angle": {
+              "triangles": 59,
+              "xy_area_m2": 0.41760000815391507
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        }
+      ],
+      "known_parts_post_evaluation": [
+        {
+          "part": 0,
+          "seeds": 1668,
+          "failed": 0
+        },
+        {
+          "part": 1,
+          "seeds": 1259,
+          "failed": 56
+        },
+        {
+          "part": 2,
+          "seeds": 439,
+          "failed": 260
+        }
+      ]
+    },
+    {
+      "id": "corridor-060",
+      "seeds": 3638,
+      "valid": 3118,
+      "fit_first_failures": {
+        "insufficient": 0,
+        "rank_deficient": 496,
+        "height_shift_after_rank": 0,
+        "rmse_after_rank_and_shift": 24,
+        "valid_small_components": 41
+      },
+      "mesh_first_failures": {
+        "edge_length": 15,
+        "model_agreement": 140,
+        "normal_angle": 64,
+        "centroid_agreement": 0
+      },
+      "components": [
+        {
+          "id": 0,
+          "seeds": 1734,
+          "median_z_m": 0.0,
+          "candidate_triangles": 3300,
+          "kept_triangles": 3162,
+          "kept_xy_area_fraction_of_seed_hull": 0.9442857146205194,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "model_agreement": {
+              "triangles": 138,
+              "xy_area_m2": 1.3103999777793973
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 1,
+          "seeds": 680,
+          "median_z_m": 0.7200000286102295,
+          "candidate_triangles": 1254,
+          "kept_triangles": 1254,
+          "kept_xy_area_fraction_of_seed_hull": 1.0,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 2,
+          "seeds": 663,
+          "median_z_m": 0.6000000238418579,
+          "candidate_triangles": 1237,
+          "kept_triangles": 1156,
+          "kept_xy_area_fraction_of_seed_hull": 0.9134048292093555,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 15,
+              "xy_area_m2": 0.15164920120490066
+            },
+            "model_agreement": {
+              "triangles": 2,
+              "xy_area_m2": 0.009431581788312826
+            },
+            "normal_angle": {
+              "triangles": 64,
+              "xy_area_m2": 0.5991579658190389
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        }
+      ],
+      "known_parts_post_evaluation": [
+        {
+          "part": 0,
+          "seeds": 1668,
+          "failed": 0
+        },
+        {
+          "part": 1,
+          "seeds": 1259,
+          "failed": 0
+        },
+        {
+          "part": 2,
+          "seeds": 711,
+          "failed": 520
+        }
+      ]
+    },
+    {
+      "id": "corridor-080",
+      "seeds": 3774,
+      "valid": 3037,
+      "fit_first_failures": {
+        "insufficient": 0,
+        "rank_deficient": 713,
+        "height_shift_after_rank": 0,
+        "rmse_after_rank_and_shift": 24,
+        "valid_small_components": 45
+      },
+      "mesh_first_failures": {
+        "edge_length": 30,
+        "model_agreement": 142,
+        "normal_angle": 96,
+        "centroid_agreement": 0
+      },
+      "components": [
+        {
+          "id": 0,
+          "seeds": 1734,
+          "median_z_m": 0.0,
+          "candidate_triangles": 3300,
+          "kept_triangles": 3162,
+          "kept_xy_area_fraction_of_seed_hull": 0.9442857146205194,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "model_agreement": {
+              "triangles": 138,
+              "xy_area_m2": 1.3103999777793973
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 1,
+          "seeds": 631,
+          "median_z_m": 0.800000011920929,
+          "candidate_triangles": 1156,
+          "kept_triangles": 1026,
+          "kept_xy_area_fraction_of_seed_hull": 0.8644448491338422,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 30,
+              "xy_area_m2": 0.2122104707768102
+            },
+            "model_agreement": {
+              "triangles": 4,
+              "xy_area_m2": 0.0432280787417767
+            },
+            "normal_angle": {
+              "triangles": 96,
+              "xy_area_m2": 0.8826387122154209
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 2,
+          "seeds": 627,
+          "median_z_m": 0.9200000166893005,
+          "candidate_triangles": 1152,
+          "kept_triangles": 1152,
+          "kept_xy_area_fraction_of_seed_hull": 1.0,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        }
+      ],
+      "known_parts_post_evaluation": [
+        {
+          "part": 0,
+          "seeds": 1668,
+          "failed": 0
+        },
+        {
+          "part": 1,
+          "seeds": 1258,
+          "failed": 0
+        },
+        {
+          "part": 2,
+          "seeds": 848,
+          "failed": 737
+        }
+      ]
+    },
+    {
+      "id": "hill",
+      "seeds": 9874,
+      "valid": 9872,
+      "fit_first_failures": {
+        "insufficient": 0,
+        "rank_deficient": 0,
+        "height_shift_after_rank": 0,
+        "rmse_after_rank_and_shift": 2,
+        "valid_small_components": 188
+      },
+      "mesh_first_failures": {
+        "edge_length": 197,
+        "model_agreement": 1621,
+        "normal_angle": 1023,
+        "centroid_agreement": 1
+      },
+      "components": [
+        {
+          "id": 0,
+          "seeds": 9684,
+          "median_z_m": 0.47082502766640855,
+          "candidate_triangles": 19341,
+          "kept_triangles": 16499,
+          "kept_xy_area_fraction_of_seed_hull": 0.8442224717676681,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 197,
+              "xy_area_m2": 1.3700656195782712
+            },
+            "model_agreement": {
+              "triangles": 1621,
+              "xy_area_m2": 9.184220451658408
+            },
+            "normal_angle": {
+              "triangles": 1023,
+              "xy_area_m2": 4.951660273926484
+            },
+            "centroid_agreement": {
+              "triangles": 1,
+              "xy_area_m2": 0.00020296624438742583
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "forest",
+      "seeds": 17019,
+      "valid": 14958,
+      "fit_first_failures": {
+        "insufficient": 202,
+        "rank_deficient": 0,
+        "height_shift_after_rank": 0,
+        "rmse_after_rank_and_shift": 1859,
+        "valid_small_components": 2539
+      },
+      "mesh_first_failures": {
+        "edge_length": 396,
+        "model_agreement": 980,
+        "normal_angle": 19,
+        "centroid_agreement": 0
+      },
+      "components": [
+        {
+          "id": 0,
+          "seeds": 12156,
+          "median_z_m": 0.9109451318545376,
+          "candidate_triangles": 24278,
+          "kept_triangles": 23301,
+          "kept_xy_area_fraction_of_seed_hull": 0.9660195874615021,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 350,
+              "xy_area_m2": 2.02374110304714
+            },
+            "model_agreement": {
+              "triangles": 620,
+              "xy_area_m2": 2.833815886504518
+            },
+            "normal_angle": {
+              "triangles": 7,
+              "xy_area_m2": 0.024838900918418533
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 1,
+          "seeds": 48,
+          "median_z_m": 1.2470418935168222,
+          "candidate_triangles": 82,
+          "kept_triangles": 5,
+          "kept_xy_area_fraction_of_seed_hull": 0.03031780343453686,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 5,
+              "xy_area_m2": 0.059666775160209795
+            },
+            "model_agreement": {
+              "triangles": 71,
+              "xy_area_m2": 0.5178727459048673
+            },
+            "normal_angle": {
+              "triangles": 1,
+              "xy_area_m2": 0.008354306405919942
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 2,
+          "seeds": 38,
+          "median_z_m": 1.7639127115096458,
+          "candidate_triangles": 60,
+          "kept_triangles": 5,
+          "kept_xy_area_fraction_of_seed_hull": 0.09382144066501244,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 5,
+              "xy_area_m2": 0.10327632808391063
+            },
+            "model_agreement": {
+              "triangles": 50,
+              "xy_area_m2": 0.39033109600213556
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 3,
+          "seeds": 36,
+          "median_z_m": 1.937977215499322,
+          "candidate_triangles": 63,
+          "kept_triangles": 3,
+          "kept_xy_area_fraction_of_seed_hull": 0.03151156969972787,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 8,
+              "xy_area_m2": 0.1583780420216101
+            },
+            "model_agreement": {
+              "triangles": 50,
+              "xy_area_m2": 0.27512828666070277
+            },
+            "normal_angle": {
+              "triangles": 2,
+              "xy_area_m2": 0.006974787356824663
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 4,
+          "seeds": 36,
+          "median_z_m": 2.296737963420793,
+          "candidate_triangles": 61,
+          "kept_triangles": 3,
+          "kept_xy_area_fraction_of_seed_hull": 0.00958669434597075,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 7,
+              "xy_area_m2": 0.14560818887557048
+            },
+            "model_agreement": {
+              "triangles": 47,
+              "xy_area_m2": 0.3541495257884577
+            },
+            "normal_angle": {
+              "triangles": 4,
+              "xy_area_m2": 0.01218263068128067
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 5,
+          "seeds": 36,
+          "median_z_m": 2.1718256711538917,
+          "candidate_triangles": 62,
+          "kept_triangles": 5,
+          "kept_xy_area_fraction_of_seed_hull": 0.06333308377947003,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 8,
+              "xy_area_m2": 0.13918960162592953
+            },
+            "model_agreement": {
+              "triangles": 46,
+              "xy_area_m2": 0.3062304786758432
+            },
+            "normal_angle": {
+              "triangles": 3,
+              "xy_area_m2": 0.012023666437301017
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 6,
+          "seeds": 35,
+          "median_z_m": 1.4872454993068966,
+          "candidate_triangles": 61,
+          "kept_triangles": 5,
+          "kept_xy_area_fraction_of_seed_hull": 0.04424804342965239,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 12,
+              "xy_area_m2": 0.22175858034805174
+            },
+            "model_agreement": {
+              "triangles": 43,
+              "xy_area_m2": 0.32277382499937346
+            },
+            "normal_angle": {
+              "triangles": 1,
+              "xy_area_m2": 0.010730969817444702
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 7,
+          "seeds": 34,
+          "median_z_m": 1.6737184980205404,
+          "candidate_triangles": 56,
+          "kept_triangles": 1,
+          "kept_xy_area_fraction_of_seed_hull": 0.01351282281875251,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 1,
+              "xy_area_m2": 0.00276041393738069
+            },
+            "model_agreement": {
+              "triangles": 53,
+              "xy_area_m2": 0.23593032317174334
+            },
+            "normal_angle": {
+              "triangles": 1,
+              "xy_area_m2": 0.004796059697696364
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "combined",
+      "seeds": 38625,
+      "valid": 36498,
+      "fit_first_failures": {
+        "insufficient": 182,
+        "rank_deficient": 40,
+        "height_shift_after_rank": 0,
+        "rmse_after_rank_and_shift": 1905,
+        "valid_small_components": 2903
+      },
+      "mesh_first_failures": {
+        "edge_length": 420,
+        "model_agreement": 2769,
+        "normal_angle": 1221,
+        "centroid_agreement": 0
+      },
+      "components": [
+        {
+          "id": 0,
+          "seeds": 32169,
+          "median_z_m": 0.526127140250243,
+          "candidate_triangles": 63988,
+          "kept_triangles": 60335,
+          "kept_xy_area_fraction_of_seed_hull": 0.9415990445005347,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 316,
+              "xy_area_m2": 4.280185123427245
+            },
+            "model_agreement": {
+              "triangles": 2187,
+              "xy_area_m2": 12.30055837631015
+            },
+            "normal_angle": {
+              "triangles": 1150,
+              "xy_area_m2": 5.8169875003902725
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 1,
+          "seeds": 468,
+          "median_z_m": 1.100000023841858,
+          "candidate_triangles": 850,
+          "kept_triangles": 794,
+          "kept_xy_area_fraction_of_seed_hull": 0.9362244826252053,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "model_agreement": {
+              "triangles": 20,
+              "xy_area_m2": 0.1727999791622139
+            },
+            "normal_angle": {
+              "triangles": 36,
+              "xy_area_m2": 0.1972000631570836
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 2,
+          "seeds": 453,
+          "median_z_m": 1.2000000476837158,
+          "candidate_triangles": 835,
+          "kept_triangles": 816,
+          "kept_xy_area_fraction_of_seed_hull": 0.9729729596447627,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 13,
+              "xy_area_m2": 0.132800070953369
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 6,
+              "xy_area_m2": 0.024000006675720442
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 3,
+          "seeds": 124,
+          "median_z_m": 0.6009048256738837,
+          "candidate_triangles": 242,
+          "kept_triangles": 114,
+          "kept_xy_area_fraction_of_seed_hull": 0.2887458994716387,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 35,
+              "xy_area_m2": 1.22758400972873
+            },
+            "model_agreement": {
+              "triangles": 72,
+              "xy_area_m2": 0.33388872383090984
+            },
+            "normal_angle": {
+              "triangles": 21,
+              "xy_area_m2": 0.1093688800526138
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 4,
+          "seeds": 119,
+          "median_z_m": 0.3944287677780128,
+          "candidate_triangles": 211,
+          "kept_triangles": 88,
+          "kept_xy_area_fraction_of_seed_hull": 0.37715035421751353,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 10,
+              "xy_area_m2": 0.06813745486851985
+            },
+            "model_agreement": {
+              "triangles": 113,
+              "xy_area_m2": 0.748346303882272
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 5,
+          "seeds": 57,
+          "median_z_m": 2.6725839140161787,
+          "candidate_triangles": 102,
+          "kept_triangles": 9,
+          "kept_xy_area_fraction_of_seed_hull": 0.08409615288485092,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 10,
+              "xy_area_m2": 0.22630779861054862
+            },
+            "model_agreement": {
+              "triangles": 83,
+              "xy_area_m2": 0.4836602017411451
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 6,
+          "seeds": 49,
+          "median_z_m": 1.9624514265967736,
+          "candidate_triangles": 85,
+          "kept_triangles": 0,
+          "kept_xy_area_fraction_of_seed_hull": 0.0,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 7,
+              "xy_area_m2": 0.08997797411927877
+            },
+            "model_agreement": {
+              "triangles": 78,
+              "xy_area_m2": 0.41239301623454594
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 7,
+          "seeds": 48,
+          "median_z_m": 1.488812339995647,
+          "candidate_triangles": 87,
+          "kept_triangles": 5,
+          "kept_xy_area_fraction_of_seed_hull": 0.03136210548012796,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 16,
+              "xy_area_m2": 0.2761370556112297
+            },
+            "model_agreement": {
+              "triangles": 63,
+              "xy_area_m2": 0.6203550238612365
+            },
+            "normal_angle": {
+              "triangles": 3,
+              "xy_area_m2": 0.015075164165921251
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 8,
+          "seeds": 43,
+          "median_z_m": 1.196318683256302,
+          "candidate_triangles": 75,
+          "kept_triangles": 5,
+          "kept_xy_area_fraction_of_seed_hull": 0.03295507300230828,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 5,
+              "xy_area_m2": 0.027367889165724746
+            },
+            "model_agreement": {
+              "triangles": 63,
+              "xy_area_m2": 0.36034198007560825
+            },
+            "normal_angle": {
+              "triangles": 2,
+              "xy_area_m2": 0.012532444704998369
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 9,
+          "seeds": 34,
+          "median_z_m": 2.435440170705431,
+          "candidate_triangles": 58,
+          "kept_triangles": 4,
+          "kept_xy_area_fraction_of_seed_hull": 0.0797504663400356,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 5,
+              "xy_area_m2": 0.05735067635532687
+            },
+            "model_agreement": {
+              "triangles": 49,
+              "xy_area_m2": 0.34964262460914597
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 10,
+          "seeds": 31,
+          "median_z_m": 1.3211509012396738,
+          "candidate_triangles": 52,
+          "kept_triangles": 5,
+          "kept_xy_area_fraction_of_seed_hull": 0.06856100228512822,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 3,
+              "xy_area_m2": 0.02879260716713361
+            },
+            "model_agreement": {
+              "triangles": 41,
+              "xy_area_m2": 0.34298484030716736
+            },
+            "normal_angle": {
+              "triangles": 3,
+              "xy_area_m2": 0.003934722768121901
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "quick",
+      "seeds": 98837,
+      "valid": 13587,
+      "fit_first_failures": {
+        "insufficient": 85246,
+        "rank_deficient": 0,
+        "height_shift_after_rank": 0,
+        "rmse_after_rank_and_shift": 4,
+        "valid_small_components": 314
+      },
+      "mesh_first_failures": {
+        "edge_length": 2002,
+        "model_agreement": 145,
+        "normal_angle": 0,
+        "centroid_agreement": 0
+      },
+      "components": [
+        {
+          "id": 0,
+          "seeds": 2216,
+          "median_z_m": 0.549198243139278,
+          "candidate_triangles": 4409,
+          "kept_triangles": 4177,
+          "kept_xy_area_fraction_of_seed_hull": 0.7150658685243485,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 232,
+              "xy_area_m2": 24.344212104855615
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 1,
+          "seeds": 2119,
+          "median_z_m": 0.9151218575261749,
+          "candidate_triangles": 4216,
+          "kept_triangles": 4012,
+          "kept_xy_area_fraction_of_seed_hull": 0.7577580691478444,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 198,
+              "xy_area_m2": 18.527703789274412
+            },
+            "model_agreement": {
+              "triangles": 6,
+              "xy_area_m2": 0.08396680444332105
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 2,
+          "seeds": 1212,
+          "median_z_m": 1.6727161067931693,
+          "candidate_triangles": 2402,
+          "kept_triangles": 2278,
+          "kept_xy_area_fraction_of_seed_hull": 0.8120614643962379,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 110,
+              "xy_area_m2": 7.442176701052858
+            },
+            "model_agreement": {
+              "triangles": 14,
+              "xy_area_m2": 0.2166328695757329
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 3,
+          "seeds": 1129,
+          "median_z_m": 1.358224294924561,
+          "candidate_triangles": 2238,
+          "kept_triangles": 2127,
+          "kept_xy_area_fraction_of_seed_hull": 0.8536113065282313,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 107,
+              "xy_area_m2": 5.10969869916622
+            },
+            "model_agreement": {
+              "triangles": 4,
+              "xy_area_m2": 0.10727882342575867
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 4,
+          "seeds": 1022,
+          "median_z_m": 1.975663816478907,
+          "candidate_triangles": 2025,
+          "kept_triangles": 1841,
+          "kept_xy_area_fraction_of_seed_hull": 0.7380357745792102,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 170,
+              "xy_area_m2": 9.190128972050843
+            },
+            "model_agreement": {
+              "triangles": 14,
+              "xy_area_m2": 0.22351542374599376
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 5,
+          "seeds": 972,
+          "median_z_m": 0.6368134511376059,
+          "candidate_triangles": 1924,
+          "kept_triangles": 1784,
+          "kept_xy_area_fraction_of_seed_hull": 0.6407595412307656,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 138,
+              "xy_area_m2": 14.793030204269598
+            },
+            "model_agreement": {
+              "triangles": 2,
+              "xy_area_m2": 0.03156441494320461
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 6,
+          "seeds": 638,
+          "median_z_m": 1.320501908600317,
+          "candidate_triangles": 1257,
+          "kept_triangles": 1063,
+          "kept_xy_area_fraction_of_seed_hull": 0.5165494521868055,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 164,
+              "xy_area_m2": 13.526068504967043
+            },
+            "model_agreement": {
+              "triangles": 30,
+              "xy_area_m2": 0.51742368703799
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 7,
+          "seeds": 607,
+          "median_z_m": 6.333207759281953,
+          "candidate_triangles": 1192,
+          "kept_triangles": 1106,
+          "kept_xy_area_fraction_of_seed_hull": 0.7952189381511378,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 79,
+              "xy_area_m2": 3.866550727162826
+            },
+            "model_agreement": {
+              "triangles": 7,
+              "xy_area_m2": 0.11834707564457858
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 8,
+          "seeds": 422,
+          "median_z_m": 2.0837293352345982,
+          "candidate_triangles": 822,
+          "kept_triangles": 726,
+          "kept_xy_area_fraction_of_seed_hull": 0.5193393069989474,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 96,
+              "xy_area_m2": 9.484946936776396
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 9,
+          "seeds": 352,
+          "median_z_m": 0.9002453813093081,
+          "candidate_triangles": 678,
+          "kept_triangles": 639,
+          "kept_xy_area_fraction_of_seed_hull": 0.9121391351613447,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 39,
+              "xy_area_m2": 0.9260234132843834
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 10,
+          "seeds": 351,
+          "median_z_m": 1.1258691209537393,
+          "candidate_triangles": 682,
+          "kept_triangles": 599,
+          "kept_xy_area_fraction_of_seed_hull": 0.7014720511727996,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 83,
+              "xy_area_m2": 3.5919421328244425
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 11,
+          "seeds": 349,
+          "median_z_m": 5.189514975480813,
+          "candidate_triangles": 682,
+          "kept_triangles": 521,
+          "kept_xy_area_fraction_of_seed_hull": 0.4816248698301935,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 116,
+              "xy_area_m2": 7.398877628768787
+            },
+            "model_agreement": {
+              "triangles": 45,
+              "xy_area_m2": 0.8006013580770741
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 12,
+          "seeds": 297,
+          "median_z_m": 1.969807585213016,
+          "candidate_triangles": 578,
+          "kept_triangles": 515,
+          "kept_xy_area_fraction_of_seed_hull": 0.7746104457773438,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 55,
+              "xy_area_m2": 1.9063856683978884
+            },
+            "model_agreement": {
+              "triangles": 8,
+              "xy_area_m2": 0.1346320155353169
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 13,
+          "seeds": 215,
+          "median_z_m": 2.0632068613835544,
+          "candidate_triangles": 410,
+          "kept_triangles": 372,
+          "kept_xy_area_fraction_of_seed_hull": 0.8642312788382154,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 35,
+              "xy_area_m2": 0.8002341111728128
+            },
+            "model_agreement": {
+              "triangles": 3,
+              "xy_area_m2": 0.060407975730413455
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 14,
+          "seeds": 191,
+          "median_z_m": 2.291753099926753,
+          "candidate_triangles": 367,
+          "kept_triangles": 299,
+          "kept_xy_area_fraction_of_seed_hull": 0.561323399982187,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 66,
+              "xy_area_m2": 3.3578511575747143
+            },
+            "model_agreement": {
+              "triangles": 2,
+              "xy_area_m2": 0.024662872295266425
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 15,
+          "seeds": 166,
+          "median_z_m": 1.0222564010289616,
+          "candidate_triangles": 318,
+          "kept_triangles": 278,
+          "kept_xy_area_fraction_of_seed_hull": 0.7035597838261283,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 40,
+              "xy_area_m2": 1.664803893172575
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 16,
+          "seeds": 146,
+          "median_z_m": 5.5868985499177555,
+          "candidate_triangles": 277,
+          "kept_triangles": 247,
+          "kept_xy_area_fraction_of_seed_hull": 0.8116344851824197,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 28,
+              "xy_area_m2": 0.7331430243089017
+            },
+            "model_agreement": {
+              "triangles": 2,
+              "xy_area_m2": 0.044182218966852815
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 17,
+          "seeds": 104,
+          "median_z_m": 7.3312540939239765,
+          "candidate_triangles": 192,
+          "kept_triangles": 163,
+          "kept_xy_area_fraction_of_seed_hull": 0.6713440667364373,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 28,
+              "xy_area_m2": 1.079836416050238
+            },
+            "model_agreement": {
+              "triangles": 1,
+              "xy_area_m2": 0.022634582264458913
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 18,
+          "seeds": 102,
+          "median_z_m": 2.069177072594578,
+          "candidate_triangles": 189,
+          "kept_triangles": 169,
+          "kept_xy_area_fraction_of_seed_hull": 0.8056473212615177,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 18,
+              "xy_area_m2": 0.5298212279394647
+            },
+            "model_agreement": {
+              "triangles": 2,
+              "xy_area_m2": 0.04894398411124712
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 19,
+          "seeds": 92,
+          "median_z_m": 1.9292048234854675,
+          "candidate_triangles": 169,
+          "kept_triangles": 139,
+          "kept_xy_area_fraction_of_seed_hull": 0.6676243800711258,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 30,
+              "xy_area_m2": 1.0175417094233126
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 20,
+          "seeds": 71,
+          "median_z_m": 2.2143456775655124,
+          "candidate_triangles": 126,
+          "kept_triangles": 113,
+          "kept_xy_area_fraction_of_seed_hull": 0.8934420503947158,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 13,
+              "xy_area_m2": 0.19509279894009524
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 21,
+          "seeds": 67,
+          "median_z_m": 2.6837683508095798,
+          "candidate_triangles": 121,
+          "kept_triangles": 96,
+          "kept_xy_area_fraction_of_seed_hull": 0.65251819700131,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 25,
+              "xy_area_m2": 0.7338125045125707
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 22,
+          "seeds": 62,
+          "median_z_m": 2.322310331329934,
+          "candidate_triangles": 110,
+          "kept_triangles": 98,
+          "kept_xy_area_fraction_of_seed_hull": 0.8771718731411857,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 12,
+              "xy_area_m2": 0.19154519613130105
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 23,
+          "seeds": 56,
+          "median_z_m": 3.5602468840158172,
+          "candidate_triangles": 99,
+          "kept_triangles": 85,
+          "kept_xy_area_fraction_of_seed_hull": 0.8061333313144299,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 13,
+              "xy_area_m2": 0.2681808811303199
+            },
+            "model_agreement": {
+              "triangles": 1,
+              "xy_area_m2": 0.01823688491822395
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 24,
+          "seeds": 49,
+          "median_z_m": 1.5360207938078485,
+          "candidate_triangles": 87,
+          "kept_triangles": 76,
+          "kept_xy_area_fraction_of_seed_hull": 0.9136736341523661,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 11,
+              "xy_area_m2": 0.0983229223146509
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 25,
+          "seeds": 43,
+          "median_z_m": 2.360677127871023,
+          "candidate_triangles": 76,
+          "kept_triangles": 59,
+          "kept_xy_area_fraction_of_seed_hull": 0.705955433418775,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 15,
+              "xy_area_m2": 0.33152240911590525
+            },
+            "model_agreement": {
+              "triangles": 2,
+              "xy_area_m2": 0.02878576590069315
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 26,
+          "seeds": 42,
+          "median_z_m": 2.3596114121689578,
+          "candidate_triangles": 73,
+          "kept_triangles": 46,
+          "kept_xy_area_fraction_of_seed_hull": 0.4714782885615379,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 25,
+              "xy_area_m2": 0.7847634642839694
+            },
+            "model_agreement": {
+              "triangles": 2,
+              "xy_area_m2": 0.012730922287119029
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 27,
+          "seeds": 41,
+          "median_z_m": 2.162773044000876,
+          "candidate_triangles": 71,
+          "kept_triangles": 55,
+          "kept_xy_area_fraction_of_seed_hull": 0.6572436616135925,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 16,
+              "xy_area_m2": 0.47331608581771434
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 28,
+          "seeds": 40,
+          "median_z_m": 1.1081834330982998,
+          "candidate_triangles": 67,
+          "kept_triangles": 59,
+          "kept_xy_area_fraction_of_seed_hull": 0.7301613437824108,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 8,
+              "xy_area_m2": 0.28890534710808424
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 29,
+          "seeds": 34,
+          "median_z_m": 2.3128451720701406,
+          "candidate_triangles": 59,
+          "kept_triangles": 42,
+          "kept_xy_area_fraction_of_seed_hull": 0.5820917137312825,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 17,
+              "xy_area_m2": 0.4427469278234639
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 30,
+          "seeds": 34,
+          "median_z_m": 5.069357877696243,
+          "candidate_triangles": 56,
+          "kept_triangles": 48,
+          "kept_xy_area_fraction_of_seed_hull": 0.8105050917279034,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 8,
+              "xy_area_m2": 0.15253509296690027
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        },
+        {
+          "id": 31,
+          "seeds": 32,
+          "median_z_m": 3.26405162749426,
+          "candidate_triangles": 54,
+          "kept_triangles": 47,
+          "kept_xy_area_fraction_of_seed_hull": 0.926017535912261,
+          "first_failures": {
+            "edge_length": {
+              "triangles": 7,
+              "xy_area_m2": 0.05291187362672645
+            },
+            "model_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "normal_angle": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            },
+            "centroid_agreement": {
+              "triangles": 0,
+              "xy_area_m2": 0.0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

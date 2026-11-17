@@ -1,0 +1,182 @@
+{
+  "passed": true,
+  "port": 42482,
+  "scene_count": 17,
+  "scenes": [
+    {
+      "id": "corridor-040",
+      "passed": true,
+      "raw_points": 30761,
+      "seeds": 3366,
+      "result_sha256": "633df6c0bf639ae84586b7521616bd39b136fb1f3a14e6fa70a2ff0b807516b6",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "corridor-060",
+      "passed": true,
+      "raw_points": 32841,
+      "seeds": 3638,
+      "result_sha256": "d9bf33cbf878f9381cb53cbcd131a0e0372068bfd62b3f46b9f6b6ad12ad2dbb",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "corridor-080",
+      "passed": true,
+      "raw_points": 34921,
+      "seeds": 3774,
+      "result_sha256": "61cb252f0e816a92f652530bca6d8b53e55f0a6c15ae88d42c92478a6931858d",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "combined",
+      "passed": true,
+      "raw_points": 439501,
+      "seeds": 38625,
+      "result_sha256": "287c829949dd02c4562c7cdd9d35dc14c89a4cf5619896c3fb2000eb7152295f",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "table",
+      "passed": true,
+      "raw_points": 32683,
+      "seeds": 3665,
+      "result_sha256": "000e48c7ad54467664db775479b0a21229ece604b13d544681771a09760e96ed",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "hill",
+      "passed": true,
+      "raw_points": 200000,
+      "seeds": 9874,
+      "result_sha256": "485717408afbe05b71fb960c1d340fadf96585feb1a702165ef5406a3690ece6",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "forest",
+      "passed": true,
+      "raw_points": 141068,
+      "seeds": 17019,
+      "result_sha256": "5493b7dd806caf2cf5d61dca043d9dc53e3096651c51afea70985e383a3e49c4",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "flat",
+      "passed": true,
+      "raw_points": 10201,
+      "seeds": 4624,
+      "result_sha256": "de4d07f6fe1a2bdb404791bd420090fbccddaf9af6906883813821d40be6bd2f",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "ramp",
+      "passed": true,
+      "raw_points": 10201,
+      "seeds": 5158,
+      "result_sha256": "409287ecc7c62c31caab591b8911e337979dbfb59533a9282ba22a4b71d0672c",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "steps",
+      "passed": true,
+      "raw_points": 39417,
+      "seeds": 4270,
+      "result_sha256": "20413596522084eb268f56d3aa0576b4dc874c2be01dbbdc32a9e9dd5f3587c1",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "steps-single",
+      "passed": true,
+      "raw_points": 10201,
+      "seeds": 4636,
+      "result_sha256": "72ae636810f41286d00fac885ee8b4727873c44b7f0bfed1256a765b5b8ab44d",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "flat_ramp",
+      "passed": true,
+      "raw_points": 10201,
+      "seeds": 4760,
+      "result_sha256": "26b00f3a84c24211e3a47162c5811431c51ada412bf6041fceb12c22bd5ed17e",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "quick",
+      "passed": true,
+      "raw_points": 100000,
+      "seeds": 98837,
+      "result_sha256": "90f63938311e886dc358603c84655f599f786851ea54b088ea7b6a763f96fced",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "desert",
+      "passed": true,
+      "raw_points": 100000,
+      "seeds": 12910,
+      "result_sha256": "ba089399558a7b0f76f93a543737a2a517f62f7c3b9b65659a9bcb6318a8109f",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "mountain",
+      "passed": true,
+      "raw_points": 50000,
+      "seeds": 5336,
+      "result_sha256": "5998b2d150ac7469aafa2e7596ce0e80e7f9f69bbaa0413de97fe859882d3236",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "snow",
+      "passed": true,
+      "raw_points": 500000,
+      "seeds": 43281,
+      "result_sha256": "a94b21ab782075afb7bf2e5f08fde9ac8e77e84d39b56bb07c105ebadbbe3819",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    },
+    {
+      "id": "vocano",
+      "passed": true,
+      "raw_points": 100000,
+      "seeds": 10315,
+      "result_sha256": "904aa4462ed147a7810df1197d8152d3b6ceba2c1ace7d46d6b904871219550e",
+      "all_residuals_recomputed": true,
+      "all_max_abs_errors_independently_recomputed": true,
+      "max_error_csv_all_centers": true
+    }
+  ],
+  "frozen_2125_point_neighbor_and_coefficient_parity": true,
+  "source_files": {
+    "scene_fit_catalog.py": "f13dd4cfcfd53a7cdc6307f7c02fcedbc70f0ed71da7d32ae359e3fb3c909bfb",
+    "table_local_surfaces.py": "c6678ed1c8cc3e1e75c1d8e5bc5ed192e6e33ffcb8f24405c4f7c12804dba709"
+  }
+}

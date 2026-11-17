@@ -1,0 +1,733 @@
+{
+  "scene_count": 17,
+  "unit": "fitting center / local quadratic function",
+  "definitions": {
+    "no_valid_fit": "No valid model: insufficient neighbors or solved but failed rank/height/RMSE checks. Does not mean a mathematical fit is impossible.",
+    "valid_unused": "Valid local model whose seed appears in zero retained triangles. Includes small-component filtering and all adjacent faces rejected.",
+    "valid_used": "Valid model whose seed appears in at least one retained triangle; some other adjacent candidate triangles may still be rejected.",
+    "partial_rejection": "valid_used_with_rejected_adjacent_faces is a subset of valid_used, not a fourth additive category.",
+    "triangles": "Counted separately from local functions. First-failure order: edge length, model disagreement, normal angle, centroid disagreement.",
+    "scope": "Current complete input clouds and 0.12 m seed selection; scene counts overlap in source geometry and are not independent samples."
+  },
+  "scenes": [
+    {
+      "id": "corridor-040",
+      "name": "独立通道 · 净空 0.40 m",
+      "counts": {
+        "centers": 3366,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 316,
+        "no_valid_fit": 316,
+        "valid": 3050,
+        "valid_unused": 128,
+        "valid_unused_small_component": 27,
+        "valid_unused_major_component": 101,
+        "valid_used": 2922,
+        "valid_used_with_rejected_adjacent_faces": 202,
+        "valid_used_without_rejected_adjacent_faces": 2720,
+        "fit_invalid_rank_first": 248,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 68
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 9.38799762329174,
+        "valid_unused": 3.8027332144979207,
+        "valid_used": 86.80926916221033
+      },
+      "triangles": {
+        "candidates": 5558,
+        "kept": 5332,
+        "rejected": 226,
+        "first_failure_reasons": {
+          "edge_length": 14,
+          "model_agreement": 149,
+          "normal_angle": 63,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 39.29514326832671,
+        "rejected_xy_m2": 1.8983579143909068,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "633df6c0bf639ae84586b7521616bd39b136fb1f3a14e6fa70a2ff0b807516b6"
+    },
+    {
+      "id": "corridor-060",
+      "name": "独立通道 · 净空 0.60 m",
+      "counts": {
+        "centers": 3638,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 520,
+        "no_valid_fit": 520,
+        "valid": 3118,
+        "valid_unused": 73,
+        "valid_unused_small_component": 41,
+        "valid_unused_major_component": 32,
+        "valid_used": 3045,
+        "valid_used_with_rejected_adjacent_faces": 197,
+        "valid_used_without_rejected_adjacent_faces": 2848,
+        "fit_invalid_rank_first": 496,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 24
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 14.293567894447499,
+        "valid_unused": 2.0065970313358985,
+        "valid_used": 83.6998350742166
+      },
+      "triangles": {
+        "candidates": 5791,
+        "kept": 5572,
+        "rejected": 219,
+        "first_failure_reasons": {
+          "edge_length": 15,
+          "model_agreement": 140,
+          "normal_angle": 64,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 40.92597837379857,
+        "rejected_xy_m2": 2.0706387265916497,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "d9bf33cbf878f9381cb53cbcd131a0e0372068bfd62b3f46b9f6b6ad12ad2dbb"
+    },
+    {
+      "id": "corridor-080",
+      "name": "独立通道 · 净空 0.80 m",
+      "counts": {
+        "centers": 3774,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 737,
+        "no_valid_fit": 737,
+        "valid": 3037,
+        "valid_unused": 114,
+        "valid_unused_small_component": 45,
+        "valid_unused_major_component": 69,
+        "valid_used": 2923,
+        "valid_used_with_rejected_adjacent_faces": 223,
+        "valid_used_without_rejected_adjacent_faces": 2700,
+        "fit_invalid_rank_first": 713,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 24
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 19.52835188129306,
+        "valid_unused": 3.0206677265500796,
+        "valid_used": 77.45098039215686
+      },
+      "triangles": {
+        "candidates": 5608,
+        "kept": 5340,
+        "rejected": 268,
+        "first_failure_reasons": {
+          "edge_length": 30,
+          "model_agreement": 142,
+          "normal_angle": 96,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 40.06456068051489,
+        "rejected_xy_m2": 2.448477239513405,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "61cb252f0e816a92f652530bca6d8b53e55f0a6c15ae88d42c92478a6931858d"
+    },
+    {
+      "id": "combined",
+      "name": "丘陵、森林与桌子",
+      "counts": {
+        "centers": 38625,
+        "not_solved_insufficient": 182,
+        "solved_but_invalid": 1945,
+        "no_valid_fit": 2127,
+        "valid": 36498,
+        "valid_unused": 3597,
+        "valid_unused_small_component": 2903,
+        "valid_unused_major_component": 694,
+        "valid_used": 32901,
+        "valid_used_with_rejected_adjacent_faces": 3220,
+        "valid_used_without_rejected_adjacent_faces": 29681,
+        "fit_invalid_rank_first": 40,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 1905
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 5.506796116504854,
+        "valid_unused": 9.312621359223302,
+        "valid_used": 85.18058252427184
+      },
+      "triangles": {
+        "candidates": 66585,
+        "kept": 62175,
+        "rejected": 4410,
+        "first_failure_reasons": {
+          "edge_length": 420,
+          "model_agreement": 2769,
+          "normal_angle": 1221,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 402.25787061824866,
+        "rejected_xy_m2": 28.718710511936234,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "287c829949dd02c4562c7cdd9d35dc14c89a4cf5619896c3fb2000eb7152295f"
+    },
+    {
+      "id": "table",
+      "name": "大桌子",
+      "counts": {
+        "centers": 3665,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 128,
+        "no_valid_fit": 128,
+        "valid": 3537,
+        "valid_unused": 38,
+        "valid_unused_small_component": 15,
+        "valid_unused_major_component": 23,
+        "valid_used": 3499,
+        "valid_used_with_rejected_adjacent_faces": 114,
+        "valid_used_without_rejected_adjacent_faces": 3385,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 128
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 3.4924965893587996,
+        "valid_unused": 1.0368349249658937,
+        "valid_used": 95.4706684856753
+      },
+      "triangles": {
+        "candidates": 6685,
+        "kept": 6570,
+        "rejected": 115,
+        "first_failure_reasons": {
+          "edge_length": 13,
+          "model_agreement": 58,
+          "normal_angle": 44,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 47.60320002250671,
+        "rejected_xy_m2": 0.865200060415269,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "000e48c7ad54467664db775479b0a21229ece604b13d544681771a09760e96ed"
+    },
+    {
+      "id": "hill",
+      "name": "丘陵",
+      "counts": {
+        "centers": 9874,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 2,
+        "no_valid_fit": 2,
+        "valid": 9872,
+        "valid_unused": 521,
+        "valid_unused_small_component": 188,
+        "valid_unused_major_component": 333,
+        "valid_used": 9351,
+        "valid_used_with_rejected_adjacent_faces": 2203,
+        "valid_used_without_rejected_adjacent_faces": 7148,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 2
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.0202552157180474,
+        "valid_unused": 5.276483694551347,
+        "valid_used": 94.7032610897306
+      },
+      "triangles": {
+        "candidates": 19341,
+        "kept": 16499,
+        "rejected": 2842,
+        "first_failure_reasons": {
+          "edge_length": 197,
+          "model_agreement": 1621,
+          "normal_angle": 1023,
+          "centroid_agreement": 1
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 99.54034761856767,
+        "rejected_xy_m2": 15.506149311407551,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "485717408afbe05b71fb960c1d340fadf96585feb1a702165ef5406a3690ece6"
+    },
+    {
+      "id": "forest",
+      "name": "森林",
+      "counts": {
+        "centers": 17019,
+        "not_solved_insufficient": 202,
+        "solved_but_invalid": 1859,
+        "no_valid_fit": 2061,
+        "valid": 14958,
+        "valid_unused": 2900,
+        "valid_unused_small_component": 2539,
+        "valid_unused_major_component": 361,
+        "valid_used": 12058,
+        "valid_used_with_rejected_adjacent_faces": 768,
+        "valid_used_without_rejected_adjacent_faces": 11290,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 1859
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 12.109994711792703,
+        "valid_unused": 17.039779070450674,
+        "valid_used": 70.85022621775663
+      },
+      "triangles": {
+        "candidates": 24723,
+        "kept": 23328,
+        "rejected": 1395,
+        "first_failure_reasons": {
+          "edge_length": 396,
+          "model_agreement": 980,
+          "normal_angle": 19,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 147.11945524290815,
+        "rejected_xy_m2": 8.17051252212233,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "5493b7dd806caf2cf5d61dca043d9dc53e3096651c51afea70985e383a3e49c4"
+    },
+    {
+      "id": "flat",
+      "name": "平地",
+      "counts": {
+        "centers": 4624,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 0,
+        "no_valid_fit": 0,
+        "valid": 4624,
+        "valid_unused": 0,
+        "valid_unused_small_component": 0,
+        "valid_unused_major_component": 0,
+        "valid_used": 4624,
+        "valid_used_with_rejected_adjacent_faces": 0,
+        "valid_used_without_rejected_adjacent_faces": 4624,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 0
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.0,
+        "valid_unused": 0.0,
+        "valid_used": 100.0
+      },
+      "triangles": {
+        "candidates": 8978,
+        "kept": 8978,
+        "rejected": 0,
+        "first_failure_reasons": {
+          "edge_length": 0,
+          "model_agreement": 0,
+          "normal_angle": 0,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 64.0,
+        "rejected_xy_m2": 0.0,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "de4d07f6fe1a2bdb404791bd420090fbccddaf9af6906883813821d40be6bd2f"
+    },
+    {
+      "id": "ramp",
+      "name": "斜坡",
+      "counts": {
+        "centers": 5158,
+        "not_solved_insufficient": 14,
+        "solved_but_invalid": 0,
+        "no_valid_fit": 14,
+        "valid": 5144,
+        "valid_unused": 0,
+        "valid_unused_small_component": 0,
+        "valid_unused_major_component": 0,
+        "valid_used": 5144,
+        "valid_used_with_rejected_adjacent_faces": 4,
+        "valid_used_without_rejected_adjacent_faces": 5140,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 0
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.27142303218301667,
+        "valid_unused": 0.0,
+        "valid_used": 99.72857696781699
+      },
+      "triangles": {
+        "candidates": 10008,
+        "kept": 10006,
+        "rejected": 2,
+        "first_failure_reasons": {
+          "edge_length": 2,
+          "model_agreement": 0,
+          "normal_angle": 0,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 63.88480001945496,
+        "rejected_xy_m2": 0.006400025939939269,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "409287ecc7c62c31caab591b8911e337979dbfb59533a9282ba22a4b71d0672c"
+    },
+    {
+      "id": "steps",
+      "name": "高低组合多级台阶",
+      "counts": {
+        "centers": 4270,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 490,
+        "no_valid_fit": 490,
+        "valid": 3780,
+        "valid_unused": 390,
+        "valid_unused_small_component": 210,
+        "valid_unused_major_component": 180,
+        "valid_used": 3390,
+        "valid_used_with_rejected_adjacent_faces": 480,
+        "valid_used_without_rejected_adjacent_faces": 2910,
+        "fit_invalid_rank_first": 486,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 4
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 11.475409836065573,
+        "valid_unused": 9.133489461358314,
+        "valid_used": 79.39110070257611
+      },
+      "triangles": {
+        "candidates": 6542,
+        "kept": 5848,
+        "rejected": 694,
+        "first_failure_reasons": {
+          "edge_length": 291,
+          "model_agreement": 53,
+          "normal_angle": 350,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 61.29083103999358,
+        "rejected_xy_m2": 20.36193790842387,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "20413596522084eb268f56d3aa0576b4dc874c2be01dbbdc32a9e9dd5f3587c1"
+    },
+    {
+      "id": "steps-single",
+      "name": "原单级台阶（历史）",
+      "counts": {
+        "centers": 4636,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 0,
+        "no_valid_fit": 0,
+        "valid": 4636,
+        "valid_unused": 0,
+        "valid_unused_small_component": 0,
+        "valid_unused_major_component": 0,
+        "valid_used": 4636,
+        "valid_used_with_rejected_adjacent_faces": 0,
+        "valid_used_without_rejected_adjacent_faces": 4636,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 0
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.0,
+        "valid_unused": 0.0,
+        "valid_used": 100.0
+      },
+      "triangles": {
+        "candidates": 8868,
+        "kept": 8868,
+        "rejected": 0,
+        "first_failure_reasons": {
+          "edge_length": 0,
+          "model_agreement": 0,
+          "normal_angle": 0,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 62.72000002861026,
+        "rejected_xy_m2": 0.0,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "72ae636810f41286d00fac885ee8b4727873c44b7f0bfed1256a765b5b8ab44d"
+    },
+    {
+      "id": "flat_ramp",
+      "name": "平地与斜坡组合",
+      "counts": {
+        "centers": 4760,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 0,
+        "no_valid_fit": 0,
+        "valid": 4760,
+        "valid_unused": 0,
+        "valid_unused_small_component": 0,
+        "valid_unused_major_component": 0,
+        "valid_used": 4760,
+        "valid_used_with_rejected_adjacent_faces": 0,
+        "valid_used_without_rejected_adjacent_faces": 4760,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 0
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.0,
+        "valid_unused": 0.0,
+        "valid_used": 100.0
+      },
+      "triangles": {
+        "candidates": 9246,
+        "kept": 9246,
+        "rejected": 0,
+        "first_failure_reasons": {
+          "edge_length": 0,
+          "model_agreement": 0,
+          "normal_angle": 0,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 63.99999999999999,
+        "rejected_xy_m2": 0.0,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "26b00f3a84c24211e3a47162c5811431c51ada412bf6041fceb12c22bd5ed17e"
+    },
+    {
+      "id": "quick",
+      "name": "Quick 地形",
+      "counts": {
+        "centers": 98837,
+        "not_solved_insufficient": 85246,
+        "solved_but_invalid": 4,
+        "no_valid_fit": 85250,
+        "valid": 13587,
+        "valid_unused": 367,
+        "valid_unused_small_component": 314,
+        "valid_unused_major_component": 53,
+        "valid_used": 13220,
+        "valid_used_with_rejected_adjacent_faces": 2519,
+        "valid_used_without_rejected_adjacent_faces": 10701,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 4
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 86.25312383014459,
+        "valid_unused": 0.37131843338021187,
+        "valid_used": 13.375557736475209
+      },
+      "triangles": {
+        "candidates": 26026,
+        "kept": 23879,
+        "rejected": 2147,
+        "first_failure_reasons": {
+          "edge_length": 2002,
+          "model_agreement": 145,
+          "normal_angle": 0,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 480.61587693069555,
+        "rejected_xy_m2": 135.79918020516828,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "90f63938311e886dc358603c84655f599f786851ea54b088ea7b6a763f96fced"
+    },
+    {
+      "id": "desert",
+      "name": "沙漠",
+      "counts": {
+        "centers": 12910,
+        "not_solved_insufficient": 2,
+        "solved_but_invalid": 0,
+        "no_valid_fit": 2,
+        "valid": 12908,
+        "valid_unused": 3,
+        "valid_unused_small_component": 0,
+        "valid_unused_major_component": 3,
+        "valid_used": 12905,
+        "valid_used_with_rejected_adjacent_faces": 449,
+        "valid_used_without_rejected_adjacent_faces": 12456,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 0
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.015491866769945777,
+        "valid_unused": 0.023237800154918668,
+        "valid_used": 99.96127033307513
+      },
+      "triangles": {
+        "candidates": 25789,
+        "kept": 25410,
+        "rejected": 379,
+        "first_failure_reasons": {
+          "edge_length": 207,
+          "model_agreement": 2,
+          "normal_angle": 170,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 143.77614435551936,
+        "rejected_xy_m2": 2.8154747378061806,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "ba089399558a7b0f76f93a543737a2a517f62f7c3b9b65659a9bcb6318a8109f"
+    },
+    {
+      "id": "mountain",
+      "name": "山地",
+      "counts": {
+        "centers": 5336,
+        "not_solved_insufficient": 1,
+        "solved_but_invalid": 25,
+        "no_valid_fit": 26,
+        "valid": 5310,
+        "valid_unused": 299,
+        "valid_unused_small_component": 114,
+        "valid_unused_major_component": 185,
+        "valid_used": 5011,
+        "valid_used_with_rejected_adjacent_faces": 1904,
+        "valid_used_without_rejected_adjacent_faces": 3107,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 25
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.4872563718140929,
+        "valid_unused": 5.603448275862069,
+        "valid_used": 93.90929535232384
+      },
+      "triangles": {
+        "candidates": 10347,
+        "kept": 8326,
+        "rejected": 2021,
+        "first_failure_reasons": {
+          "edge_length": 158,
+          "model_agreement": 1681,
+          "normal_angle": 182,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 62.18259077373709,
+        "rejected_xy_m2": 15.850012636266584,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "5998b2d150ac7469aafa2e7596ce0e80e7f9f69bbaa0413de97fe859882d3236"
+    },
+    {
+      "id": "snow",
+      "name": "雪地",
+      "counts": {
+        "centers": 43281,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 16,
+        "no_valid_fit": 16,
+        "valid": 43265,
+        "valid_unused": 8417,
+        "valid_unused_small_component": 3184,
+        "valid_unused_major_component": 5233,
+        "valid_used": 34848,
+        "valid_used_with_rejected_adjacent_faces": 16634,
+        "valid_used_without_rejected_adjacent_faces": 18214,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 16
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.036967722557242205,
+        "valid_unused": 19.44733254776923,
+        "valid_used": 80.51569972967353
+      },
+      "triangles": {
+        "candidates": 79992,
+        "kept": 50475,
+        "rejected": 29517,
+        "first_failure_reasons": {
+          "edge_length": 1234,
+          "model_agreement": 25724,
+          "normal_angle": 2557,
+          "centroid_agreement": 2
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 421.37745664585003,
+        "rejected_xy_m2": 143.3796518803099,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "a94b21ab782075afb7bf2e5f08fde9ac8e77e84d39b56bb07c105ebadbbe3819"
+    },
+    {
+      "id": "vocano",
+      "name": "火山",
+      "counts": {
+        "centers": 10315,
+        "not_solved_insufficient": 0,
+        "solved_but_invalid": 0,
+        "no_valid_fit": 0,
+        "valid": 10315,
+        "valid_unused": 481,
+        "valid_unused_small_component": 72,
+        "valid_unused_major_component": 409,
+        "valid_used": 9834,
+        "valid_used_with_rejected_adjacent_faces": 2944,
+        "valid_used_without_rejected_adjacent_faces": 6890,
+        "fit_invalid_rank_first": 0,
+        "fit_invalid_height_shift_after_rank": 0,
+        "fit_invalid_rmse_after_rank_shift": 0
+      },
+      "percentages_of_centers": {
+        "no_valid_fit": 0.0,
+        "valid_unused": 4.663111972855066,
+        "valid_used": 95.33688802714494
+      },
+      "triangles": {
+        "candidates": 20448,
+        "kept": 16663,
+        "rejected": 3785,
+        "first_failure_reasons": {
+          "edge_length": 167,
+          "model_agreement": 2987,
+          "normal_angle": 631,
+          "centroid_agreement": 0
+        }
+      },
+      "projected_area": {
+        "candidate_xy_hulls_m2": 118.42436124328862,
+        "rejected_xy_m2": 22.205353444231896,
+        "note": "Per-component XY hull area; not actual missing 3D area or image pixels."
+      },
+      "result_sha256": "904aa4462ed147a7810df1197d8152d3b6ceba2c1ace7d46d6b904871219550e"
+    }
+  ],
+  "checks": {
+    "partitions_sum_to_all_centers": true,
+    "published_triangle_arrays_exactly_reproduced": true,
+    "fit_outputs_unchanged": true
+  }
+}

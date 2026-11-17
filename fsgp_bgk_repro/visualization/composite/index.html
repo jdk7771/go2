@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>丘陵 × 森林 × 桌子 · 拼接点云</title>
+  <link rel="stylesheet" href="./viewer.css?v=1">
+  <link rel="icon" href="data:,">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
+</head>
+<body><main>
+  <header><a href="../" class="back">← 所有实验</a><div class="eyebrow">COMPOSITE POINT CLOUD</div>
+    <h1>丘陵、森林，还有一张桌子。</h1>
+    <p>从左到右经过丘陵、过渡坡、桌子空地和森林。保留原始地形尺寸与全部独立表面，桌下仍然空旷。</p>
+  </header>
+  <nav class="scene-links" aria-label="其他场景"><span>新增通道场景：</span><a href="../corridor-040/">净空 0.40 m</a><a href="../corridor-060/">净空 0.60 m</a><a href="../corridor-080/">净空 0.80 m</a></nav>
+  <section class="metrics" aria-label="场景信息">
+    <div><span>场景长 × 宽</span><strong>32 × 12 <small>m</small></strong></div>
+    <div><span>完整点云</span><strong id="total-points">—</strong></div>
+    <div><span>桌子尺寸</span><strong>3 × 2 × 1.2 <small>m</small></strong></div>
+    <div><span>桌下净空</span><strong>1.10 <small>m</small></strong></div>
+  </section>
+  <section class="viewer-shell">
+    <div class="toolbar"><div class="views" role="group" aria-label="视角">
+      <button data-view="overall" class="active">整体场景</button><button data-view="hill">丘陵</button>
+      <button data-view="forest">森林</button><button data-view="table">桌子局部</button>
+      <button data-view="under">桌底视角</button><button data-view="top">俯视</button>
+    </div><label>着色 <select id="color-mode"><option value="source">来源 / 部件</option><option value="height">高度</option></select></label></div>
+    <div id="viewport" aria-label="可旋转的拼接场景点云"><div id="status" role="status">正在加载完整点云…</div>
+      <div class="view-label" id="view-label">整体场景</div><div class="height-key" id="height-key" hidden>高度 / m <span></span><div><b>0</b><b id="height-max">—</b></div></div>
+      <div class="gesture">拖动旋转 · 滚轮缩放 · 右键平移 · 地面网格 1 m</div>
+    </div>
+    <div class="layers" id="layers"></div>
+    <div class="display-controls"><label>点大小 <input id="point-size" type="range" min="1" max="5" step="0.25" value="2"><output id="point-size-value">2 px</output></label>
+      <label><input id="labels" type="checkbox" checked>区域标注</label><label><input id="grid" type="checkbox" checked>参考网格</label>
+      <label><input id="isolate-table" type="checkbox">只看桌子与中央空地</label><span id="visible-count">—</span></div>
+  </section>
+  <section class="notes">
+    <div><h2>拼接布局</h2><p>丘陵位于 X = −15～−5 m；中央空地位于 −3～3 m；森林位于 5～17 m。两侧各有 2 m 过渡带。点击「桌子局部」可放大检查桌面、桌底和四条腿。</p><p>原始丘陵与森林只做平移；空地延伸、过渡坡和丘陵边沿补地为新增几何。颜色表示来源和部件。</p></div>
+    <div><h2>下载完整场景</h2><p id="source-summary">完整点云加载中…</p><p>这是构造的完整场景点云，尚未模拟 LiDAR 遮挡、加入测量噪声或执行曲面拟合。</p>
+      <div class="downloads"><a href="./combined_scene.pcd" download>下载 PCD</a><a href="./combined_scene.npz" download>下载 NPZ</a><a href="./scene.json">来源与变换</a><a href="./overview.png" target="_blank">静态预览</a><a href="./README.md">构造说明</a></div></div>
+  </section>
+</main><script type="module" src="./viewer.js?v=1"></script></body></html>

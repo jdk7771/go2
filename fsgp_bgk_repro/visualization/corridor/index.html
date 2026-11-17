@@ -1,0 +1,32 @@
+<!doctype html><html lang="zh-CN"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>0.4 / 0.6 / 0.8 米净空通道</title><link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./viewer.css?v=2">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
+</head><body><main>
+  <header><a href="../" class="back">← 所有实验</a><div class="eyebrow">COVERED CORRIDOR / THREE CLEARANCES</div>
+    <h1 id="title">同一个通道，三种净空。</h1><p>独立通道场景：地面、两侧墙体和顶板，两端敞开。三个场景共用相同地面，只改变通道净高。</p>
+  </header>
+  <nav class="scene-tabs" aria-label="切换场景"><a href="../combined-scene/">拼接大场景</a><a data-clearance="0.4" href="../corridor-040/">净空 0.40 m</a><a data-clearance="0.6" href="../corridor-060/">净空 0.60 m</a><a data-clearance="0.8" href="../corridor-080/">净空 0.80 m</a><a id="fit-link" href="../">查看二次曲面拟合 →</a></nav>
+  <section class="metrics"><div><span>通道净高 · 地面至顶板底面</span><strong id="clear-height">—</strong></div>
+    <div><span>通道长 × 净宽</span><strong>4 × 2 <small>m</small></strong></div>
+    <div><span>地面长 × 宽</span><strong>6 × 4 <small>m</small></strong></div><div><span>完整点云</span><strong id="total-points">—</strong></div></section>
+  <section class="viewer-shell"><div class="toolbar"><div class="views" role="group" aria-label="视角">
+    <button data-view="local" class="active">通道局部</button><button data-view="entrance">入口正视</button><button data-view="inside">通道内部</button>
+    <button data-view="overall">通道整体</button><button data-view="top">俯视</button></div>
+    <label>着色 <select id="color-mode"><option value="source">来源 / 部件</option><option value="height">高度</option></select></label></div>
+    <div id="viewport" aria-label="可旋转的三维通道点云"><div id="status" role="status">正在加载完整场景…</div>
+      <div class="view-label" id="view-label">通道局部</div><div class="height-key" id="height-key" hidden>高度 / m <span></span><div><b>0</b><b id="height-max">—</b></div></div>
+      <div class="gesture">拖动旋转 · 滚轮缩放 · 右键平移 · 地面网格 1 m</div></div>
+    <div class="layers" id="layers"></div><div class="display-controls">
+      <label>点大小 <input id="point-size" type="range" min="1" max="5" step="0.25" value="2"><output id="point-size-value">2 px</output></label>
+      <label><input id="grid" type="checkbox" checked>参考网格</label><label><input id="dimensions" type="checkbox" checked>净高标注</label>
+      <span id="visible-count">—</span></div>
+  </section>
+  <section class="notes"><div><h2>固定尺寸，只改变高度</h2><p id="geometry-summary">读取尺寸中…</p>
+    <p>通道内部保持空旷，地面延伸至整个通道内部。可隐藏「顶板上下面」检查墙体和地面。</p>
+    <p>「入口正视」使用相同相机与比例，便于对比三种高度；「通道内部」将相机置于净空中间。</p></div>
+    <div><h2>完整场景点云</h2><p id="source-summary">加载中…</p><p>这是构造的完整表面点云，尚未模拟 LiDAR 遮挡、加入测量噪声或执行曲面拟合。图层颜色表示构造来源及部件。</p>
+    <div class="downloads"><a href="./corridor_scene.pcd" download>下载 PCD</a><a href="./corridor_scene.npz" download>下载 NPZ</a><a href="./scene.json">尺寸与来源</a><a href="./audit.json">几何校验</a><a href="./README.md">构造说明</a></div></div></section>
+  <section class="comparison"><h2>同一比例尺下的三种净空</h2><p>横截面位于通道中部；净宽均为 2 米，顶板厚度均为 12 厘米。</p><img src="./clearance-comparison.png" alt="同一比例尺展示净高 0.4、0.6、0.8 米的通道横截面" loading="lazy"></section>
+</main><script type="module" src="./viewer.js?v=2"></script></body></html>

@@ -1,0 +1,99 @@
+{
+  "area_unit": "m^2",
+  "support_definition": "XY convex hull area of the 30 training points for all valid fits",
+  "display_definition": "Area of actual published independent-patch triangles grouped by function; includes zero-area sampled patches; 5x5 triangulation approximation",
+  "display_max_xy_box_m": [
+    0.24,
+    0.24
+  ],
+  "scenes": [
+    {
+      "scene": "flat_ramp",
+      "valid_fits": 4760,
+      "support_xy_area_m2": {
+        "count": 4760,
+        "median": 0.15679997272491164,
+        "p05": 0.11839998874664381,
+        "p95": 0.15680003471373996,
+        "maximum": 0.15680008239746715
+      },
+      "shown_fits": 3000,
+      "display_xy_area_m2": {
+        "count": 3000,
+        "median": 0.05759989013677114,
+        "p05": 0.028799973678587776,
+        "p95": 0.05760000457763681,
+        "maximum": 0.05760000457763681
+      },
+      "display_3d_mesh_area_m2": {
+        "count": 3000,
+        "median": 0.05759989013677114,
+        "p05": 0.028799973678587776,
+        "p95": 0.05769818658537073,
+        "maximum": 0.05810104036224168
+      },
+      "shown_with_no_triangles": 0,
+      "selected_join_seed_1734": {
+        "support_xy_area_m2": 0.14720000414848297,
+        "display_sampled": true,
+        "display_xy_area_m2": 0.05760000100135798,
+        "display_3d_mesh_area_m2": 0.05809858642555149
+      }
+    },
+    {
+      "scene": "hill",
+      "valid_fits": 9872,
+      "support_xy_area_m2": {
+        "count": 9872,
+        "median": 0.011519721861077414,
+        "p05": 0.007330532434855285,
+        "p95": 0.013283843119557655,
+        "maximum": 0.2145040084969878
+      },
+      "shown_fits": 3000,
+      "display_xy_area_m2": {
+        "count": 3000,
+        "median": 0.005180797058301323,
+        "p05": 0.0019423367562456662,
+        "p95": 0.006996103689912303,
+        "maximum": 0.010521409626150557
+      },
+      "display_3d_mesh_area_m2": {
+        "count": 3000,
+        "median": 0.0056098993956412895,
+        "p05": 0.003202604527913018,
+        "p95": 0.007412484658731212,
+        "maximum": 0.010536948862479844
+      },
+      "shown_with_no_triangles": 66
+    },
+    {
+      "scene": "combined",
+      "valid_fits": 36498,
+      "support_xy_area_m2": {
+        "count": 36498,
+        "median": 0.03041630274702812,
+        "p05": 0.009539173669196543,
+        "p95": 0.044545364522016954,
+        "maximum": 0.6759983857476755
+      },
+      "shown_fits": 3000,
+      "display_xy_area_m2": {
+        "count": 3000,
+        "median": 0.014345263996105473,
+        "p05": 0.0039054887209637457,
+        "p95": 0.022684413198476226,
+        "maximum": 0.05759994735717555
+      },
+      "display_3d_mesh_area_m2": {
+        "count": 3000,
+        "median": 0.014826746459765755,
+        "p05": 0.004710636274270981,
+        "p95": 0.0233999735176603,
+        "maximum": 0.05784160913225481
+      },
+      "shown_with_no_triangles": 29
+    }
+  ],
+  "note": "Supports and display patches overlap. A polynomial has no finite intrinsic area without a domain; multiplying by function count does not give unique scene coverage."
+}

@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:42482/?scene=corridor-040",
+  "rootStatus": 200,
+  "sceneCount": 16,
+  "service": "go2-pointcloud-viewer.service",
+  "enabled": true,
+  "transient": false,
+  "noCache": true,
+  "profileWithHullClipping": true,
+  "errors": []
+}

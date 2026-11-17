@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "standalone_corridors": [
+    "corridor-040",
+    "corridor-060",
+    "corridor-080"
+  ],
+  "identical_floor_points": 14443,
+  "single_composite_scene": true,
+  "composite_npz_and_pcd_unchanged": true,
+  "unchanged_other_fit_results": [
+    "combined",
+    "table",
+    "hill",
+    "forest",
+    "flat",
+    "ramp",
+    "steps",
+    "flat_ramp",
+    "quick",
+    "desert",
+    "mountain",
+    "snow",
+    "vocano"
+  ]
+}

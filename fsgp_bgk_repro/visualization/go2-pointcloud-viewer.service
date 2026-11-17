@@ -1,0 +1,12 @@
+[Unit]
+Description=Point cloud fitting and visualization on localhost:42482
+
+[Service]
+Type=simple
+WorkingDirectory=/home/jiang/snap/go2
+ExecStart=/usr/bin/python3 /home/jiang/snap/go2/fsgp_bgk_repro/serve_visualization.py
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target

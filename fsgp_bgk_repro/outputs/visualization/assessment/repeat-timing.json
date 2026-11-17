@@ -1,0 +1,167 @@
+{
+  "scenes": [
+    {
+      "scene": "hill",
+      "repeats": 3,
+      "runs_ms": [
+        {
+          "select_centers_ms": 60.74717000046803,
+          "window_query_ms": 168.67037100018933,
+          "fit_and_covariance_ms": 210.27428099932877,
+          "assembly_ms": 84.0674430000945,
+          "display_patch_geometry_ms": 1440.776428999925,
+          "three_jump_methods_ms": 2356.371238000065,
+          "clearance_ms": 1038.1304250004177,
+          "local_costs_ms": 2.3746529996060417,
+          "body_50x80_ms": 690.3198239997437,
+          "total_assessment_ms": 6051.734208000198
+        },
+        {
+          "select_centers_ms": 58.45563600087189,
+          "window_query_ms": 172.17300099946442,
+          "fit_and_covariance_ms": 212.81043100043462,
+          "assembly_ms": 79.88687599936384,
+          "display_patch_geometry_ms": 1452.691397000308,
+          "three_jump_methods_ms": 2365.008091999698,
+          "clearance_ms": 1036.9764510005552,
+          "local_costs_ms": 2.3425949993907125,
+          "body_50x80_ms": 687.0511850002003,
+          "total_assessment_ms": 6067.398038000647
+        },
+        {
+          "select_centers_ms": 57.89284999991651,
+          "window_query_ms": 181.4246660005665,
+          "fit_and_covariance_ms": 211.35241499996482,
+          "assembly_ms": 79.70403699982853,
+          "display_patch_geometry_ms": 1443.2629860002635,
+          "three_jump_methods_ms": 2384.988662000069,
+          "clearance_ms": 1043.0592299999262,
+          "local_costs_ms": 2.36040499930823,
+          "body_50x80_ms": 690.8613860005062,
+          "total_assessment_ms": 6094.909012000244
+        }
+      ],
+      "medians_ms": {
+        "select_centers_ms": 58.45563600087189,
+        "window_query_ms": 172.17300099946442,
+        "fit_and_covariance_ms": 211.35241499996482,
+        "assembly_ms": 79.88687599936384,
+        "display_patch_geometry_ms": 1443.2629860002635,
+        "three_jump_methods_ms": 2365.008091999698,
+        "clearance_ms": 1038.1304250004177,
+        "local_costs_ms": 2.36040499930823,
+        "body_50x80_ms": 690.3198239997437,
+        "total_assessment_ms": 6067.398038000647
+      }
+    },
+    {
+      "scene": "steps",
+      "repeats": 3,
+      "runs_ms": [
+        {
+          "select_centers_ms": 22.1258299998226,
+          "window_query_ms": 69.7981780003829,
+          "fit_and_covariance_ms": 71.61360099962621,
+          "assembly_ms": 34.22824999961449,
+          "display_patch_geometry_ms": 556.0748980005883,
+          "three_jump_methods_ms": 822.1927819995472,
+          "clearance_ms": 469.3074570004683,
+          "local_costs_ms": 1.1184610002601403,
+          "body_50x80_ms": 232.8798629996527,
+          "total_assessment_ms": 2279.3416940003226
+        },
+        {
+          "select_centers_ms": 22.339549000207626,
+          "window_query_ms": 69.98578000002453,
+          "fit_and_covariance_ms": 72.81755300027726,
+          "assembly_ms": 34.28049400008604,
+          "display_patch_geometry_ms": 551.8432859998939,
+          "three_jump_methods_ms": 817.9528709997612,
+          "clearance_ms": 454.3697159997464,
+          "local_costs_ms": 1.1184610002601403,
+          "body_50x80_ms": 229.58741700040264,
+          "total_assessment_ms": 2254.2975020005542
+        },
+        {
+          "select_centers_ms": 22.311055000500346,
+          "window_query_ms": 71.30015299935621,
+          "fit_and_covariance_ms": 74.0737470005115,
+          "assembly_ms": 34.338673999627645,
+          "display_patch_geometry_ms": 552.3099239999283,
+          "three_jump_methods_ms": 820.5531470002825,
+          "clearance_ms": 465.6255919999239,
+          "local_costs_ms": 1.1101500003860565,
+          "body_50x80_ms": 231.85640599967883,
+          "total_assessment_ms": 2273.48122300009
+        }
+      ],
+      "medians_ms": {
+        "select_centers_ms": 22.311055000500346,
+        "window_query_ms": 69.98578000002453,
+        "fit_and_covariance_ms": 72.81755300027726,
+        "assembly_ms": 34.28049400008604,
+        "display_patch_geometry_ms": 552.3099239999283,
+        "three_jump_methods_ms": 820.5531470002825,
+        "clearance_ms": 465.6255919999239,
+        "local_costs_ms": 1.1184610002601403,
+        "body_50x80_ms": 231.85640599967883,
+        "total_assessment_ms": 2273.48122300009
+      }
+    },
+    {
+      "scene": "combined",
+      "repeats": 3,
+      "runs_ms": [
+        {
+          "select_centers_ms": 128.82019600056083,
+          "window_query_ms": 507.40524899993034,
+          "fit_and_covariance_ms": 274.05993699994724,
+          "assembly_ms": 111.67994999959774,
+          "display_patch_geometry_ms": 1900.037400000656,
+          "three_jump_methods_ms": 2762.3276009999245,
+          "clearance_ms": 1455.5249380000532,
+          "local_costs_ms": 8.874080999703438,
+          "body_50x80_ms": 955.6342489995586,
+          "total_assessment_ms": 8104.365976000736
+        },
+        {
+          "select_centers_ms": 137.18730499931553,
+          "window_query_ms": 489.6013510006014,
+          "fit_and_covariance_ms": 273.8320059997932,
+          "assembly_ms": 111.08036400037236,
+          "display_patch_geometry_ms": 1907.8431359994283,
+          "three_jump_methods_ms": 2768.7905809998483,
+          "clearance_ms": 1461.0901280002508,
+          "local_costs_ms": 8.890705000339949,
+          "body_50x80_ms": 937.1132589994886,
+          "total_assessment_ms": 8095.431209999333
+        },
+        {
+          "select_centers_ms": 129.97431100029644,
+          "window_query_ms": 522.4725629996101,
+          "fit_and_covariance_ms": 273.5197740003059,
+          "assembly_ms": 111.47219600024982,
+          "display_patch_geometry_ms": 1915.6678669996836,
+          "three_jump_methods_ms": 2787.506775000111,
+          "clearance_ms": 1460.5607670000609,
+          "local_costs_ms": 8.802843000012217,
+          "body_50x80_ms": 937.0124569995824,
+          "total_assessment_ms": 8146.993115000441
+        }
+      ],
+      "medians_ms": {
+        "select_centers_ms": 129.97431100029644,
+        "window_query_ms": 507.40524899993034,
+        "fit_and_covariance_ms": 273.8320059997932,
+        "assembly_ms": 111.47219600024982,
+        "display_patch_geometry_ms": 1907.8431359994283,
+        "three_jump_methods_ms": 2768.7905809998483,
+        "clearance_ms": 1460.5607670000609,
+        "local_costs_ms": 8.874080999703438,
+        "body_50x80_ms": 937.1132589994886,
+        "total_assessment_ms": 8104.365976000736
+      }
+    }
+  ],
+  "note": "Same strict 20 cm pipeline. Each run includes all calculations and patch geometry; source construction and IO excluded. Single-thread BLAS. Not end-to-end latency with sensor/visualization."
+}

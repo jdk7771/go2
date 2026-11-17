@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "port": 42482,
+  "whiteToRed": true,
+  "allFunctionCSV": true,
+  "realQuadraticPatches": true,
+  "localProfileZoom": true,
+  "analyticReferenceOnly": true,
+  "missingNotZero": true,
+  "mobileOverflow": false,
+  "records": [
+    {
+      "scene": "combined",
+      "centers": 38625,
+      "solved": 38443,
+      "missing": 182,
+      "residualDifference": 3.885780586188048e-16,
+      "colorDifference": 2.9063370488024987e-8,
+      "basicMaterial": true,
+      "white": "ffffff",
+      "red": "ff0000",
+      "worst": 36630,
+      "max": 0.06272482189079372
+    },
+    {
+      "scene": "hill",
+      "centers": 9874,
+      "solved": 9874,
+      "missing": 0,
+      "residualDifference": 1.97758476261356e-16,
+      "colorDifference": 2.9768238873906228e-8,
+      "basicMaterial": true,
+      "white": "ffffff",
+      "red": "ff0000",
+      "worst": 1968,
+      "max": 0.047875578669514675
+    },
+    {
+      "scene": "flat_ramp",
+      "centers": 4760,
+      "solved": 4760,
+      "missing": 0,
+      "residualDifference": 1.4051260155412137e-16,
+      "colorDifference": 1.900755830508416e-8,
+      "basicMaterial": true,
+      "white": "ffffff",
+      "red": "ff0000",
+      "worst": 3128,
+      "max": 0.010516228625058601
+    },
+    {
+      "probe": "start",
+      "seed": 1734,
+      "coefficientXX": 0.5193832237777124,
+      "vertices": 81,
+      "triangles": 128,
+      "difference": 6.213664128368324e-9,
+      "url": "http://127.0.0.1:42482/?scene=flat_ramp&color=max-error&view=seed&overlay=0&neighbors=1&surface=patch&only=1&seed=1734"
+    },
+    {
+      "probe": "end",
+      "seed": 2993,
+      "coefficientXX": -0.5193833500679746,
+      "vertices": 81,
+      "triangles": 128,
+      "difference": 3.3858683745613405e-8,
+      "url": "http://127.0.0.1:42482/?scene=flat_ramp&color=max-error&view=seed&overlay=0&neighbors=1&surface=patch&only=1&seed=2993"
+    },
+    {
+      "probe": "flat",
+      "seed": 1190,
+      "coefficientXX": 0,
+      "vertices": 81,
+      "triangles": 128,
+      "difference": 0,
+      "url": "http://127.0.0.1:42482/?scene=flat_ramp&color=max-error&view=seed&overlay=0&neighbors=1&surface=patch&only=1&seed=1190"
+    }
+  ],
+  "errors": [],
+  "failed": []
+}

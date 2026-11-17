@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 .mpl-cache/
+# Generated point clouds, numerical arrays and browser caches stay local.
+# Selected reports and evidence already tracked by Git remain versioned.
+outputs/

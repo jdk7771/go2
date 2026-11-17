@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "actualFits": 1964,
+  "validFits": 1955,
+  "rejectedFitsIncluded": 9,
+  "allCurvesPlotted": true,
+  "filters": true,
+  "pointClickLinksSeed": true,
+  "neighborResiduals": 30,
+  "unknownIsNotZero": true,
+  "threeDimensionalErrorColors": [
+    {
+      "metric": "fit_rmse_m",
+      "vertexColors": true,
+      "count": 48875,
+      "unique": 1603,
+      "triangles": 58411
+    },
+    {
+      "metric": "truth_neighbor_rmse_m",
+      "vertexColors": true,
+      "count": 48875,
+      "unique": 1436,
+      "triangles": 58411
+    }
+  ],
+  "triangleExample": true,
+  "csvRows": 2125,
+  "mobileOverflow": false,
+  "errors": [],
+  "failed": []
+}

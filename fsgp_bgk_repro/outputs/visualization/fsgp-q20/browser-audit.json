@@ -1,0 +1,503 @@
+{
+  "passed": true,
+  "cases": 81,
+  "fields_per_case": 5,
+  "checked": [
+    {
+      "id": "flat_dense_low_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_dense_low_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_dense_low_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_dense_noisy_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_dense_noisy_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_dense_noisy_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_sparse_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 503
+    },
+    {
+      "id": "flat_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 485
+    },
+    {
+      "id": "flat_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 488
+    },
+    {
+      "id": "ramp_dense_low_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "ramp_dense_low_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "ramp_dense_low_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "ramp_dense_noisy_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "ramp_dense_noisy_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "ramp_dense_noisy_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "ramp_sparse_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 337
+    },
+    {
+      "id": "ramp_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 307
+    },
+    {
+      "id": "ramp_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 313
+    },
+    {
+      "id": "flat_ramp_dense_low_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_ramp_dense_low_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_ramp_dense_low_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_ramp_dense_noisy_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_ramp_dense_noisy_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_ramp_dense_noisy_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "flat_ramp_sparse_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 412
+    },
+    {
+      "id": "flat_ramp_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 402
+    },
+    {
+      "id": "flat_ramp_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 399
+    },
+    {
+      "id": "steps_dense_low_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 495
+    },
+    {
+      "id": "steps_dense_low_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 495
+    },
+    {
+      "id": "steps_dense_low_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 495
+    },
+    {
+      "id": "steps_dense_noisy_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 495
+    },
+    {
+      "id": "steps_dense_noisy_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 495
+    },
+    {
+      "id": "steps_dense_noisy_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 495
+    },
+    {
+      "id": "steps_sparse_noisy_1101",
+      "unknownChecks": 2,
+      "excludedChecks": 3,
+      "common": 369
+    },
+    {
+      "id": "steps_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 367
+    },
+    {
+      "id": "steps_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 378
+    },
+    {
+      "id": "steps-single_dense_low_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "steps-single_dense_low_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "steps-single_dense_low_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 624
+    },
+    {
+      "id": "steps-single_dense_noisy_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "steps-single_dense_noisy_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "steps-single_dense_noisy_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 0,
+      "common": 625
+    },
+    {
+      "id": "steps-single_sparse_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 458
+    },
+    {
+      "id": "steps-single_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 430
+    },
+    {
+      "id": "steps-single_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 424
+    },
+    {
+      "id": "hill_dense_low_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 613
+    },
+    {
+      "id": "hill_dense_low_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 612
+    },
+    {
+      "id": "hill_dense_low_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 603
+    },
+    {
+      "id": "hill_dense_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 619
+    },
+    {
+      "id": "hill_dense_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 617
+    },
+    {
+      "id": "hill_dense_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 617
+    },
+    {
+      "id": "hill_sparse_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 148
+    },
+    {
+      "id": "hill_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 121
+    },
+    {
+      "id": "hill_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 0,
+      "common": 136
+    },
+    {
+      "id": "corridor-040_dense_low_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-040_dense_low_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-040_dense_low_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-040_dense_noisy_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-040_dense_noisy_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-040_dense_noisy_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-040_sparse_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 397
+    },
+    {
+      "id": "corridor-040_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 399
+    },
+    {
+      "id": "corridor-040_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 393
+    },
+    {
+      "id": "corridor-060_dense_low_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-060_dense_low_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-060_dense_low_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-060_dense_noisy_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-060_dense_noisy_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-060_dense_noisy_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-060_sparse_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 400
+    },
+    {
+      "id": "corridor-060_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 405
+    },
+    {
+      "id": "corridor-060_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 398
+    },
+    {
+      "id": "corridor-080_dense_low_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-080_dense_low_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-080_dense_low_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 459
+    },
+    {
+      "id": "corridor-080_dense_noisy_1101",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-080_dense_noisy_1102",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-080_dense_noisy_1103",
+      "unknownChecks": 0,
+      "excludedChecks": 3,
+      "common": 460
+    },
+    {
+      "id": "corridor-080_sparse_noisy_1101",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 398
+    },
+    {
+      "id": "corridor-080_sparse_noisy_1102",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 401
+    },
+    {
+      "id": "corridor-080_sparse_noisy_1103",
+      "unknownChecks": 1,
+      "excludedChecks": 3,
+      "common": 401
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "unknown_and_excluded_colors_verified": true,
+  "controls": true,
+  "invalid_url_fallback": true,
+  "mobile_overflow": false,
+  "home_and_assessment_links": true,
+  "downloads": true,
+  "renderer": "Chrome headless canvas 2D; no GPU speed claim",
+  "chrome_version": "152.0.7977.75"
+}

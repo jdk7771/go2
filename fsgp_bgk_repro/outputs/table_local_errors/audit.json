@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "records": 2125,
+  "solved": 1964,
+  "valid": 1955,
+  "individual_residuals_checked": 58920,
+  "truth_sample_upper_bound_checks": 58920,
+  "statistics_recomputed": true,
+  "csv_matches_json": true,
+  "triangle_example_recomputed": true,
+  "original_fit_result_hash_unchanged": true
+}

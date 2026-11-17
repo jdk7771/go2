@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "scenes": 17,
+  "compute_runs": 51,
+  "window_first_open_runs": 408,
+  "window_rebuild_samples": 1224,
+  "csv_rows": {
+    "compute-runs.csv": 51,
+    "compute-summary.csv": 17,
+    "per-view-compute.csv": 136,
+    "browser-runs.csv": 408,
+    "browser-summary.csv": 136
+  },
+  "source_and_models_unchanged": true,
+  "median_values_verified": true,
+  "stage_sum_matches_total": true,
+  "browser_errors": [],
+  "resource_failures": []
+}

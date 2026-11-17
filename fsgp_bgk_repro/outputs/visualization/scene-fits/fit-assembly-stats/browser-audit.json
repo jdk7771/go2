@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "port": 42482,
+  "sceneRows": 16,
+  "hillLocalFitFailures": 2,
+  "hillValidUnused": 521,
+  "hillUsedWithMissingConnections": 2203,
+  "csvRows": 16,
+  "mobileOverflow": false,
+  "errors": []
+}

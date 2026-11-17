@@ -8,6 +8,13 @@ M20 点云驱动的六维机身轨迹规划。原有 Go2 C++ 工程位于 `src/`
 新增论文复现：[Quadric LiDAR 二次曲面里程计、增量建图与定位](quadric_lidar_repro/README.md)，
 [KITTI 04 实测报告](quadric_lidar_repro/outputs/kitti04/REPORT.md)。
 
+新增点云实验：[严格 20 cm 局部二次拟合与机身几何评估](step.md)、
+[Q20 与 FSGP 的 81 组配对测评](fsgp_bgk_repro/outputs/visualization/fsgp-q20/report.md)，
+[源码检出后生成数据与启动 42482 的方法](fsgp_bgk_repro/README.md#当前点云实验与-fsgp-对比2026-11-17)。
+
+原远端 `step.md` 的机身—轮端联合规划方案完整保存在
+[联合规划扩展方案](docs/body-wheel-joint-planning.md)，仍为待实现的设计文档。
+
 ## 当前版本：从起点逐步规划
 
 先筛选安全起终点；从起点开始，每轮读取周围 1.4 m 点云，在 0.65 m 局部范围选短期目标，

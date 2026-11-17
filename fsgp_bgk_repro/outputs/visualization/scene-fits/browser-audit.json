@@ -1,0 +1,170 @@
+{
+  "passed": true,
+  "rootPort": 42482,
+  "sceneCount": 17,
+  "scenes": [
+    {
+      "id": "corridor-040",
+      "raw": 30761,
+      "displayedRaw": 30761,
+      "valid": 3050,
+      "triangles": 5332,
+      "displayedTriangles": 5332,
+      "solved": 3366
+    },
+    {
+      "id": "corridor-060",
+      "raw": 32841,
+      "displayedRaw": 32841,
+      "valid": 3118,
+      "triangles": 5572,
+      "displayedTriangles": 5572,
+      "solved": 3638
+    },
+    {
+      "id": "corridor-080",
+      "raw": 34921,
+      "displayedRaw": 34921,
+      "valid": 3037,
+      "triangles": 5340,
+      "displayedTriangles": 5340,
+      "solved": 3774
+    },
+    {
+      "id": "combined",
+      "raw": 439501,
+      "displayedRaw": 439501,
+      "valid": 36498,
+      "triangles": 62175,
+      "displayedTriangles": 62175,
+      "solved": 38443
+    },
+    {
+      "id": "table",
+      "raw": 32683,
+      "displayedRaw": 32683,
+      "valid": 3537,
+      "triangles": 6570,
+      "displayedTriangles": 6570,
+      "solved": 3665
+    },
+    {
+      "id": "hill",
+      "raw": 200000,
+      "displayedRaw": 200000,
+      "valid": 9872,
+      "triangles": 16499,
+      "displayedTriangles": 16499,
+      "solved": 9874
+    },
+    {
+      "id": "forest",
+      "raw": 141068,
+      "displayedRaw": 141068,
+      "valid": 14958,
+      "triangles": 23328,
+      "displayedTriangles": 23328,
+      "solved": 16817
+    },
+    {
+      "id": "flat",
+      "raw": 10201,
+      "displayedRaw": 10201,
+      "valid": 4624,
+      "triangles": 8978,
+      "displayedTriangles": 8978,
+      "solved": 4624
+    },
+    {
+      "id": "ramp",
+      "raw": 10201,
+      "displayedRaw": 10201,
+      "valid": 5144,
+      "triangles": 10006,
+      "displayedTriangles": 10006,
+      "solved": 5144
+    },
+    {
+      "id": "steps",
+      "raw": 39417,
+      "displayedRaw": 39417,
+      "valid": 3780,
+      "triangles": 5848,
+      "displayedTriangles": 5848,
+      "solved": 4270
+    },
+    {
+      "id": "steps-single",
+      "raw": 10201,
+      "displayedRaw": 10201,
+      "valid": 4636,
+      "triangles": 8868,
+      "displayedTriangles": 8868,
+      "solved": 4636
+    },
+    {
+      "id": "flat_ramp",
+      "raw": 10201,
+      "displayedRaw": 10201,
+      "valid": 4760,
+      "triangles": 9246,
+      "displayedTriangles": 9246,
+      "solved": 4760
+    },
+    {
+      "id": "quick",
+      "raw": 100000,
+      "displayedRaw": 100000,
+      "valid": 13587,
+      "triangles": 23879,
+      "displayedTriangles": 23879,
+      "solved": 13591
+    },
+    {
+      "id": "desert",
+      "raw": 100000,
+      "displayedRaw": 100000,
+      "valid": 12908,
+      "triangles": 25410,
+      "displayedTriangles": 25410,
+      "solved": 12908
+    },
+    {
+      "id": "mountain",
+      "raw": 50000,
+      "displayedRaw": 50000,
+      "valid": 5310,
+      "triangles": 8326,
+      "displayedTriangles": 8326,
+      "solved": 5335
+    },
+    {
+      "id": "snow",
+      "raw": 500000,
+      "displayedRaw": 500000,
+      "valid": 43265,
+      "triangles": 50475,
+      "displayedTriangles": 50475,
+      "solved": 43281
+    },
+    {
+      "id": "vocano",
+      "raw": 100000,
+      "displayedRaw": 100000,
+      "valid": 10315,
+      "triangles": 16663,
+      "displayedTriangles": 16663,
+      "solved": 10315
+    }
+  ],
+  "independentPatches": true,
+  "selectedFunction": true,
+  "exactNeighborsDisplayed": 30,
+  "rmseColors": true,
+  "unknownNotZero": true,
+  "legacyLinks": true,
+  "downloads": true,
+  "mobileOverflow": false,
+  "errors": [],
+  "failed": []
+}
