@@ -62,7 +62,9 @@ export MPLCONFIGDIR=/tmp/fsgp-bgk-matplotlib
 所有场景的统一拟合与可视化入口：**http://127.0.0.1:42482/**。今后沿用此端口。
 首页为简洁的单图评价界面：选场景、选指标，直接查看白→红曲面及全场景平均值、最大值和指标已知比例；点击曲面可查看实际局部函数数值。低值白色、高值红色、未知灰色，色标明确显示单位和上限。
 
-支持突变 A/B/C、坡度、粗糙度、拟合残差、不确定性、上方占用、落足与机身评价，共 11 项；切换指标使用同一批已保存结果，不重新拟合。默认展示严格 20 cm 独立面片，可直接勾选组合曲面或原始点。通道和桌子默认隐藏上方遮挡，仅改变显示，统计仍包含全场景有效函数。
+支持突变 A/B/C、坡度、粗糙度、拟合残差、不确定性、上方占用、落足与机身评价，共 11 项；切换指标使用同一批已保存结果，不重新拟合。默认展示严格 20 cm 独立面片，可直接勾选组合曲面或原始点。勾选“拟合覆盖（蓝色）”可直接区分实际有效面（蓝色）、未拟合中心（橙色）和有效但当前未成面的中心（紫色）；白红模式中的白色实体面表示低指标，背景色空隙才表示没有显示曲面。图下显示各类中心数量；点击面片描出该函数实际三角形。
+
+通道和桌子默认显示全部高度，手动选择“仅看底部 10 cm”才裁剪显示；统计仍包含全场景有效函数。森林 24,500 个中心中 19,995 个因点数不足未求解、547 个因 RMSE 超过 2 cm 被拒绝；3,958 个有效函数中 28 个裁剪后无独立三角面。详细归因见仓库根目录 `result.md` 与 `outputs/visualization/metrics/fit-coverage-audit.json`。
 
 原八窗口工作台保留于 `http://127.0.0.1:42482/assessment/details.html`，历史 30 近邻查看器保留于 `http://127.0.0.1:42482/scene-fits/`。历史查看器仍使用 0.12 m 体素、30 近邻与 0.75 m 搜索半径，其数据与新首页的严格 20 cm 方案分开。旧首页带 `color`、`surface` 等参数的深链接自动进入原查看器。
 
@@ -524,6 +526,8 @@ PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /u
 ```bash
 # 只发布页面，不改点云、模型、评价数值或原始计时。
 PYTHONNOUSERSITE=1 /usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+# 可选：从已保存森林／桌子原始点复核拟合与缺面归因，不改实验结果。
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 /usr/bin/python3 -m fsgp_bgk_repro.audit_metric_coverage
 node fsgp_bgk_repro/tests/metric_viewer_browser.cjs
 ```
 

@@ -2,7 +2,7 @@
 <html lang="zh-CN"><head><base href="./metrics/"><meta name="go2-metric-home" content="42482">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>地形评价 · 42482</title><link rel="icon" href="data:,">
-<link rel="stylesheet" href="./viewer.css?v=1">
+<link rel="stylesheet" href="./viewer.css?v=2">
 <script type="importmap">{"imports":{"three":"../scene-fits/vendor/three.module.min.js","three/addons/controls/OrbitControls.js":"../scene-fits/vendor/OrbitControls.js"}}</script>
 <script>
 const oldQuery=new URLSearchParams(location.search);
@@ -21,15 +21,16 @@ if(!oldQuery.has('metric')&&['color','surface','view','only','seed','overlay','n
 <section class="readout" aria-label="当前指标数值">
  <div><span>平均值（全场景）</span><strong id="mean-value">—</strong></div>
  <div><span>最大值（全场景）</span><strong id="max-value">—</strong></div>
- <div><span>指标已知比例</span><strong id="known-value">—</strong></div>
+ <div><span>指标已知／有效拟合</span><strong id="known-value">—</strong></div>
 </section>
 <section class="figure" aria-label="评价指标三维图">
- <div class="figure-top"><strong id="map-title">正在读取…</strong><div class="display-controls"><label><input id="mesh-mode" type="checkbox">组合曲面</label><label><input id="cloud-overlay" type="checkbox">原始点</label><label id="occlusion-option" hidden><input id="hide-overhead" type="checkbox">隐藏上方遮挡</label></div></div>
+ <div class="figure-top"><strong id="map-title">正在读取…</strong><div class="display-controls"><label><input id="fit-coverage" type="checkbox">拟合覆盖（蓝色）</label><label><input id="mesh-mode" type="checkbox">组合曲面</label><label><input id="cloud-overlay" type="checkbox">原始点</label><label id="occlusion-option" hidden><input id="hide-overhead" type="checkbox">仅看底部 10 cm</label></div></div>
  <div id="viewport" aria-label="白到红评价曲面"></div>
  <div id="loading" role="status">正在加载场景…</div>
- <div class="legend"><span id="scale-low">0</span><i aria-label="白色低值，红色高值"></i><span id="scale-high">—</span><span class="unknown"><b></b>未知</span></div>
+ <div class="legend"><span id="metric-legend"><span id="scale-low">0</span><i aria-label="白色低值，红色高值"></i><span id="scale-high">—</span><span class="swatch"><b class="unknown"></b>指标未知</span></span><span id="coverage-legend" class="swatch" hidden><b class="fitted"></b>有效曲面</span><span class="swatch"><b class="unfitted"></b>未拟合中心</span><span class="swatch"><b class="unshown"></b><span id="unshown-label">有效但未成面</span></span><span class="swatch"><b class="uncovered"></b>无曲面背景</span></div>
 </section>
+<p id="fit-summary" class="fit-summary"></p>
 <div class="selection"><span id="selection-info">点击曲面查看该处的具体数值。</span><button id="clear-selection" hidden>取消选择</button></div>
 <p id="metric-note" class="note"></p>
 <footer><span id="source-info"></span><nav><a id="csv-link" download>下载数值 CSV</a><a href="../fsgp-q20/">FSGP 对比</a><a id="old-viewer-link" href="../scene-fits/">原拟合查看器</a></nav></footer>
-</main><script type="module" src="./viewer.js?v=1"></script></body></html>
+</main><script type="module" src="./viewer.js?v=2"></script></body></html>

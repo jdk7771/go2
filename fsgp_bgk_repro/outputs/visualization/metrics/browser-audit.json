@@ -1408,6 +1408,28 @@
   "noDetailsOrIframes": true,
   "selectionAndShare": true,
   "meshAndRawToggle": true,
+  "coverageToggle": true,
+  "forestCoverage": {
+    "coverage": {
+      "insufficient": 19995,
+      "rejected": 547,
+      "validNoPatch": 28,
+      "validUnassembled": 583
+    },
+    "rendered": 3930,
+    "markers": [
+      [
+        "unfitted",
+        20542
+      ],
+      [
+        "unshown",
+        28
+      ]
+    ]
+  },
+  "selectedPatchOutline": true,
+  "tabletopVisibleByDefault": true,
   "legacyLinks": true,
   "assessmentRedirect": true,
   "advancedWorkbench": true,

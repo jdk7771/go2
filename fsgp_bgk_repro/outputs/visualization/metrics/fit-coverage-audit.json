@@ -1,0 +1,110 @@
+{
+  "counting_unit": "local fitting centres; not raw-point fraction or covered surface area",
+  "config": "20x20 cm XY window, +/-4 cm relative Z, minimum 30 points; fit ALL eligible points",
+  "fit_model": "z(x,y) quadratic height graph, not general implicit quadric fitting",
+  "display": "Saved local functions sampled on 5x5 grids; actual triangles clipped to observed XY hull and +/-4 cm relative Z",
+  "interpretation": "Solid white is a valid fitted surface with a low metric. Background gaps have no displayed triangles. A grey solid surface has an unknown metric.",
+  "insufficient_split_note": "XY-only counts diagnose gate effects; including other heights is not a validated fix.",
+  "scenes": [
+    {
+      "scene": "forest",
+      "raw_points": 141068,
+      "centers": 24500,
+      "solved": 4505,
+      "valid": 3958,
+      "valid_center_fraction": 0.16155102040816327,
+      "rejection_exclusive": {
+        "insufficient_points": 19995,
+        "rank": 0,
+        "center_offset_after_rank": 0,
+        "rmse_after_rank_offset": 547
+      },
+      "insufficient_points_split": {
+        "xy_window_already_below_minimum": 11445,
+        "xy_enough_but_height_gate_below_minimum": 8550
+      },
+      "valid_with_display_triangles": 3930,
+      "valid_without_display_triangles": 28,
+      "valid_without_display_reasons_exclusive": {
+        "xy_hull_alone_removes_all": 23,
+        "height_gate_after_xy_removes_all": 5
+      },
+      "independent_patch_triangles": 29890,
+      "valid_without_assembly": 583,
+      "assembled_triangles": 4672,
+      "metrics": {
+        "jump_b_m": {
+          "valid_functions_with_known_value": 3545,
+          "near_white_below_one_percent_color_scale": 2502,
+          "color_scale_maximum": 0.12
+        },
+        "max_error_m": {
+          "valid_functions_with_known_value": 3958,
+          "near_white_below_one_percent_color_scale": 1225,
+          "color_scale_maximum": 0.02
+        },
+        "slope_deg": {
+          "valid_functions_with_known_value": 3958,
+          "near_white_below_one_percent_color_scale": 3,
+          "color_scale_maximum": 45.0
+        },
+        "body_cost": {
+          "valid_functions_with_known_value": 318,
+          "near_white_below_one_percent_color_scale": 0,
+          "color_scale_maximum": 1.0
+        }
+      },
+      "saved_fit_recheck_passed": true
+    },
+    {
+      "scene": "table",
+      "raw_points": 82283,
+      "centers": 5183,
+      "solved": 5131,
+      "valid": 5011,
+      "valid_center_fraction": 0.9668145861470191,
+      "rejection_exclusive": {
+        "insufficient_points": 52,
+        "rank": 0,
+        "center_offset_after_rank": 0,
+        "rmse_after_rank_offset": 120
+      },
+      "insufficient_points_split": {
+        "xy_window_already_below_minimum": 4,
+        "xy_enough_but_height_gate_below_minimum": 48
+      },
+      "valid_with_display_triangles": 5011,
+      "valid_without_display_triangles": 0,
+      "valid_without_display_reasons_exclusive": {
+        "xy_hull_alone_removes_all": 0,
+        "height_gate_after_xy_removes_all": 0
+      },
+      "independent_patch_triangles": 95654,
+      "valid_without_assembly": 193,
+      "assembled_triangles": 9208,
+      "metrics": {
+        "jump_b_m": {
+          "valid_functions_with_known_value": 5011,
+          "near_white_below_one_percent_color_scale": 4093,
+          "color_scale_maximum": 0.12
+        },
+        "max_error_m": {
+          "valid_functions_with_known_value": 5011,
+          "near_white_below_one_percent_color_scale": 4664,
+          "color_scale_maximum": 0.02
+        },
+        "slope_deg": {
+          "valid_functions_with_known_value": 5011,
+          "near_white_below_one_percent_color_scale": 4664,
+          "color_scale_maximum": 45.0
+        },
+        "body_cost": {
+          "valid_functions_with_known_value": 4527,
+          "near_white_below_one_percent_color_scale": 0,
+          "color_scale_maximum": 1.0
+        }
+      },
+      "saved_fit_recheck_passed": true
+    }
+  ]
+}

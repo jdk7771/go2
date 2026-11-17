@@ -35,24 +35,32 @@ function dispose(group){for(const object of [...group.children]){object.geometry
 function draw(){const w=viewport.clientWidth,h=viewport.clientHeight;if(!w||!h)return;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.render(scene,camera);}
 new ResizeObserver(()=>{renderer.setSize(viewport.clientWidth,viewport.clientHeight);if(state.ready)frame(camera.position.clone().sub(controls.target).normalize());else draw();}).observe(viewport);
 function geometry(positions){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(positions,3));return g;}
+const coverage=()=>$('fit-coverage').checked;
 function clipping(){return $('hide-overhead').checked?[new THREE.Plane(new THREE.Vector3(0,0,-1),state.data.meta.bounds[0][2]+.10)]:[];}
 function pointCloud(positions,color,size=1.3){return new THREE.Points(geometry(positions),new THREE.PointsMaterial({color,size,sizeAttenuation:false,clippingPlanes:clipping()}));}
-function share(){if(!state.ready)return;const url=new URL(location.href);url.searchParams.set('scene',state.data.meta.id);url.searchParams.set('metric',state.metric);url.searchParams.set('angle',state.angle);url.searchParams.set('mesh',$('mesh-mode').checked?'1':'0');url.searchParams.set('points',$('cloud-overlay').checked?'1':'0');url.searchParams.set('hide',$('hide-overhead').checked?'1':'0');if(state.selected===null)url.searchParams.delete('model');else url.searchParams.set('model',state.selected);history.replaceState(null,'',url);}
+function share(){if(!state.ready)return;const url=new URL(location.href);url.searchParams.set('scene',state.data.meta.id);url.searchParams.set('metric',state.metric);url.searchParams.set('angle',state.angle);url.searchParams.set('mesh',$('mesh-mode').checked?'1':'0');url.searchParams.set('points',$('cloud-overlay').checked?'1':'0');url.searchParams.set('hide',$('hide-overhead').checked?'1':'0');url.searchParams.set('coverage',coverage()?'1':'0');if(state.selected===null)url.searchParams.delete('model');else url.searchParams.set('model',state.selected);history.replaceState(null,'',url);}
 function updateNumbers(){
  if(!state.ready)return;const d=state.data,spec=fields[state.metric];let sum=0,count=0,max=-Infinity;
  for(let i=0;i<d.meta.centers;i++)if(value(i,'valid')&&Number.isFinite(value(i,state.metric))){const v=value(i,state.metric);sum+=v;count++;max=Math.max(max,v);}
  state.stats={known:count,valid:d.meta.valid,mean:count?sum/count:NaN,max:count?max:NaN};
  $('mean-value').textContent=format(state.stats.mean);$('max-value').textContent=format(state.stats.max);$('known-value').textContent=d.meta.valid?(count/d.meta.valid*100).toFixed(1)+'%':'暂无拟合';$('known-value').title=`${number(count)} / ${number(d.meta.valid)} 个有效函数有该指标`;
- $('map-title').textContent=`${d.meta.name} · ${spec.label}`;$('scale-low').textContent=format(0);$('scale-high').textContent='≥ '+format(spec.scale);
- $('metric-note').textContent=spec.note+' 白色低值，红色高值；灰色为未知，缺面保留。'+($('mesh-mode').checked?' 组合面颜色插值，点选显示最近顶点的局部函数数值。':'')+(!d.meta.valid?' 本场景没有有效拟合，图中显示灰色原始点。':'');
- $('source-info').textContent=`原始点 ${number(d.meta.raw_points)} · 有效函数 ${number(d.meta.valid)} · 20 cm 局部拟合`;
+ const combined=$('mesh-mode').checked,missing=combined?d.coverage.validUnassembled:d.coverage.validNoPatch;
+ $('map-title').textContent=`${d.meta.name} · ${coverage()?(combined?'组合覆盖':'拟合覆盖'):spec.label}`;$('scale-low').textContent=format(0);$('scale-high').textContent='≥ '+format(spec.scale);
+ $('metric-legend').hidden=coverage();$('coverage-legend').hidden=!coverage();$('unshown-label').textContent=combined?'有效但未组合':'有效但未成面';
+ $('metric-note').textContent=(coverage()?'蓝色只画实际保留的曲面；橙色点未拟合，紫色点拟合有效但当前没有面。':spec.note+' 白色实体面已拟合，表示指标低；灰色实体面已拟合，但该指标未知。')+' 背景色空隙没有显示曲面，不能仅凭空隙认定拟合失败。'+(combined?' 当前为组合网格；连接检查也会产生缺口。'+(coverage()?'':' 颜色在顶点间插值，点选显示最近顶点函数的值。'):' 独立面片受观测点凸包和 ±4 cm 高度范围裁剪。')+($('hide-overhead').checked?' 当前已裁剪：仅显示全局最低点以上 10 cm。':'')+(!d.meta.valid?' 本场景没有有效拟合，灰色原始点只作参考。':'');
+ $('fit-summary').textContent=`有效拟合 ${number(d.meta.valid)} / ${number(d.meta.centers)}（${(100*d.meta.valid/d.meta.centers).toFixed(1)}%） · 点数不足 ${number(d.coverage.insufficient)} · 求解后未通过 ${number(d.coverage.rejected)} · ${combined?'有效但未组合':'有效但未成面'} ${number(missing)}`;
+ $('fit-summary').title='按局部拟合中心计数；不是点云点数比例，也不是曲面覆盖面积。';
+ $('source-info').textContent=`原始点 ${number(d.meta.raw_points)} · ${number(d.meta.centers)} 个拟合中心 · 20×20 cm，至少 ${d.meta.config.minimum_points} 点，窗口内全部合格点参与拟合`;
  $('details-link').href=new URL(`details.html?scene=${d.meta.id}${state.selected===null?'':'&seed='+state.selected}`,BASE);
  $('old-viewer-link').href=new URL(`../scene-fits/?scene=${d.meta.id}`,BASE);$('csv-link').href=new URL(`${d.meta.id}/per-model.csv`,BASE);
  updateSelection();
 }
 function paint(){
  if(!state.ready)return;const object=content.children.find(o=>o.userData.surface);
- if(object){const d=state.data,isMesh=object.userData.mode==='mesh',positions=object.geometry.attributes.position.array,colors=new Float32Array(positions.length),color=new THREE.Color();for(let k=0;k<positions.length/3;k++){const i=isMesh?k:d.patchOwners[k];colorFor(value(i,state.metric),fields[state.metric].scale,color).toArray(colors,k*3);}object.geometry.setAttribute('color',new THREE.BufferAttribute(colors,3));object.userData.field=state.metric;}
+ if(object){const d=state.data,isMesh=object.userData.mode==='mesh',positions=object.geometry.attributes.position.array,colors=new Float32Array(positions.length),color=new THREE.Color();for(let k=0;k<positions.length/3;k++){const i=isMesh?k:d.patchOwners[k];if(coverage())color.set('#2586cb');else colorFor(value(i,state.metric),fields[state.metric].scale,color);color.toArray(colors,k*3);}object.geometry.setAttribute('color',new THREE.BufferAttribute(colors,3));object.userData.field=state.metric;object.userData.coverage=coverage();}
+ let edges=content.children.find(o=>o.userData.coverageEdges);
+ if(coverage()&&object&&!edges){edges=new THREE.LineSegments(new THREE.EdgesGeometry(object.geometry,20),new THREE.LineBasicMaterial({color:'#163f61',transparent:true,opacity:.35,clippingPlanes:clipping()}));edges.userData={coverageEdges:true};content.add(edges);}
+ if(edges)edges.visible=coverage();
  updateNumbers();draw();share();
 }
 async function extra(d,key,file,Type){if(d[key])return d[key];d.pending??={};if(!d.pending[key])d.pending[key]=d.get(file).then(b=>d[key]=new Type(b));return d.pending[key];}
@@ -63,9 +71,12 @@ async function install(){
   const raw=$('cloud-overlay').checked||!d.meta.valid?await extra(d,'points','points.bin',Float32Array):null;
   if(d!==state.data||token!==state.renderToken)return;dispose(content);
   if(d.meta.valid){const g=geometry(isMesh?d.positions:d.patches);g.setIndex(new THREE.BufferAttribute(isMesh?mesh:d.patchFaces,1));const object=new THREE.Mesh(g,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,clippingPlanes:clipping(),polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1}));object.userData={surface:true,mode:isMesh?'mesh':'patch'};content.add(object);}
-  // Invalid centres remain grey points, never fabricated surface patches.
-  const invalid=[];for(let i=0;i<d.meta.centers;i++)if(!value(i,'valid'))invalid.push(...xyz(i));
-  if(invalid.length&&d.meta.valid)content.add(pointCloud(new Float32Array(invalid),'#8d969f',1.6));
+  // A missing function is a marker, never an invented surface. Keep it distinct
+  // from both low-valued white surfaces and grey metric-unknown surfaces.
+  for(const [kind,color,predicate]of [['unfitted','#c27619',i=>!value(i,'valid')],['unshown','#8c5db7',i=>value(i,'valid')&&!(isMesh?value(i,'assembled'):d.patchCounts[i])]]){
+   const ids=[];for(let i=0;i<d.meta.centers;i++)if(predicate(i))ids.push(i);
+   if(ids.length){const object=pointCloud(new Float32Array(ids.flatMap(xyz)),color,2.2);object.userData={kind,modelIds:ids};content.add(object);}
+  }
   if(raw)content.add(pointCloud(raw,'#98a3ae',1.1));paint();updateSelection();draw();state.renderedScene=d.meta.id;
  }catch(e){if(e.name!=='AbortError')throw e;}
 }
@@ -83,7 +94,12 @@ function setAngle(angle){
 function updateSelection(){
  dispose(highlight);const i=state.selected;$('clear-selection').hidden=i===null;
  if(i===null){$('selection-info').textContent='点击曲面查看该处的具体数值。';return;}
- const p=xyz(i);$('selection-info').textContent=`局部函数 #${i} · ${fields[state.metric].label} ${format(value(i,'valid')?value(i,state.metric):NaN)} · XYZ (${p.map(v=>v.toFixed(2)).join(', ')}) m`;
+ const d=state.data,p=xyz(i),valid=!!value(i,'valid'),n=value(i,'point_count');
+ const reason=valid?'拟合有效':n<d.meta.config.minimum_points?`未拟合：仅 ${n} 点，不足 ${d.meta.config.minimum_points} 点`:value(i,'rmse_m')>d.meta.config.max_rmse_m?'未通过：RMSE 超过 2 cm':Math.abs(value(i,'c0'))>d.meta.config.height_gate_m?'未通过：中心偏移超过 4 cm':'未通过：秩或数值检查';
+ $('selection-info').textContent=`${valid?'局部函数':'拟合中心'} #${i} · ${reason} · ${n} 点 · ${d.patchCounts[i]} 个独立面片三角形 · ${fields[state.metric].label} ${format(valid?value(i,state.metric):NaN)} · XYZ (${p.map(v=>v.toFixed(2)).join(', ')}) m`;
+ // Outline only the selected function's actual triangles, with no cross-patch
+ // connections. A flat fitted quadratic legitimately has zero curvature.
+ if(d.patchCounts[i]){const selected=d.patchFaceIds[i],vertices=new Float32Array(selected.length*3);for(let k=0;k<selected.length;k++)vertices.set(d.patches.subarray(selected[k]*3,selected[k]*3+3),k*3);const g=geometry(vertices),wire=new THREE.WireframeGeometry(g);g.dispose();const object=new THREE.LineSegments(wire,new THREE.LineBasicMaterial({color:'#243e58',depthTest:false,clippingPlanes:clipping()}));object.userData={selectedPatch:i};object.renderOrder=9;highlight.add(object);}
  const [x,y,z]=p,vertices=new Float32Array([x-.04,y,z+.005,x+.04,y,z+.005,x,y-.04,z+.005,x,y+.04,z+.005]),g=geometry(vertices),mark=new THREE.LineSegments(g,new THREE.LineBasicMaterial({color:'#242a31',depthTest:false,clippingPlanes:clipping()}));mark.renderOrder=10;highlight.add(mark);
 }
 function select(i){if(!state.ready)return;state.selected=i===null?null:Math.max(0,Math.min(state.data.meta.centers-1,Math.round(i)));updateSelection();updateNumbers();share();draw();}
@@ -91,7 +107,8 @@ let down=null;renderer.domElement.addEventListener('pointerdown',e=>down=[e.clie
 renderer.domElement.addEventListener('pointerup',e=>{
  if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>4||!state.ready){down=null;return;}down=null;
  const rect=renderer.domElement.getBoundingClientRect(),ray=new THREE.Raycaster();ray.params.Points.threshold=.05;ray.setFromCamera(new THREE.Vector2((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1),camera);
- const limit=$('hide-overhead').checked?state.data.meta.bounds[0][2]+.100001:Infinity,hit=ray.intersectObjects(content.children,false).find(h=>h.point.z<=limit);if(!hit)return;
+ const limit=$('hide-overhead').checked?state.data.meta.bounds[0][2]+.100001:Infinity,hit=ray.intersectObjects(content.children.filter(o=>o.userData.surface||o.isPoints),false).find(h=>h.point.z<=limit);if(!hit)return;
+ if(hit.object.userData.modelIds){select(hit.object.userData.modelIds[hit.index]);return;}
  if(hit.object.userData.surface&&hit.object.userData.mode==='patch'){select(state.data.patchOwners[hit.face.a]);return;}
  let best=Infinity,id=null;const positions=state.data.positions,candidates=hit.object.userData.surface?[hit.face.a,hit.face.b,hit.face.c]:Array.from({length:state.data.meta.centers},(_,i)=>i);for(const i of candidates){const k=i*3,dist=(hit.point.x-positions[k])**2+(hit.point.y-positions[k+1])**2+(hit.point.z-positions[k+2])**2;if(dist<best){best=dist;id=i;}}select(id);
 });
@@ -104,9 +121,12 @@ async function loadScene(id){
   const d={meta,models:new Float64Array(models),patches:new Float32Array(patches),patchFaces:new Uint32Array(faces),patchOwners:new Uint32Array(owners),columns:Object.fromEntries(meta.fields.map((f,i)=>[f,i])),get};
   if(d.models.length!==meta.centers*meta.fields.length||d.patches.length!==d.patchOwners.length*3||d.patchFaces.length!==meta.patch_triangles*3)throw Error('评价数据长度不匹配');
   state.data=d;d.positions=new Float32Array(meta.centers*3);for(let i=0;i<meta.centers;i++)d.positions.set([value(i,'x'),value(i,'y'),value(i,'valid')?value(i,'height'):value(i,'z')],i*3);
+  d.patchCounts=new Uint32Array(meta.centers);d.patchFaceIds=Array.from({length:meta.centers},()=>[]);
+  for(let k=0;k<d.patchFaces.length;k+=3){const i=d.patchOwners[d.patchFaces[k]];d.patchCounts[i]++;d.patchFaceIds[i].push(...d.patchFaces.subarray(k,k+3));}
+  d.coverage={insufficient:0,rejected:0,validNoPatch:0,validUnassembled:0};for(let i=0;i<meta.centers;i++){if(!value(i,'valid')){if(value(i,'point_count')<meta.config.minimum_points)d.coverage.insufficient++;else d.coverage.rejected++;}else{if(!d.patchCounts[i])d.coverage.validNoPatch++;if(!value(i,'assembled'))d.coverage.validUnassembled++;}}
   const p=new URLSearchParams(location.search),same=p.get('scene')===id,model=same&&p.has('model')?Number(p.get('model')):NaN;
   state.selected=Number.isInteger(model)&&model>=0&&model<meta.centers?model:null;
-  $('scene-select').value=id;const overhead=id.startsWith('corridor-')||id==='table';$('occlusion-option').hidden=!overhead;$('hide-overhead').checked=overhead&&(same&&p.has('hide')?p.get('hide')==='1':true);
+  $('scene-select').value=id;const overhead=id.startsWith('corridor-')||id==='table';$('occlusion-option').hidden=!overhead;$('hide-overhead').checked=overhead&&same&&p.get('hide')==='1';
   state.ready=true;await install();if(token!==state.token)return;setAngle(state.angle);$('loading').hidden=true;
  }catch(e){if(e.name!=='AbortError'&&token===state.token)fail(e);}
 }
@@ -114,10 +134,10 @@ async function start(){
  if(window.metricLegacyRedirect)return;
  const r=await fetch(new URL('catalog.json',BASE));if(!r.ok)throw Error('尚未生成评价场景：HTTP '+r.status);state.catalog=await r.json();
  for(const c of state.catalog.scenes)$('scene-select').append(new Option(c.name,c.id));for(const [key,f]of Object.entries(fields))$('metric-select').append(new Option(f.label,key));
- const params=new URLSearchParams(location.search);state.metric=Object.hasOwn(fields,params.get('metric'))?params.get('metric'):'jump_b_m';$('metric-select').value=state.metric;state.angle=params.get('angle')||'3d';$('mesh-mode').checked=params.get('mesh')==='1';$('cloud-overlay').checked=params.get('points')==='1';
+ const params=new URLSearchParams(location.search);state.metric=Object.hasOwn(fields,params.get('metric'))?params.get('metric'):'jump_b_m';$('metric-select').value=state.metric;state.angle=params.get('angle')||'3d';$('mesh-mode').checked=params.get('mesh')==='1';$('cloud-overlay').checked=params.get('points')==='1';$('fit-coverage').checked=params.get('coverage')==='1';
  $('scene-select').onchange=()=>loadScene($('scene-select').value);$('metric-select').onchange=()=>{state.metric=$('metric-select').value;paint();};
- for(const id of ['mesh-mode','cloud-overlay','hide-overhead'])$(id).onchange=()=>install().catch(fail);for(const b of document.querySelectorAll('[data-angle]'))b.onclick=()=>setAngle(b.dataset.angle);$('clear-selection').onclick=()=>select(null);
+ $('fit-coverage').onchange=paint;for(const id of ['mesh-mode','cloud-overlay'])$(id).onchange=()=>install().catch(fail);$('hide-overhead').onchange=()=>install().then(()=>frame(camera.position.clone().sub(controls.target).normalize())).catch(fail);for(const b of document.querySelectorAll('[data-angle]'))b.onclick=()=>setAngle(b.dataset.angle);$('clear-selection').onclick=()=>select(null);
  const requested=params.get('scene');await loadScene(state.catalog.scenes.some(c=>c.id===requested)?requested:'steps');
 }
-window.metricViewer={state,renderer,camera,controls,content,fields,value,colorFor,select,loadScene,setAngle,paint};
+window.metricViewer={state,renderer,camera,controls,content,highlight,fields,value,colorFor,select,loadScene,setAngle,paint};
 start().catch(fail);
