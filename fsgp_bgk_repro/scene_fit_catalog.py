@@ -396,8 +396,8 @@ def publish_index():
         home, archive = WEB / "index.html", WEB / "legacy-results.html"
         if home.exists() and not archive.exists():
             shutil.copyfile(home, archive)
-        html = template.read_text().replace("<head>", '<head><base href="./scene-fits/"><meta name="go2-scene-fit-home" content="42482">', 1)
-        home.write_text(html)
+        from .publish_metric_viewer import publish
+        publish()
     with (OUT / "summary.csv").open("w") as stream:
         writer = csv.writer(stream)
         writer.writerow(["scene", "raw_points", "seed_count", "solved", "valid", "rejected", "triangles", "median_training_rmse_m", "xyz_to_mesh_median_ms"])

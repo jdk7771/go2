@@ -33,11 +33,11 @@ function save(records,environment,errors,failed){
  assert(Number.isInteger(repeats)&&repeats>0);
  const catalog=JSON.parse(fs.readFileSync(path.join(root,'catalog.json'))),scenes=catalog.scenes.filter(c=>!requested.length||requested.includes(c.id));
  assert(scenes.length>0);for(const id of requested)assert(scenes.some(c=>c.id===id),'unknown scene '+id);
- const html=fs.readFileSync(path.join(root,'index.html'),'utf8').replace(/(<details\s+data-panel="[^"]+")\s+open/g,'$1');
+ const html=fs.readFileSync(path.join(root,'details.html'),'utf8').replace(/(<details\s+data-panel="[^"]+")\s+open/g,'$1');
  const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--enable-unsafe-swiftshader']});
  const context=await browser.newContext({viewport:{width:1440,height:1000},deviceScaleFactor:1}),records=[],errors=[],failed=[];
  const environment={chrome_version:browser.version(),headless:true,viewport:{width:1440,height:1000},device_scale_factor:1,http_cache_disabled:true,view_order:views,webgl_renderers:[]};
- await context.route('http://127.0.0.1:42482/assessment/**',route=>{const url=new URL(route.request().url());if(url.pathname==='/assessment/'||url.pathname==='/assessment/index.html')return route.fulfill({status:200,contentType:'text/html',body:html});return route.continue();});
+ await context.route('http://127.0.0.1:42482/assessment/**',route=>{const url=new URL(route.request().url());if(url.pathname==='/assessment/details.html')return route.fulfill({status:200,contentType:'text/html',body:html});return route.continue();});
  try{
   for(const scene of scenes){
    const runs=[];
@@ -45,7 +45,7 @@ function save(records,environment,errors,failed){
     const page=await context.newPage();page.setDefaultTimeout(120000);
     page.on('pageerror',e=>errors.push({scene:scene.id,run:rep+1,message:e.message}));page.on('response',r=>{if(r.status()>=400)failed.push({url:r.url(),status:r.status()});});
     const cdp=await context.newCDPSession(page);await cdp.send('Network.enable');await cdp.send('Network.setCacheDisabled',{cacheDisabled:true});
-    await page.goto('http://127.0.0.1:42482/assessment/?scene='+scene.id,{waitUntil:'domcontentloaded'});
+    await page.goto('http://127.0.0.1:42482/assessment/details.html?scene='+scene.id,{waitUntil:'domcontentloaded'});
     await page.waitForFunction(id=>window.terrainAssessment?.state.ready&&window.terrainAssessment.state.data.meta.id===id&&document.getElementById('loading').hidden,scene.id);
     const load=await page.evaluate(()=>{if(window.terrainAssessment.state.panels.size)throw Error('benchmark initial panels must be collapsed');return performance.now();});
     const run={load_without_3d_ms:load,views:{}};

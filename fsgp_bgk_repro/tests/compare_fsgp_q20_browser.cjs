@@ -56,7 +56,7 @@ const protocol=JSON.parse(fs.readFileSync(path.join(out,'protocol.json')));
   await page.goto(base,{waitUntil:'domcontentloaded'});
   const homeLink=page.locator('a[href="../fsgp-q20/"]');assert.equal(await homeLink.count(),1);
   assert.equal(await homeLink.evaluate(a=>a.href),base+'fsgp-q20/');
-  await page.goto(base+'assessment/',{waitUntil:'domcontentloaded'});
+  await page.goto(base+'assessment/details.html',{waitUntil:'domcontentloaded'});
   assert.equal(await page.locator('a[href="../fsgp-q20/"]').count(),1);
   assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
   fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify({passed:true,cases:checked.length,fields_per_case:5,checked,

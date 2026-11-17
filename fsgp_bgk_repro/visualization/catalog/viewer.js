@@ -191,7 +191,7 @@ async function loadScene(id){
   d.meshPositions=new Float32Array(meta.seed_count*3);for(let i=0;i<meta.seed_count;i++)d.meshPositions.set([d.seeds[i*14],d.seeds[i*14+1],Number.isFinite(d.seeds[i*14+9])?d.seeds[i*14+9]:d.seeds[i*14+2]],i*3);
   d.assembled=new Uint8Array(meta.seed_count);for(const i of d.mesh)d.assembled[i]=1;d.assembledCount=d.assembled.reduce((sum,v)=>sum+v,0);
   state.data=d;state.ready=true;state.seed=0;let best=Infinity;
-  const assessmentURL=new URL(`../assessment/?scene=${encodeURIComponent(id)}`,BASE);$('assessment-link').href=assessmentURL.href;if($('assessment-inline').open)$('assessment-frame').src=assessmentURL.href;
+  const assessmentURL=new URL(`../assessment/details.html?scene=${encodeURIComponent(id)}`,BASE);$('assessment-link').href=assessmentURL.href;if($('assessment-inline').open)$('assessment-frame').src=assessmentURL.href;
   for(let i=0;i<meta.seed_count;i++)if(value(i,12)){const score=value(i,0)**2+value(i,1)**2-.02*value(i,2);if(score<best){best=score;state.seed=i;}}
   if(requestedSeed!==null&&Number.isInteger(Number(requestedSeed))&&Number(requestedSeed)>=0&&Number(requestedSeed)<meta.seed_count)state.seed=Number(requestedSeed);
   $('seed-id').max=meta.seed_count-1;$('only-current').checked=requestedOnly;$('scene-select').value=id;$('cloud-caption').textContent=`完整 ${number(meta.raw_points)} 点`;$('ramp-probes').hidden=id!=='flat_ramp';if(requestedOnly)$('slice').value=(value(state.seed,1)-meta.bounds[0][1])/(meta.bounds[1][1]-meta.bounds[0][1])*100;

@@ -38,6 +38,7 @@ export MPLCONFIGDIR=/tmp/fsgp-bgk-matplotlib
 /usr/bin/python3 -m fsgp_bgk_repro.mixed_steps_scene
 /usr/bin/python3 -m fsgp_bgk_repro.scene_fit_catalog
 /usr/bin/python3 -m fsgp_bgk_repro.assessment_export
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
 
 # 9 场景 × 3 噪声／密度 × 3 种子，含 8 帧时序小实验。
 /usr/bin/python3 -m fsgp_bgk_repro.compare_fsgp_q20
@@ -59,9 +60,11 @@ export MPLCONFIGDIR=/tmp/fsgp-bgk-matplotlib
 ## 立即运行
 
 所有场景的统一拟合与可视化入口：**http://127.0.0.1:42482/**。今后沿用此端口。
-首页可切换 17 个地形/构造场景，查看完整输入、独立局部二次函数、组合曲面、剖面、
-逐函数训练残差和每场景 3 次端到端耗时。原有论文流程与单帧实验从“历史实验”进入。
-本页全景测试从完整原始点云取 30 近邻，以 0.12 m 体素选拟合中心，不是此前 2125 点单帧的工作量。
+首页为简洁的单图评价界面：选场景、选指标，直接查看白→红曲面及全场景平均值、最大值和指标已知比例；点击曲面可查看实际局部函数数值。低值白色、高值红色、未知灰色，色标明确显示单位和上限。
+
+支持突变 A/B/C、坡度、粗糙度、拟合残差、不确定性、上方占用、落足与机身评价，共 11 项；切换指标使用同一批已保存结果，不重新拟合。默认展示严格 20 cm 独立面片，可直接勾选组合曲面或原始点。通道和桌子默认隐藏上方遮挡，仅改变显示，统计仍包含全场景有效函数。
+
+原八窗口工作台保留于 `http://127.0.0.1:42482/assessment/details.html`，历史 30 近邻查看器保留于 `http://127.0.0.1:42482/scene-fits/`。历史查看器仍使用 0.12 m 体素、30 近邻与 0.75 m 搜索半径，其数据与新首页的严格 20 cm 方案分开。旧首页带 `color`、`surface` 等参数的深链接自动进入原查看器。
 
 ```bash
 # 启动 / 重启统一页面（安装好的用户服务，用户登录后自动启动）
@@ -515,3 +518,15 @@ PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 /u
 “着色”新增 `fit-status`（有效拟合为蓝，其余白）和 `assembly-status`（中心至少参与一个最终三角形为蓝，其余白）。状态对照使用全部有效函数的独立面片并绘制全部中心，不采用 3,000 面片的抽样上限；未求解、无效函数用白色中心表示，不生成假曲面。两种状态只改变颜色，组合状态不表示所有邻接面都被保留。图例提供返回实际组合网格的按钮。
 
 既有结果可运行 `python3 -m fsgp_bgk_repro.export_scene_status_patches` 生成状态面片；新场景导出时自动生成。文件只在进入状态模式时由浏览器加载，原始拟合结果保持不变。
+
+## 简洁评价页面的单独发布与检查
+
+```bash
+# 只发布页面，不改点云、模型、评价数值或原始计时。
+PYTHONNOUSERSITE=1 /usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+node fsgp_bgk_repro/tests/metric_viewer_browser.cjs
+```
+
+前端源码在 `visualization/metrics/`，发布于同端口首页与 `outputs/visualization/metrics/`。
+灰色未知不当作零值；平均值与最大值统计全场景有效函数的有限指标值，已知比例的分母也是有效函数数，不是场景面积。
+白红为固定物理范围的线性映射，超过图例上限饱和为红色；颜色不等同经标定的通过概率。

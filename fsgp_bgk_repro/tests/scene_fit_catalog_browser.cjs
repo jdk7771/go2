@@ -6,7 +6,7 @@ const output=path.resolve(__dirname,'../outputs/visualization/scene-fits');
  try{
   const page=await browser.newPage({viewport:{width:1480,height:1100}}),errors=[],failed=[],results=[];
   page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)failed.push({url:r.url(),status:r.status()});});
-  assert.equal((await page.goto('http://127.0.0.1:42482/',{waitUntil:'networkidle',timeout:60000})).status(),200);
+  assert.equal((await page.goto('http://127.0.0.1:42482/scene-fits/',{waitUntil:'networkidle',timeout:60000})).status(),200);
   await page.waitForFunction(()=>window.sceneFitCatalog?.state.ready,{timeout:60000});
   const sceneCount=await page.evaluate(()=>window.sceneFitCatalog.state.catalog.scenes.length);
   assert.equal(await page.locator('#scene-select option').count(),sceneCount);assert.equal(await page.locator('#scene-table tr').count(),sceneCount);
