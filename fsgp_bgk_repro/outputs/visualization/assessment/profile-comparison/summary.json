@@ -1,0 +1,2758 @@
+{
+  "experiment_date": "2026-11-18",
+  "timezone": "Asia/Shanghai",
+  "profiles": {
+    "q20-n30": {
+      "patch_size_m": 0.2,
+      "seed_voxel_m": 0.1,
+      "height_gate_m": 0.04,
+      "minimum_points": 30,
+      "noise_floor_m": 0.003,
+      "max_rmse_m": 0.02,
+      "clearance_low_m": 0.1,
+      "clearance_high_m": 0.6,
+      "clearance_cell_m": 0.05,
+      "jump_offset_m": 0.24,
+      "jump_limit_m": 0.12,
+      "sigma_multiplier": 2.0,
+      "slope_limit_deg": 45.0,
+      "roughness_limit_m": 0.01,
+      "normal_change_limit_deg": 15.0,
+      "body_length_m": 0.8,
+      "body_width_m": 0.5,
+      "com_height_m": 0.3,
+      "leg_height_residual_limit_m": 0.15,
+      "body_minimum_coverage": 0.8
+    },
+    "q15-n15": {
+      "patch_size_m": 0.15,
+      "seed_voxel_m": 0.1,
+      "height_gate_m": 0.04,
+      "minimum_points": 15,
+      "noise_floor_m": 0.003,
+      "max_rmse_m": 0.02,
+      "clearance_low_m": 0.1,
+      "clearance_high_m": 0.6,
+      "clearance_cell_m": 0.05,
+      "jump_offset_m": 0.24,
+      "jump_limit_m": 0.12,
+      "sigma_multiplier": 2.0,
+      "slope_limit_deg": 45.0,
+      "roughness_limit_m": 0.01,
+      "normal_change_limit_deg": 15.0,
+      "body_length_m": 0.8,
+      "body_width_m": 0.5,
+      "com_height_m": 0.3,
+      "leg_height_residual_limit_m": 0.15,
+      "body_minimum_coverage": 0.8
+    }
+  },
+  "scenes": [
+    {
+      "id": "corridor-040",
+      "name": "独立通道 · 净空 0.40 m",
+      "raw_points": 78103,
+      "source_xyz_sha256": "9d09fd4b1022f9f0ab8a4e38dc0c21fc4a3281f1aee1e976332448b71aa1e162",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 4889,
+        "solved": 4305,
+        "valid": 4285,
+        "valid_fraction": 0.8764573532419718,
+        "insufficient": 584,
+        "rejected": 20,
+        "displayed_functions": 4285,
+        "valid_no_patch": 0,
+        "patch_triangles": 63526,
+        "assembled_functions": 3968,
+        "assembled_triangles": 7359,
+        "valid_unassembled": 317,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 90.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.007686148293200664,
+          "maximum": 0.01853238621423086
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.015741938343686805,
+          "maximum": 0.0307211699079755
+        },
+        "std_patch_m": {
+          "median": 0.0013821037731938355,
+          "p95": 0.003378752481375923,
+          "maximum": 0.01488294160980169
+        },
+        "jump_b_m_known": 4285,
+        "foot_cost_known": 4285,
+        "body_cost_known": 3884,
+        "stages_ms": {
+          "select_centers_ms": 38.95169899999473,
+          "window_query_ms": 97.3465980000583,
+          "fit_and_covariance_ms": 61.379766999948515,
+          "assembly_ms": 39.84573499997168,
+          "display_patch_geometry_ms": 430.1867140000013,
+          "three_jump_methods_ms": 597.505495000064,
+          "clearance_ms": 439.067657999999,
+          "local_costs_ms": 0.945088999969812,
+          "body_50x80_ms": 246.63388700002997,
+          "total_assessment_ms": 1951.8650160000561
+        },
+        "total_assessment_ms": 1951.8650160000561,
+        "fit_pipeline_ms": 197.67806400000154,
+        "compute_call_wall_ms": 1953.426314000012,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.5010850155987856,
+          "maximum": 0.6073395981274639
+        },
+        "jump_sigma_m": {
+          "median": 0.004304924174919158,
+          "p95": 0.040570216155831305,
+          "maximum": 0.24621101135042395
+        },
+        "jump_upper_m": {
+          "median": 0.008609850481465228,
+          "p95": 0.5146424778375626,
+          "maximum": 0.9065534377373784
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 23.27758061056885,
+          "maximum": 28.300766163666648
+        }
+      },
+      "q15-n15": {
+        "centers": 4889,
+        "solved": 4885,
+        "valid": 4303,
+        "valid_fraction": 0.8801390877480058,
+        "insufficient": 4,
+        "rejected": 582,
+        "displayed_functions": 4303,
+        "valid_no_patch": 0,
+        "patch_triangles": 64211,
+        "assembled_functions": 3942,
+        "assembled_triangles": 7274,
+        "valid_unassembled": 361,
+        "point_count": {
+          "median": 42.0,
+          "p95": 49.0,
+          "maximum": 56.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.00800640810323262,
+          "maximum": 0.015236199891469935
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.014189190609744325,
+          "maximum": 0.027473271485923777
+        },
+        "std_patch_m": {
+          "median": 0.0015956155009580197,
+          "p95": 0.004609926626251863,
+          "maximum": 0.008121425943726274
+        },
+        "jump_b_m_known": 4303,
+        "foot_cost_known": 4303,
+        "body_cost_known": 3837,
+        "stages_ms": {
+          "select_centers_ms": 13.955503000033787,
+          "window_query_ms": 46.97070299994266,
+          "fit_and_covariance_ms": 46.20252100005473,
+          "assembly_ms": 29.762002999973447,
+          "display_patch_geometry_ms": 416.0482749999801,
+          "three_jump_methods_ms": 521.768828000063,
+          "clearance_ms": 366.37761800000135,
+          "local_costs_ms": 0.9023459999752959,
+          "body_50x80_ms": 219.28088799995749,
+          "total_assessment_ms": 1661.27105999999
+        },
+        "total_assessment_ms": 1661.27105999999,
+        "fit_pipeline_ms": 107.12872700003118,
+        "compute_call_wall_ms": 1661.6925509999874,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.5199999809265137,
+          "maximum": 0.7360002764748721
+        },
+        "jump_sigma_m": {
+          "median": 0.011825577716489167,
+          "p95": 0.10570341500511919,
+          "maximum": 0.4324902107358975
+        },
+        "jump_upper_m": {
+          "median": 0.025595245674672706,
+          "p95": 0.5429541310944941,
+          "maximum": 1.558567897461009
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 28.300766181239545,
+          "maximum": 35.75390043181516
+        }
+      },
+      "paired_centers": {
+        "both_valid": 4283,
+        "newly_valid": 20,
+        "lost_valid": 2,
+        "both_invalid": 584
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "corridor-060",
+      "name": "独立通道 · 净空 0.60 m",
+      "raw_points": 83383,
+      "source_xyz_sha256": "d23b8fae549f7dffc83177f78f034c3d03793987506ce4d2bd95f948f970f015",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 5221,
+        "solved": 4317,
+        "valid": 4285,
+        "valid_fraction": 0.8207239992338633,
+        "insufficient": 904,
+        "rejected": 32,
+        "displayed_functions": 4285,
+        "valid_no_patch": 0,
+        "patch_triangles": 63526,
+        "assembled_functions": 3968,
+        "assembled_triangles": 7359,
+        "valid_unassembled": 317,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 90.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.007686167381965166,
+          "maximum": 0.018532398736636663
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.015741957109535194,
+          "maximum": 0.030721193911063687
+        },
+        "std_patch_m": {
+          "median": 0.0013821037731938355,
+          "p95": 0.003378760872602318,
+          "maximum": 0.014882951666263503
+        },
+        "jump_b_m_known": 4285,
+        "foot_cost_known": 4285,
+        "body_cost_known": 3884,
+        "stages_ms": {
+          "select_centers_ms": 14.983699000026718,
+          "window_query_ms": 64.65905799996108,
+          "fit_and_covariance_ms": 59.83387800006312,
+          "assembly_ms": 29.65751499993985,
+          "display_patch_geometry_ms": 423.76443600005587,
+          "three_jump_methods_ms": 586.6485970000213,
+          "clearance_ms": 471.8891329999906,
+          "local_costs_ms": 1.0626309999679506,
+          "body_50x80_ms": 245.66613800004689,
+          "total_assessment_ms": 1898.1674589999784
+        },
+        "total_assessment_ms": 1898.1674589999784,
+        "fit_pipeline_ms": 139.47663500005092,
+        "compute_call_wall_ms": 1898.6293190000652,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.7010850632825014,
+          "maximum": 0.8073396380823226
+        },
+        "jump_sigma_m": {
+          "median": 0.004304924174919158,
+          "p95": 0.040570216155831305,
+          "maximum": 0.24621117770156256
+        },
+        "jump_upper_m": {
+          "median": 0.008609850481465228,
+          "p95": 0.7146425255212784,
+          "maximum": 1.1065537842921906
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 23.27760540539988,
+          "maximum": 28.300766163666648
+        }
+      },
+      "q15-n15": {
+        "centers": 5221,
+        "solved": 5217,
+        "valid": 4303,
+        "valid_fraction": 0.824171614633212,
+        "insufficient": 4,
+        "rejected": 914,
+        "displayed_functions": 4303,
+        "valid_no_patch": 0,
+        "patch_triangles": 64211,
+        "assembled_functions": 3942,
+        "assembled_triangles": 7274,
+        "valid_unassembled": 361,
+        "point_count": {
+          "median": 42.0,
+          "p95": 49.0,
+          "maximum": 56.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.00800640810323262,
+          "maximum": 0.015236209517450094
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.014189190609744325,
+          "maximum": 0.027473294586827235
+        },
+        "std_patch_m": {
+          "median": 0.0015956155009580197,
+          "p95": 0.0046099380751337205,
+          "maximum": 0.008121431074709433
+        },
+        "jump_b_m_known": 4303,
+        "foot_cost_known": 4303,
+        "body_cost_known": 3837,
+        "stages_ms": {
+          "select_centers_ms": 14.82697400001598,
+          "window_query_ms": 50.08377699994071,
+          "fit_and_covariance_ms": 49.30253600002743,
+          "assembly_ms": 31.271046000028946,
+          "display_patch_geometry_ms": 413.6473840000008,
+          "three_jump_methods_ms": 521.7543659999819,
+          "clearance_ms": 372.64520799999445,
+          "local_costs_ms": 1.0175140000683314,
+          "body_50x80_ms": 219.26179899992349,
+          "total_assessment_ms": 1673.8129789999903
+        },
+        "total_assessment_ms": 1673.8129789999903,
+        "fit_pipeline_ms": 114.21328699998412,
+        "compute_call_wall_ms": 1674.2855229999805,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.7200000286102295,
+          "maximum": 0.9360002943562655
+        },
+        "jump_sigma_m": {
+          "median": 0.011825577716595261,
+          "p95": 0.10570341500511919,
+          "maximum": 0.432490483785617
+        },
+        "jump_upper_m": {
+          "median": 0.025595245674672706,
+          "p95": 0.7417825286622903,
+          "maximum": 1.7585685068307657
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 28.300766181239545,
+          "maximum": 35.75396790600725
+        }
+      },
+      "paired_centers": {
+        "both_valid": 4283,
+        "newly_valid": 20,
+        "lost_valid": 2,
+        "both_invalid": 916
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "corridor-080",
+      "name": "独立通道 · 净空 0.80 m",
+      "raw_points": 88663,
+      "source_xyz_sha256": "f883f605f669436b59086141c42d9aa99bf14e3202d0c522a5e2be65a9bb8903",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 5553,
+        "solved": 4329,
+        "valid": 4285,
+        "valid_fraction": 0.7716549612821898,
+        "insufficient": 1224,
+        "rejected": 44,
+        "displayed_functions": 4285,
+        "valid_no_patch": 0,
+        "patch_triangles": 63526,
+        "assembled_functions": 3968,
+        "assembled_triangles": 7359,
+        "valid_unassembled": 317,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 90.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.007686148293200664,
+          "maximum": 0.018532398736636663
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.015741957109535194,
+          "maximum": 0.030721193911063687
+        },
+        "std_patch_m": {
+          "median": 0.0013821037731938355,
+          "p95": 0.003378752481375923,
+          "maximum": 0.014882951666263503
+        },
+        "jump_b_m_known": 4285,
+        "foot_cost_known": 4285,
+        "body_cost_known": 3884,
+        "stages_ms": {
+          "select_centers_ms": 15.697260000024471,
+          "window_query_ms": 65.44620800002576,
+          "fit_and_covariance_ms": 60.58303899999373,
+          "assembly_ms": 30.190597999990132,
+          "display_patch_geometry_ms": 432.0017300000245,
+          "three_jump_methods_ms": 592.2868319998997,
+          "clearance_ms": 444.55854200009526,
+          "local_costs_ms": 1.0008909999896787,
+          "body_50x80_ms": 233.0426969999735,
+          "total_assessment_ms": 1874.8089839999693
+        },
+        "total_assessment_ms": 1874.8089839999693,
+        "fit_pipeline_ms": 141.72650700004397,
+        "compute_call_wall_ms": 1875.26015800006,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.899024596379555,
+          "maximum": 1.0073396261613936
+        },
+        "jump_sigma_m": {
+          "median": 0.004304924160216825,
+          "p95": 0.040570216155831305,
+          "maximum": 0.24621117770156256
+        },
+        "jump_upper_m": {
+          "median": 0.008609850481465228,
+          "p95": 0.9164790512622418,
+          "maximum": 1.3065537723712617
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 23.27760540539988,
+          "maximum": 28.300766163666648
+        }
+      },
+      "q15-n15": {
+        "centers": 5553,
+        "solved": 5549,
+        "valid": 4303,
+        "valid_fraction": 0.7748964523680894,
+        "insufficient": 4,
+        "rejected": 1246,
+        "displayed_functions": 4303,
+        "valid_no_patch": 0,
+        "patch_triangles": 64211,
+        "assembled_functions": 3942,
+        "assembled_triangles": 7274,
+        "valid_unassembled": 361,
+        "point_count": {
+          "median": 42.0,
+          "p95": 49.0,
+          "maximum": 56.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.00800640810323262,
+          "maximum": 0.015236209517450094
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.014189190609744325,
+          "maximum": 0.027473294586827235
+        },
+        "std_patch_m": {
+          "median": 0.0015956155009580197,
+          "p95": 0.004609926626251863,
+          "maximum": 0.008121431074709433
+        },
+        "jump_b_m_known": 4303,
+        "foot_cost_known": 4303,
+        "body_cost_known": 3837,
+        "stages_ms": {
+          "select_centers_ms": 15.411116999985097,
+          "window_query_ms": 51.30904800000735,
+          "fit_and_covariance_ms": 51.08227400000942,
+          "assembly_ms": 30.094422000047416,
+          "display_patch_geometry_ms": 425.09394699993663,
+          "three_jump_methods_ms": 512.0859969999856,
+          "clearance_ms": 373.82998000009593,
+          "local_costs_ms": 1.0139519999938784,
+          "body_50x80_ms": 212.91560800000298,
+          "total_assessment_ms": 1672.8387189999694
+        },
+        "total_assessment_ms": 1672.8387189999694,
+        "fit_pipeline_ms": 117.80243900000187,
+        "compute_call_wall_ms": 1673.3908130000827,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.9200000166893005,
+          "maximum": 1.1360002824353366
+        },
+        "jump_sigma_m": {
+          "median": 0.011825577716595261,
+          "p95": 0.10570341499552706,
+          "maximum": 0.432490483785617
+        },
+        "jump_upper_m": {
+          "median": 0.025595245674672706,
+          "p95": 0.9366794322489144,
+          "maximum": 1.9585684949098368
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 28.300766181239545,
+          "maximum": 35.75390043181516
+        }
+      },
+      "paired_centers": {
+        "both_valid": 4283,
+        "newly_valid": 20,
+        "lost_valid": 2,
+        "both_invalid": 1248
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "combined",
+      "name": "丘陵、森林与桌子",
+      "raw_points": 439501,
+      "source_xyz_sha256": "54459c604f8a4e87fec235a77b26287b26e5e07a07f799e2e09fa5b28df5eeb7",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 55364,
+        "solved": 18906,
+        "valid": 18385,
+        "valid_fraction": 0.3320749945813164,
+        "insufficient": 36458,
+        "rejected": 521,
+        "displayed_functions": 17013,
+        "valid_no_patch": 1372,
+        "patch_triangles": 124725,
+        "assembled_functions": 17308,
+        "assembled_triangles": 30068,
+        "valid_unassembled": 1077,
+        "point_count": {
+          "median": 65.0,
+          "p95": 77.0,
+          "maximum": 126.0
+        },
+        "rmse_m": {
+          "median": 0.0001906629263188313,
+          "p95": 0.0065667799166936255,
+          "maximum": 0.019978493472050184
+        },
+        "max_error_m": {
+          "median": 0.0005391497792191086,
+          "p95": 0.01767681609016936,
+          "maximum": 0.06029940948987144
+        },
+        "std_patch_m": {
+          "median": 0.0008666744883487899,
+          "p95": 0.002508074580922903,
+          "maximum": 0.029519562647401635
+        },
+        "jump_b_m_known": 18009,
+        "foot_cost_known": 18009,
+        "body_cost_known": 13250,
+        "stages_ms": {
+          "select_centers_ms": 129.6860709999237,
+          "window_query_ms": 504.99063600000227,
+          "fit_and_covariance_ms": 267.18334300016977,
+          "assembly_ms": 112.87868499994147,
+          "display_patch_geometry_ms": 1874.4874689998596,
+          "three_jump_methods_ms": 2712.666128000137,
+          "clearance_ms": 1422.8296859998864,
+          "local_costs_ms": 8.704068000042753,
+          "body_50x80_ms": 1129.3928540001161,
+          "total_assessment_ms": 8162.821313999984
+        },
+        "total_assessment_ms": 8162.821313999984,
+        "fit_pipeline_ms": 901.8600500000957,
+        "compute_call_wall_ms": 8170.961417000171,
+        "jump_b_m": {
+          "median": 0.0019137663681363104,
+          "p95": 0.23287335099405557,
+          "maximum": 1.9372442069481737
+        },
+        "jump_sigma_m": {
+          "median": 0.00453063636422985,
+          "p95": 0.06615377153893756,
+          "maximum": 1.4239398622581996
+        },
+        "jump_upper_m": {
+          "median": 0.011532982782035078,
+          "p95": 0.3869753284003244,
+          "maximum": 3.842522987205397
+        },
+        "slope_deg": {
+          "median": 15.550557603908162,
+          "p95": 51.402125951029504,
+          "maximum": 80.1118774240939
+        }
+      },
+      "q15-n15": {
+        "centers": 55364,
+        "solved": 26577,
+        "valid": 26139,
+        "valid_fraction": 0.4721299039086771,
+        "insufficient": 28787,
+        "rejected": 438,
+        "displayed_functions": 25155,
+        "valid_no_patch": 984,
+        "patch_triangles": 177823,
+        "assembled_functions": 24419,
+        "assembled_triangles": 45528,
+        "valid_unassembled": 1720,
+        "point_count": {
+          "median": 30.0,
+          "p95": 45.0,
+          "maximum": 95.0
+        },
+        "rmse_m": {
+          "median": 9.618345366719125e-05,
+          "p95": 0.0082246794908038,
+          "maximum": 0.01999888540879911
+        },
+        "max_error_m": {
+          "median": 0.00021804513479599733,
+          "p95": 0.020881903137809136,
+          "maximum": 0.061172117308633506
+        },
+        "std_patch_m": {
+          "median": 0.001418201040716516,
+          "p95": 0.005265692862616615,
+          "maximum": 0.03088115012330598
+        },
+        "jump_b_m_known": 26127,
+        "foot_cost_known": 26127,
+        "body_cost_known": 18382,
+        "stages_ms": {
+          "select_centers_ms": 127.36005799979466,
+          "window_query_ms": 396.3217830000758,
+          "fit_and_covariance_ms": 247.13683400000264,
+          "assembly_ms": 156.63876500002516,
+          "display_patch_geometry_ms": 2570.980990999942,
+          "three_jump_methods_ms": 3360.7953570001428,
+          "clearance_ms": 1830.6762199999866,
+          "local_costs_ms": 8.99138599993421,
+          "body_50x80_ms": 1243.0017320000388,
+          "total_assessment_ms": 9941.905500999837
+        },
+        "total_assessment_ms": 9941.905500999837,
+        "fit_pipeline_ms": 770.8186749998731,
+        "compute_call_wall_ms": 9946.845835999966,
+        "jump_b_m": {
+          "median": 0.0019774460032520036,
+          "p95": 0.4726098309551765,
+          "maximum": 7.67137783550373
+        },
+        "jump_sigma_m": {
+          "median": 0.01459798557229154,
+          "p95": 0.15644045198154602,
+          "maximum": 2.7331689756045052
+        },
+        "jump_upper_m": {
+          "median": 0.03249912332173524,
+          "p95": 0.7880165893723883,
+          "maximum": 11.761997197231256
+        },
+        "slope_deg": {
+          "median": 15.339165751122124,
+          "p95": 49.25558818079906,
+          "maximum": 80.41565297016898
+        }
+      },
+      "paired_centers": {
+        "both_valid": 17474,
+        "newly_valid": 8665,
+        "lost_valid": 911,
+        "both_invalid": 28314
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "table",
+      "name": "大桌子",
+      "raw_points": 82283,
+      "source_xyz_sha256": "501fd0ec9354500bf043fb918780e4de2743bae6fcd278ea97bec2b585514cbc",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 5183,
+        "solved": 5131,
+        "valid": 5011,
+        "valid_fraction": 0.9668145861470191,
+        "insufficient": 52,
+        "rejected": 120,
+        "displayed_functions": 5011,
+        "valid_no_patch": 0,
+        "patch_triangles": 95654,
+        "assembled_functions": 4818,
+        "assembled_triangles": 9208,
+        "valid_unassembled": 193,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 81.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.006658945734060129,
+          "maximum": 0.009710298139060759
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.012820562688521237,
+          "maximum": 0.020728169055822115
+        },
+        "std_patch_m": {
+          "median": 0.0014235586629802593,
+          "p95": 0.0030722652617795935,
+          "maximum": 0.004856081147488981
+        },
+        "jump_b_m_known": 5011,
+        "foot_cost_known": 5011,
+        "body_cost_known": 4527,
+        "stages_ms": {
+          "select_centers_ms": 13.323819000106596,
+          "window_query_ms": 61.83311499989941,
+          "fit_and_covariance_ms": 67.93224600005487,
+          "assembly_ms": 35.145107000062126,
+          "display_patch_geometry_ms": 509.1356599998562,
+          "three_jump_methods_ms": 736.9014600001265,
+          "clearance_ms": 490.16858799996044,
+          "local_costs_ms": 0.9462739999435144,
+          "body_50x80_ms": 223.20422000007056,
+          "total_assessment_ms": 2138.5928629999853
+        },
+        "total_assessment_ms": 2138.5928629999853,
+        "fit_pipeline_ms": 143.08918000006088,
+        "compute_call_wall_ms": 2139.0784669999903,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 1.2000000476837158,
+          "maximum": 1.308333232032473
+        },
+        "jump_sigma_m": {
+          "median": 0.003913267253380299,
+          "p95": 0.03782957319761679,
+          "maximum": 0.09332438089341712
+        },
+        "jump_upper_m": {
+          "median": 0.007826536487736175,
+          "p95": 1.2067187128465544,
+          "maximum": 1.4756374718026686
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 4.131508656326314,
+          "maximum": 28.300857043506042
+        }
+      },
+      "q15-n15": {
+        "centers": 5183,
+        "solved": 5179,
+        "valid": 5019,
+        "valid_fraction": 0.968358093768088,
+        "insufficient": 4,
+        "rejected": 160,
+        "displayed_functions": 5019,
+        "valid_no_patch": 0,
+        "patch_triangles": 87622,
+        "assembled_functions": 4817,
+        "assembled_triangles": 9180,
+        "valid_unassembled": 202,
+        "point_count": {
+          "median": 36.0,
+          "p95": 49.0,
+          "maximum": 56.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.006658945734060129,
+          "maximum": 0.010421989502782596
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.01250004771216132,
+          "maximum": 0.021440110152888138
+        },
+        "std_patch_m": {
+          "median": 0.001644797361494206,
+          "p95": 0.0040325161387845965,
+          "maximum": 0.008341866395562404
+        },
+        "jump_b_m_known": 5019,
+        "foot_cost_known": 5019,
+        "body_cost_known": 4484,
+        "stages_ms": {
+          "select_centers_ms": 13.18134200005261,
+          "window_query_ms": 48.82273299995177,
+          "fit_and_covariance_ms": 49.72270100006426,
+          "assembly_ms": 35.457359000020006,
+          "display_patch_geometry_ms": 494.8168059997897,
+          "three_jump_methods_ms": 618.1576550000045,
+          "clearance_ms": 417.73999500014725,
+          "local_costs_ms": 0.9712070000205131,
+          "body_50x80_ms": 205.80795499995475,
+          "total_assessment_ms": 1884.6801279999
+        },
+        "total_assessment_ms": 1884.6801279999,
+        "fit_pipeline_ms": 111.72677600006864,
+        "compute_call_wall_ms": 1885.3509489999851,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 1.2000000476837158,
+          "maximum": 1.4500001328383427
+        },
+        "jump_sigma_m": {
+          "median": 0.012797622566707348,
+          "p95": 0.06343655275812334,
+          "maximum": 0.33003220357175106
+        },
+        "jump_upper_m": {
+          "median": 0.025595268903633547,
+          "p95": 1.224324246275462,
+          "maximum": 1.975461795935891
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 3.479930838300649,
+          "maximum": 36.8700285266598
+        }
+      },
+      "paired_centers": {
+        "both_valid": 5011,
+        "newly_valid": 8,
+        "lost_valid": 0,
+        "both_invalid": 164
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "hill",
+      "name": "丘陵",
+      "raw_points": 200000,
+      "source_xyz_sha256": "db763f5ddc1559a3dd7c11a4caf91e0aee8648bf7e5b9f31951c3ea79a9fd70d",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 13860,
+        "solved": 13791,
+        "valid": 13789,
+        "valid_fraction": 0.9948773448773449,
+        "insufficient": 69,
+        "rejected": 2,
+        "displayed_functions": 12448,
+        "valid_no_patch": 1341,
+        "patch_triangles": 89039,
+        "assembled_functions": 13337,
+        "assembled_triangles": 24411,
+        "valid_unassembled": 452,
+        "point_count": {
+          "median": 70.0,
+          "p95": 77.0,
+          "maximum": 87.0
+        },
+        "rmse_m": {
+          "median": 0.00021872052373456255,
+          "p95": 0.0023720204278498166,
+          "maximum": 0.01963804330042097
+        },
+        "max_error_m": {
+          "median": 0.0006375960898912028,
+          "p95": 0.00669349437848378,
+          "maximum": 0.048443092158042954
+        },
+        "std_patch_m": {
+          "median": 0.0007096728862512414,
+          "p95": 0.0013036864831620426,
+          "maximum": 0.008745282101022194
+        },
+        "jump_b_m_known": 13789,
+        "foot_cost_known": 13789,
+        "body_cost_known": 12589,
+        "stages_ms": {
+          "select_centers_ms": 59.50480999990759,
+          "window_query_ms": 174.5286830000623,
+          "fit_and_covariance_ms": 211.21726000001217,
+          "assembly_ms": 79.51546000003873,
+          "display_patch_geometry_ms": 1436.2470629998825,
+          "three_jump_methods_ms": 2368.4197820000463,
+          "clearance_ms": 1022.9354690000036,
+          "local_costs_ms": 2.3128479999741103,
+          "body_50x80_ms": 698.0633570001373,
+          "total_assessment_ms": 6052.748293999912
+        },
+        "total_assessment_ms": 6052.748293999912,
+        "fit_pipeline_ms": 445.25075299998207,
+        "compute_call_wall_ms": 6053.968832999999,
+        "jump_b_m": {
+          "median": 0.0022993024354374947,
+          "p95": 0.12954928219569856,
+          "maximum": 3.3290186654398486
+        },
+        "jump_sigma_m": {
+          "median": 0.003770626733599792,
+          "p95": 0.06970998575203008,
+          "maximum": 1.874582827124191
+        },
+        "jump_upper_m": {
+          "median": 0.009823041204548903,
+          "p95": 0.26034815448367965,
+          "maximum": 7.078184319688231
+        },
+        "slope_deg": {
+          "median": 17.5153275676702,
+          "p95": 54.34326230067852,
+          "maximum": 80.09147925631184
+        }
+      },
+      "q15-n15": {
+        "centers": 13860,
+        "solved": 13847,
+        "valid": 13844,
+        "valid_fraction": 0.9988455988455989,
+        "insufficient": 13,
+        "rejected": 3,
+        "displayed_functions": 12982,
+        "valid_no_patch": 862,
+        "patch_triangles": 96257,
+        "assembled_functions": 13357,
+        "assembled_triangles": 24334,
+        "valid_unassembled": 487,
+        "point_count": {
+          "median": 41.0,
+          "p95": 46.0,
+          "maximum": 53.0
+        },
+        "rmse_m": {
+          "median": 0.00014153054304046303,
+          "p95": 0.0017331679738952599,
+          "maximum": 0.019697477865705335
+        },
+        "max_error_m": {
+          "median": 0.0003471396026336819,
+          "p95": 0.004427955441965022,
+          "maximum": 0.045604850665726275
+        },
+        "std_patch_m": {
+          "median": 0.0009491945599591858,
+          "p95": 0.0014872022981754223,
+          "maximum": 0.01376590192663739
+        },
+        "jump_b_m_known": 13844,
+        "foot_cost_known": 13844,
+        "body_cost_known": 12144,
+        "stages_ms": {
+          "select_centers_ms": 57.817637999960425,
+          "window_query_ms": 132.81303999997363,
+          "fit_and_covariance_ms": 146.21283499991478,
+          "assembly_ms": 79.09037300009913,
+          "display_patch_geometry_ms": 1383.3940259999054,
+          "three_jump_methods_ms": 1923.972090999996,
+          "clearance_ms": 952.866935999964,
+          "local_costs_ms": 2.398332000211667,
+          "body_50x80_ms": 616.338136999957,
+          "total_assessment_ms": 5294.905781999887
+        },
+        "total_assessment_ms": 5294.905781999887,
+        "fit_pipeline_ms": 336.8435129998488,
+        "compute_call_wall_ms": 5296.374463999882,
+        "jump_b_m": {
+          "median": 0.002719796041720901,
+          "p95": 0.15236069751903727,
+          "maximum": 3.1583138996383173
+        },
+        "jump_sigma_m": {
+          "median": 0.008640138497700681,
+          "p95": 0.10170644554707098,
+          "maximum": 3.4985030169626166
+        },
+        "jump_upper_m": {
+          "median": 0.019422206795065153,
+          "p95": 0.3477090848317955,
+          "maximum": 8.137336746547376
+        },
+        "slope_deg": {
+          "median": 17.60942249845796,
+          "p95": 55.37046931012492,
+          "maximum": 80.14254735411104
+        }
+      },
+      "paired_centers": {
+        "both_valid": 13788,
+        "newly_valid": 56,
+        "lost_valid": 1,
+        "both_invalid": 15
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "forest",
+      "name": "森林",
+      "raw_points": 141068,
+      "source_xyz_sha256": "de627d15778dd40dbc72f3aeee1582279b2155be859da377abc0cecc3b0ebd34",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 24500,
+        "solved": 4505,
+        "valid": 3958,
+        "valid_fraction": 0.16155102040816327,
+        "insufficient": 19995,
+        "rejected": 547,
+        "displayed_functions": 3930,
+        "valid_no_patch": 28,
+        "patch_triangles": 29890,
+        "assembled_functions": 3375,
+        "assembled_triangles": 4672,
+        "valid_unassembled": 583,
+        "point_count": {
+          "median": 31.0,
+          "p95": 44.0,
+          "maximum": 100.0
+        },
+        "rmse_m": {
+          "median": 0.00011374932737886479,
+          "p95": 0.018450124966568553,
+          "maximum": 0.0199965531212011
+        },
+        "max_error_m": {
+          "median": 0.0002586751806716728,
+          "p95": 0.04278578804193414,
+          "maximum": 0.06361831212661398
+        },
+        "std_patch_m": {
+          "median": 0.0012089186903262391,
+          "p95": 0.009155748062556895,
+          "maximum": 0.029519195330933383
+        },
+        "jump_b_m_known": 3545,
+        "foot_cost_known": 3545,
+        "body_cost_known": 318,
+        "stages_ms": {
+          "select_centers_ms": 39.057190999983504,
+          "window_query_ms": 178.9226809999036,
+          "fit_and_covariance_ms": 46.19757099999333,
+          "assembly_ms": 12.547312000151578,
+          "display_patch_geometry_ms": 389.85596899988195,
+          "three_jump_methods_ms": 298.9876680001089,
+          "clearance_ms": 324.5441449998907,
+          "local_costs_ms": 4.071226999940336,
+          "body_50x80_ms": 149.1560480001226,
+          "total_assessment_ms": 1443.342186999871
+        },
+        "total_assessment_ms": 1443.342186999871,
+        "fit_pipeline_ms": 264.17744299988044,
+        "compute_call_wall_ms": 1446.5027600001577,
+        "jump_b_m": {
+          "median": 0.0004275238105485579,
+          "p95": 0.6808489584330154,
+          "maximum": 1.6171765279136392
+        },
+        "jump_sigma_m": {
+          "median": 0.0061849343131587554,
+          "p95": 0.06688733989287522,
+          "maximum": 0.303107264762749
+        },
+        "jump_upper_m": {
+          "median": 0.012841653282142937,
+          "p95": 0.7917374747067945,
+          "maximum": 2.156025170015079
+        },
+        "slope_deg": {
+          "median": 13.594404057965589,
+          "p95": 23.412252326320186,
+          "maximum": 61.684420152066636
+        }
+      },
+      "q15-n15": {
+        "centers": 24500,
+        "solved": 12245,
+        "valid": 11845,
+        "valid_fraction": 0.48346938775510206,
+        "insufficient": 12255,
+        "rejected": 400,
+        "displayed_functions": 11736,
+        "valid_no_patch": 109,
+        "patch_triangles": 78088,
+        "assembled_functions": 10719,
+        "assembled_triangles": 20704,
+        "valid_unassembled": 1126,
+        "point_count": {
+          "median": 17.0,
+          "p95": 22.0,
+          "maximum": 76.0
+        },
+        "rmse_m": {
+          "median": 7.394036400387274e-05,
+          "p95": 0.01594256766473216,
+          "maximum": 0.019989312088154777
+        },
+        "max_error_m": {
+          "median": 0.00015605634674666205,
+          "p95": 0.03470842349182149,
+          "maximum": 0.06845625942804795
+        },
+        "std_patch_m": {
+          "median": 0.0018178676693903317,
+          "p95": 0.010811521297344624,
+          "maximum": 0.03494863182984926
+        },
+        "jump_b_m_known": 11838,
+        "foot_cost_known": 11842,
+        "body_cost_known": 5556,
+        "stages_ms": {
+          "select_centers_ms": 38.658256999951846,
+          "window_query_ms": 146.77433800011386,
+          "fit_and_covariance_ms": 88.4960629998659,
+          "assembly_ms": 52.01054999997723,
+          "display_patch_geometry_ms": 1141.466876000095,
+          "three_jump_methods_ms": 1390.4135610000594,
+          "clearance_ms": 818.7047509998138,
+          "local_costs_ms": 4.40604200002781,
+          "body_50x80_ms": 516.1445800001729,
+          "total_assessment_ms": 4197.077392999972
+        },
+        "total_assessment_ms": 4197.077392999972,
+        "fit_pipeline_ms": 273.9286579999316,
+        "compute_call_wall_ms": 4199.6894359999715,
+        "jump_b_m": {
+          "median": 0.00140101118103092,
+          "p95": 0.7443082197714725,
+          "maximum": 7.928806967571627
+        },
+        "jump_sigma_m": {
+          "median": 0.01855809559881718,
+          "p95": 0.1918467414025126,
+          "maximum": 2.6141350842251883
+        },
+        "jump_upper_m": {
+          "median": 0.038414361600037264,
+          "p95": 1.0144848582258295,
+          "maximum": 12.237945668156893
+        },
+        "slope_deg": {
+          "median": 14.024626440980715,
+          "p95": 28.710797481149974,
+          "maximum": 73.04257202488279
+        }
+      },
+      "paired_centers": {
+        "both_valid": 3352,
+        "newly_valid": 8493,
+        "lost_valid": 606,
+        "both_invalid": 12049
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "flat",
+      "name": "平地",
+      "raw_points": 103041,
+      "source_xyz_sha256": "b381b510f8dfd3bde410f8295b89e4d82057dd442069544dacd61dfaca0ac72d",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 6561,
+        "solved": 6557,
+        "valid": 6557,
+        "valid_fraction": 0.9993903368388966,
+        "insufficient": 4,
+        "rejected": 0,
+        "displayed_functions": 6557,
+        "valid_no_patch": 0,
+        "patch_triangles": 131040,
+        "assembled_functions": 6557,
+        "assembled_triangles": 12796,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 81.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "std_patch_m": {
+          "median": 0.0014235591427579327,
+          "p95": 0.0014895511006163778,
+          "maximum": 0.0017596719136894774
+        },
+        "jump_b_m_known": 6557,
+        "foot_cost_known": 6557,
+        "body_cost_known": 5913,
+        "stages_ms": {
+          "select_centers_ms": 21.701331000031132,
+          "window_query_ms": 73.1657069998164,
+          "fit_and_covariance_ms": 88.77148000010493,
+          "assembly_ms": 45.73806600001262,
+          "display_patch_geometry_ms": 666.8997449999097,
+          "three_jump_methods_ms": 998.2694289999472,
+          "clearance_ms": 539.3643120000888,
+          "local_costs_ms": 1.1338639999394218,
+          "body_50x80_ms": 278.09825999997884,
+          "total_assessment_ms": 2713.144568999951
+        },
+        "total_assessment_ms": 2713.144568999951,
+        "fit_pipeline_ms": 183.63851799995246,
+        "compute_call_wall_ms": 2713.7595859999237,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "jump_sigma_m": {
+          "median": 0.0035799772456880895,
+          "p95": 0.004846465055084722,
+          "maximum": 0.006495603929281719
+        },
+        "jump_upper_m": {
+          "median": 0.007159954491376179,
+          "p95": 0.009692930110169444,
+          "maximum": 0.012991207858563439
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "q15-n15": {
+        "centers": 6561,
+        "solved": 6557,
+        "valid": 6557,
+        "valid_fraction": 0.9993903368388966,
+        "insufficient": 4,
+        "rejected": 0,
+        "displayed_functions": 6557,
+        "valid_no_patch": 0,
+        "patch_triangles": 88192,
+        "assembled_functions": 6557,
+        "assembled_triangles": 12796,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": 30.0,
+          "p95": 42.0,
+          "maximum": 49.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "std_patch_m": {
+          "median": 0.0015956137925218512,
+          "p95": 0.0018336459995259488,
+          "maximum": 0.0022519870020812076
+        },
+        "jump_b_m_known": 6557,
+        "foot_cost_known": 6557,
+        "body_cost_known": 5842,
+        "stages_ms": {
+          "select_centers_ms": 21.85686099983286,
+          "window_query_ms": 53.574185000115904,
+          "fit_and_covariance_ms": 58.16900600007102,
+          "assembly_ms": 45.48516299996663,
+          "display_patch_geometry_ms": 646.4414009999473,
+          "three_jump_methods_ms": 798.4064409999974,
+          "clearance_ms": 467.94740900008946,
+          "local_costs_ms": 1.1433619999934308,
+          "body_50x80_ms": 265.30752499979826,
+          "total_assessment_ms": 2358.3337269999447
+        },
+        "total_assessment_ms": 2358.3337269999447,
+        "fit_pipeline_ms": 133.6000520000198,
+        "compute_call_wall_ms": 2359.173142999907,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        },
+        "jump_sigma_m": {
+          "median": 0.014925973948215888,
+          "p95": 0.023516613188873766,
+          "maximum": 0.04217401915265996
+        },
+        "jump_upper_m": {
+          "median": 0.029851947896431776,
+          "p95": 0.04703322637774753,
+          "maximum": 0.08434803830531992
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 0.0,
+          "maximum": 0.0
+        }
+      },
+      "paired_centers": {
+        "both_valid": 6557,
+        "newly_valid": 0,
+        "lost_valid": 0,
+        "both_invalid": 4
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "ramp",
+      "name": "斜坡",
+      "raw_points": 103041,
+      "source_xyz_sha256": "fbe868ed6efe206d5f6cb19f017e3100405b96988648a68aae6165b7420c35ff",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 8246,
+        "solved": 8242,
+        "valid": 8242,
+        "valid_fraction": 0.9995149163230658,
+        "insufficient": 4,
+        "rejected": 0,
+        "displayed_functions": 8242,
+        "valid_no_patch": 0,
+        "patch_triangles": 162650,
+        "assembled_functions": 8242,
+        "assembled_triangles": 16142,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 81.0
+        },
+        "rmse_m": {
+          "median": 1.706285249480563e-08,
+          "p95": 3.7503485950811736e-08,
+          "maximum": 4.196912473323381e-08
+        },
+        "max_error_m": {
+          "median": 4.211771798944691e-08,
+          "p95": 7.505346109083766e-08,
+          "maximum": 8.753858189800706e-08
+        },
+        "std_patch_m": {
+          "median": 0.0014235591803591673,
+          "p95": 0.0014895511006163778,
+          "maximum": 0.0019475321418582063
+        },
+        "jump_b_m_known": 8242,
+        "foot_cost_known": 8242,
+        "body_cost_known": 7462,
+        "stages_ms": {
+          "select_centers_ms": 22.10381400004735,
+          "window_query_ms": 89.22855099990556,
+          "fit_and_covariance_ms": 111.23738100013725,
+          "assembly_ms": 59.98911300002874,
+          "display_patch_geometry_ms": 850.7599549998304,
+          "three_jump_methods_ms": 1318.537435000053,
+          "clearance_ms": 706.6000620000068,
+          "local_costs_ms": 1.5054860000418557,
+          "body_50x80_ms": 377.69173900005626,
+          "total_assessment_ms": 3537.655910000012
+        },
+        "total_assessment_ms": 3537.655910000012,
+        "fit_pipeline_ms": 222.56974600009016,
+        "compute_call_wall_ms": 3538.498888000049,
+        "jump_b_m": {
+          "median": 2.8231747051243872e-08,
+          "p95": 6.611459953953514e-08,
+          "maximum": 1.588605160751655e-07
+        },
+        "jump_sigma_m": {
+          "median": 0.003586574254502689,
+          "p95": 0.0048464650709579395,
+          "maximum": 0.007149890555002672
+        },
+        "jump_upper_m": {
+          "median": 0.007173163387220221,
+          "p95": 0.009692990839555464,
+          "maximum": 0.014299878539162024
+        },
+        "slope_deg": {
+          "median": 15.069956753500918,
+          "p95": 15.069961571871508,
+          "maximum": 15.069983769358393
+        }
+      },
+      "q15-n15": {
+        "centers": 8246,
+        "solved": 8242,
+        "valid": 8242,
+        "valid_fraction": 0.9995149163230658,
+        "insufficient": 4,
+        "rejected": 0,
+        "displayed_functions": 8242,
+        "valid_no_patch": 0,
+        "patch_triangles": 110992,
+        "assembled_functions": 8242,
+        "assembled_triangles": 16142,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": 30.0,
+          "p95": 42.0,
+          "maximum": 49.0
+        },
+        "rmse_m": {
+          "median": 1.3809684520425918e-08,
+          "p95": 3.4440275841204554e-08,
+          "maximum": 4.195842990503752e-08
+        },
+        "max_error_m": {
+          "median": 3.082328765662001e-08,
+          "p95": 7.084351954554994e-08,
+          "maximum": 8.798806086507405e-08
+        },
+        "std_patch_m": {
+          "median": 0.0015352023873116084,
+          "p95": 0.0018336459995259484,
+          "maximum": 0.0022519872248969847
+        },
+        "jump_b_m_known": 8242,
+        "foot_cost_known": 8242,
+        "body_cost_known": 7360,
+        "stages_ms": {
+          "select_centers_ms": 22.496802999967258,
+          "window_query_ms": 64.59816799997498,
+          "fit_and_covariance_ms": 75.28260499998396,
+          "assembly_ms": 60.84513800010427,
+          "display_patch_geometry_ms": 806.6008200000852,
+          "three_jump_methods_ms": 1048.3048459998372,
+          "clearance_ms": 595.9977770000933,
+          "local_costs_ms": 1.4496829999188776,
+          "body_50x80_ms": 349.99571900016235,
+          "total_assessment_ms": 3025.5751209999744
+        },
+        "total_assessment_ms": 3025.5751209999744,
+        "fit_pipeline_ms": 162.3775759999262,
+        "compute_call_wall_ms": 3026.608063999902,
+        "jump_b_m": {
+          "median": 1.1799828079916974e-07,
+          "p95": 3.9502784088263354e-07,
+          "maximum": 1.3362787047999092e-06
+        },
+        "jump_sigma_m": {
+          "median": 0.01288914746831131,
+          "p95": 0.01873541249504214,
+          "maximum": 0.043722616510792366
+        },
+        "jump_upper_m": {
+          "median": 0.025778347139834918,
+          "p95": 0.03747088990818035,
+          "maximum": 0.08744545363952165
+        },
+        "slope_deg": {
+          "median": 15.06995574815119,
+          "p95": 15.06997348706283,
+          "maximum": 15.069987441712655
+        }
+      },
+      "paired_centers": {
+        "both_valid": 8242,
+        "newly_valid": 0,
+        "lost_valid": 0,
+        "both_invalid": 4
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "steps",
+      "name": "高低组合多级台阶",
+      "raw_points": 97455,
+      "source_xyz_sha256": "f9da78def804eb0cf16d6bdca1d2001521cad5bf727a03444999f84e574b6940",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 6097,
+        "solved": 5401,
+        "valid": 5379,
+        "valid_fraction": 0.8822371658192554,
+        "insufficient": 696,
+        "rejected": 22,
+        "displayed_functions": 5379,
+        "valid_no_patch": 0,
+        "patch_triangles": 96320,
+        "assembled_functions": 4584,
+        "assembled_triangles": 8135,
+        "valid_unassembled": 795,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 92.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.008006419143512428,
+          "maximum": 0.019475296534845327
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.01463416089479588,
+          "maximum": 0.043853930873414194
+        },
+        "std_patch_m": {
+          "median": 0.0014895482828693304,
+          "p95": 0.004248414568537922,
+          "maximum": 0.009479544125319338
+        },
+        "jump_b_m_known": 5379,
+        "foot_cost_known": 5379,
+        "body_cost_known": 4855,
+        "stages_ms": {
+          "select_centers_ms": 23.09162999995351,
+          "window_query_ms": 71.18286900004023,
+          "fit_and_covariance_ms": 73.38410700003806,
+          "assembly_ms": 34.23317300007511,
+          "display_patch_geometry_ms": 555.3792829998656,
+          "three_jump_methods_ms": 830.667000999938,
+          "clearance_ms": 470.86665200004063,
+          "local_costs_ms": 1.1421740000514546,
+          "body_50x80_ms": 228.05134300006102,
+          "total_assessment_ms": 2288.000606999958
+        },
+        "total_assessment_ms": 2288.000606999958,
+        "fit_pipeline_ms": 167.6586060000318,
+        "compute_call_wall_ms": 2288.5610089999773,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.6529007031391695,
+          "maximum": 1.0013686121851233
+        },
+        "jump_sigma_m": {
+          "median": 0.004575818645974317,
+          "p95": 0.07727868392849757,
+          "maximum": 0.22927396955937848
+        },
+        "jump_upper_m": {
+          "median": 0.009692930143586803,
+          "p95": 0.7166266855426762,
+          "maximum": 1.180120591150889
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 28.30074822865989,
+          "maximum": 47.47912067435706
+        }
+      },
+      "q15-n15": {
+        "centers": 6097,
+        "solved": 6089,
+        "valid": 5389,
+        "valid_fraction": 0.8838773167131376,
+        "insufficient": 8,
+        "rejected": 700,
+        "displayed_functions": 5389,
+        "valid_no_patch": 0,
+        "patch_triangles": 71940,
+        "assembled_functions": 4541,
+        "assembled_triangles": 8049,
+        "valid_unassembled": 848,
+        "point_count": {
+          "median": 30.0,
+          "p95": 42.0,
+          "maximum": 56.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 0.008838834896540746,
+          "maximum": 0.01824311597120565
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 0.012820509255024879,
+          "maximum": 0.031077297215826784
+        },
+        "std_patch_m": {
+          "median": 0.0015956170625660425,
+          "p95": 0.006083034235139432,
+          "maximum": 0.015768047789280322
+        },
+        "jump_b_m_known": 5389,
+        "foot_cost_known": 5389,
+        "body_cost_known": 4794,
+        "stages_ms": {
+          "select_centers_ms": 22.682011999904717,
+          "window_query_ms": 53.76648500009651,
+          "fit_and_covariance_ms": 54.056182999829616,
+          "assembly_ms": 34.13937300001635,
+          "display_patch_geometry_ms": 530.7298459999856,
+          "three_jump_methods_ms": 674.5476010000857,
+          "clearance_ms": 399.1874569999254,
+          "local_costs_ms": 1.1101170000529237,
+          "body_50x80_ms": 221.1282210000718,
+          "total_assessment_ms": 1991.3496689998738
+        },
+        "total_assessment_ms": 1991.3496689998738,
+        "fit_pipeline_ms": 130.50467999983084,
+        "compute_call_wall_ms": 1992.0335500000874,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.6499999761581421,
+          "maximum": 1.0
+        },
+        "jump_sigma_m": {
+          "median": 0.016148632699626814,
+          "p95": 0.21156689258410627,
+          "maximum": 0.5346253047848643
+        },
+        "jump_upper_m": {
+          "median": 0.07128527062215899,
+          "p95": 0.798076960632212,
+          "maximum": 1.696956385016825
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 36.86989738712823,
+          "maximum": 56.30996372622731
+        }
+      },
+      "paired_centers": {
+        "both_valid": 5377,
+        "newly_valid": 12,
+        "lost_valid": 2,
+        "both_invalid": 706
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "steps-single",
+      "name": "原单级台阶（历史）",
+      "raw_points": 103041,
+      "source_xyz_sha256": "9bd921bfef39639ed06b81d698b7fcee106ee0c228d7eee8d176d194ba8633ef",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 6669,
+        "solved": 6663,
+        "valid": 6663,
+        "valid_fraction": 0.9991003148897886,
+        "insufficient": 6,
+        "rejected": 0,
+        "displayed_functions": 6663,
+        "valid_no_patch": 0,
+        "patch_triangles": 130998,
+        "assembled_functions": 6663,
+        "assembled_triangles": 12848,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 81.0
+        },
+        "rmse_m": {
+          "median": 2.392008335448237e-16,
+          "p95": 3.572730110635508e-05,
+          "maximum": 0.00011464573991762576
+        },
+        "max_error_m": {
+          "median": 7.412801353506669e-16,
+          "p95": 9.27166319829312e-05,
+          "maximum": 0.0003480721305111553
+        },
+        "std_patch_m": {
+          "median": 0.0014235592708961148,
+          "p95": 0.0016836891694473914,
+          "maximum": 0.0019475282514626324
+        },
+        "jump_b_m_known": 6663,
+        "foot_cost_known": 6663,
+        "body_cost_known": 6019,
+        "stages_ms": {
+          "select_centers_ms": 21.94351299999653,
+          "window_query_ms": 74.86463600002935,
+          "fit_and_covariance_ms": 88.37838399995235,
+          "assembly_ms": 45.517175999975734,
+          "display_patch_geometry_ms": 683.8380720000714,
+          "three_jump_methods_ms": 1023.448364999922,
+          "clearance_ms": 539.7198850000677,
+          "local_costs_ms": 1.183728999876621,
+          "body_50x80_ms": 287.89073100006135,
+          "total_assessment_ms": 2766.7868659998476
+        },
+        "total_assessment_ms": 2766.7868659998476,
+        "fit_pipeline_ms": 185.18653299997823,
+        "compute_call_wall_ms": 2767.773504999923,
+        "jump_b_m": {
+          "median": 2.7703602550382816e-12,
+          "p95": 0.44999989127831613,
+          "maximum": 0.4500016266800875
+        },
+        "jump_sigma_m": {
+          "median": 0.0037642955312881354,
+          "p95": 0.005230674199457127,
+          "maximum": 0.012504035312376599
+        },
+        "jump_upper_m": {
+          "median": 0.007613085030018131,
+          "p95": 0.4598452859305831,
+          "maximum": 0.47500834791390945
+        },
+        "slope_deg": {
+          "median": 1.3859740601013726e-12,
+          "p95": 3.6109617129538707,
+          "maximum": 11.32559848121726
+        }
+      },
+      "q15-n15": {
+        "centers": 6669,
+        "solved": 6663,
+        "valid": 6663,
+        "valid_fraction": 0.9991003148897886,
+        "insufficient": 6,
+        "rejected": 0,
+        "displayed_functions": 6663,
+        "valid_no_patch": 0,
+        "patch_triangles": 88362,
+        "assembled_functions": 6663,
+        "assembled_triangles": 12848,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": 30.0,
+          "p95": 42.0,
+          "maximum": 49.0
+        },
+        "rmse_m": {
+          "median": 2.0881798250324187e-17,
+          "p95": 1.566220340350734e-05,
+          "maximum": 5.9193556977788415e-05
+        },
+        "max_error_m": {
+          "median": 4.9867401562749856e-17,
+          "p95": 3.721504858485182e-05,
+          "maximum": 0.00015724073934200375
+        },
+        "std_patch_m": {
+          "median": 0.0015956141578795865,
+          "p95": 0.001871068185374272,
+          "maximum": 0.0023784760544051362
+        },
+        "jump_b_m_known": 6663,
+        "foot_cost_known": 6663,
+        "body_cost_known": 5947,
+        "stages_ms": {
+          "select_centers_ms": 22.437422000166407,
+          "window_query_ms": 54.78634799987958,
+          "fit_and_covariance_ms": 59.262434999936886,
+          "assembly_ms": 45.99920900000143,
+          "display_patch_geometry_ms": 654.3504080000275,
+          "three_jump_methods_ms": 825.6562480000866,
+          "clearance_ms": 480.2935309999157,
+          "local_costs_ms": 1.1884780001309991,
+          "body_50x80_ms": 274.4505549999303,
+          "total_assessment_ms": 2418.42700899997
+        },
+        "total_assessment_ms": 2418.42700899997,
+        "fit_pipeline_ms": 136.48620499998287,
+        "compute_call_wall_ms": 2419.224867999901,
+        "jump_b_m": {
+          "median": 3.307188504410791e-12,
+          "p95": 0.44999915669939916,
+          "maximum": 0.4500006825203108
+        },
+        "jump_sigma_m": {
+          "median": 0.014925973948215893,
+          "p95": 0.02377059495268159,
+          "maximum": 0.04233898111801531
+        },
+        "jump_upper_m": {
+          "median": 0.03229726457726852,
+          "p95": 0.4660890741840892,
+          "maximum": 0.4975412305253676
+        },
+        "slope_deg": {
+          "median": 4.981071100677649e-13,
+          "p95": 3.5966722325497527,
+          "maximum": 11.408667459205342
+        }
+      },
+      "paired_centers": {
+        "both_valid": 6663,
+        "newly_valid": 0,
+        "lost_valid": 0,
+        "both_invalid": 6
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "flat_ramp",
+      "name": "平地与斜坡组合",
+      "raw_points": 103041,
+      "source_xyz_sha256": "82aec80e65740a3bbb28a6bf7758f8185cbd31f671f7cd1b06769084d4397936",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 6885,
+        "solved": 6881,
+        "valid": 6881,
+        "valid_fraction": 0.9994190268700073,
+        "insufficient": 4,
+        "rejected": 0,
+        "displayed_functions": 6881,
+        "valid_no_patch": 0,
+        "patch_triangles": 137696,
+        "assembled_functions": 6881,
+        "assembled_triangles": 13436,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": 64.0,
+          "p95": 81.0,
+          "maximum": 81.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 1.5400156570927727e-08,
+          "maximum": 0.0014320543519423545
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 2.7460508780947912e-08,
+          "maximum": 0.0028125163584270356
+        },
+        "std_patch_m": {
+          "median": 0.0014235591427579327,
+          "p95": 0.0014895511006163705,
+          "maximum": 0.0017596719136894774
+        },
+        "jump_b_m_known": 6881,
+        "foot_cost_known": 6881,
+        "body_cost_known": 6229,
+        "stages_ms": {
+          "select_centers_ms": 22.045611999828907,
+          "window_query_ms": 77.06228600000031,
+          "fit_and_covariance_ms": 93.36853400009204,
+          "assembly_ms": 49.48983600002066,
+          "display_patch_geometry_ms": 704.9894239999048,
+          "three_jump_methods_ms": 1035.6213080001453,
+          "clearance_ms": 572.5209729998824,
+          "local_costs_ms": 1.2252840001565346,
+          "body_50x80_ms": 300.2503299999262,
+          "total_assessment_ms": 2856.5759619998516
+        },
+        "total_assessment_ms": 2856.5759619998516,
+        "fit_pipeline_ms": 192.47643199992126,
+        "compute_call_wall_ms": 2857.1684189998905,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.011249978571341315,
+          "maximum": 0.01821426202326451
+        },
+        "jump_sigma_m": {
+          "median": 0.0035799765756448555,
+          "p95": 0.004846465052738379,
+          "maximum": 0.0064956039292817175
+        },
+        "jump_upper_m": {
+          "median": 0.007360888169856876,
+          "p95": 0.01834339225959487,
+          "maximum": 0.031114900386913426
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 16.699246216710122,
+          "maximum": 16.699254675813407
+        }
+      },
+      "q15-n15": {
+        "centers": 6885,
+        "solved": 6881,
+        "valid": 6881,
+        "valid_fraction": 0.9994190268700073,
+        "insufficient": 4,
+        "rejected": 0,
+        "displayed_functions": 6881,
+        "valid_no_patch": 0,
+        "patch_triangles": 93652,
+        "assembled_functions": 6881,
+        "assembled_triangles": 13436,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": 30.0,
+          "p95": 42.0,
+          "maximum": 49.0
+        },
+        "rmse_m": {
+          "median": 0.0,
+          "p95": 1.273452371560682e-08,
+          "maximum": 0.0010669652914332638
+        },
+        "max_error_m": {
+          "median": 0.0,
+          "p95": 2.341571387828867e-08,
+          "maximum": 0.0019285920083840045
+        },
+        "std_patch_m": {
+          "median": 0.0015956138902936457,
+          "p95": 0.0018336459995259488,
+          "maximum": 0.0022519870020812076
+        },
+        "jump_b_m_known": 6881,
+        "foot_cost_known": 6881,
+        "body_cost_known": 6154,
+        "stages_ms": {
+          "select_centers_ms": 21.915006999961406,
+          "window_query_ms": 56.59219800008941,
+          "fit_and_covariance_ms": 62.38854999992327,
+          "assembly_ms": 49.52663300014137,
+          "display_patch_geometry_ms": 674.6647239999675,
+          "three_jump_methods_ms": 841.5680359998987,
+          "clearance_ms": 491.6818609999609,
+          "local_costs_ms": 1.2134100002185733,
+          "body_50x80_ms": 280.1375829999415,
+          "total_assessment_ms": 2479.690376999997
+        },
+        "total_assessment_ms": 2479.690376999997,
+        "fit_pipeline_ms": 140.8957549999741,
+        "compute_call_wall_ms": 2480.5677850001757,
+        "jump_b_m": {
+          "median": 0.0,
+          "p95": 0.016439886933369396,
+          "maximum": 0.024267862778288005
+        },
+        "jump_sigma_m": {
+          "median": 0.01492597394821587,
+          "p95": 0.023516613188873766,
+          "maximum": 0.04217401915265996
+        },
+        "jump_upper_m": {
+          "median": 0.031085801239170575,
+          "p95": 0.04703322637774753,
+          "maximum": 0.08434803830531992
+        },
+        "slope_deg": {
+          "median": 0.0,
+          "p95": 16.699247051599027,
+          "maximum": 16.69925184172451
+        }
+      },
+      "paired_centers": {
+        "both_valid": 6881,
+        "newly_valid": 0,
+        "lost_valid": 0,
+        "both_invalid": 4
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "quick",
+      "name": "Quick 地形",
+      "raw_points": 100000,
+      "source_xyz_sha256": "2ee7685c56aba8da49f7b35354f6cde2c5413a3fbdd28938a6ca9bbc16da630c",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 99942,
+        "solved": 0,
+        "valid": 0,
+        "valid_fraction": 0.0,
+        "insufficient": 99942,
+        "rejected": 0,
+        "displayed_functions": 0,
+        "valid_no_patch": 0,
+        "patch_triangles": 0,
+        "assembled_functions": 0,
+        "assembled_triangles": 0,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "rmse_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "max_error_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "std_patch_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "jump_b_m_known": 0,
+        "foot_cost_known": 0,
+        "body_cost_known": 0,
+        "stages_ms": {
+          "select_centers_ms": 26.90993300006994,
+          "window_query_ms": 265.5837639999845,
+          "fit_and_covariance_ms": 10.069408999925145,
+          "assembly_ms": 0.8774069999617495,
+          "display_patch_geometry_ms": 0.16028400000323018,
+          "three_jump_methods_ms": 0.17809400014812127,
+          "clearance_ms": 19.374201999880825,
+          "local_costs_ms": 13.28340300005948,
+          "body_50x80_ms": 0.5473409999012802,
+          "total_assessment_ms": 336.98621100006676
+        },
+        "total_assessment_ms": 336.98621100006676,
+        "fit_pipeline_ms": 302.5631059999796,
+        "compute_call_wall_ms": 350.381218999928,
+        "jump_b_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "jump_sigma_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "jump_upper_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "slope_deg": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        }
+      },
+      "q15-n15": {
+        "centers": 99942,
+        "solved": 0,
+        "valid": 0,
+        "valid_fraction": 0.0,
+        "insufficient": 99942,
+        "rejected": 0,
+        "displayed_functions": 0,
+        "valid_no_patch": 0,
+        "patch_triangles": 0,
+        "assembled_functions": 0,
+        "assembled_triangles": 0,
+        "valid_unassembled": 0,
+        "point_count": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "rmse_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "max_error_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "std_patch_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "jump_b_m_known": 0,
+        "foot_cost_known": 0,
+        "body_cost_known": 0,
+        "stages_ms": {
+          "select_centers_ms": 27.199632000019847,
+          "window_query_ms": 258.21544099994753,
+          "fit_and_covariance_ms": 9.239492000006067,
+          "assembly_ms": 0.8619729999281844,
+          "display_patch_geometry_ms": 0.16265900012513157,
+          "three_jump_methods_ms": 0.18402999990030366,
+          "clearance_ms": 19.24003800013452,
+          "local_costs_ms": 13.032885000029637,
+          "body_50x80_ms": 0.5698989998563775,
+          "total_assessment_ms": 328.7084230000801
+        },
+        "total_assessment_ms": 328.7084230000801,
+        "fit_pipeline_ms": 294.65456499997345,
+        "compute_call_wall_ms": 340.97313199981727,
+        "jump_b_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "jump_sigma_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "jump_upper_m": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        },
+        "slope_deg": {
+          "median": null,
+          "p95": null,
+          "maximum": null
+        }
+      },
+      "paired_centers": {
+        "both_valid": 0,
+        "newly_valid": 0,
+        "lost_valid": 0,
+        "both_invalid": 99942
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "desert",
+      "name": "沙漠",
+      "raw_points": 100000,
+      "source_xyz_sha256": "5fb002d61e30aadfedcb3bad2e746a29840d3fc8b946c9c67239d19271d6363a",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 18285,
+        "solved": 844,
+        "valid": 844,
+        "valid_fraction": 0.046158053048947226,
+        "insufficient": 17441,
+        "rejected": 0,
+        "displayed_functions": 844,
+        "valid_no_patch": 0,
+        "patch_triangles": 6747,
+        "assembled_functions": 73,
+        "assembled_triangles": 58,
+        "valid_unassembled": 771,
+        "point_count": {
+          "median": 30.0,
+          "p95": 32.0,
+          "maximum": 35.0
+        },
+        "rmse_m": {
+          "median": 0.0002724962442495071,
+          "p95": 0.0008371446616270101,
+          "maximum": 0.001914884609906935
+        },
+        "max_error_m": {
+          "median": 0.0005920493812135805,
+          "p95": 0.001710161769775762,
+          "maximum": 0.004249262212282962
+        },
+        "std_patch_m": {
+          "median": 0.0010829156844319875,
+          "p95": 0.0012519582902268138,
+          "maximum": 0.0015044606015336465
+        },
+        "jump_b_m_known": 365,
+        "foot_cost_known": 365,
+        "body_cost_known": 0,
+        "stages_ms": {
+          "select_centers_ms": 21.049463000053947,
+          "window_query_ms": 114.82993799995711,
+          "fit_and_covariance_ms": 9.746462999828509,
+          "assembly_ms": 1.5565370001695555,
+          "display_patch_geometry_ms": 84.05063199984397,
+          "three_jump_methods_ms": 17.6170090001051,
+          "clearance_ms": 70.94532499991146,
+          "local_costs_ms": 2.7830070000618434,
+          "body_50x80_ms": 28.29193299999133,
+          "total_assessment_ms": 350.8738689999973
+        },
+        "total_assessment_ms": 350.8738689999973,
+        "fit_pipeline_ms": 145.62586399983957,
+        "compute_call_wall_ms": 352.5147039999865,
+        "jump_b_m": {
+          "median": 0.00030646576349541155,
+          "p95": 0.001728410983925066,
+          "maximum": 0.005973089694896072
+        },
+        "jump_sigma_m": {
+          "median": 0.004537302950150007,
+          "p95": 0.006853642260499716,
+          "maximum": 0.008095937833050838
+        },
+        "jump_upper_m": {
+          "median": 0.009599044436850921,
+          "p95": 0.015307298639833057,
+          "maximum": 0.017734269764373402
+        },
+        "slope_deg": {
+          "median": 14.189022388934237,
+          "p95": 22.46619142898916,
+          "maximum": 27.48100929366621
+        }
+      },
+      "q15-n15": {
+        "centers": 18285,
+        "solved": 10945,
+        "valid": 10945,
+        "valid_fraction": 0.5985780694558381,
+        "insufficient": 7340,
+        "rejected": 0,
+        "displayed_functions": 10945,
+        "valid_no_patch": 0,
+        "patch_triangles": 83897,
+        "assembled_functions": 10941,
+        "assembled_triangles": 20953,
+        "valid_unassembled": 4,
+        "point_count": {
+          "median": 16.0,
+          "p95": 18.0,
+          "maximum": 22.0
+        },
+        "rmse_m": {
+          "median": 0.00019385976264526557,
+          "p95": 0.0006222882728329594,
+          "maximum": 0.002097286427529053
+        },
+        "max_error_m": {
+          "median": 0.0003924683232859648,
+          "p95": 0.0012527125561380792,
+          "maximum": 0.003888538791066435
+        },
+        "std_patch_m": {
+          "median": 0.0016275199842755688,
+          "p95": 0.0019437286159492892,
+          "maximum": 0.00248985266342081
+        },
+        "jump_b_m_known": 10943,
+        "foot_cost_known": 10943,
+        "body_cost_known": 3806,
+        "stages_ms": {
+          "select_centers_ms": 20.725332999973034,
+          "window_query_ms": 92.94818199987276,
+          "fit_and_covariance_ms": 73.56210800003282,
+          "assembly_ms": 49.94453800009069,
+          "display_patch_geometry_ms": 1050.360942999987,
+          "three_jump_methods_ms": 1148.337225999967,
+          "clearance_ms": 684.7361400000409,
+          "local_costs_ms": 3.4158319999733067,
+          "body_50x80_ms": 444.2256390000239,
+          "total_assessment_ms": 3568.2583149998663
+        },
+        "total_assessment_ms": 3568.2583149998663,
+        "fit_pipeline_ms": 187.23562299987861,
+        "compute_call_wall_ms": 3569.6557559999746,
+        "jump_b_m": {
+          "median": 0.002644111890867107,
+          "p95": 0.01172062989250211,
+          "maximum": 0.04377349665197572
+        },
+        "jump_sigma_m": {
+          "median": 0.014506587638792182,
+          "p95": 0.021882700665921517,
+          "maximum": 0.042834196892603704
+        },
+        "jump_upper_m": {
+          "median": 0.031773971635273596,
+          "p95": 0.05001624042796587,
+          "maximum": 0.12944189043718313
+        },
+        "slope_deg": {
+          "median": 18.440575004795907,
+          "p95": 33.05866886100014,
+          "maximum": 44.71649708830355
+        }
+      },
+      "paired_centers": {
+        "both_valid": 764,
+        "newly_valid": 10181,
+        "lost_valid": 80,
+        "both_invalid": 7260
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "mountain",
+      "name": "山地",
+      "raw_points": 50000,
+      "source_xyz_sha256": "bd2fa050987ca52295659212a2092f0cef3756932120dce620db842303393bcb",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 7533,
+        "solved": 5192,
+        "valid": 5191,
+        "valid_fraction": 0.6891012876675959,
+        "insufficient": 2341,
+        "rejected": 1,
+        "displayed_functions": 5191,
+        "valid_no_patch": 0,
+        "patch_triangles": 41282,
+        "assembled_functions": 5113,
+        "assembled_triangles": 9143,
+        "valid_unassembled": 78,
+        "point_count": {
+          "median": 32.0,
+          "p95": 36.0,
+          "maximum": 55.0
+        },
+        "rmse_m": {
+          "median": 0.0026783312469142112,
+          "p95": 0.007079832097847591,
+          "maximum": 0.019933304907203738
+        },
+        "max_error_m": {
+          "median": 0.006671380773542623,
+          "p95": 0.01875818415449592,
+          "maximum": 0.04186972507508939
+        },
+        "std_patch_m": {
+          "median": 0.0011415651155364363,
+          "p95": 0.0029655084165559646,
+          "maximum": 0.013188778260268508
+        },
+        "jump_b_m_known": 5188,
+        "foot_cost_known": 5188,
+        "body_cost_known": 3925,
+        "stages_ms": {
+          "select_centers_ms": 16.787088999990374,
+          "window_query_ms": 50.3410819999317,
+          "fit_and_covariance_ms": 47.409663000053115,
+          "assembly_ms": 23.665058000005956,
+          "display_patch_geometry_ms": 513.9800510000896,
+          "three_jump_methods_ms": 632.422866999832,
+          "clearance_ms": 355.47211600010087,
+          "local_costs_ms": 1.4544289999776083,
+          "body_50x80_ms": 222.91123800005153,
+          "total_assessment_ms": 1864.4447809999747
+        },
+        "total_assessment_ms": 1864.4447809999747,
+        "fit_pipeline_ms": 114.53783399997519,
+        "compute_call_wall_ms": 1865.069295000012,
+        "jump_b_m": {
+          "median": 0.009336606941430625,
+          "p95": 0.03274922900886268,
+          "maximum": 0.3831386479756439
+        },
+        "jump_sigma_m": {
+          "median": 0.0061349161247417445,
+          "p95": 0.014578838765158152,
+          "maximum": 0.07785052654201495
+        },
+        "jump_upper_m": {
+          "median": 0.020904580706848315,
+          "p95": 0.05571676896308398,
+          "maximum": 0.4479658634884043
+        },
+        "slope_deg": {
+          "median": 8.91050287738702,
+          "p95": 20.095357045922995,
+          "maximum": 36.829119816884585
+        }
+      },
+      "q15-n15": {
+        "centers": 7533,
+        "solved": 6756,
+        "valid": 6750,
+        "valid_fraction": 0.8960573476702509,
+        "insufficient": 777,
+        "rejected": 6,
+        "displayed_functions": 6736,
+        "valid_no_patch": 14,
+        "patch_triangles": 51405,
+        "assembled_functions": 6406,
+        "assembled_triangles": 10095,
+        "valid_unassembled": 344,
+        "point_count": {
+          "median": 18.0,
+          "p95": 21.0,
+          "maximum": 34.0
+        },
+        "rmse_m": {
+          "median": 0.002191470894777817,
+          "p95": 0.007368363033501688,
+          "maximum": 0.019977020704781263
+        },
+        "max_error_m": {
+          "median": 0.004790410108825404,
+          "p95": 0.016858568691586032,
+          "maximum": 0.04407687865480615
+        },
+        "std_patch_m": {
+          "median": 0.0016514959926583785,
+          "p95": 0.00465829246694714,
+          "maximum": 0.024383775904554365
+        },
+        "jump_b_m_known": 6750,
+        "foot_cost_known": 6750,
+        "body_cost_known": 5239,
+        "stages_ms": {
+          "select_centers_ms": 16.65767200006485,
+          "window_query_ms": 41.36754299997847,
+          "fit_and_covariance_ms": 49.57527500005199,
+          "assembly_ms": 32.11024600000201,
+          "display_patch_geometry_ms": 650.3105199999482,
+          "three_jump_methods_ms": 788.4848749999946,
+          "clearance_ms": 434.3318450000879,
+          "local_costs_ms": 1.4461179998761509,
+          "body_50x80_ms": 279.53898600003413,
+          "total_assessment_ms": 2293.825454000171
+        },
+        "total_assessment_ms": 2293.825454000171,
+        "fit_pipeline_ms": 107.6004900000953,
+        "compute_call_wall_ms": 2294.490336000081,
+        "jump_b_m": {
+          "median": 0.020279296833128152,
+          "p95": 0.11958712401095052,
+          "maximum": 0.9294797968372112
+        },
+        "jump_sigma_m": {
+          "median": 0.01576592753339737,
+          "p95": 0.06743869286784904,
+          "maximum": 0.9256792073115689
+        },
+        "jump_upper_m": {
+          "median": 0.04915117988736634,
+          "p95": 0.24473753195302264,
+          "maximum": 2.780838211460349
+        },
+        "slope_deg": {
+          "median": 9.372027045987377,
+          "p95": 28.999453870595342,
+          "maximum": 69.61926652752628
+        }
+      },
+      "paired_centers": {
+        "both_valid": 5112,
+        "newly_valid": 1638,
+        "lost_valid": 79,
+        "both_invalid": 704
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "snow",
+      "name": "雪地",
+      "raw_points": 500000,
+      "source_xyz_sha256": "8098a2cd29fd8f33a30c1d92945968349837ff3b98cc65995686e2353d8f8591",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 61454,
+        "solved": 35924,
+        "valid": 35924,
+        "valid_fraction": 0.58456731864484,
+        "insufficient": 25530,
+        "rejected": 0,
+        "displayed_functions": 35838,
+        "valid_no_patch": 86,
+        "patch_triangles": 274929,
+        "assembled_functions": 34969,
+        "assembled_triangles": 64378,
+        "valid_unassembled": 955,
+        "point_count": {
+          "median": 39.0,
+          "p95": 43.0,
+          "maximum": 49.0
+        },
+        "rmse_m": {
+          "median": 0.0005025199687035968,
+          "p95": 0.004679171835117125,
+          "maximum": 0.017943526835305378
+        },
+        "max_error_m": {
+          "median": 0.0012931368536041104,
+          "p95": 0.011738454053864948,
+          "maximum": 0.039818248525231824
+        },
+        "std_patch_m": {
+          "median": 0.0009625538202575081,
+          "p95": 0.0021454469776559988,
+          "maximum": 0.011221877161559844
+        },
+        "jump_b_m_known": 35848,
+        "foot_cost_known": 35868,
+        "body_cost_known": 28529,
+        "stages_ms": {
+          "select_centers_ms": 195.7115929999418,
+          "window_query_ms": 516.9944500000838,
+          "fit_and_covariance_ms": 395.5869899998561,
+          "assembly_ms": 218.61439200006316,
+          "display_patch_geometry_ms": 3586.4242390000527,
+          "three_jump_methods_ms": 5062.331717999996,
+          "clearance_ms": 2572.9021810000177,
+          "local_costs_ms": 9.633659999963129,
+          "body_50x80_ms": 2030.7336959999702,
+          "total_assessment_ms": 14588.935293999839
+        },
+        "total_assessment_ms": 14588.935293999839,
+        "fit_pipeline_ms": 1108.2930329998817,
+        "compute_call_wall_ms": 14596.482886999866,
+        "jump_b_m": {
+          "median": 0.002998193968509748,
+          "p95": 0.03658036440984336,
+          "maximum": 0.3442745588856515
+        },
+        "jump_sigma_m": {
+          "median": 0.004840851750685944,
+          "p95": 0.01620131349507892,
+          "maximum": 0.1414422946847152
+        },
+        "jump_upper_m": {
+          "median": 0.012116727275227682,
+          "p95": 0.0644731946744736,
+          "maximum": 0.6271591482550819
+        },
+        "slope_deg": {
+          "median": 4.146376542756924,
+          "p95": 31.651218222616517,
+          "maximum": 67.85169941968155
+        }
+      },
+      "q15-n15": {
+        "centers": 61454,
+        "solved": 55662,
+        "valid": 55662,
+        "valid_fraction": 0.9057506427571842,
+        "insufficient": 5792,
+        "rejected": 0,
+        "displayed_functions": 45831,
+        "valid_no_patch": 9831,
+        "patch_triangles": 313865,
+        "assembled_functions": 47642,
+        "assembled_triangles": 73280,
+        "valid_unassembled": 8020,
+        "point_count": {
+          "median": 21.0,
+          "p95": 25.0,
+          "maximum": 31.0
+        },
+        "rmse_m": {
+          "median": 0.0010931350257409435,
+          "p95": 0.0076610590030240155,
+          "maximum": 0.017324849945572457
+        },
+        "max_error_m": {
+          "median": 0.0024367675221232486,
+          "p95": 0.01623639898156704,
+          "maximum": 0.04095679396184315
+        },
+        "std_patch_m": {
+          "median": 0.001460428029900216,
+          "p95": 0.005265170966131038,
+          "maximum": 0.017273747346387463
+        },
+        "jump_b_m_known": 55662,
+        "foot_cost_known": 55662,
+        "body_cost_known": 44329,
+        "stages_ms": {
+          "select_centers_ms": 201.8782340001053,
+          "window_query_ms": 437.60131499993804,
+          "fit_and_covariance_ms": 420.0175549999585,
+          "assembly_ms": 349.9331010000333,
+          "display_patch_geometry_ms": 5382.823439000049,
+          "three_jump_methods_ms": 7448.38857700006,
+          "clearance_ms": 3505.965841000034,
+          "local_costs_ms": 10.22017299987965,
+          "body_50x80_ms": 3310.624512000004,
+          "total_assessment_ms": 21067.455121000196
+        },
+        "total_assessment_ms": 21067.455121000196,
+        "fit_pipeline_ms": 1059.4971040000019,
+        "compute_call_wall_ms": 21076.40845700007,
+        "jump_b_m": {
+          "median": 0.021365779366043114,
+          "p95": 0.3355154533935464,
+          "maximum": 2.403241191790709
+        },
+        "jump_sigma_m": {
+          "median": 0.014746031780320315,
+          "p95": 0.3677620486110246,
+          "maximum": 4.244997855918589
+        },
+        "jump_upper_m": {
+          "median": 0.045739875210683956,
+          "p95": 1.0088345194851132,
+          "maximum": 9.143683097737416
+        },
+        "slope_deg": {
+          "median": 18.248415709495937,
+          "p95": 62.22153826307293,
+          "maximum": 76.68761398548426
+        }
+      },
+      "paired_centers": {
+        "both_valid": 35922,
+        "newly_valid": 19740,
+        "lost_valid": 2,
+        "both_invalid": 5790
+      },
+      "original_files_unchanged": true
+    },
+    {
+      "id": "vocano",
+      "name": "火山",
+      "raw_points": 100000,
+      "source_xyz_sha256": "50803da84df2d649881ac1429c239d52c43b04ce8e2ae378f89257063b1b16ca",
+      "baseline_models_exact_match": true,
+      "q20-n30": {
+        "centers": 14637,
+        "solved": 9967,
+        "valid": 9967,
+        "valid_fraction": 0.6809455489512878,
+        "insufficient": 4670,
+        "rejected": 0,
+        "displayed_functions": 9967,
+        "valid_no_patch": 0,
+        "patch_triangles": 79163,
+        "assembled_functions": 9803,
+        "assembled_triangles": 17862,
+        "valid_unassembled": 164,
+        "point_count": {
+          "median": 32.0,
+          "p95": 36.0,
+          "maximum": 43.0
+        },
+        "rmse_m": {
+          "median": 0.0006518459057402591,
+          "p95": 0.00639992828269757,
+          "maximum": 0.015640834633252994
+        },
+        "max_error_m": {
+          "median": 0.0016214879294664903,
+          "p95": 0.015449494740421196,
+          "maximum": 0.03774147086903103
+        },
+        "std_patch_m": {
+          "median": 0.001079138903419137,
+          "p95": 0.0027002243948610295,
+          "maximum": 0.009719941313465714
+        },
+        "jump_b_m_known": 9961,
+        "foot_cost_known": 9961,
+        "body_cost_known": 7488,
+        "stages_ms": {
+          "select_centers_ms": 36.709737000137466,
+          "window_query_ms": 106.71575799983657,
+          "fit_and_covariance_ms": 94.7502760000134,
+          "assembly_ms": 48.257292000016605,
+          "display_patch_geometry_ms": 990.939654000158,
+          "three_jump_methods_ms": 1259.0955609998673,
+          "clearance_ms": 688.2312130001083,
+          "local_costs_ms": 2.658335999967676,
+          "body_50x80_ms": 442.13505800007624,
+          "total_assessment_ms": 3669.495260000076
+        },
+        "total_assessment_ms": 3669.495260000076,
+        "fit_pipeline_ms": 238.17577099998744,
+        "compute_call_wall_ms": 3670.5412599999363,
+        "jump_b_m": {
+          "median": 0.0035047235517291515,
+          "p95": 0.033273440180634495,
+          "maximum": 0.2346030169573094
+        },
+        "jump_sigma_m": {
+          "median": 0.0054704803824149354,
+          "p95": 0.013794656608742911,
+          "maximum": 0.04378785077711148
+        },
+        "jump_upper_m": {
+          "median": 0.01368296031366145,
+          "p95": 0.055108594972711505,
+          "maximum": 0.2986356884190041
+        },
+        "slope_deg": {
+          "median": 8.408042182279429,
+          "p95": 22.518831031036317,
+          "maximum": 44.21217152536007
+        }
+      },
+      "q15-n15": {
+        "centers": 14637,
+        "solved": 13565,
+        "valid": 13565,
+        "valid_fraction": 0.9267609482817517,
+        "insufficient": 1072,
+        "rejected": 0,
+        "displayed_functions": 13521,
+        "valid_no_patch": 44,
+        "patch_triangles": 101530,
+        "assembled_functions": 12730,
+        "assembled_triangles": 21483,
+        "valid_unassembled": 835,
+        "point_count": {
+          "median": 18.0,
+          "p95": 21.0,
+          "maximum": 27.0
+        },
+        "rmse_m": {
+          "median": 0.0006234584852754547,
+          "p95": 0.006087715737731318,
+          "maximum": 0.014489386400015623
+        },
+        "max_error_m": {
+          "median": 0.0013383071087909933,
+          "p95": 0.012985086515430585,
+          "maximum": 0.03168395401724697
+        },
+        "std_patch_m": {
+          "median": 0.0015811978417975305,
+          "p95": 0.004007614607425036,
+          "maximum": 0.011848060166086386
+        },
+        "jump_b_m_known": 13565,
+        "foot_cost_known": 13565,
+        "body_cost_known": 11184,
+        "stages_ms": {
+          "select_centers_ms": 41.67496700006268,
+          "window_query_ms": 86.14124699988679,
+          "fit_and_covariance_ms": 100.91347299999143,
+          "assembly_ms": 69.58096500011379,
+          "display_patch_geometry_ms": 1326.2733349999962,
+          "three_jump_methods_ms": 1690.1518249999299,
+          "clearance_ms": 887.0624989999669,
+          "local_costs_ms": 2.5954089999231655,
+          "body_50x80_ms": 582.4616250001782,
+          "total_assessment_ms": 4786.858905999907
+        },
+        "total_assessment_ms": 4786.858905999907,
+        "fit_pipeline_ms": 228.7296869999409,
+        "compute_call_wall_ms": 4788.018884999929,
+        "jump_b_m": {
+          "median": 0.008710374829639794,
+          "p95": 0.10456164626740228,
+          "maximum": 0.47779654218731793
+        },
+        "jump_sigma_m": {
+          "median": 0.014774378646671586,
+          "p95": 0.06078596221680049,
+          "maximum": 0.32933054132420664
+        },
+        "jump_upper_m": {
+          "median": 0.035841325957743975,
+          "p95": 0.2143261915252618,
+          "maximum": 0.9625437920552729
+        },
+        "slope_deg": {
+          "median": 10.197551472344847,
+          "p95": 36.66359012247118,
+          "maximum": 60.16002320537383
+        }
+      },
+      "paired_centers": {
+        "both_valid": 9866,
+        "newly_valid": 3699,
+        "lost_valid": 101,
+        "both_invalid": 971
+      },
+      "original_files_unchanged": true
+    }
+  ],
+  "code_sha256": {
+    "terrain_assessment.py": "d08590c53f4aa1c81a8293a92cbffc1a96be6cf5b14aba8193feb9e468ea2903",
+    "assessment_export.py": "ceed18437fa62e4948f17e0b11bb8c55e4d8f3d0e694a3d675ba12dfb8607d69",
+    "assessment_profiles.py": "69dd24dcbb2d6e0f865c80843a73958a1cb874a5fc98a6cc2ff23de691f45596"
+  },
+  "environment": {
+    "python": "3.10.12",
+    "numpy": "1.21.5",
+    "blas_threads": 1
+  },
+  "notes": [
+    "Same saved raw XYZ bytes, same 10 cm voxel-selected centres, same centre order; no resampling or point upsampling.",
+    "Only requested config changes: patch_size_m 0.20->0.15, minimum_points 30->15. ALL eligible points are used, not exactly 15 nearest neighbours.",
+    "Height gate +/-4 cm, rank/ridge/RMSE checks, jump candidate offset 24 cm, assembly thresholds and 80x50 cm body dimensions are fixed.",
+    "Patch geometry and normal-corner evaluation follow the selected width. Clearance uses 5 cm columns: 4x4 for Q20, 3x3 for Q15, normalized by the actual number of columns.",
+    "Body support queries respect the selected local half-width; body coverage still describes the same 80x50 cm rectangle. XY support boxes are not an exact continuous collision or convex-hull certificate.",
+    "Paired timings: one sequential whole-scene CPU run per profile, baseline first. Total includes fitting, assembly, patch geometry and all assessments, excludes file IO and browser. No claim of stable speedup from a single run.",
+    "Residuals are training residuals, not held-out accuracy. Centre counts and triangle counts are not covered area; smaller patches and changed sets of valid centres affect comparisons.",
+    "Original Q20 binaries/metadata are preserved; recomputed default models and geometry are checked against saved results. Historical FSGP benchmark remains an independent experiment with its original code hashes."
+  ]
+}

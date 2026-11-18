@@ -1,4 +1,4 @@
-"""Publish 20 cm assessment experiments on the existing port, preserving history."""
+"""Publish configurable assessment experiments on the existing port, preserving history."""
 import argparse
 from dataclasses import asdict, replace
 import csv
@@ -92,7 +92,7 @@ def compute(points, config=AssessmentConfig()):
     seeds=points[source_ids];mark('select_centers_ms')
     pools=window_pools(points,seeds,config);mark('window_query_ms')
     fits=fit_pools(points,seeds,pools,config);mark('fit_and_covariance_ms')
-    labels,components,edges,assembly_info=assemble(seeds,fits,LocalConfig(patch_half_width_m=.1))
+    labels,components,edges,assembly_info=assemble(seeds,fits,LocalConfig(patch_half_width_m=config.patch_size_m/2))
     faces=np.concatenate([c['triangles'] for c in components]).astype('<u4') if components else np.empty((0,3),dtype='<u4')
     used=np.zeros(len(seeds),bool);used[np.unique(faces)]=True;mark('assembly_ms')
     vertices,patch_faces,owners,std_max=patches(points,seeds,pools,fits,config);mark('display_patch_geometry_ms')
@@ -116,11 +116,16 @@ def compute(points, config=AssessmentConfig()):
                 times=times,components=len(components),assembly_info=assembly_info)
 
 
-def export_scene(name,config=AssessmentConfig()):
-    output=OUT/name;output.mkdir(parents=True,exist_ok=True)
+def export_scene(name,config=AssessmentConfig(),*,output_root=OUT):
     points,source=assessment_source(name)
     print(f'Assessing {name}: {len(points)} raw points',flush=True)
     result=compute(points,config)
+    return save_scene(name,points,source,result,config,output_root=output_root)
+
+
+def save_scene(name,points,source,result,config=AssessmentConfig(),*,output_root=OUT):
+    """Serialize a computed result; alternate profiles never overwrite OUT."""
+    output=Path(output_root)/name;output.mkdir(parents=True,exist_ok=True)
     fits=result['fits'];valid=np.isfinite(fits['height']);n=len(valid)
     for filename,array in (('points.bin',points.astype('<f4')),('models.bin',result['packed']),
                            ('mesh.bin',result['triangles']),('patches.bin',result['patches']),
@@ -155,7 +160,7 @@ def export_scene(name,config=AssessmentConfig()):
                             'C':'method B + 2*sigma_delta; significance is separate, not traversability'},
               jump_solve_counts=result['jumps']['solve_counts'],
               uncertainty='Finite-ridge sandwich covariance, RSS/(n-6), 3 mm noise floor; prediction variance phi.T@cov@phi. Conditional linear-model estimate, not calibrated sensor uncertainty.',
-              clearance='Observed occupied 5 cm columns in a 20 cm footprint, 10..60 cm above fitted surface. Raw points plus vertices of actual fitted triangles. Sampled surface evidence, not exact continuous collision detection or certified free space.',
+              clearance=f'Observed occupied 5 cm columns in a {config.patch_size_m*100:g} cm footprint, 10..60 cm above fitted surface. Raw points plus vertices of actual fitted triangles. Sampled surface evidence, not exact continuous collision detection or certified free space.',
               body='80 cm along X, 50 cm along Y, assumed feet +/-35 cm and +/-20 cm; COM height 30 cm. Geometric quasi-static proxy only; no dynamics/friction/real mass model.',
               unknown='NaN in binaries / empty in CSV. Unsupported jump sides and body coverage are never zero-filled.')
     (output/'data.json').write_text(json.dumps(finite_json(meta),ensure_ascii=False,indent=2)+'\n')
@@ -163,17 +168,17 @@ def export_scene(name,config=AssessmentConfig()):
     return meta
 
 
-def publish():
-    OUT.mkdir(exist_ok=True,parents=True)
+def publish(output_root=OUT,*,copy_assets=True):
+    output_root=Path(output_root);output_root.mkdir(exist_ok=True,parents=True)
     cases=[]
     for name in ORDER:
-        path=OUT/name/'data.json'
+        path=output_root/name/'data.json'
         if path.exists():cases.append(json.loads(path.read_text()))
-    (OUT/'catalog.json').write_text(json.dumps(dict(scenes=cases,default_scene='steps',fields=FIELDS),ensure_ascii=False,indent=2)+'\n')
+    (output_root/'catalog.json').write_text(json.dumps(dict(scenes=cases,default_scene='steps',fields=FIELDS),ensure_ascii=False,indent=2)+'\n')
     assets=ROOT/'visualization/assessment'
-    if assets.exists():
+    if copy_assets and assets.exists():
         for path in assets.iterdir():
-            if path.is_file():shutil.copyfile(path,OUT/path.name)
+            if path.is_file():shutil.copyfile(path,output_root/path.name)
     return cases
 
 

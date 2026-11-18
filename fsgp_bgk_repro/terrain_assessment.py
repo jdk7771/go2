@@ -1,4 +1,4 @@
-"""20 cm local polynomial assessment; engineering costs, not dynamics claims.
+"""Configurable local polynomial assessment; engineering costs, not dynamics claims.
 
 All calculations consume XYZ only. Units are metres/radians unless named.
 Missing fits/unsupported directions remain NaN rather than zero risk.
@@ -218,8 +218,11 @@ def jump_metrics(points, seeds, pools, fits, config=AssessmentConfig()):
 def clearance_metrics(points, seeds, fits, patch_positions, patch_faces, config=AssessmentConfig()):
     """Sampled clearance evidence from raw returns and actual fitted surfaces."""
     active = np.flatnonzero(np.isfinite(fits['height']))
-    occupied_raw = np.zeros((len(seeds), 16), bool)
-    occupied_surface = np.zeros((len(seeds), 16), bool)
+    cells = int(round(config.patch_size_m/config.clearance_cell_m))
+    if cells < 1 or not np.isclose(cells*config.clearance_cell_m, config.patch_size_m):
+        raise ValueError('Patch width must be an integer multiple of clearance cell size')
+    occupied_raw = np.zeros((len(seeds), cells*cells), bool)
+    occupied_surface = np.zeros((len(seeds), cells*cells), bool)
     counts = np.zeros((len(seeds), 2), dtype=np.int32)
     half = config.patch_size_m/2
     # Only vertices used by a real fitted triangle are valid surface samples.
@@ -241,8 +244,8 @@ def clearance_metrics(points, seeds, fits, patch_positions, patch_faces, config=
                 keep = (dz >= config.clearance_low_m-1e-7) & (dz <= config.clearance_high_m+1e-7)
                 counts[i, source_id] = int(keep.sum())
                 cell = np.floor((p[keep, :2]-seeds[i, :2]+half)/config.clearance_cell_m).astype(int)
-                cell = np.clip(cell, 0, 3)
-                dest[i, cell[:, 0]+4*cell[:, 1]] = True
+                cell = np.clip(cell, 0, cells-1)
+                dest[i, cell[:, 0]+cells*cell[:, 1]] = True
     cost = np.mean(occupied_raw | occupied_surface, axis=1)
     cost[~np.isfinite(fits['height'])] = np.nan
     return dict(cost=cost, raw_hits=counts[:, 0], surface_hits=counts[:, 1],
@@ -254,7 +257,8 @@ def local_metrics(seeds, fits, std_max, jumps, clearance, config=AssessmentConfi
     valid = np.isfinite(fits['height'])
     slope = np.rad2deg(np.arctan(np.linalg.norm(c[:, 1:3], axis=1)))
     change = np.zeros(len(seeds))
-    for u, v in ((-.1, -.1), (-.1, .1), (.1, -.1), (.1, .1)):
+    half = config.patch_size_m/2
+    for u, v in ((-half, -half), (-half, half), (half, -half), (half, half)):
         normal = np.column_stack((-(c[:, 1]+2*c[:, 3]*u+c[:, 4]*v),
                                    -(c[:, 2]+c[:, 4]*u+2*c[:, 5]*v), np.ones(len(c))))
         normal /= np.linalg.norm(normal, axis=1)[:, None]
@@ -273,7 +277,7 @@ def local_metrics(seeds, fits, std_max, jumps, clearance, config=AssessmentConfi
                 slope_cost=slope_cost, error_uncertainty_cost=uncertainty, foot_cost=cost)
 
 
-def choose_support(seeds, fits, query_xy, expected_z, max_candidates=16):
+def choose_support(seeds, fits, query_xy, expected_z, max_candidates=16, config=AssessmentConfig()):
     active = np.flatnonzero(np.isfinite(fits['height']))
     result = np.full(query_xy.shape[:-1], -1, dtype=np.int32)
     height = np.full(result.shape, np.nan)
@@ -281,13 +285,14 @@ def choose_support(seeds, fits, query_xy, expected_z, max_candidates=16):
         return result, height
     tree = cKDTree(seeds[active, :2])
     flat, target = query_xy.reshape(-1, 2), expected_z.ravel()
-    distance, index = tree.query(flat, k=max_candidates, distance_upper_bound=np.sqrt(2)*.1+1e-8)
+    half = config.patch_size_m/2
+    distance, index = tree.query(flat, k=max_candidates, distance_upper_bound=np.sqrt(2)*half+1e-8)
     safe = active[np.minimum(index, len(active)-1)]
     offset = flat[:, None, :]-seeds[safe, :2]
     prediction = evaluate(seeds, fits['coefficient'], safe, np.broadcast_to(flat[:, None, :], offset.shape))
-    eligible = (index < len(active)) & np.all(np.abs(offset) <= .1+1e-7, axis=2)
+    eligible = (index < len(active)) & np.all(np.abs(offset) <= half+1e-7, axis=2)
     # A query must be inside the fitted height band, not an unchecked long extrapolation.
-    eligible &= np.abs(prediction-seeds[safe, 2]) <= .04+1e-7
+    eligible &= np.abs(prediction-seeds[safe, 2]) <= config.height_gate_m+1e-7
     cost = distance**2+.5*(prediction-target[:, None])**2
     cost[~eligible] = np.inf
     winner = np.argmin(cost, axis=1)
@@ -315,7 +320,7 @@ def body_metrics(seeds, fits, metrics, jumps, clearance, config=AssessmentConfig
         offsets = np.r_[foot_xy, grid_xy]
         query = seeds[ids, None, :2]+offsets
         expected = fits['height'][ids, None]+np.sum(fits['coefficient'][ids, None, 1:3]*offsets, axis=2)
-        support, z = choose_support(seeds, fits, query, expected)
+        support, z = choose_support(seeds, fits, query, expected, config=config)
         contacts[ids], contact_z[ids] = support[:, :4], z[:, :4]
         coverage = np.mean(support[:, 4:] >= 0, axis=1)
         result['coverage'][ids] = coverage

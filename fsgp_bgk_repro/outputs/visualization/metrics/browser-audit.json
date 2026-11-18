@@ -1,9 +1,14 @@
 {
   "passed": true,
   "scenes": 17,
+  "profiles": [
+    "q20-n30",
+    "q15-n15"
+  ],
   "metrics": 11,
   "records": [
     {
+      "profile": "q20-n30",
       "scene": "corridor-040",
       "fields": [
         {
@@ -86,6 +91,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "corridor-060",
       "fields": [
         {
@@ -168,6 +174,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "corridor-080",
       "fields": [
         {
@@ -250,6 +257,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "combined",
       "fields": [
         {
@@ -332,6 +340,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "table",
       "fields": [
         {
@@ -414,6 +423,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "hill",
       "fields": [
         {
@@ -496,6 +506,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "forest",
       "fields": [
         {
@@ -578,6 +589,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "flat",
       "fields": [
         {
@@ -660,6 +672,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "ramp",
       "fields": [
         {
@@ -742,6 +755,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "steps",
       "fields": [
         {
@@ -824,6 +838,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "steps-single",
       "fields": [
         {
@@ -906,6 +921,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "flat_ramp",
       "fields": [
         {
@@ -988,6 +1004,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "quick",
       "fields": [
         {
@@ -1070,6 +1087,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "desert",
       "fields": [
         {
@@ -1152,6 +1170,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "mountain",
       "fields": [
         {
@@ -1234,6 +1253,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "snow",
       "fields": [
         {
@@ -1316,6 +1336,7 @@
       ]
     },
     {
+      "profile": "q20-n30",
       "scene": "vocano",
       "fields": [
         {
@@ -1396,6 +1417,1417 @@
           "max": 0.2986356884190041
         }
       ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "corridor-040",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0982877829389112,
+          "max": 0.7360002764748721
+        },
+        {
+          "field": "slope_deg",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 2.886227261244334,
+          "max": 35.75390043181516
+        },
+        {
+          "field": "roughness_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.11208139215604922,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0015780534069002024,
+          "max": 0.027473271485923777
+        },
+        {
+          "field": "rmse_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0009217773678645607,
+          "max": 0.015236199891469935
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0018585959310887363,
+          "max": 0.008121425943726274
+        },
+        {
+          "field": "clearance_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.4032587083946607,
+          "max": 1
+        },
+        {
+          "field": "foot_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.25138531002233305,
+          "max": 0.9407936499153001
+        },
+        {
+          "field": "body_cost",
+          "known": 3837,
+          "valid": 4303,
+          "mean": 0.4230895614013962,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.15191553648791686,
+          "max": 1.4920010341180239
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.14741177424050678,
+          "max": 1.558567897461009
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "corridor-060",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.13137784040058267,
+          "max": 0.9360002943562655
+        },
+        {
+          "field": "slope_deg",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 2.886229932333876,
+          "max": 35.75396790600725
+        },
+        {
+          "field": "roughness_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.11208139215604922,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0015780549402423041,
+          "max": 0.027473294586827235
+        },
+        {
+          "field": "rmse_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0009217783119673385,
+          "max": 0.015236209517450094
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0018585964425429633,
+          "max": 0.008121431074709433
+        },
+        {
+          "field": "clearance_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.394014511839286,
+          "max": 1
+        },
+        {
+          "field": "foot_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.24888919764050313,
+          "max": 0.9407938266654273
+        },
+        {
+          "field": "body_cost",
+          "known": 3837,
+          "valid": 4303,
+          "mean": 0.4406427695931236,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.1828466870333823,
+          "max": 1.6920010519994173
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.18151905511361205,
+          "max": 1.7585685068307657
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "corridor-080",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.1511793644324028,
+          "max": 1.1360002824353366
+        },
+        {
+          "field": "slope_deg",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 2.886227843867227,
+          "max": 35.75390043181516
+        },
+        {
+          "field": "roughness_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.11208139215604922,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0015780537569377844,
+          "max": 0.027473294586827235
+        },
+        {
+          "field": "rmse_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0009217775652258789,
+          "max": 0.015236209517450094
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.0018585960516890113,
+          "max": 0.008121431074709433
+        },
+        {
+          "field": "clearance_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.2128489167764096,
+          "max": 1
+        },
+        {
+          "field": "foot_cost",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.20915695949567037,
+          "max": 0.9407938266654273
+        },
+        {
+          "field": "body_cost",
+          "known": 3837,
+          "valid": 4303,
+          "mean": 0.3910786579791963,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.20851235100341015,
+          "max": 1.8920010400784883
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 4303,
+          "valid": 4303,
+          "mean": 0.20263349941400813,
+          "max": 1.9585684949098368
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "combined",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 26127,
+          "valid": 26139,
+          "mean": 0.0637818077639313,
+          "max": 7.67137783550373
+        },
+        {
+          "field": "slope_deg",
+          "known": 26139,
+          "valid": 26139,
+          "mean": 18.840403620858375,
+          "max": 80.41565297016898
+        },
+        {
+          "field": "roughness_cost",
+          "known": 26139,
+          "valid": 26139,
+          "mean": 0.3223016544947906,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 26139,
+          "valid": 26139,
+          "mean": 0.0024618634460272103,
+          "max": 0.061172117308633506
+        },
+        {
+          "field": "rmse_m",
+          "known": 26139,
+          "valid": 26139,
+          "mean": 0.0010583077043108393,
+          "max": 0.01999888540879911
+        },
+        {
+          "field": "std_patch_m",
+          "known": 26139,
+          "valid": 26139,
+          "mean": 0.0018912498413820587,
+          "max": 0.03088115012330598
+        },
+        {
+          "field": "clearance_cost",
+          "known": 26139,
+          "valid": 26139,
+          "mean": 0.05663737879966519,
+          "max": 1
+        },
+        {
+          "field": "foot_cost",
+          "known": 26127,
+          "valid": 26139,
+          "mean": 0.3116646881075874,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 18382,
+          "valid": 26139,
+          "mean": 0.45858487847304286,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 26127,
+          "valid": 26139,
+          "mean": 0.16837566461998893,
+          "max": 29.310645878950478
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 26127,
+          "valid": 26139,
+          "mean": 0.1283263897360416,
+          "max": 11.761997197231256
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "table",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.1317115807410049,
+          "max": 1.4500001328383427
+        },
+        {
+          "field": "slope_deg",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 1.3410636322216833,
+          "max": 36.8700285266598
+        },
+        {
+          "field": "roughness_cost",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.058045435264434245,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.0008958192083801852,
+          "max": 0.021440110152888138
+        },
+        {
+          "field": "rmse_m",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.0004943499543940601,
+          "max": 0.010421989502782596
+        },
+        {
+          "field": "std_patch_m",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.001876075813729056,
+          "max": 0.008341866395562404
+        },
+        {
+          "field": "clearance_cost",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.11819530229572056,
+          "max": 1
+        },
+        {
+          "field": "foot_cost",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.14771287339572114,
+          "max": 0.8881660965951563
+        },
+        {
+          "field": "body_cost",
+          "known": 4484,
+          "valid": 5019,
+          "mean": 0.28514021469448325,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.16209464913031635,
+          "max": 2.2375005335413416
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 5019,
+          "valid": 5019,
+          "mean": 0.1708380187071799,
+          "max": 1.975461795935891
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "hill",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.03093459761455206,
+          "max": 3.1583138996383173
+        },
+        {
+          "field": "slope_deg",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 22.38075940759399,
+          "max": 80.14254735411104
+        },
+        {
+          "field": "roughness_cost",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.42290830752081393,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.0011265082402161207,
+          "max": 0.045604850665726275
+        },
+        {
+          "field": "rmse_m",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.0004541773427442166,
+          "max": 0.019697477865705335
+        },
+        {
+          "field": "std_patch_m",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.0010572910862092341,
+          "max": 0.01376590192663739
+        },
+        {
+          "field": "clearance_cost",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.0031220905968088884,
+          "max": 1
+        },
+        {
+          "field": "foot_cost",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.33413031341485555,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 12144,
+          "valid": 13844,
+          "mean": 0.44677654964931673,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.14111877876782222,
+          "max": 12.481614054209526
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 13844,
+          "valid": 13844,
+          "mean": 0.08870640010864907,
+          "max": 8.137336746547376
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "forest",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 11838,
+          "valid": 11845,
+          "mean": 0.0993547534989279,
+          "max": 7.928806967571627
+        },
+        {
+          "field": "slope_deg",
+          "known": 11845,
+          "valid": 11845,
+          "mean": 14.994674910172554,
+          "max": 73.04257202488279
+        },
+        {
+          "field": "roughness_cost",
+          "known": 11845,
+          "valid": 11845,
+          "mean": 0.1941118064069135,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 11845,
+          "valid": 11845,
+          "mean": 0.003939434118061767,
+          "max": 0.06845625942804795
+        },
+        {
+          "field": "rmse_m",
+          "known": 11845,
+          "valid": 11845,
+          "mean": 0.0017140662267713525,
+          "max": 0.019989312088154777
+        },
+        {
+          "field": "std_patch_m",
+          "known": 11845,
+          "valid": 11845,
+          "mean": 0.00281817549130461,
+          "max": 0.03494863182984926
+        },
+        {
+          "field": "clearance_cost",
+          "known": 11845,
+          "valid": 11845,
+          "mean": 0.1195628722855402,
+          "max": 1
+        },
+        {
+          "field": "foot_cost",
+          "known": 11842,
+          "valid": 11845,
+          "mean": 0.2821006101689862,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 5556,
+          "valid": 11845,
+          "mean": 0.46493376907465084,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 11838,
+          "valid": 11845,
+          "mean": 0.18995192160521007,
+          "max": 30.386748222836296
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 11838,
+          "valid": 11845,
+          "mean": 0.17732865248598864,
+          "max": 12.237945668156893
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "flat",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "slope_deg",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "roughness_cost",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "std_patch_m",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0.0015470694009863187,
+          "max": 0.0022519870020812076
+        },
+        {
+          "field": "clearance_cost",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "foot_cost",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0.07860117376576517,
+          "max": 0.19443578268706668
+        },
+        {
+          "field": "body_cost",
+          "known": 5842,
+          "valid": 6557,
+          "mean": 0.08650155485370013,
+          "max": 0.18698501481315588
+        },
+        {
+          "field": "jump_a_m",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 6557,
+          "valid": 6557,
+          "mean": 0.030302630282832428,
+          "max": 0.08434803830531992
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "ramp",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 1.551588365078009e-7,
+          "max": 0.0000013362787047999092
+        },
+        {
+          "field": "slope_deg",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 15.069954386631045,
+          "max": 15.069987441712655
+        },
+        {
+          "field": "roughness_cost",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 0.0000036929751056481016,
+          "max": 0.00005657017676780916
+        },
+        {
+          "field": "max_error_m",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 3.287889048069021e-8,
+          "max": 8.798806086507405e-8
+        },
+        {
+          "field": "rmse_m",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 1.5668403881785165e-8,
+          "max": 4.195842990503752e-8
+        },
+        {
+          "field": "std_patch_m",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 0.001542155783801843,
+          "max": 0.0022519872248969847
+        },
+        {
+          "field": "clearance_cost",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "foot_cost",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 0.15780680080809226,
+          "max": 0.2846144853493343
+        },
+        {
+          "field": "body_cost",
+          "known": 7360,
+          "valid": 8242,
+          "mean": 0.15733272866654502,
+          "max": 0.25851652838617634
+        },
+        {
+          "field": "jump_a_m",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 5.991394257673477e-7,
+          "max": 0.000007845842595832764
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 8242,
+          "valid": 8242,
+          "mean": 0.02815793815967222,
+          "max": 0.08744545363952165
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "steps",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.120525157557021,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 5.637197839571552,
+          "max": 56.30996372622731
+        },
+        {
+          "field": "roughness_cost",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.16178318262203945,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.002335793559663432,
+          "max": 0.031077297215826784
+        },
+        {
+          "field": "rmse_m",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.0015198016422322334,
+          "max": 0.01824311597120565
+        },
+        {
+          "field": "std_patch_m",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.00234729457292375,
+          "max": 0.015768047789280322
+        },
+        {
+          "field": "clearance_cost",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.05469990309478158,
+          "max": 0.6666666666666666
+        },
+        {
+          "field": "foot_cost",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.255746814910785,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 4794,
+          "valid": 5389,
+          "mean": 0.3966161903941104,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.2503629542761285,
+          "max": 1.740002519686898
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 5389,
+          "valid": 5389,
+          "mean": 0.21433887419069184,
+          "max": 1.696956385016825
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "steps-single",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.03273966934400399,
+          "max": 0.4500006825203108
+        },
+        {
+          "field": "slope_deg",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.496823718562158,
+          "max": 11.408667459205342
+        },
+        {
+          "field": "roughness_cost",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.00979832031284866,
+          "max": 0.2978270366151815
+        },
+        {
+          "field": "max_error_m",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.000004680412761416861,
+          "max": 0.00015724073934200375
+        },
+        {
+          "field": "rmse_m",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.0000019259211344419723,
+          "max": 0.000059193556977788415
+        },
+        {
+          "field": "std_patch_m",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.0015552722973046936,
+          "max": 0.0023784760544051362
+        },
+        {
+          "field": "clearance_cost",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.004018877049043637,
+          "max": 0.3333333333333333
+        },
+        {
+          "field": "foot_cost",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.09873548639359965,
+          "max": 0.34620980077180313
+        },
+        {
+          "field": "body_cost",
+          "known": 5947,
+          "valid": 6663,
+          "mean": 0.14816471527478434,
+          "max": 0.5110814356766376
+        },
+        {
+          "field": "jump_a_m",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.0329865642576735,
+          "max": 0.45000011936713274
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 6663,
+          "valid": 6663,
+          "mean": 0.06304898357751952,
+          "max": 0.4975412305253676
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "flat_ramp",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0.0019133877754553693,
+          "max": 0.024267862778288005
+        },
+        {
+          "field": "slope_deg",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 4.709347890801197,
+          "max": 16.69925184172451
+        },
+        {
+          "field": "roughness_cost",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0.023543389753813246,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0.00004540830054142742,
+          "max": 0.0019285920083840045
+        },
+        {
+          "field": "rmse_m",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0.000025121539954438412,
+          "max": 0.0010669652914332638
+        },
+        {
+          "field": "std_patch_m",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0.001553238269152506,
+          "max": 0.0022519870020812076
+        },
+        {
+          "field": "clearance_cost",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "foot_cost",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0.11108954169838366,
+          "max": 0.43706770247521365
+        },
+        {
+          "field": "body_cost",
+          "known": 6154,
+          "valid": 6881,
+          "mean": 0.13364253687393837,
+          "max": 0.3508179036650029
+        },
+        {
+          "field": "jump_a_m",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0.010245067289973306,
+          "max": 0.13339287278647172
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 6881,
+          "valid": 6881,
+          "mean": 0.030940029943489527,
+          "max": 0.08434803830531992
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "quick",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "slope_deg",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "roughness_cost",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "max_error_m",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "rmse_m",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "std_patch_m",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "clearance_cost",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "foot_cost",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "body_cost",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "jump_a_m",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 0,
+          "valid": 0,
+          "mean": null,
+          "max": null
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "desert",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 10943,
+          "valid": 10945,
+          "mean": 0.003896890959020382,
+          "max": 0.04377349665197572
+        },
+        {
+          "field": "slope_deg",
+          "known": 10945,
+          "valid": 10945,
+          "mean": 18.360693294389502,
+          "max": 44.71649708830355
+        },
+        {
+          "field": "roughness_cost",
+          "known": 10945,
+          "valid": 10945,
+          "mean": 0.2090258500446729,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 10945,
+          "valid": 10945,
+          "mean": 0.0004858113961254605,
+          "max": 0.003888538791066435
+        },
+        {
+          "field": "rmse_m",
+          "known": 10945,
+          "valid": 10945,
+          "mean": 0.0002392116103310099,
+          "max": 0.002097286427529053
+        },
+        {
+          "field": "std_patch_m",
+          "known": 10945,
+          "valid": 10945,
+          "mean": 0.0016473399042565738,
+          "max": 0.00248985266342081
+        },
+        {
+          "field": "clearance_cost",
+          "known": 10945,
+          "valid": 10945,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "foot_cost",
+          "known": 10943,
+          "valid": 10945,
+          "mean": 0.23151643322276025,
+          "max": 0.621844849440658
+        },
+        {
+          "field": "body_cost",
+          "known": 3806,
+          "valid": 10945,
+          "mean": 0.3238508432939756,
+          "max": 0.5643400781220941
+        },
+        {
+          "field": "jump_a_m",
+          "known": 10943,
+          "valid": 10945,
+          "mean": 0.01496358434743095,
+          "max": 0.1268514976313101
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 10943,
+          "valid": 10945,
+          "mean": 0.033031664967988546,
+          "max": 0.12944189043718313
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "mountain",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.035586432039357914,
+          "max": 0.9294797968372112
+        },
+        {
+          "field": "slope_deg",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 11.685698424546679,
+          "max": 69.61926652752628
+        },
+        {
+          "field": "roughness_cost",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.6116775381788015,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.006205693142164528,
+          "max": 0.04407687865480615
+        },
+        {
+          "field": "rmse_m",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.002800340634509023,
+          "max": 0.019977020704781263
+        },
+        {
+          "field": "std_patch_m",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.002105898055008902,
+          "max": 0.024383775904554365
+        },
+        {
+          "field": "clearance_cost",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.0029794238683127556,
+          "max": 0.8888888888888888
+        },
+        {
+          "field": "foot_cost",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.35879062996474165,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 5239,
+          "valid": 6750,
+          "mean": 0.4500185433768677,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.12552838734225663,
+          "max": 2.4401414797034633
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 6750,
+          "valid": 6750,
+          "mean": 0.08034768094473606,
+          "max": 2.780838211460349
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "snow",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.07954004412788312,
+          "max": 2.403241191790709
+        },
+        {
+          "field": "slope_deg",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 24.49855964634631,
+          "max": 76.68761398548426
+        },
+        {
+          "field": "roughness_cost",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.5535963236230379,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.004722742139601808,
+          "max": 0.04095679396184315
+        },
+        {
+          "field": "rmse_m",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.0022078130408286593,
+          "max": 0.017324849945572457
+        },
+        {
+          "field": "std_patch_m",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.00210770868230687,
+          "max": 0.017273747346387463
+        },
+        {
+          "field": "clearance_cost",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.00495051481361714,
+          "max": 1
+        },
+        {
+          "field": "foot_cost",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.47453978848869305,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 44329,
+          "valid": 55662,
+          "mean": 0.5070474674178524,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.3152245512526177,
+          "max": 9.423510592565867
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 55662,
+          "valid": 55662,
+          "mean": 0.23028425792525103,
+          "max": 9.143683097737416
+        }
+      ]
+    },
+    {
+      "profile": "q15-n15",
+      "scene": "vocano",
+      "fields": [
+        {
+          "field": "jump_b_m",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.026328375093472675,
+          "max": 0.47779654218731793
+        },
+        {
+          "field": "slope_deg",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 13.339039963188112,
+          "max": 60.16002320537383
+        },
+        {
+          "field": "roughness_cost",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.42652327714608335,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.003528710751187416,
+          "max": 0.03168395401724697
+        },
+        {
+          "field": "rmse_m",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.0016444246012196598,
+          "max": 0.014489386400015623
+        },
+        {
+          "field": "std_patch_m",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.0019156898137669988,
+          "max": 0.011848060166086386
+        },
+        {
+          "field": "clearance_cost",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.00009829217348568621,
+          "max": 0.2222222222222222
+        },
+        {
+          "field": "foot_cost",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.30733065814919275,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 11184,
+          "valid": 13565,
+          "mean": 0.39642547467894906,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.10432701416780996,
+          "max": 1.898136861243261
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 13565,
+          "valid": 13565,
+          "mean": 0.06582013888684903,
+          "max": 0.9625437920552729
+        }
+      ]
     }
   ],
   "colors": [
@@ -1428,6 +2860,9 @@
       ]
     ]
   },
+  "profileShareAndCSV": true,
+  "profileKeepsCamera": true,
+  "patchSizeMatchesProfile": true,
   "selectedPatchOutline": true,
   "tabletopVisibleByDefault": true,
   "legacyLinks": true,

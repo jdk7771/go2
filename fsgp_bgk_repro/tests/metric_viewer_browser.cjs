@@ -5,14 +5,18 @@ const base='http://127.0.0.1:42482/',out=path.resolve(__dirname,'../outputs/visu
  const browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true,args:['--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--enable-unsafe-swiftshader']});
  const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[],failed=[],records=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.status()>=400)failed.push({url:r.url(),status:r.status()});});
- const wait=id=>page.waitForFunction(id=>window.metricViewer?.state.ready&&window.metricViewer.state.data.meta.id===id&&window.metricViewer.state.renderedScene===id&&document.getElementById('loading').hidden,id,{timeout:90000});
+ const wait=(id,profile='q20-n30')=>page.waitForFunction(({id,profile})=>window.metricViewer?.state.ready&&window.metricViewer.state.data.meta.id===id&&window.metricViewer.state.renderedScene===id&&window.metricViewer.state.renderedProfile===profile&&document.getElementById('loading').hidden,{id,profile},{timeout:90000});
  try{
   await page.goto(base,{waitUntil:'networkidle'});await wait('steps');
   assert.equal(await page.locator('canvas').count(),1);assert.equal(await page.locator('details,iframe').count(),0);
   const scenes=await page.locator('#scene-select option').evaluateAll(options=>options.map(o=>o.value));assert.equal(scenes.length,17);
   const fields=await page.locator('#metric-select option').evaluateAll(options=>options.map(o=>o.value));assert.equal(fields.length,11);
+  const profiles=await page.locator('#profile-select option').evaluateAll(options=>options.map(o=>o.value));assert.deepEqual(profiles,['q20-n30','q15-n15']);
+  for(const profile of profiles){
+   const current=await page.locator('#scene-select').inputValue();await page.selectOption('#profile-select',profile);await wait(current,profile);
   for(const id of scenes){
-   await page.selectOption('#scene-select',id);await wait(id);
+   await page.selectOption('#scene-select',id);await wait(id,profile);
+   assert.match(await page.locator('#source-info').innerText(),profile==='q15-n15'?/15×15 cm，至少 15 点/:/20×20 cm，至少 30 点/);
    const checked=[];
    for(const field of fields){
     await page.selectOption('#metric-select',field);
@@ -29,8 +33,10 @@ const base='http://127.0.0.1:42482/',out=path.resolve(__dirname,'../outputs/visu
      return {field,known:n,valid:d.meta.valid,mean:n?sum/n:null,max:n?max:null};
     },field);checked.push(result);
    }
-   records.push({scene:id,fields:checked});console.log('Checked',id,fields.length,'metrics');
+   records.push({profile,scene:id,fields:checked});console.log('Checked',profile,id,fields.length,'metrics');
   }
+  }
+  await page.selectOption('#profile-select','q20-n30');await wait('vocano');
   const colors=await page.evaluate(()=>{const a=window.metricViewer;return [a.colorFor(0,1).getHexString(),a.colorFor(.5,1).getHexString(),a.colorFor(1,1).getHexString(),a.colorFor(NaN,1).getHexString()];});
   assert.deepEqual(colors,['ffffff','ff8080','ff0000','8d969f']);
   await page.selectOption('#scene-select','steps');await wait('steps');await page.selectOption('#metric-select','jump_b_m');
@@ -56,6 +62,19 @@ const base='http://127.0.0.1:42482/',out=path.resolve(__dirname,'../outputs/visu
   assert(await page.evaluate(()=>window.metricViewer.content.children.some(o=>o.userData.coverageEdges&&o.visible)));
   assert(await page.evaluate(()=>{const a=window.metricViewer,d=a.state.data,g=a.content.children.find(o=>o.userData.surface),colors=g.geometry.attributes.color.array,want=a.colorFor(NaN,1).set('#2586cb').toArray();return g.geometry.index.array===d.patchFaces&&[0,Math.floor(colors.length/6)*3,colors.length-3].every(k=>want.every((v,j)=>Math.abs(v-colors[k+j])<1e-6));}));
   await page.screenshot({path:path.join(out,'forest-fit-coverage.png'),fullPage:true});
+  const beforeProfileCamera=await page.evaluate(()=>window.metricViewer.camera.position.toArray());
+  await page.selectOption('#profile-select','q15-n15');await wait('forest','q15-n15');assert.deepEqual(await page.evaluate(()=>window.metricViewer.camera.position.toArray()),beforeProfileCamera);
+  assert.equal(await page.evaluate(()=>window.metricViewer.state.data.meta.valid),11845);assert.match(await page.locator('#fit-summary').innerText(),/11,845 \/ 24,500（48.3%）/);
+  assert.match(await page.locator('#csv-link').getAttribute('href'),/profiles\/q15-n15\/forest\/per-model.csv/);assert.equal((await page.request.get(await page.locator('#csv-link').getAttribute('href'))).status(),200);
+  assert.match(await page.locator('#details-link').getAttribute('href'),/profiles\/q15-n15\/forest\/data.json/);
+  assert(await page.evaluate(()=>{const d=window.metricViewer.state.data,half=d.meta.config.patch_size_m/2;for(let k=0;k<d.patchOwners.length;k++){const i=d.patchOwners[k];for(let j=0;j<2;j++)if(Math.abs(d.patches[k*3+j]-d.models[i*d.meta.fields.length+j])>half+1e-5)return false;}return true;}));
+  await page.screenshot({path:path.join(out,'forest-q15-fit-coverage.png'),fullPage:true});
+  await page.check('#cloud-overlay');await page.waitForFunction(()=>window.metricViewer.content.children.some(o=>o.isPoints&&o.geometry.attributes.position.count===window.metricViewer.state.data.meta.raw_points));await page.uncheck('#cloud-overlay');
+  const profileShared=page.url();await page.goto(profileShared,{waitUntil:'networkidle'});await wait('forest','q15-n15');assert(await page.isChecked('#fit-coverage'));assert.equal(await page.locator('#profile-select').inputValue(),'q15-n15');
+  await page.check('#mesh-mode');await page.waitForFunction(()=>window.metricViewer.content.children.find(o=>o.userData.surface)?.userData.mode==='mesh');
+  assert(await page.evaluate(()=>{const a=window.metricViewer,d=a.state.data;return a.content.children.find(o=>o.userData.surface).geometry.index.count===d.meta.triangles*3;}));
+  await page.screenshot({path:path.join(out,'forest-q15-assembled.png'),fullPage:true});
+  await page.uncheck('#mesh-mode');await page.selectOption('#profile-select','q20-n30');await wait('forest');
   await page.evaluate(()=>{const a=window.metricViewer;let id=0;while(a.value(id,'valid'))id++;a.select(id);});assert.match(await page.locator('#selection-info').innerText(),/未拟合|未通过/);
   await page.evaluate(()=>{const a=window.metricViewer;let id=0;while(!a.state.data.patchCounts[id])id++;a.select(id);});assert(await page.evaluate(()=>window.metricViewer.highlight.children.some(o=>o.userData.selectedPatch===window.metricViewer.state.selected)));
   await page.click('#clear-selection');await page.check('#mesh-mode');await page.waitForFunction(()=>window.metricViewer.content.children.find(o=>o.userData.surface)?.userData.mode==='mesh');
@@ -69,8 +88,10 @@ const base='http://127.0.0.1:42482/',out=path.resolve(__dirname,'../outputs/visu
   await page.goto(base+'assessment/details.html?scene=flat',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.terrainAssessment?.state.ready&&document.getElementById('loading').hidden);assert.equal(await page.locator('[data-panel]').count(),8);
   await page.goto(base+'?scene=hill&metric=max_error_m',{waitUntil:'networkidle'});await wait('hill');
   await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.waitForFunction(()=>window.metricViewer.renderer.domElement.width>0);await page.screenshot({path:path.join(out,'mobile.png'),fullPage:true});
+  await page.selectOption('#profile-select','q15-n15');await wait('hill','q15-n15');assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await page.screenshot({path:path.join(out,'mobile-q15.png'),fullPage:true});
+  const report=await page.locator('#profile-report-link').getAttribute('href');assert.equal((await page.request.get(new URL(report,page.url()).href)).status(),200);
   assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
-  fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify({passed:true,scenes:17,metrics:11,records,colors,singleCanvas:true,noDetailsOrIframes:true,selectionAndShare:true,meshAndRawToggle:true,coverageToggle:true,forestCoverage:forest,selectedPatchOutline:true,tabletopVisibleByDefault:true,legacyLinks:true,assessmentRedirect:true,advancedWorkbench:true,mobileOverflow:false,errors,failed},null,2)+'\n');
-  console.log('PASS 17 scenes × 11 metrics; single canvas, white/red colors, exact saved values, legacy links and mobile');
+  fs.writeFileSync(path.join(out,'browser-audit.json'),JSON.stringify({passed:true,scenes:17,profiles,metrics:11,records,colors,singleCanvas:true,noDetailsOrIframes:true,selectionAndShare:true,meshAndRawToggle:true,coverageToggle:true,forestCoverage:forest,profileShareAndCSV:true,profileKeepsCamera:true,patchSizeMatchesProfile:true,selectedPatchOutline:true,tabletopVisibleByDefault:true,legacyLinks:true,assessmentRedirect:true,advancedWorkbench:true,mobileOverflow:false,errors,failed},null,2)+'\n');
+  console.log('PASS 2 profiles × 17 scenes × 11 metrics; correct numerical data, geometry, CSV, share links and mobile');
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1)});

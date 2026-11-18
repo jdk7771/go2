@@ -389,6 +389,9 @@ systemctl --user status go2-pointcloud-viewer.service
     comparison_section=OUT.parent/'fsgp-q20/step-section.md'
     if comparison_section.exists():
         report+='\n\n'+comparison_section.read_text()
+    profile_section=OUT/'profile-comparison/step-section.md'
+    if profile_section.exists():
+        report+='\n\n'+profile_section.read_text()
     (ROOT.parent/'step.md').write_text(report)
     print('Wrote',ROOT.parent/'step.md')
 

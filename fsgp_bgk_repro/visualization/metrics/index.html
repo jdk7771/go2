@@ -2,7 +2,7 @@
 <html lang="zh-CN"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>地形评价 · 42482</title><link rel="icon" href="data:,">
-<link rel="stylesheet" href="./viewer.css?v=2">
+<link rel="stylesheet" href="./viewer.css?v=3">
 <script type="importmap">{"imports":{"three":"../scene-fits/vendor/three.module.min.js","three/addons/controls/OrbitControls.js":"../scene-fits/vendor/OrbitControls.js"}}</script>
 <script>
 const oldQuery=new URLSearchParams(location.search);
@@ -15,6 +15,7 @@ if(!oldQuery.has('metric')&&['color','surface','view','only','seed','overlay','n
 <header><div><h1>地形评价</h1><p>选场景、选指标，直接看数值和白到红分布。</p></div><a id="details-link" href="../assessment/details.html">详细实验 ↗</a></header>
 <section class="controls" aria-label="场景与指标">
  <label>场景<select id="scene-select" aria-label="选择场景"></select></label>
+ <label class="profile-control">拟合设置<select id="profile-select" aria-label="选择拟合设置"></select></label>
  <label>评价指标<select id="metric-select" aria-label="选择评价指标"></select></label>
  <div class="angles" aria-label="视角"><button data-angle="3d" class="active">三维</button><button data-angle="top">俯视</button><button data-angle="side">侧视</button></div>
 </section>
@@ -32,5 +33,5 @@ if(!oldQuery.has('metric')&&['color','surface','view','only','seed','overlay','n
 <p id="fit-summary" class="fit-summary"></p>
 <div class="selection"><span id="selection-info">点击曲面查看该处的具体数值。</span><button id="clear-selection" hidden>取消选择</button></div>
 <p id="metric-note" class="note"></p>
-<footer><span id="source-info"></span><nav><a id="csv-link" download>下载数值 CSV</a><a href="../fsgp-q20/">FSGP 对比</a><a id="old-viewer-link" href="../scene-fits/">原拟合查看器</a></nav></footer>
-</main><script type="module" src="./viewer.js?v=2"></script></body></html>
+<footer><span id="source-info"></span><nav><a id="csv-link" download>下载数值 CSV</a><a id="profile-report-link" href="../assessment/profile-comparison/" hidden>两组设置对照</a><a href="../fsgp-q20/">FSGP 对比</a><a id="old-viewer-link" href="../scene-fits/">原拟合查看器</a></nav></footer>
+</main><script type="module" src="./viewer.js?v=3"></script></body></html>

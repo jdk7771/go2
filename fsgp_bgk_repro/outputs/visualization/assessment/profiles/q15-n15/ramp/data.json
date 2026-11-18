@@ -1,0 +1,332 @@
+{
+  "id": "ramp",
+  "name": "斜坡",
+  "source": {
+    "kind": "analytic_regeneration",
+    "spacing_m": 0.025,
+    "original_geometry_preserved": true,
+    "reason": "A strict 20 cm window in the old 8 cm grid usually contains fewer than 30 points"
+  },
+  "raw_points": 103041,
+  "centers": 8246,
+  "valid": 8242,
+  "solved": 8242,
+  "triangles": 16142,
+  "patch_triangles": 110992,
+  "components": 1,
+  "bounds": [
+    [
+      -4.0,
+      -4.0,
+      -1.399999976158142
+    ],
+    [
+      4.0,
+      4.0,
+      1.399999976158142
+    ]
+  ],
+  "config": {
+    "patch_size_m": 0.15,
+    "seed_voxel_m": 0.1,
+    "height_gate_m": 0.04,
+    "minimum_points": 15,
+    "noise_floor_m": 0.003,
+    "max_rmse_m": 0.02,
+    "clearance_low_m": 0.1,
+    "clearance_high_m": 0.6,
+    "clearance_cell_m": 0.05,
+    "jump_offset_m": 0.24,
+    "jump_limit_m": 0.12,
+    "sigma_multiplier": 2.0,
+    "slope_limit_deg": 45.0,
+    "roughness_limit_m": 0.01,
+    "normal_change_limit_deg": 15.0,
+    "body_length_m": 0.8,
+    "body_width_m": 0.5,
+    "com_height_m": 0.3,
+    "leg_height_residual_limit_m": 0.15,
+    "body_minimum_coverage": 0.8
+  },
+  "fields": [
+    "x",
+    "y",
+    "z",
+    "c0",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "height",
+    "valid",
+    "point_count",
+    "rmse_m",
+    "max_error_m",
+    "std_center_m",
+    "std_patch_m",
+    "error_plus_2sigma_m",
+    "slope_deg",
+    "normal_change_deg",
+    "jump_a_m",
+    "jump_b_m",
+    "jump_sigma_m",
+    "jump_significance",
+    "jump_upper_m",
+    "jump_known_directions",
+    "clearance_cost",
+    "raw_obstacle_hits",
+    "surface_obstacle_hits",
+    "roughness_cost",
+    "foot_cost",
+    "body_cost",
+    "body_coverage",
+    "body_slope_deg",
+    "body_plane_rmse_m",
+    "body_support_margin_m",
+    "body_max_jump_m",
+    "body_max_clearance",
+    "body_max_roughness",
+    "body_max_uncertainty",
+    "assembled"
+  ],
+  "field_stats": {
+    "point_count": {
+      "known": 8246,
+      "total": 8246,
+      "median": 30.0,
+      "p95": 42.0,
+      "maximum": 49.0
+    },
+    "rmse_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 1.3809684520425918e-08,
+      "p95": 3.4440275841204554e-08,
+      "maximum": 4.195842990503752e-08
+    },
+    "max_error_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 3.082328765662001e-08,
+      "p95": 7.084351954554994e-08,
+      "maximum": 8.798806086507405e-08
+    },
+    "std_center_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 0.0010474458726389656,
+      "p95": 0.001178379460857354,
+      "maximum": 0.0016626143621101118
+    },
+    "std_patch_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 0.0015352023873116084,
+      "p95": 0.0018336459995259484,
+      "maximum": 0.0022519872248969847
+    },
+    "error_plus_2sigma_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 0.003070459437988287,
+      "p95": 0.0036673199316588764,
+      "maximum": 0.004504036633639245
+    },
+    "slope_deg": {
+      "known": 8242,
+      "total": 8246,
+      "median": 15.06995574815119,
+      "p95": 15.06997348706283,
+      "maximum": 15.069987441712655
+    },
+    "normal_change_deg": {
+      "known": 8242,
+      "total": 8246,
+      "median": 3.97898824022056e-05,
+      "p95": 0.00011754823029858193,
+      "maximum": 0.0008485526515171374
+    },
+    "jump_a_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 4.4330859783059395e-07,
+      "p95": 1.3760571111465225e-06,
+      "maximum": 7.845842595832764e-06
+    },
+    "jump_b_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 1.1799828079916974e-07,
+      "p95": 3.9502784088263354e-07,
+      "maximum": 1.3362787047999092e-06
+    },
+    "jump_sigma_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 0.01288914746831131,
+      "p95": 0.01873541249504214,
+      "maximum": 0.043722616510792366
+    },
+    "jump_significance": {
+      "known": 8242,
+      "total": 8246,
+      "median": 1.2333520220853607e-05,
+      "p95": 3.3514523219529305e-05,
+      "maximum": 4.855489538373471e-05
+    },
+    "jump_upper_m": {
+      "known": 8242,
+      "total": 8246,
+      "median": 0.025778347139834918,
+      "p95": 0.03747088990818035,
+      "maximum": 0.08744545363952165
+    },
+    "jump_known_directions": {
+      "known": 8246,
+      "total": 8246,
+      "median": 5.0,
+      "p95": 8.0,
+      "maximum": 12.0
+    },
+    "clearance_cost": {
+      "known": 8242,
+      "total": 8246,
+      "median": 0.0,
+      "p95": 0.0,
+      "maximum": 0.0
+    },
+    "raw_obstacle_hits": {
+      "known": 8246,
+      "total": 8246,
+      "median": 0.0,
+      "p95": 0.0,
+      "maximum": 0.0
+    },
+    "surface_obstacle_hits": {
+      "known": 8246,
+      "total": 8246,
+      "median": 0.0,
+      "p95": 0.0,
+      "maximum": 0.0
+    },
+    "roughness_cost": {
+      "known": 8242,
+      "total": 8246,
+      "median": 2.771294173630284e-06,
+      "p95": 7.836548686572128e-06,
+      "maximum": 5.657017676780916e-05
+    },
+    "foot_cost": {
+      "known": 8242,
+      "total": 8246,
+      "median": 0.1530019995552091,
+      "p95": 0.18049909627448404,
+      "maximum": 0.2846144853493343
+    },
+    "body_cost": {
+      "known": 7360,
+      "total": 8246,
+      "median": 0.14552512332008677,
+      "p95": 0.25068161791009863,
+      "maximum": 0.25851652838617634
+    },
+    "body_coverage": {
+      "known": 8242,
+      "total": 8246,
+      "median": 1.0,
+      "p95": 1.0,
+      "maximum": 1.0
+    },
+    "body_slope_deg": {
+      "known": 7360,
+      "total": 8246,
+      "median": 15.069955809612232,
+      "p95": 15.069957233597451,
+      "maximum": 15.069965165654311
+    },
+    "body_plane_rmse_m": {
+      "known": 7360,
+      "total": 8246,
+      "median": 1.3835547152396548e-09,
+      "p95": 8.344705999807633e-09,
+      "maximum": 2.2973284741212296e-07
+    },
+    "body_support_margin_m": {
+      "known": 7360,
+      "total": 8246,
+      "median": 0.1710317269894326,
+      "p95": 0.17103173807955563,
+      "maximum": 0.17103194263394178
+    },
+    "body_max_jump_m": {
+      "known": 7360,
+      "total": 8246,
+      "median": 0.033863651050911915,
+      "p95": 0.08434830474080625,
+      "maximum": 0.08744545363952165
+    },
+    "body_max_clearance": {
+      "known": 7360,
+      "total": 8246,
+      "median": 0.0,
+      "p95": 0.0,
+      "maximum": 0.0
+    },
+    "body_max_roughness": {
+      "known": 7360,
+      "total": 8246,
+      "median": 6.693159454235897e-06,
+      "p95": 1.9418782696807258e-05,
+      "maximum": 5.657017676780916e-05
+    },
+    "body_max_uncertainty": {
+      "known": 7360,
+      "total": 8246,
+      "median": 0.15956420402350213,
+      "p95": 0.22519918886938142,
+      "maximum": 0.22520183168196223
+    },
+    "assembled": {
+      "known": 8246,
+      "total": 8246,
+      "median": 1.0,
+      "p95": 1.0,
+      "maximum": 1.0
+    }
+  },
+  "timings": {
+    "repeats": 1,
+    "stages_ms": {
+      "select_centers_ms": 22.496802999967258,
+      "window_query_ms": 64.59816799997498,
+      "fit_and_covariance_ms": 75.28260499998396,
+      "assembly_ms": 60.84513800010427,
+      "display_patch_geometry_ms": 806.6008200000852,
+      "three_jump_methods_ms": 1048.3048459998372,
+      "clearance_ms": 595.9977770000933,
+      "local_costs_ms": 1.4496829999188776,
+      "body_50x80_ms": 349.99571900016235,
+      "total_assessment_ms": 3025.5751209999744
+    },
+    "note": "One CPU run, single-thread BLAS. Includes patch geometry and all assessment stages; excludes source generation, file IO and browser rendering. Not the old fit-only benchmark."
+  },
+  "jump_methods": {
+    "A": "max of two one-sided quadratic endpoint prediction residuals",
+    "B": "two disjoint half-plane fits evaluated at the same candidate midpoint",
+    "C": "method B + 2*sigma_delta; significance is separate, not traversability"
+  },
+  "jump_solve_counts": {
+    "candidate_pairs": 22165,
+    "side_windows": 44330,
+    "actual_side_solves": 44330,
+    "both_sides_valid_pairs": 22165
+  },
+  "uncertainty": "Finite-ridge sandwich covariance, RSS/(n-6), 3 mm noise floor; prediction variance phi.T@cov@phi. Conditional linear-model estimate, not calibrated sensor uncertainty.",
+  "clearance": "Observed occupied 5 cm columns in a 15 cm footprint, 10..60 cm above fitted surface. Raw points plus vertices of actual fitted triangles. Sampled surface evidence, not exact continuous collision detection or certified free space.",
+  "body": "80 cm along X, 50 cm along Y, assumed feet +/-35 cm and +/-20 cm; COM height 30 cm. Geometric quasi-static proxy only; no dynamics/friction/real mass model.",
+  "unknown": "NaN in binaries / empty in CSV. Unsupported jump sides and body coverage are never zero-filled.",
+  "profile_id": "q15-n15",
+  "profile_label": "15×15 cm · 至少 15 点",
+  "source_xyz_sha256": "fbe868ed6efe206d5f6cb19f017e3100405b96988648a68aae6165b7420c35ff"
+}

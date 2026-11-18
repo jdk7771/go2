@@ -1,0 +1,53 @@
+{
+  "default_profile": "q20-n30",
+  "profiles": [
+    {
+      "id": "q20-n30",
+      "label": "20×20 cm · 至少 30 点",
+      "path": "",
+      "scene_ids": [
+        "corridor-040",
+        "corridor-060",
+        "corridor-080",
+        "combined",
+        "table",
+        "hill",
+        "forest",
+        "flat",
+        "ramp",
+        "steps",
+        "steps-single",
+        "flat_ramp",
+        "quick",
+        "desert",
+        "mountain",
+        "snow",
+        "vocano"
+      ]
+    },
+    {
+      "id": "q15-n15",
+      "label": "15×15 cm · 至少 15 点",
+      "path": "profiles/q15-n15/",
+      "scene_ids": [
+        "corridor-040",
+        "corridor-060",
+        "corridor-080",
+        "combined",
+        "table",
+        "hill",
+        "forest",
+        "flat",
+        "ramp",
+        "steps",
+        "steps-single",
+        "flat_ramp",
+        "quick",
+        "desert",
+        "mountain",
+        "snow",
+        "vocano"
+      ]
+    }
+  ]
+}
