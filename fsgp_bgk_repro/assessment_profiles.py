@@ -183,8 +183,9 @@ def main():
     for name in args.scenes:
         records.append(run_scene(name));export_report(records)
     publish(PROFILE_OUT,copy_assets=False)
-    from .publish_metric_viewer import publish as publish_viewer
-    publish_viewer()
+    if (OUT.parent/'convex-assessment/profiles.json').exists():
+        from .publish_metric_viewer import publish as publish_viewer
+        publish_viewer()
     print('Published profile',PROFILE_ID,'and paired report',REPORT_OUT,flush=True)
 
 

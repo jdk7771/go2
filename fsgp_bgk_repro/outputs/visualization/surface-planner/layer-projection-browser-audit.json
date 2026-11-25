@@ -1,0 +1,226 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "scene": "flat-corridor-platforms",
+      "map_id": "platforms-bypass-base",
+      "mode": "base",
+      "frames": 416,
+      "crossings": 0,
+      "cost": 8.037285442064007,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "map_id": "platforms-bypass-overlay",
+      "mode": "overlay",
+      "frames": 268,
+      "crossings": 2,
+      "cost": 7.594137172539294,
+      "maxFootZ": 0.15000000596046448
+    },
+    {
+      "scene": "hill",
+      "map_id": "hill-base",
+      "mode": "base",
+      "frames": 526,
+      "crossings": 0,
+      "cost": 11.855337346960193,
+      "maxFootZ": 0.6241981191651795
+    },
+    {
+      "scene": "hill",
+      "map_id": "hill-overlay",
+      "mode": "overlay",
+      "frames": 526,
+      "crossings": 0,
+      "cost": 11.855337346960193,
+      "maxFootZ": 0.6241981191651795
+    },
+    {
+      "scene": "flat",
+      "map_id": "flat-base",
+      "mode": "base",
+      "frames": 353,
+      "crossings": 0,
+      "cost": 6.714766232507951,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "table",
+      "map_id": "table-under-base",
+      "mode": "base",
+      "frames": 241,
+      "crossings": 0,
+      "cost": 4.636490879902915,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "table",
+      "map_id": "table-under-overlay",
+      "mode": "overlay",
+      "frames": 241,
+      "crossings": 0,
+      "cost": 4.636490879902915,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "table",
+      "map_id": "table-top-base",
+      "mode": "base",
+      "frames": 87,
+      "crossings": 0,
+      "cost": 1.655278048045587,
+      "maxFootZ": 1.2000000476837158
+    },
+    {
+      "scene": "table",
+      "map_id": "table-top-overlay",
+      "mode": "overlay",
+      "frames": 87,
+      "crossings": 0,
+      "cost": 1.655278048045587,
+      "maxFootZ": 1.2000000476837158
+    },
+    {
+      "scene": "table-low-040",
+      "map_id": "low-table-bypass-base",
+      "mode": "base",
+      "frames": 337,
+      "crossings": 0,
+      "cost": 6.600533577265179,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "table-low-042",
+      "map_id": "low-table-under-base",
+      "mode": "base",
+      "frames": 259,
+      "crossings": 0,
+      "cost": 4.813130879902915,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "table-low-060",
+      "map_id": "low-table-under-base",
+      "mode": "base",
+      "frames": 241,
+      "crossings": 0,
+      "cost": 4.636490879902915,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "surface-route-test",
+      "map_id": "layered-base",
+      "mode": "base",
+      "frames": 307,
+      "crossings": 0,
+      "cost": 6.017852632661001,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "surface-route-test",
+      "map_id": "layered-overlay",
+      "mode": "overlay",
+      "frames": 151,
+      "crossings": 2,
+      "cost": 5.05214725567608,
+      "maxFootZ": 0.029999999329447746
+    },
+    {
+      "scene": "layer-choice",
+      "map_id": "bridge-base",
+      "mode": "base",
+      "frames": 610,
+      "crossings": 0,
+      "cost": 11.202651424973665,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "layer-choice",
+      "map_id": "bridge-overlay",
+      "mode": "overlay",
+      "frames": 610,
+      "crossings": 0,
+      "cost": 11.202651424973665,
+      "maxFootZ": 0
+    },
+    {
+      "scene": "platform-underpass-070",
+      "map_id": "extended-platform-under-base",
+      "mode": "base",
+      "frames": 400,
+      "crossings": 0,
+      "cost": 7.716068307949543,
+      "maxFootZ": 0,
+      "underpass": {
+        "minimum_body_height_m": 0.4,
+        "frames": 44,
+        "frame_index": 305
+      }
+    },
+    {
+      "scene": "platform-underpass-070",
+      "map_id": "extended-platform-under-overlay",
+      "mode": "overlay",
+      "frames": 224,
+      "crossings": 2,
+      "cost": 6.626719901760745,
+      "maxFootZ": 0.15000000596046448,
+      "underpass": {
+        "minimum_body_height_m": 0.4,
+        "frames": 44,
+        "frame_index": 148
+      }
+    },
+    {
+      "scene": "platform-underpass-042",
+      "map_id": "extended-platform-under-base",
+      "mode": "base",
+      "frames": 418,
+      "crossings": 0,
+      "cost": 7.843992948585642,
+      "maxFootZ": 0,
+      "underpass": {
+        "minimum_body_height_m": 0.32,
+        "frames": 44,
+        "frame_index": 314
+      }
+    },
+    {
+      "scene": "platform-underpass-042",
+      "map_id": "extended-platform-under-overlay",
+      "mode": "overlay",
+      "frames": 242,
+      "crossings": 2,
+      "cost": 6.741919901760749,
+      "maxFootZ": 0.15000000596046448,
+      "underpass": {
+        "minimum_body_height_m": 0.32,
+        "frames": 44,
+        "frame_index": 157
+      }
+    },
+    {
+      "scene": "four-platforms",
+      "map_id": "all-platforms-overlay",
+      "mode": "overlay",
+      "frames": 1302,
+      "crossings": 2,
+      "cost": 26.95250741308336,
+      "maxFootZ": 0.30000001192092896,
+      "case_id": "all-platforms"
+    }
+  ],
+  "projection_toggle": true,
+  "real_height_preserved": true,
+  "no_endpoint_height_lift_rule": true,
+  "no_generated_swings": true,
+  "crossing_candidates": true,
+  "failed_search_display": true,
+  "mobile": true,
+  "historical_viewer": true,
+  "four_platforms_archive": true,
+  "errors": [],
+  "failed": []
+}

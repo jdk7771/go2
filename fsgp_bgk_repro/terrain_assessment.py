@@ -4,7 +4,9 @@ All calculations consume XYZ only. Units are metres/radians unless named.
 Missing fits/unsupported directions remain NaN rather than zero risk.
 """
 from dataclasses import dataclass
+from functools import lru_cache
 import numpy as np
+from scipy.integrate import quad
 from scipy.spatial import cKDTree, ConvexHull, QhullError
 
 
@@ -16,6 +18,7 @@ class AssessmentConfig:
     minimum_points: int = 30
     noise_floor_m: float = .003
     max_rmse_m: float = .02
+    error_uncertainty_limit_m: float = .02
     clearance_low_m: float = .10
     clearance_high_m: float = .60
     clearance_cell_m: float = .05
@@ -30,6 +33,7 @@ class AssessmentConfig:
     com_height_m: float = .30
     leg_height_residual_limit_m: float = .15
     body_minimum_coverage: float = .80
+    center_offset_check: bool = True
 
 
 def basis(xy):
@@ -97,7 +101,8 @@ def fit_pools(points, seeds, pools, config=AssessmentConfig()):
             cov = noise[:, None, None]*(inverse @ gram @ inverse)
             cov *= transform[:, :, None]*transform[:, None, :]
             cov = (cov+cov.transpose(0, 2, 1))/2
-            valid = rank & (np.abs(coefficient[:, 0]) <= config.height_gate_m) & (rmse <= config.max_rmse_m)
+            center_ok = np.abs(coefficient[:, 0]) <= config.height_gate_m if config.center_offset_check else np.ones(len(ids), bool)
+            valid = rank & center_ok & (rmse <= config.max_rmse_m)
             result['coefficient'][ids] = coefficient
             result['covariance'][ids] = cov
             result['noise_variance'][ids] = noise
@@ -215,16 +220,43 @@ def jump_metrics(points, seeds, pools, fits, config=AssessmentConfig()):
     return output
 
 
+@lru_cache(maxsize=16)
+def circular_column_areas(radius, cell_size):
+    """Areas of square columns clipped to a circle, indexed x + cells*y."""
+    cells = int(np.ceil(2*radius/cell_size-1e-12))
+    edges = np.minimum(-radius+np.arange(cells+1)*cell_size, radius)
+    areas = np.zeros(cells*cells)
+    for iy in range(cells):
+        y0, y1 = edges[iy:iy+2]
+        breaks = []
+        for yy in (y0, y1):
+            if abs(yy) < radius:
+                xx = np.sqrt(radius*radius-yy*yy)
+                breaks.extend((-xx, xx))
+        for ix in range(cells):
+            x0, x1 = edges[ix:ix+2]
+            def height(xx):
+                bound = np.sqrt(max(0., radius*radius-xx*xx))
+                return max(0., min(y1, bound)-max(y0, -bound))
+            cuts = sorted({x0, x1, *(x for x in breaks if x0 < x < x1)})
+            areas[ix+cells*iy] = sum(quad(height, a, b, epsabs=1e-13, epsrel=1e-11)[0]
+                                     for a, b in zip(cuts[:-1], cuts[1:]))
+    areas.setflags(write=False)
+    return areas
+
+
 def clearance_metrics(points, seeds, fits, patch_positions, patch_faces, config=AssessmentConfig()):
     """Sampled clearance evidence from raw returns and actual fitted surfaces."""
     active = np.flatnonzero(np.isfinite(fits['height']))
-    cells = int(round(config.patch_size_m/config.clearance_cell_m))
-    if cells < 1 or not np.isclose(cells*config.clearance_cell_m, config.patch_size_m):
+    circular = getattr(config, 'domain_shape', 'square') == 'circle'
+    half = config.radius_m if circular else config.patch_size_m/2
+    cells = int(np.ceil(2*half/config.clearance_cell_m-1e-12)) if circular else int(round(config.patch_size_m/config.clearance_cell_m))
+    if cells < 1 or (not circular and not np.isclose(cells*config.clearance_cell_m, config.patch_size_m)):
         raise ValueError('Patch width must be an integer multiple of clearance cell size')
+    areas = circular_column_areas(half, config.clearance_cell_m) if circular else None
     occupied_raw = np.zeros((len(seeds), cells*cells), bool)
     occupied_surface = np.zeros((len(seeds), cells*cells), bool)
     counts = np.zeros((len(seeds), 2), dtype=np.int32)
-    half = config.patch_size_m/2
     # Only vertices used by a real fitted triangle are valid surface samples.
     samples = patch_positions[np.unique(patch_faces)].astype(float) if len(patch_faces) else np.empty((0, 3))
     for source_id, cloud in enumerate((points, samples)):
@@ -234,7 +266,7 @@ def clearance_metrics(points, seeds, fits, patch_positions, patch_faces, config=
         dest = occupied_raw if source_id == 0 else occupied_surface
         for start in range(0, len(active), 256):
             ids = active[start:start+256]
-            nearby = tree.query_ball_point(seeds[ids, :2], half+1e-7, p=np.inf, return_sorted=True)
+            nearby = tree.query_ball_point(seeds[ids, :2], half+1e-7, p=2 if circular else np.inf, return_sorted=True)
             for i, neighbors in zip(ids, nearby):
                 if not neighbors:
                     continue
@@ -246,10 +278,12 @@ def clearance_metrics(points, seeds, fits, patch_positions, patch_faces, config=
                 cell = np.floor((p[keep, :2]-seeds[i, :2]+half)/config.clearance_cell_m).astype(int)
                 cell = np.clip(cell, 0, cells-1)
                 dest[i, cell[:, 0]+cells*cell[:, 1]] = True
-    cost = np.mean(occupied_raw | occupied_surface, axis=1)
+    occupied = occupied_raw | occupied_surface
+    cost = occupied @ (areas/areas.sum()) if circular else np.mean(occupied, axis=1)
     cost[~np.isfinite(fits['height'])] = np.nan
     return dict(cost=cost, raw_hits=counts[:, 0], surface_hits=counts[:, 1],
-                raw_occupied=occupied_raw, surface_occupied=occupied_surface)
+                raw_occupied=occupied_raw, surface_occupied=occupied_surface,
+                column_areas_m2=areas if circular else np.full(cells*cells,config.clearance_cell_m**2))
 
 
 def local_metrics(seeds, fits, std_max, jumps, clearance, config=AssessmentConfig()):
@@ -258,7 +292,12 @@ def local_metrics(seeds, fits, std_max, jumps, clearance, config=AssessmentConfi
     slope = np.rad2deg(np.arctan(np.linalg.norm(c[:, 1:3], axis=1)))
     change = np.zeros(len(seeds))
     half = config.patch_size_m/2
-    for u, v in ((-half, -half), (-half, half), (half, -half), (half, half)):
+    if getattr(config, 'domain_shape', 'square') == 'circle':
+        theta = np.arange(24)*2*np.pi/24
+        offsets = config.radius_m*np.c_[np.cos(theta),np.sin(theta)]
+    else:
+        offsets = ((-half, -half), (-half, half), (half, -half), (half, half))
+    for u, v in offsets:
         normal = np.column_stack((-(c[:, 1]+2*c[:, 3]*u+c[:, 4]*v),
                                    -(c[:, 2]+c[:, 4]*u+2*c[:, 5]*v), np.ones(len(c))))
         normal /= np.linalg.norm(normal, axis=1)[:, None]
@@ -268,7 +307,7 @@ def local_metrics(seeds, fits, std_max, jumps, clearance, config=AssessmentConfi
                        np.clip(change/config.normal_change_limit_deg, 0, 1))
     slope_cost = np.clip(slope/config.slope_limit_deg, 0, 1)
     jump_cost = np.clip(jumps['upper_m']/config.jump_limit_m, 0, 1)
-    uncertainty = np.clip((fits['max_error']+config.sigma_multiplier*std_max)/config.max_rmse_m, 0, 1)
+    uncertainty = np.clip((fits['max_error']+config.sigma_multiplier*std_max)/config.error_uncertainty_limit_m, 0, 1)
     cost = .25*slope_cost+.20*rough+.25*jump_cost+.20*clearance['cost']+.10*uncertainty
     cost = np.where(slope >= config.slope_limit_deg, 1., cost)
     for values in (slope, change, rough, slope_cost, uncertainty, cost):
@@ -302,7 +341,7 @@ def choose_support(seeds, fits, query_xy, expected_z, max_candidates=16, config=
     return result, height
 
 
-def body_metrics(seeds, fits, metrics, jumps, clearance, config=AssessmentConfig()):
+def body_metrics(seeds, fits, metrics, jumps, clearance, config=AssessmentConfig(), *, support_query=None):
     n = len(seeds)
     columns = ['risk', 'coverage', 'slope_deg', 'plane_rmse_m', 'support_margin_m',
                'max_jump_upper_m', 'max_clearance_cost', 'max_roughness_cost', 'max_uncertainty_cost']
@@ -320,7 +359,10 @@ def body_metrics(seeds, fits, metrics, jumps, clearance, config=AssessmentConfig
         offsets = np.r_[foot_xy, grid_xy]
         query = seeds[ids, None, :2]+offsets
         expected = fits['height'][ids, None]+np.sum(fits['coefficient'][ids, None, 1:3]*offsets, axis=2)
-        support, z = choose_support(seeds, fits, query, expected, config=config)
+        if support_query is None:
+            support, z = choose_support(seeds, fits, query, expected, config=config)
+        else:
+            support, z = support_query(query, expected)
         contacts[ids], contact_z[ids] = support[:, :4], z[:, :4]
         coverage = np.mean(support[:, 4:] >= 0, axis=1)
         result['coverage'][ids] = coverage

@@ -1,6 +1,14 @@
-# 20×20 cm 局部二次曲面与 50×80 cm 机器人窗口评估
+# 局部二次曲面拟合实验
 
-更新：2026-11-17。本文将原始需求整理为已实现方法、计算口径和实测结果。原始文字保存在 [step.original.2026-11-17.md](step.original.2026-11-17.md)。
+当前版本：2026-11-24。[简明完整流程](planning-workflow.md)说明点云、曲面、指标与两次 A*；[第 27 节](#layer-projection-reproduce)复现分层投影规划。圆形拟合及早期方窗、FSGP 记录继续保留。
+
+当前地形页为 **18 场景、73 组设置、六项诊断指标**。当前规划改为同层滚动、本层 A* 与可跨层叠加图的第二次 A*；交接高差严格小于 40 cm。当前命令见[第 27 节](#layer-projection-reproduce)，最新结果见 [result.md](result.md)。旧逐腿规划与计数保留为历史阶段。
+
+规划单足代价已删除上方占用，只保留坡度／平滑性／RMSE／最大误差／不确定性，权重为 0.30／0.20／0.15／0.10／0.10，合计 0.85。地形页六项诊断指标仍保留；删除占用项的上一阶段记录见[第 26 节](#no-occupancy-cost-reproduce)。
+
+**阅读顺序：**了解当前流程先看 `planning-workflow.md`，复现当前版本看第 27 节，详细参数与逐项结果看 `surface-planning-v1.md`。下面第 1–15 节记录早期方窗、组合面及旧指标；第 16–26 节记录后续历史迭代。各节“当前／本次”及场景数、测试数均按其所属阶段理解，组合面不属于当前方法。
+
+历史初稿：2026-11-17。下文按阶段保留已实现方法、计算口径和实测结果。
 
 ## 1. 做了什么，在哪里看
 
@@ -8,7 +16,7 @@
 
 这是局部二次函数的工程实验，与 FSGP 论文的 GP 方法分开。当前机身评估是有假设的几何／准静态代理指标，没有输入实机质量分布、摩擦、关节可达性或运动状态，因此不能据此宣称实机动力学稳定或保证通过。
 
-- 统一首页：<http://127.0.0.1:42482/>，简洁单图切换指标，统一白→红；白色实体面表示已拟合且指标低。勾选“拟合覆盖（蓝色）”查看有效曲面、未拟合中心与有效但未成面中心；点击曲面查看实际局部网格和数值。森林／桌子缺面归因见 `result.md`。
+- 统一首页：<http://127.0.0.1:42482/>，简洁单图切换指标，统一白→红；白色实体面表示已拟合且指标低。勾选“拟合覆盖（蓝色）”查看有效曲面、未拟合中心与有效但未成面中心；点击曲面查看实际局部网格和数值。森林／桌子缺面归因见 [实验记录](experiment-results.md)，[指标与计算方法](result.md) 单独保留。
 - 新工作台：<http://127.0.0.1:42482/assessment/details.html?scene=steps>。
 - 丘陵：<http://127.0.0.1:42482/assessment/details.html?scene=hill>。
 - 平地与斜坡：<http://127.0.0.1:42482/assessment/details.html?scene=flat_ramp>。
@@ -441,3 +449,344 @@ systemctl --user status go2-pointcloud-viewer.service
 完整 17 场景表、阶段耗时和逐组指标见 [设置对照](http://127.0.0.1:42482/assessment/profile-comparison/)；[直接打开森林 15 cm 版本](http://127.0.0.1:42482/?scene=forest&profile=q15-n15&metric=jump_b_m&coverage=1&mesh=0)。有效比例按中心计算，不是面积；残差为训练残差；本次计时每组各一次。默认 20 cm 模型与网格已复算核对，并保留原文件。
 
 对应实现：`assessment_profiles.py`；汇总 `assessment/profile-comparison/summary.json`；新二进制结果 `assessment/profiles/q15-n15/<scene>/`。净空列数、法向角点和机身支持查询跟随所选局部尺寸，默认参数下结果保持一致。浏览器核查 2 设置×17 场景×11 指标。
+
+## 14. 圆形 R=7 cm 拟合（2026-11-21）
+
+本节仅保留圆形局部二次拟合；路径规划、相关仿真与两个新增规划场景已按用户要求删除。原有 17 场景、三个独立通道和一个拼接大场景继续保留，统一入口为 **http://127.0.0.1:42482/**。
+
+圆形邻域半径 7 cm，至少 15 个合格点全部参与，参考高度带 ±4 cm；使用 11.5 cm 六角中心排布，允许少量相邻原始点复用。高度模式从局部观测推断，不预设全场层数。只在有观测而缺少有效函数的位置有限补片，新增数量最多为初始中心数的 5%。
+
+每个有效中心有独立六参数二次函数、协方差和训练残差；RMSE 上限 8 mm。有效范围同时受圆域、局部凸包与附近兼容原始点限制。每个函数独立裁切和建面，不跨函数生成连接网格，也不把未知区域补零。显示网格用于渲染，并按原方窗指标口径为上方占用提供顶点采样证据，不进行完整三角面碰撞检测。
+
+圆形现补齐与 20 cm、15 cm 方窗相同的 11 项指标：突变 A/B/C、坡度、粗糙度、最大训练残差、RMSE、预测标准差、上方占用、落足与机身评价。粗糙度改用相同的 RMSE 与边界法向变化归一化，误差不确定性项统一用 2 cm 参考尺度；圆形占用按裁切列面积加权，机身查询使用真实圆域与原始点支持。两种方窗重新计算并核对历史数值，不覆盖原文件；没有恢复已删除的规划与新增场景。
+
+完整计算口径、原始点支持条件及数量定义见 [result.md 第 8 节](result.md#8-圆形-r7-cm-拟合2026-11-21)。圆形代码为 `fsgp_bgk_repro/circular_surfaces.py`，复算与对照脚本为 `compare_circle_square.py`；数据位于 `assessment/profiles/qcircle-r07/<scene>/`。[三组指标对照](http://127.0.0.1:42482/assessment/circle-square-comparison/)保存 17 场景×3 设置的指标统计与单次阶段计时。选择指标自动切换白到红，勾选蓝色覆盖可继续看实际拟合范围。
+
+- [多级台阶](http://127.0.0.1:42482/?scene=steps&profile=qcircle-r07&coverage=1)。
+- [丘陵](http://127.0.0.1:42482/?scene=hill&profile=qcircle-r07&coverage=1)。
+- [森林](http://127.0.0.1:42482/?scene=forest&profile=qcircle-r07&coverage=1)。
+- [原有大桌子](http://127.0.0.1:42482/?scene=table&profile=qcircle-r07&coverage=1)。
+
+
+## 15. 四个稀疏场景自适应拟合（2026-11-21）
+
+新增沙漠、山地、雪地、火山专用的“自适应圆形”设置，其他设置继续保留。按原始点密度选择六角中心间距，每个中心在 7–15 cm 候选半径中尝试，优先满足覆盖与 24 点，质量不合格时保留较小的合格函数，至少 15 点全部参与、训练 RMSE≤8 mm。改用切平面残差筛点，并在原始点自身 XY 比较预测高度；依然受圆域、凸包和附近兼容观测限制，显示不跨函数补洞。
+
+固定种子 5000 个原始观测点支持率：沙漠 0.64%→99.96%，山地 10.46%→95.00%，雪地 60.66%→94.50%，火山 14.76%→99.06%。这不是独立测试精度或地表面积覆盖率；实际拟合次数、显示函数、训练残差和分项耗时单列。所有 11 项指标均已计算。
+
+统一入口 **http://127.0.0.1:42482/**；[直接看沙漠](http://127.0.0.1:42482/?scene=desert&profile=qcircle-adaptive&coverage=1)。勾选蓝色覆盖或选择白到红指标，点选可见函数实际半径。完整方法和结果见 [result.md 第 9 节](result.md#9-四个稀疏地形的自适应圆形拟合2026-11-21) 与 [对照报告](fsgp_bgk_repro/outputs/visualization/assessment/adaptive-circle/report.md)。
+
+生成命令（保持 42482 服务运行，生成后刷新）：
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.adaptive_circular_surfaces
+/usr/bin/python3 -m fsgp_bgk_repro.adaptive_circle_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+
+## 16. 当前首页收敛为八场景与六指标
+
+以 [result.md 第 11 节](result.md#11-当前首页八场景凸多边形显示与六项指标)为准。首页仅八场景，局部二次拟合后直接以合格点的精确 XY 凸包作为显示域，不再做组合网格或按观测支持删除显示三角形。所有指标独立于显示网格：上方占用、平均导数法向坡度、训练 RMSE、预测均值不确定性、法向变化 RMS 平滑性、最大训练残差。默认自适应扩展至八场景，保留固定圆形和两种方窗对照，统一色标和坐标单位。
+
+新数据位于 `outputs/visualization/convex-assessment/`；原数据及历史独立链接保留。用户已确认“对齐”指统一场景规则，相邻函数不额外施加无缝约束。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.convex_surface_assessment
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+继续使用 http://127.0.0.1:42482/ ，用户服务 `go2-pointcloud-viewer.service` 无需更换端口。
+
+## 17. 平地通道与高低台
+
+原八场景保留，新增“平地 · 通道与高低台”，共九场景、四种设置、六项指标。8×8 m 平地上放置长 4 m、净宽 2 m、净高 0.60 m 的敞口通道，以及高 0.15 m／0.80 m 的两个实心平台，台面各 1.6×1.4 m。约 2.5 cm 间距构造完整表面，去重后 156,743 点；未模拟 LiDAR 遮挡或噪声。拟合只用 XYZ。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.flat_obstacles_scene
+/usr/bin/python3 -m fsgp_bgk_repro.convex_surface_assessment --scenes flat-corridor-platforms
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+第二条命令仅重跑新场景的四种设置，自动更新九场景目录；不重算原八场景。查看 [42482 新场景](http://127.0.0.1:42482/?scene=flat-corridor-platforms&profile=qcircle-adaptive&coverage=1&points=1)。默认自适应拟合链路 4.824 s，含六指标及显示几何的完整计算 9.636 s，5,793 个有效函数全部显示。其余三组完整计算约 5.485／6.138／8.111 s；均为本机单次 CPU 结果，排除写盘与浏览器。方法、验证和局限见 [result.md 第 12 节](result.md#12-平地新增通道与高低台2026-11-21)。
+
+## 18. 森林取消中心预测偏移上限
+
+2026-11-22 新增森林专用的“自适应圆形 · 无中心偏移限制”。只关闭 `abs(c0)≤4 cm` 的拟合通过检查，保留邻域高度筛选、至少 15 点、秩检查、RMSE≤8 mm、凸包显示和现有六项指标。原四种设置与 36 组数据保留。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.forest_center_offset_ablation
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+实验脚本包含完整自适应重跑与固定原邻域／系数的单项核查。完整重跑有效函数 4,666→4,760，同一批原始点支持率 71.06%→71.40%；固定原系数时仅恢复 23 个函数。取消上限后 91 个有效函数偏移>4 cm，最大 1.5626 m，详细含义和计时见 [result.md 第 4 节](result.md#4-森林取消中心预测偏移上限2026-11-22)。
+
+[42482 取消上限版本](http://127.0.0.1:42482/?scene=forest&profile=qcircle-adaptive-no-offset&coverage=1) · [原版本](http://127.0.0.1:42482/?scene=forest&profile=qcircle-adaptive&coverage=1)。该选项只在森林可用；切换其他场景时回到可用设置。
+
+<a id="hill-small-gaps-reproduce"></a>
+
+## 19. 丘陵：只补小于9 cm²的小缝
+
+本节为丘陵第一阶段记录；当前全场景同步与边界高度规则见[第 20 节](#all-small-gaps-reproduce)。原独立结果继续保留。
+
+2026-11-22，按最终要求保留大空档，不继续拟合。对丘陵四设置已有有效函数的精确 XY 凸包求并集，只补被包围、整个连通区域面积严格小于 9 cm² 的小缝；≥9 cm² 和外侧敞口保持原样。不删减原始点，不新增拟合中心或函数。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.hill_small_gaps
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+前提是当前丘陵四设置的 `convex-assessment/` 数据已存在。本机使用系统 GEOS C 库计算多边形并集、连通空洞面积和约束三角化，通过 ctypes 调用，不依赖 Shapely；GEOS 需提供 `GEOSConstrainedDelaunayTriangulation_r`。
+
+补缝三角形每个归属一个邻近原函数，顶点 Z 由原二次函数求值。三角形只用于显示已经选好的小缝，面积门限先按整个连通空档判断；六项指标在原凸包域计算，补缝仅继承父函数颜色。显示补全与原文件分开保存到 `convex-assessment/hill-small-gaps/`，发布时核对原文件哈希，若不匹配则不启用该显示选项。
+
+默认自适应补全 12,398 处、3.153551 m²，显示 XY 并集由 96.475406 增至 99.628957 m²；234 处较大的封闭空档和外侧敞口保留，实际拟合函数仍为 9,810 个。其余设置的结果与验证见 [result.md 第 5 节](result.md#hill-small-gaps)。
+
+查看 [42482 补缝效果](http://127.0.0.1:42482/?scene=hill&profile=qcircle-adaptive&coverage=1&gaps=1)，切换“补齐小缝（<9 cm²）”直接对照。大空档仍显示背景；补上的蓝色不表示新增实测点云。
+
+<a id="all-small-gaps-reproduce"></a>
+
+## 20. 全场景同步小缝补偿
+
+全部九场景、四种基础设置及森林取消中心偏移上限对照，共 37 组，统一使用严格 <9 cm² 的封闭连通空档门限。大空档和外侧敞口保留，不继续拟合。范围约束和新增边界高度兼容检查同时使用：在原凸包支持的缝隙顶点，父函数与至少一个支持函数的预测高度差≤4 cm；无法满足时整块小缝保留。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.small_gaps
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+前提为当前 37 组拟合数据已经存在；使用系统 GEOS C 库，不重新拟合。当前结果单独存放于 `convex-assessment/small-gaps/<profile>/<scene>/`，原丘陵 `hill-small-gaps/` 历史结果保留。首页优先使用当前全场景补偿数据，发布时验证原文件哈希。
+
+打开 [42482](http://127.0.0.1:42482/?scene=forest&profile=qcircle-adaptive&coverage=1&gaps=1)，所有当前场景均可切换“补齐小缝（<9 cm²）”。原始点、拟合系数与六指标不变；没有候选小缝的设置显示零补全。统计和局限见 [result.md 第 6 节](result.md#all-small-gaps)。
+
+<a id="boundary-heights-reproduce"></a>
+
+## 21. 邻层曲面的边界高度差图
+
+为高低台通道场景和多级台阶的四种设置生成边界高差色线，共八组。局部一致函数先组成连通区域，按区域外侧相邻关系找边界，再在同一 XY 查询两个原函数，计算 `abs(f_i(q)-f_j(q))`；不使用两个中心高度直接相减。无人工分层、无部件标签、无新拟合。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+export MPLCONFIGDIR=/tmp/go2-boundary-matplotlib
+/usr/bin/python3 -m fsgp_bgk_repro.boundary_heights --profiles qcircle-adaptive qcircle-r07 q15-n15 q20-n30
+/usr/bin/python3 -m fsgp_bgk_repro.boundary_height_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+查看 [42482 高低台边界图](http://127.0.0.1:42482/?scene=flat-corridor-platforms&profile=qcircle-adaptive&coverage=1&boundary=1) 或[多级台阶边界图](http://127.0.0.1:42482/?scene=steps&profile=qcircle-adaptive&coverage=1&boundary=1)。新增“边界高度差”开关默认关闭，`boundary=1` 链接开启；白→红为 0–80 cm，低于 2 cm 不绘制，超过 80 cm 保留原值。点选色线查看两函数编号与边界差。
+
+原六指标和全场景小缝补偿保留，边界统计独立显示。默认矮台约 15 cm、高台约 80 cm；台阶侧边到外侧地面可达 100 cm，不能当作中央单级台阶高度。计算规则、核查与局限见 [result.md 第 7 节](result.md#boundary-heights)。数据、CSV、俯视和解析剖面图位于 `convex-assessment/boundary-heights/`。
+
+<a id="surface-planner-v1-reproduce"></a>
+
+## 22. 拟合曲面 A* 初版、M20 台阶能力与播放
+
+这是本次重新实现的初版，未恢复以前删除的规划方案。详细方法见 [surface-planning-v1.md](surface-planning-v1.md)，实际结果见 [result.md 第 8 节](result.md#surface-planner-v1)。原拟合和六指标保留，规划单独输出。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+# 首次生成新的小场景，原丘陵拟合直接复用。
+/usr/bin/python3 -m fsgp_bgk_repro.surface_route_scene
+/usr/bin/python3 -m fsgp_bgk_repro.convex_surface_assessment --scenes surface-route-test
+# 依次执行，避免同时写能力记录；已完成的同 checkpoint/高度/种子/模式自动跳过。
+/usr/bin/python3 -m fsgp_bgk_repro.m20_step_capability
+/usr/bin/python3 -m fsgp_bgk_repro.m20_step_capability --heights .045 .05 .055
+/usr/bin/python3 -m fsgp_bgk_repro.m20_step_capability --heights 0 .02 .04 --modes fixed_legs
+# 从能力报告读取保守门限，规划丘陵和新增场景，独立核查后生成说明。
+/usr/bin/python3 -m fsgp_bgk_repro.surface_astar
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_audit
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_report
+# 如重建全部场景的小缝显示数据，仍与规划支持域分开。
+/usr/bin/python3 -m fsgp_bgk_repro.small_gaps
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+systemctl --user start go2-pointcloud-viewer.service
+```
+
+依赖本地 `/home/jiang/m20-repro/` 中的 M20 XML、meshes 和 `model_19999.pt`，具体路径及 SHA256 写在 JSON。能力测试为 MuJoCo 3.8 的确定性 CPU rollout；`PYTHONNOUSERSITE=1` 先隔离 NumPy 环境，工具中的 `_mujoco()` 再按需载入已有 MuJoCo 包，不需要安装其他依赖。
+
+[打开丘陵](http://127.0.0.1:42482/surface-planner/?scene=hill)，点击“播放”或“近看机器人”；绿色为支撑足，红色为空中腿，紫色点为准静态 ZMP。时间条可逐帧查看，文字中“高差 flag”和“摆动腿”分别显示。[测试场景](http://127.0.0.1:42482/surface-planner/?scene=surface-route-test)可以切换机身经过矮台或绕开台面中心域的两条路线。原首页仍为全部拟合场景入口，所有端口均沿用 **42482**。
+
+当前能力记录 51 次，采用 4 cm 保守跳差门限；丘陵 A* 与过渡检查约 27.55 s，测试场景两条路线合计约 9.14 s。它是离线离散规划，尚未进行盲走策略跟踪、动态 ZMP 或整机连杆连续碰撞验证，不能把网页播放当作物理执行成功。
+
+验证命令：
+
+```bash
+PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 /usr/bin/python3 -m unittest discover -s fsgp_bgk_repro/tests -p 'test_*.py'
+node fsgp_bgk_repro/tests/surface_planner_browser.cjs
+```
+
+本次 98 项 Python 测试通过。逐帧核查位于 `surface-planner/results/<scene>/audit.json`；网页检查记录 `surface-planner/browser-audit.json`，包括新增场景四设置×六指标的 24 个视图。原九场景 37 组的 555 个数据文件 SHA256 不变，新增场景四设置与小缝补偿已同步，合计 41 组。
+
+<a id="flat-table-reproduce"></a>
+
+## 23. 平地、桌下、桌面和平台绕行复现
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+# 复用保存的桌子 XYZ，四设置统一凸包与六指标；只更新桌子的小缝数据。
+/usr/bin/python3 -m fsgp_bgk_repro.convex_surface_assessment --scenes table
+/usr/bin/python3 -m fsgp_bgk_repro.small_gaps --scenes table
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+# 三个场景合计四条成功路线，加一项地面上桌的未通过测试。
+/usr/bin/python3 -m fsgp_bgk_repro.surface_astar --scenes flat table flat-corridor-platforms
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_audit --scenes flat table flat-corridor-platforms
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+全量回归可省略 `--scenes`，规划与审计将覆盖丘陵、矮台立墙、平地、大桌子、高低台全部五场景。统一打开 [42482 平地](http://127.0.0.1:42482/surface-planner/?scene=flat) 或[桌下](http://127.0.0.1:42482/surface-planner/?scene=table&route=0)／[桌面](http://127.0.0.1:42482/surface-planner/?scene=table&route=1)。桌面路线初始已在桌面，另一个从地面到桌面的测试未通过；没有把二者混用。
+
+新增起终点支撑高度检查、全部四轮包络检查，以及滚动不可行时的逐腿换足。实际摆腿与 >4 cm 高差 flag 分开保存。立面切片存在 >8 cm 观测间隙时拒绝，避免把分离桌腿画成墙。桌下自动半透明显示上层，不更改几何/点云或规划输入。
+
+使用现有 `assessment/table/points.bin` 的 82,283 点，与历史 large-table 默认 32,683 点版本分开。当前原 615 个数据文件不变，主页面 11 场景、45 组设置（含森林对照）。103 项 Python 测试通过；[最新数值与逐帧核查](result.md#flat-table-planning)。
+
+<a id="low-table-reproduce"></a>
+
+## 24. 低桌 40／42／60 cm：下方通行与降身
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.low_table_scene
+/usr/bin/python3 -m fsgp_bgk_repro.convex_surface_assessment --scenes table-low-040 table-low-042 table-low-060
+/usr/bin/python3 -m fsgp_bgk_repro.small_gaps --scenes table-low-040 table-low-042 table-low-060
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+/usr/bin/python3 -m fsgp_bgk_repro.surface_astar --scenes table-low-040 table-low-042 table-low-060
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_audit --scenes table-low-040 table-low-042 table-low-060
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+# 服务沿用 go2-pointcloud-viewer.service，始终 42482。
+node fsgp_bgk_repro/tests/surface_planner_browser.cjs
+node fsgp_bgk_repro/tests/small_gaps_browser.cjs table-low-040 table-low-042 table-low-060
+```
+
+42 cm 时先降机身中心到 32 cm 再进入，最小桌底间隙约 3 cm；60 cm 保持中心高 40 cm；40 cm 到桌下中央无解，另一项从桌外到桌外测试找到侧向绕行。三个场景使用占用作代价、实际净空作可行性约束，其余五场景保留严格占用过滤；没有修改六指标或降低 IK/ZMP/包围盒余量。规划仍为 A*，未知原始支撑仍禁止。
+
+全量 `surface_astar` 与 `surface_planner_audit` 省略 `--scenes` 时现覆盖八个规划场景。主地形页 14 场景、57 组设置（含森林对照），106 项 Python 测试通过；原 675 个数据文件哈希不变。[42 cm 播放](http://127.0.0.1:42482/surface-planner/?scene=table-low-042) · [完整记录](result.md#low-table-underpass)。本次是几何验证，未测定实机最低穿行高度。
+
+<a id="layer-choice-reproduce"></a>
+
+## 25. 上方 0/1 与降身／上桥两方案
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.layer_choice_scene
+/usr/bin/python3 -m fsgp_bgk_repro.convex_surface_assessment --scenes layer-choice
+/usr/bin/python3 -m fsgp_bgk_repro.small_gaps --scenes layer-choice
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+# 不带 --scenes 为全部九个规划场景；只看新场景可加 --scenes layer-choice。
+/usr/bin/python3 -m fsgp_bgk_repro.surface_astar
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_audit
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_report
+/usr/bin/python3 -m fsgp_bgk_repro.layer_choice_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+node fsgp_bgk_repro/tests/layer_choice_browser.cjs
+```
+
+[42482 两条路线](http://127.0.0.1:42482/surface-planner/?scene=layer-choice)。桥底 42 cm、桥面 48 cm，两侧封闭；上桥走两端每级 4 cm 的台阶，下穿需把机身中心降至 32 cm。同一起终点分别规划，并比较相同工程代价。0/1 在查询 XY 处计算；为 0 就否决下方支撑候选，再继续看上层，不预设三层。上层还需满足原始支撑、4 cm 能力和 IK/ZMP/过渡检查。换层前同层对齐朝向，逐腿 change 顺序为左前、右前、左后、右后。
+
+爬升门限来自既有盲走上台阶测试；最低降身高度来自当前 IK/几何候选，现有 actor 没有高度指令，未声称已经完成盲走降身标定或轨迹执行。此前八场景规划输出保留在 `surface-planner/history/before-binary-overhead-20261122/`。全部原 855 个拟合数据文件保持不变。
+
+<a id="no-occupancy-cost-reproduce"></a>
+
+## 26. 单足代价删除占用项，仅重算规划
+
+复用现有曲面、原始点、六项指标及盲走能力记录，无需重新拟合：
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.surface_astar
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_audit
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_report
+/usr/bin/python3 -m fsgp_bgk_repro.layer_choice_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+五项权重不重新缩放；上方通行 0/1、IK、ZMP、原始点支撑及机身／轮子碰撞门限保持原设置。含占用代价的旧规划结果独立保存在 `surface-planner/history/before-no-occupancy-cost-20261122/`。
+
+本轮九场景十二路线及两个负例完成独立核查，113 项 Python 测试通过；原 61 组的 915 个拟合数据文件不变。新代价与单次耗时以 [result.md](result.md) 和自动报告为准。
+
+
+<a id="layer-projection-reproduce"></a>
+
+## 27. 分层滚动与交接高差<40 cm 的投影重规划（2026-11-23）
+
+复用现有拟合和五项代价，不重新拟合点云。同层只滚动；先搜索本层，再将交接高差<40 cm 的可达层投影叠加后搜索。保留原 Z 和层编号，不生成跨层摆腿轨迹。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.layer_projection_planner
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_audit
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+只跑一个场景可在前两项后加 `--scenes flat-corridor-platforms`；自动全场景报告需要各场景已完成。旧命令 `surface_astar` 入口也已转向当前实现。上一版独立保存在 `surface-planner/history/before-layer-projection-20261123/`。
+
+
+<a id="platform-underpass-reproduce"></a>
+
+## 28. 第二台空心延伸与降身对照（2026-11-24）
+
+原场景不覆盖，新增 `platform-underpass-070` 和 `platform-underpass-042`：净空分别 70／42 cm，顶面 80／52 cm，初始前方为 +X、右侧为 −Y；第二台前后 X=[1,2.6] m 不变，右侧延伸到 Y=−4 m，另一边沿 Y=−0.9 m。四角支腿间保留真实地面点；第一台仍为 15 cm 实心台。起点 (-3.2,-1.6)、目标 (3.2,-1.6)，目标位于平台前方出口外，核查从下方驶入、驶出与恢复机身高度。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.platform_underpass_scene
+/usr/bin/python3 -m fsgp_bgk_repro.convex_surface_assessment --scenes platform-underpass-070 platform-underpass-042
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+/usr/bin/python3 -m fsgp_bgk_repro.small_gaps --scenes platform-underpass-070 platform-underpass-042
+/usr/bin/python3 -m fsgp_bgk_repro.layer_projection_planner --scenes platform-underpass-070 platform-underpass-042
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_audit --scenes platform-underpass-070 platform-underpass-042
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+node fsgp_bgk_repro/tests/layer_projection_browser.cjs
+```
+
+四种设置均从 XYZ 拟合并计算六指标；规划复用默认自适应曲面，仍分别搜索本层／叠加图，没有新增规划算法。核查平台下实际支撑、IK、ZMP、机身与轮子碰撞，42 cm 版本另检查顶板开始覆盖机身前已降低，整段机身顶部保留至少 2.5 cm 余量。平台下中心实际为 32 cm，顶部余量 3 cm；70 cm 版本中心保持 40 cm。几何候选高度不当作盲走策略实测能力。
+
+[70 cm 版](http://127.0.0.1:42482/surface-planner/?scene=platform-underpass-070) · [42 cm 版](http://127.0.0.1:42482/surface-planner/?scene=platform-underpass-042)。顶板默认蓝色不透明；勾选“透视上层”查看实际降身，外沿保留。原九场景本轮前的结果在 `surface-planner/history/before-platform-underpass-20261124/`，原场景链接继续有效。
+
+
+## 29. 五平台通行链（2026-11-24）
+
+20×8 m 平地，平台沿初始前方+X排列。第1台实心80 cm、可从左侧绕行；第2台顶高80／净空70 cm；第3台52／42 cm；第4台30／20 cm；第5台78／38 cm。2、3、4覆盖完整8 m宽度，不能侧绕；5左侧留1.2 m小路。40 cm为当前跨层门限，41.5 cm为最低净空规则，两者均为规划设置。
+
+```bash
+cd /home/jiang/snap/go2
+export PYTHONNOUSERSITE=1 OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+/usr/bin/python3 -m fsgp_bgk_repro.four_platforms_scene
+/usr/bin/python3 -m fsgp_bgk_repro.convex_surface_assessment --scenes four-platforms
+/usr/bin/python3 -m fsgp_bgk_repro.convex_assessment_report
+/usr/bin/python3 -m fsgp_bgk_repro.small_gaps --scenes four-platforms
+/usr/bin/python3 -m fsgp_bgk_repro.layer_projection_planner --scenes four-platforms
+/usr/bin/python3 -m fsgp_bgk_repro.retry_layer_projection --scene four-platforms --map all-platforms-overlay --budget 66000
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_audit --scenes four-platforms
+/usr/bin/python3 -m fsgp_bgk_repro.surface_planner_report
+/usr/bin/python3 -m fsgp_bgk_repro.publish_metric_viewer
+```
+
+[42482五平台全程结果](http://127.0.0.1:42482/surface-planner/?scene=four-platforms)。仅保留起点(-9.2,−2.4)到终点(9.2,−2.4)的全程查询，本层／叠加图分别运行；当前页不再提供原局部测试或否决目标，不指定必经点。场景标签只用于几何核查与显示，拟合和规划使用XYZ、原凸包及原五项代价。旧四平台场景、拟合和路线放在[历史页面](http://127.0.0.1:42482/surface-planner/history/before-five-platform-chain-20261124/?scene=four-platforms)。具体路线、失败状态和计时以[结果](surface-planning-v1.md)为准；跨层动作尚未验证。

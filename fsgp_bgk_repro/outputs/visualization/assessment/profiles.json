@@ -1,5 +1,11 @@
 {
-  "default_profile": "q20-n30",
+  "default_profile": "qcircle-r07",
+  "scene_defaults": {
+    "desert": "qcircle-adaptive",
+    "mountain": "qcircle-adaptive",
+    "snow": "qcircle-adaptive",
+    "vocano": "qcircle-adaptive"
+  },
   "profiles": [
     {
       "id": "q20-n30",
@@ -29,6 +35,41 @@
       "id": "q15-n15",
       "label": "15×15 cm · 至少 15 点",
       "path": "profiles/q15-n15/",
+      "scene_ids": [
+        "corridor-040",
+        "corridor-060",
+        "corridor-080",
+        "combined",
+        "table",
+        "hill",
+        "forest",
+        "flat",
+        "ramp",
+        "steps",
+        "steps-single",
+        "flat_ramp",
+        "quick",
+        "desert",
+        "mountain",
+        "snow",
+        "vocano"
+      ]
+    },
+    {
+      "id": "qcircle-adaptive",
+      "label": "自适应圆形 · R≤15 cm · 至少 15 点",
+      "path": "profiles/qcircle-adaptive/",
+      "scene_ids": [
+        "desert",
+        "mountain",
+        "snow",
+        "vocano"
+      ]
+    },
+    {
+      "id": "qcircle-r07",
+      "label": "圆形 R=7 cm · 中心约 11.5 cm · 至少 15 点",
+      "path": "profiles/qcircle-r07/",
       "scene_ids": [
         "corridor-040",
         "corridor-060",

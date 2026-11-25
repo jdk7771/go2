@@ -82,6 +82,20 @@ def assessment_source(name):
     return points,dict(kind='unchanged_source_cloud',source=source)
 
 
+def pack_assessment(seeds, fits, std_max, jumps, clearance, metrics, body, assembled, config):
+    """One numerical schema for square and circular fitted neighbourhoods."""
+    packed=np.column_stack((seeds,fits['coefficient'],fits['height'],np.isfinite(fits['height']).astype(int),fits['counts'],
+        fits['rmse'],fits['max_error'],np.sqrt(np.maximum(0,fits['covariance'][:,0,0])),std_max,
+        fits['max_error']+config.sigma_multiplier*std_max,metrics['slope_deg'],metrics['normal_change_deg'],
+        jumps['one_sided_m'],jumps['bilateral_m'],jumps['jump_sigma_m'],jumps['significance'],jumps['upper_m'],
+        jumps['known_directions'],clearance['cost'],clearance['raw_hits'],clearance['surface_hits'],
+        metrics['roughness_cost'],metrics['foot_cost'],body['risk'],body['coverage'],body['slope_deg'],
+        body['plane_rmse_m'],body['support_margin_m'],body['max_jump_upper_m'],body['max_clearance_cost'],
+        body['max_roughness_cost'],body['max_uncertainty_cost'],np.asarray(assembled).astype(int))).astype('<f8')
+    assert packed.shape==(len(seeds),len(FIELDS))
+    return packed
+
+
 def compute(points, config=AssessmentConfig()):
     points = np.asarray(points, dtype='<f4').astype(float)
     times={};start=time.perf_counter();last=start
@@ -101,15 +115,7 @@ def compute(points, config=AssessmentConfig()):
     metrics=local_metrics(seeds,fits,std_max,jumps,clearance,config);mark('local_costs_ms')
     body=body_metrics(seeds,fits,metrics,jumps,clearance,config);mark('body_50x80_ms')
     times['total_assessment_ms']=(time.perf_counter()-start)*1000
-    packed=np.column_stack((seeds,fits['coefficient'],fits['height'],np.isfinite(fits['height']).astype(int),fits['counts'],
-        fits['rmse'],fits['max_error'],np.sqrt(np.maximum(0,fits['covariance'][:,0,0])),std_max,
-        fits['max_error']+config.sigma_multiplier*std_max,metrics['slope_deg'],metrics['normal_change_deg'],
-        jumps['one_sided_m'],jumps['bilateral_m'],jumps['jump_sigma_m'],jumps['significance'],jumps['upper_m'],
-        jumps['known_directions'],clearance['cost'],clearance['raw_hits'],clearance['surface_hits'],
-        metrics['roughness_cost'],metrics['foot_cost'],body['risk'],body['coverage'],body['slope_deg'],
-        body['plane_rmse_m'],body['support_margin_m'],body['max_jump_upper_m'],body['max_clearance_cost'],
-        body['max_roughness_cost'],body['max_uncertainty_cost'],used.astype(int))).astype('<f8')
-    assert packed.shape==(len(seeds),len(FIELDS))
+    packed=pack_assessment(seeds,fits,std_max,jumps,clearance,metrics,body,used,config)
     return dict(points=points,seeds=seeds,source_ids=source_ids,pools=pools,fits=fits,
                 triangles=faces,patches=vertices,patch_faces=patch_faces,patch_owners=owners,
                 packed=packed,labels=labels,jumps=jumps,clearance=clearance,body=body,

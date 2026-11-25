@@ -1,0 +1,1442 @@
+{
+  "date": "2026-11-21",
+  "records": [
+    {
+      "scene": "desert",
+      "name": "沙漠",
+      "profile": "qcircle-r07",
+      "raw_points": 100000,
+      "centers": 119,
+      "actual_solve_count": 38,
+      "valid": 38,
+      "displayed_functions": 33,
+      "triangles": 508,
+      "raw_xyz_sha256": "5fb002d61e30aadfedcb3bad2e746a29840d3fc8b946c9c67239d19271d6363a",
+      "sample": {
+        "seed": 211,
+        "size": 5000,
+        "supported": 32,
+        "supported_fraction": 0.0064,
+        "tolerance_m": 0.012,
+        "displayed_triangle_fraction": 0.0048,
+        "note": "Same saved raw returns, not held-out accuracy or surface-area coverage."
+      },
+      "metrics": {
+        "jump_b_m": {
+          "known": 0,
+          "valid_functions": 38,
+          "known_fraction": 0.0,
+          "mean": null,
+          "median": null,
+          "minimum": null,
+          "maximum": null,
+          "p95": null
+        },
+        "slope_deg": {
+          "known": 38,
+          "valid_functions": 38,
+          "known_fraction": 1.0,
+          "mean": 27.294767573408564,
+          "median": 28.17556652079052,
+          "minimum": 10.162692593092384,
+          "maximum": 37.36903621066716,
+          "p95": 34.714395726996976
+        },
+        "roughness_cost": {
+          "known": 38,
+          "valid_functions": 38,
+          "known_fraction": 1.0,
+          "mean": 0.15231672499774912,
+          "median": 0.1290614743214076,
+          "minimum": 0.016485121394670434,
+          "maximum": 0.5637734133981447,
+          "p95": 0.33484815057562284
+        },
+        "max_error_m": {
+          "known": 38,
+          "valid_functions": 38,
+          "known_fraction": 1.0,
+          "mean": 0.0004156567270706703,
+          "median": 0.0003371125678225135,
+          "minimum": 4.4053614702565386e-05,
+          "maximum": 0.0012317943111796736,
+          "p95": 0.0009581862277515135
+        },
+        "rmse_m": {
+          "known": 38,
+          "valid_functions": 38,
+          "known_fraction": 1.0,
+          "mean": 0.0002072579710426158,
+          "median": 0.0001671799511860498,
+          "minimum": 2.5469358655620627e-05,
+          "maximum": 0.0005882004402056049,
+          "p95": 0.0004992000601605608
+        },
+        "std_patch_m": {
+          "known": 38,
+          "valid_functions": 38,
+          "known_fraction": 1.0,
+          "mean": 0.0029980208961160417,
+          "median": 0.002966406314575305,
+          "minimum": 0.0026866364806026836,
+          "maximum": 0.0035141824680943977,
+          "p95": 0.0033538699688000543
+        },
+        "clearance_cost": {
+          "known": 38,
+          "valid_functions": 38,
+          "known_fraction": 1.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0,
+          "p95": 0.0
+        },
+        "foot_cost": {
+          "known": 0,
+          "valid_functions": 38,
+          "known_fraction": 0.0,
+          "mean": null,
+          "median": null,
+          "minimum": null,
+          "maximum": null,
+          "p95": null
+        },
+        "body_cost": {
+          "known": 0,
+          "valid_functions": 38,
+          "known_fraction": 0.0,
+          "mean": null,
+          "median": null,
+          "minimum": null,
+          "maximum": null,
+          "p95": null
+        },
+        "jump_a_m": {
+          "known": 0,
+          "valid_functions": 38,
+          "known_fraction": 0.0,
+          "mean": null,
+          "median": null,
+          "minimum": null,
+          "maximum": null,
+          "p95": null
+        },
+        "jump_upper_m": {
+          "known": 0,
+          "valid_functions": 38,
+          "known_fraction": 0.0,
+          "mean": null,
+          "median": null,
+          "minimum": null,
+          "maximum": null,
+          "p95": null
+        }
+      },
+      "stages_ms": {
+        "select_centers_ms": 180.01025299963658,
+        "window_query_ms": 18.938512000204355,
+        "initial_fit_and_covariance_ms": 0.5093479994684458,
+        "support_domains_and_bounded_extra_centers_ms": 469.6385269999155,
+        "fit_pipeline_ms": 669.0966399992249,
+        "three_jump_methods_ms": 0.4250510000929353,
+        "clearance_ms": 20.378698000058648,
+        "local_costs_ms": 0.7111889999578125,
+        "body_50x80_ms": 5.720377999750781,
+        "display_geometry_ms": 15.025194000372721,
+        "total_assessment_ms": 711.3571499994578
+      },
+      "fit_ms": 669.0966399992249,
+      "fit_and_display_ms": 684.1218339995976,
+      "all_metrics_ms": 711.3571499994578,
+      "radius_stats_m": {
+        "minimum": 0.07,
+        "median": 0.07,
+        "maximum": 0.07
+      },
+      "radius_histogram": {
+        "0.070": 38
+      },
+      "mean_models_per_used_raw_point": 1.0,
+      "max_models_per_raw_point": 1,
+      "raw_points_used": 573,
+      "extra_centers": {
+        "budget": 5,
+        "centers_added": 0,
+        "actual_candidate_solves": 0,
+        "attempted_candidates": 15
+      },
+      "geometry_audit": {
+        "cross_function_triangles": 0,
+        "max_vertex_polynomial_error_m": 1.5297954769621924e-07
+      },
+      "files_sha256": {
+        "data.json": "2ac4494bfb06b4082d88cd79f372d4e54eaf58c2b9239b786c01dd348e6100f0",
+        "models.bin": "82f816e87129a7fbd896c16ad610d7f84db8bd8c76aefcb1fddab77ec3851120",
+        "patches.bin": "6d617a4bfdff2a6add37a1bee1ab2cf4f8e9e89f90ab0989d107a1f781d6b0b8",
+        "patch-faces.bin": "62ab6c1b82efca57e385eb4f92378cc685567450e576d852a472d683960b238e"
+      }
+    },
+    {
+      "scene": "desert",
+      "name": "沙漠",
+      "profile": "qcircle-adaptive",
+      "raw_points": 100000,
+      "centers": 4822,
+      "actual_solve_count": 12968,
+      "valid": 4796,
+      "displayed_functions": 4796,
+      "triangles": 200638,
+      "raw_xyz_sha256": "5fb002d61e30aadfedcb3bad2e746a29840d3fc8b946c9c67239d19271d6363a",
+      "sample": {
+        "seed": 211,
+        "size": 5000,
+        "supported": 4998,
+        "supported_fraction": 0.9996,
+        "tolerance_m": 0.012,
+        "displayed_triangle_fraction": 0.931,
+        "note": "Same saved raw returns, not held-out accuracy or surface-area coverage."
+      },
+      "metrics": {
+        "jump_b_m": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.0019156972942709026,
+          "median": 0.001026401385261999,
+          "minimum": 8.556129335257623e-06,
+          "maximum": 0.027767904367609675,
+          "p95": 0.006403481127726929
+        },
+        "slope_deg": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 17.76939085344654,
+          "median": 16.13549000783626,
+          "minimum": 0.41426083512239714,
+          "maximum": 50.26233673461829,
+          "p95": 35.929656614504324
+        },
+        "roughness_cost": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.2417017836076176,
+          "median": 0.2012304597531554,
+          "minimum": 0.009249585738475579,
+          "maximum": 1.0,
+          "p95": 0.6115189088236435
+        },
+        "max_error_m": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.0007267101707536949,
+          "median": 0.0005970441924336243,
+          "minimum": 2.2018909802234803e-05,
+          "maximum": 0.00532612743596429,
+          "p95": 0.0018940115308694674
+        },
+        "rmse_m": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.0003355098135605099,
+          "median": 0.00027316675743229297,
+          "minimum": 1.0531224164344152e-05,
+          "maximum": 0.0023375019328032137,
+          "p95": 0.0008903326593979891
+        },
+        "std_patch_m": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.002190026155836485,
+          "median": 0.002140912690345124,
+          "minimum": 0.001429893247262925,
+          "maximum": 0.004112067413770805,
+          "p95": 0.0026125120950989027
+        },
+        "clearance_cost": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0,
+          "p95": 0.0
+        },
+        "foot_cost": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.21203201783460904,
+          "median": 0.20194292074105036,
+          "minimum": 0.06026746054132329,
+          "maximum": 1.0,
+          "p95": 0.37711395415975524
+        },
+        "body_cost": {
+          "known": 2103,
+          "valid_functions": 4796,
+          "known_fraction": 0.43849040867389494,
+          "mean": 0.23307451872012883,
+          "median": 0.1933042489785306,
+          "minimum": 0.06902324976434585,
+          "maximum": 0.6857563487618078,
+          "p95": 0.5011400890619342
+        },
+        "jump_a_m": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.010469895607379967,
+          "median": 0.005596855214763274,
+          "minimum": 0.00015601490022598696,
+          "maximum": 0.1121374763802967,
+          "p95": 0.03668040784936771
+        },
+        "jump_upper_m": {
+          "known": 4796,
+          "valid_functions": 4796,
+          "known_fraction": 1.0,
+          "mean": 0.01826524141507144,
+          "median": 0.013399639470563026,
+          "minimum": 0.00644355657507053,
+          "maximum": 0.31254786323364186,
+          "p95": 0.04016805212516185
+        }
+      },
+      "stages_ms": {
+        "select_centers_ms": 297.65528999996604,
+        "window_query_ms": 0.0,
+        "initial_fit_and_covariance_ms": 1166.2660459996914,
+        "support_domains_and_bounded_extra_centers_ms": 846.6444910000064,
+        "fit_pipeline_ms": 2310.565826999664,
+        "three_jump_methods_ms": 479.0844500003004,
+        "clearance_ms": 452.1980079998684,
+        "local_costs_ms": 5.851021000125911,
+        "body_50x80_ms": 1462.4656939995475,
+        "display_geometry_ms": 3446.087876999627,
+        "total_assessment_ms": 8156.252876999133
+      },
+      "fit_ms": 2310.565826999664,
+      "fit_and_display_ms": 5756.653703999291,
+      "all_metrics_ms": 8156.252876999133,
+      "radius_stats_m": {
+        "minimum": 0.12,
+        "median": 0.12,
+        "maximum": 0.15
+      },
+      "radius_histogram": {
+        "0.120": 4380,
+        "0.150": 416
+      },
+      "mean_models_per_used_raw_point": 1.4713778444611152,
+      "max_models_per_raw_point": 8,
+      "raw_points_used": 99975,
+      "extra_centers": {
+        "budget": 235,
+        "centers_added": 105,
+        "actual_candidate_solves": 396,
+        "attempted_candidates": 160
+      },
+      "geometry_audit": {
+        "cross_function_triangles": 0,
+        "max_vertex_polynomial_error_m": 2.800907565880806e-07
+      },
+      "files_sha256": {
+        "data.json": "07ebbe76e7b491c406f935c12399ebaba4b9ca242dc1cc7ab9182791476b1c15",
+        "models.bin": "b3033d705800e92ab68dc0b0c0ccd470ce77271c279a74eeedd7f65f9f5c632b",
+        "patches.bin": "d3ed750282891049cca7960439a92652f97b3df6d3d1917b538cacd7dcd76e80",
+        "patch-faces.bin": "00448b755b8d27534f374525fbb6f20319c5607eb633169269bb1962a5fbd635"
+      }
+    },
+    {
+      "scene": "mountain",
+      "name": "山地",
+      "profile": "qcircle-r07",
+      "raw_points": 50000,
+      "centers": 602,
+      "actual_solve_count": 437,
+      "valid": 380,
+      "displayed_functions": 355,
+      "triangles": 5149,
+      "raw_xyz_sha256": "bd2fa050987ca52295659212a2092f0cef3756932120dce620db842303393bcb",
+      "sample": {
+        "seed": 211,
+        "size": 5000,
+        "supported": 523,
+        "supported_fraction": 0.1046,
+        "tolerance_m": 0.012,
+        "displayed_triangle_fraction": 0.0908,
+        "note": "Same saved raw returns, not held-out accuracy or surface-area coverage."
+      },
+      "metrics": {
+        "jump_b_m": {
+          "known": 206,
+          "valid_functions": 380,
+          "known_fraction": 0.5421052631578948,
+          "mean": 0.03418835485310746,
+          "median": 0.022840245181081353,
+          "minimum": 2.8620219796104962e-05,
+          "maximum": 0.19098780365452916,
+          "p95": 0.11855076214132423
+        },
+        "slope_deg": {
+          "known": 380,
+          "valid_functions": 380,
+          "known_fraction": 1.0,
+          "mean": 14.321211802556517,
+          "median": 11.374417199907858,
+          "minimum": 1.644246348015386,
+          "maximum": 54.59931424209506,
+          "p95": 31.045224645067016
+        },
+        "roughness_cost": {
+          "known": 380,
+          "valid_functions": 380,
+          "known_fraction": 1.0,
+          "mean": 0.6946566787656255,
+          "median": 0.7112018568757418,
+          "minimum": 0.0704679470723041,
+          "maximum": 1.0,
+          "p95": 1.0
+        },
+        "max_error_m": {
+          "known": 380,
+          "valid_functions": 380,
+          "known_fraction": 1.0,
+          "mean": 0.0060883460498332344,
+          "median": 0.0048293392064252825,
+          "minimum": 0.0006499655410903389,
+          "maximum": 0.020605221123255406,
+          "p95": 0.014987514405288166
+        },
+        "rmse_m": {
+          "known": 380,
+          "valid_functions": 380,
+          "known_fraction": 1.0,
+          "mean": 0.002817213796654409,
+          "median": 0.0022045641396667474,
+          "minimum": 0.00034977331048981366,
+          "maximum": 0.00799220197190889,
+          "p95": 0.006659974950969627
+        },
+        "std_patch_m": {
+          "known": 380,
+          "valid_functions": 380,
+          "known_fraction": 1.0,
+          "mean": 0.00414491496747442,
+          "median": 0.003206410433449396,
+          "minimum": 0.0025182991156826543,
+          "maximum": 0.011842003737963434,
+          "p95": 0.00842313337504698
+        },
+        "clearance_cost": {
+          "known": 380,
+          "valid_functions": 380,
+          "known_fraction": 1.0,
+          "mean": 0.001460566914077699,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.39816482580926027,
+          "p95": 0.0
+        },
+        "foot_cost": {
+          "known": 207,
+          "valid_functions": 380,
+          "known_fraction": 0.5447368421052632,
+          "mean": 0.45613973448071277,
+          "median": 0.4636061211551161,
+          "minimum": 0.1202433501236661,
+          "maximum": 1.0,
+          "p95": 0.6867876864993475
+        },
+        "body_cost": {
+          "known": 0,
+          "valid_functions": 380,
+          "known_fraction": 0.0,
+          "mean": null,
+          "median": null,
+          "minimum": null,
+          "maximum": null,
+          "p95": null
+        },
+        "jump_a_m": {
+          "known": 206,
+          "valid_functions": 380,
+          "known_fraction": 0.5421052631578948,
+          "mean": 0.125276685867954,
+          "median": 0.09855533914909748,
+          "minimum": 0.003974724425734433,
+          "maximum": 0.660875863918555,
+          "p95": 0.3405481467802864
+        },
+        "jump_upper_m": {
+          "known": 206,
+          "valid_functions": 380,
+          "known_fraction": 0.5421052631578948,
+          "mean": 0.08489680423300099,
+          "median": 0.07009902020530737,
+          "minimum": 0.01780264211542943,
+          "maximum": 0.31832759770693164,
+          "p95": 0.18479508885405588
+        }
+      },
+      "stages_ms": {
+        "select_centers_ms": 88.82733200061921,
+        "window_query_ms": 16.975916999399487,
+        "initial_fit_and_covariance_ms": 3.129704000457423,
+        "support_domains_and_bounded_extra_centers_ms": 262.94149000023026,
+        "fit_pipeline_ms": 371.8744430007064,
+        "three_jump_methods_ms": 8.16738899993652,
+        "clearance_ms": 33.125476999884995,
+        "local_costs_ms": 1.2051030007569352,
+        "body_50x80_ms": 63.94166900008713,
+        "display_geometry_ms": 147.46773800015944,
+        "total_assessment_ms": 625.7818190015314
+      },
+      "fit_ms": 371.8744430007064,
+      "fit_and_display_ms": 519.3421810008658,
+      "all_metrics_ms": 625.7818190015314,
+      "radius_stats_m": {
+        "minimum": 0.07,
+        "median": 0.07,
+        "maximum": 0.07
+      },
+      "radius_histogram": {
+        "0.070": 380
+      },
+      "mean_models_per_used_raw_point": 1.0378909740840037,
+      "max_models_per_raw_point": 3,
+      "raw_points_used": 5595,
+      "extra_centers": {
+        "budget": 29,
+        "centers_added": 4,
+        "actual_candidate_solves": 8,
+        "attempted_candidates": 87
+      },
+      "geometry_audit": {
+        "cross_function_triangles": 0,
+        "max_vertex_polynomial_error_m": 1.706676915347316e-07
+      },
+      "files_sha256": {
+        "data.json": "f09013a1179df1f963dce850aae7c17999ebb754616f7a51902b530c8ff3b4dc",
+        "models.bin": "4bacdf8238cf2d46ff5d1361738e9e9dc362516f768c2a34fce35bdf70186f5b",
+        "patches.bin": "7216591d03761ac54a2e9478519a2214beec0b8be3b22bb3da677e9817a3f5e7",
+        "patch-faces.bin": "000179ecf0a27fe8486fce0ffdb61313929d49463dfc7bd8f5ccbf409f6ab36f"
+      }
+    },
+    {
+      "scene": "mountain",
+      "name": "山地",
+      "profile": "qcircle-adaptive",
+      "raw_points": 50000,
+      "centers": 2944,
+      "actual_solve_count": 8691,
+      "valid": 2791,
+      "displayed_functions": 2791,
+      "triangles": 117611,
+      "raw_xyz_sha256": "bd2fa050987ca52295659212a2092f0cef3756932120dce620db842303393bcb",
+      "sample": {
+        "seed": 211,
+        "size": 5000,
+        "supported": 4750,
+        "supported_fraction": 0.95,
+        "tolerance_m": 0.012,
+        "displayed_triangle_fraction": 0.8914,
+        "note": "Same saved raw returns, not held-out accuracy or surface-area coverage."
+      },
+      "metrics": {
+        "jump_b_m": {
+          "known": 2788,
+          "valid_functions": 2791,
+          "known_fraction": 0.9989251164457184,
+          "mean": 0.026587056610187985,
+          "median": 0.014212808431232543,
+          "minimum": 0.00014919145454127258,
+          "maximum": 0.5738804150569018,
+          "p95": 0.0827252331881318
+        },
+        "slope_deg": {
+          "known": 2791,
+          "valid_functions": 2791,
+          "known_fraction": 1.0,
+          "mean": 11.339468313289027,
+          "median": 9.046354013906047,
+          "minimum": 0.13144097460794013,
+          "maximum": 81.80089564659238,
+          "p95": 28.409922104533592
+        },
+        "roughness_cost": {
+          "known": 2791,
+          "valid_functions": 2791,
+          "known_fraction": 1.0,
+          "mean": 0.5038214067697564,
+          "median": 0.4293178320269739,
+          "minimum": 0.05188817890317329,
+          "maximum": 1.0,
+          "p95": 1.0
+        },
+        "max_error_m": {
+          "known": 2791,
+          "valid_functions": 2791,
+          "known_fraction": 1.0,
+          "mean": 0.007068485421889433,
+          "median": 0.006143024088060802,
+          "minimum": 0.0006548671388679284,
+          "maximum": 0.03301049442715194,
+          "p95": 0.015546262770646253
+        },
+        "rmse_m": {
+          "known": 2791,
+          "valid_functions": 2791,
+          "known_fraction": 1.0,
+          "mean": 0.002871504536355005,
+          "median": 0.0025141345517045235,
+          "minimum": 0.0003720200404371741,
+          "maximum": 0.00799445011781779,
+          "p95": 0.006343366523906888
+        },
+        "std_patch_m": {
+          "known": 2791,
+          "valid_functions": 2791,
+          "known_fraction": 1.0,
+          "mean": 0.002983054559046044,
+          "median": 0.002461351294942067,
+          "minimum": 0.0016912971600136404,
+          "maximum": 0.020164749638516322,
+          "p95": 0.005898227841402223
+        },
+        "clearance_cost": {
+          "known": 2791,
+          "valid_functions": 2791,
+          "known_fraction": 1.0,
+          "mean": 0.0023638131233804675,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.7489327605861015,
+          "p95": 0.0
+        },
+        "foot_cost": {
+          "known": 2788,
+          "valid_functions": 2791,
+          "known_fraction": 0.9989251164457184,
+          "mean": 0.31200818738718716,
+          "median": 0.2685188532002113,
+          "minimum": 0.08133115010556492,
+          "maximum": 1.0,
+          "p95": 0.6474789570723056
+        },
+        "body_cost": {
+          "known": 1408,
+          "valid_functions": 2791,
+          "known_fraction": 0.5044786814761734,
+          "mean": 0.3244933391090204,
+          "median": 0.30765918010783405,
+          "minimum": 0.1500031954291864,
+          "maximum": 0.7070843388779168,
+          "p95": 0.4663662542040977
+        },
+        "jump_a_m": {
+          "known": 2791,
+          "valid_functions": 2791,
+          "known_fraction": 1.0,
+          "mean": 0.10200179213456449,
+          "median": 0.059937745351059335,
+          "minimum": 0.008074541009824077,
+          "maximum": 2.9086019539195966,
+          "p95": 0.33024029485581524
+        },
+        "jump_upper_m": {
+          "known": 2788,
+          "valid_functions": 2791,
+          "known_fraction": 0.9989251164457184,
+          "mean": 0.05285584031756884,
+          "median": 0.032181445110747345,
+          "minimum": 0.008460493682428277,
+          "maximum": 1.3954090037233111,
+          "p95": 0.15378356471464047
+        }
+      },
+      "stages_ms": {
+        "select_centers_ms": 176.40806299914402,
+        "window_query_ms": 0.0,
+        "initial_fit_and_covariance_ms": 640.3556040004332,
+        "support_domains_and_bounded_extra_centers_ms": 575.6441140001698,
+        "fit_pipeline_ms": 1392.407780999747,
+        "three_jump_methods_ms": 322.88188000075024,
+        "clearance_ms": 353.04883499975404,
+        "local_costs_ms": 5.782157999419724,
+        "body_50x80_ms": 721.1467160004759,
+        "display_geometry_ms": 2002.5881150004352,
+        "total_assessment_ms": 4797.855485000582
+      },
+      "fit_ms": 1392.407780999747,
+      "fit_and_display_ms": 3394.9958960001823,
+      "all_metrics_ms": 4797.855485000582,
+      "radius_stats_m": {
+        "minimum": 0.07,
+        "median": 0.1,
+        "maximum": 0.15
+      },
+      "radius_histogram": {
+        "0.070": 29,
+        "0.085": 41,
+        "0.100": 1971,
+        "0.120": 605,
+        "0.150": 145
+      },
+      "mean_models_per_used_raw_point": 1.5951818808633333,
+      "max_models_per_raw_point": 5,
+      "raw_points_used": 47861,
+      "extra_centers": {
+        "budget": 142,
+        "centers_added": 91,
+        "actual_candidate_solves": 1899,
+        "attempted_candidates": 426
+      },
+      "geometry_audit": {
+        "cross_function_triangles": 0,
+        "max_vertex_polynomial_error_m": 3.07307589819672e-07
+      },
+      "files_sha256": {
+        "data.json": "e54cdb208ba3fff072e8f9f7c8beac1dafa33c4f4f2a8522f42b7ef9c0452e90",
+        "models.bin": "2f336219bda367c254bcdd785e04e05cc8203dfa8d6caf27a6e9a216d29867a1",
+        "patches.bin": "bf2d27d5bc0b5785c130b39fb0917d6eb59a2a25c0726d4c3b74c1daad53bd03",
+        "patch-faces.bin": "24898352029f5c08e911fd4a5e6a33a35e621c18f9f482d49b079bf0d23d9014"
+      }
+    },
+    {
+      "scene": "snow",
+      "name": "雪地",
+      "profile": "qcircle-r07",
+      "raw_points": 500000,
+      "centers": 29069,
+      "actual_solve_count": 23165,
+      "valid": 23014,
+      "displayed_functions": 22126,
+      "triangles": 305842,
+      "raw_xyz_sha256": "8098a2cd29fd8f33a30c1d92945968349837ff3b98cc65995686e2353d8f8591",
+      "sample": {
+        "seed": 211,
+        "size": 5000,
+        "supported": 3033,
+        "supported_fraction": 0.6066,
+        "tolerance_m": 0.012,
+        "displayed_triangle_fraction": 0.5636,
+        "note": "Same saved raw returns, not held-out accuracy or surface-area coverage."
+      },
+      "metrics": {
+        "jump_b_m": {
+          "known": 22917,
+          "valid_functions": 23014,
+          "known_fraction": 0.9957851742417659,
+          "mean": 0.02695379828609665,
+          "median": 0.0071342951825845435,
+          "minimum": 7.167363924587278e-11,
+          "maximum": 0.5662533767830913,
+          "p95": 0.12142377990847575
+        },
+        "slope_deg": {
+          "known": 23014,
+          "valid_functions": 23014,
+          "known_fraction": 1.0,
+          "mean": 14.334495072609693,
+          "median": 6.254371457909615,
+          "minimum": 0.0032942044199192615,
+          "maximum": 71.7975727113016,
+          "p95": 47.41816720574223
+        },
+        "roughness_cost": {
+          "known": 23014,
+          "valid_functions": 23014,
+          "known_fraction": 1.0,
+          "mean": 0.37834726145639375,
+          "median": 0.21045042177657436,
+          "minimum": 5.691824308343959e-08,
+          "maximum": 1.0,
+          "p95": 1.0
+        },
+        "max_error_m": {
+          "known": 23014,
+          "valid_functions": 23014,
+          "known_fraction": 1.0,
+          "mean": 0.0017917448463984653,
+          "median": 0.0005385291745390832,
+          "minimum": 4.954331641931955e-10,
+          "maximum": 0.02140399603972181,
+          "p95": 0.007633910688887495
+        },
+        "rmse_m": {
+          "known": 23014,
+          "valid_functions": 23014,
+          "known_fraction": 1.0,
+          "mean": 0.0008649130957144685,
+          "median": 0.0002633965325356219,
+          "minimum": 2.5798720783269367e-10,
+          "maximum": 0.007966079073285691,
+          "p95": 0.0037141394556835963
+        },
+        "std_patch_m": {
+          "known": 23014,
+          "valid_functions": 23014,
+          "known_fraction": 1.0,
+          "mean": 0.0033537827841999906,
+          "median": 0.0030590739208145312,
+          "minimum": 0.002161389126228756,
+          "maximum": 0.01570929249425514,
+          "p95": 0.005388636031101314
+        },
+        "clearance_cost": {
+          "known": 23014,
+          "valid_functions": 23014,
+          "known_fraction": 1.0,
+          "mean": 0.00012290660588241227,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.5724010398996677,
+          "p95": 0.0
+        },
+        "foot_cost": {
+          "known": 22995,
+          "valid_functions": 23014,
+          "known_fraction": 0.9991744155731294,
+          "mean": 0.3369495550673754,
+          "median": 0.21939238390095728,
+          "minimum": 0.05905316363795894,
+          "maximum": 1.0,
+          "p95": 1.0
+        },
+        "body_cost": {
+          "known": 231,
+          "valid_functions": 23014,
+          "known_fraction": 0.01003736855826888,
+          "mean": 0.29440150836776807,
+          "median": 0.240609596198456,
+          "minimum": 0.12182970572340626,
+          "maximum": 0.6622750139875654,
+          "p95": 0.5383723563255869
+        },
+        "jump_a_m": {
+          "known": 22917,
+          "valid_functions": 23014,
+          "known_fraction": 0.9957851742417659,
+          "mean": 0.11230182867560419,
+          "median": 0.03357224705802173,
+          "minimum": 8.590280195508448e-09,
+          "maximum": 2.4057944010171655,
+          "p95": 0.47585932551704707
+        },
+        "jump_upper_m": {
+          "known": 22917,
+          "valid_functions": 23014,
+          "known_fraction": 0.9957851742417659,
+          "mean": 0.07937759588457897,
+          "median": 0.051474235621295765,
+          "minimum": 0.013023841197215539,
+          "maximum": 1.5650527128208906,
+          "p95": 0.24516449659692355
+        }
+      },
+      "stages_ms": {
+        "select_centers_ms": 862.0258440005273,
+        "window_query_ms": 470.7949599996937,
+        "initial_fit_and_covariance_ms": 156.52085100009572,
+        "support_domains_and_bounded_extra_centers_ms": 3123.2588849998137,
+        "fit_pipeline_ms": 4612.60054000013,
+        "three_jump_methods_ms": 1975.272521000079,
+        "clearance_ms": 1585.2027779992568,
+        "local_costs_ms": 23.973826000656118,
+        "body_50x80_ms": 4133.751719999964,
+        "display_geometry_ms": 8990.123634000156,
+        "total_assessment_ms": 21320.925019000242
+      },
+      "fit_ms": 4612.60054000013,
+      "fit_and_display_ms": 13602.724174000286,
+      "all_metrics_ms": 21320.925019000242,
+      "radius_stats_m": {
+        "minimum": 0.07,
+        "median": 0.07,
+        "maximum": 0.07
+      },
+      "radius_histogram": {
+        "0.070": 23014
+      },
+      "mean_models_per_used_raw_point": 1.228084262701363,
+      "max_models_per_raw_point": 4,
+      "raw_points_used": 302625,
+      "extra_centers": {
+        "budget": 1397,
+        "centers_added": 1128,
+        "actual_candidate_solves": 1180,
+        "attempted_candidates": 4191
+      },
+      "geometry_audit": {
+        "cross_function_triangles": 0,
+        "max_vertex_polynomial_error_m": 1.1416700083088926e-06
+      },
+      "files_sha256": {
+        "data.json": "64cb029c0b7c52d87aa521e9a9f43315228e5e8bbaebe5c81373695331ef5499",
+        "models.bin": "1222ea65f14b0fc4d6e8fc45de5fc68fb844b1a21c945ef5027514a6f04028e7",
+        "patches.bin": "4077d3310dcd77e08c3147d966ca1f4bca710513f5559b74c9a1087e1f758422",
+        "patch-faces.bin": "21a76425c4d504b3e91973367dc3d372a9c232a6e0a1e48c352a359bce9117ed"
+      }
+    },
+    {
+      "scene": "snow",
+      "name": "雪地",
+      "profile": "qcircle-adaptive",
+      "raw_points": 500000,
+      "centers": 22767,
+      "actual_solve_count": 75116,
+      "valid": 20391,
+      "displayed_functions": 20391,
+      "triangles": 951384,
+      "raw_xyz_sha256": "8098a2cd29fd8f33a30c1d92945968349837ff3b98cc65995686e2353d8f8591",
+      "sample": {
+        "seed": 211,
+        "size": 5000,
+        "supported": 4725,
+        "supported_fraction": 0.945,
+        "tolerance_m": 0.012,
+        "displayed_triangle_fraction": 0.8888,
+        "note": "Same saved raw returns, not held-out accuracy or surface-area coverage."
+      },
+      "metrics": {
+        "jump_b_m": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.05684895191157353,
+          "median": 0.009422505522089786,
+          "minimum": 9.279039897558405e-10,
+          "maximum": 2.12350016176476,
+          "p95": 0.26650804069312506
+        },
+        "slope_deg": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 20.608975229554247,
+          "median": 9.062998922081098,
+          "minimum": 0.003505631232806429,
+          "maximum": 77.73835528993418,
+          "p95": 63.535480497070154
+        },
+        "roughness_cost": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.46172009302549527,
+          "median": 0.3184241957778763,
+          "minimum": 5.691824308343959e-08,
+          "maximum": 1.0,
+          "p95": 1.0
+        },
+        "max_error_m": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.005315063354232365,
+          "median": 0.0017080538081433497,
+          "minimum": 7.228065670256497e-10,
+          "maximum": 0.048466364298999795,
+          "p95": 0.01804940564105799
+        },
+        "rmse_m": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.0021713941643187887,
+          "median": 0.0007217482724073908,
+          "minimum": 3.627519525448869e-10,
+          "maximum": 0.007999979245386571,
+          "p95": 0.0073501219183414145
+        },
+        "std_patch_m": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.0030996988800888058,
+          "median": 0.002244883767061172,
+          "minimum": 0.0015188945458484726,
+          "maximum": 0.026746194835167405,
+          "p95": 0.007275902694791239
+        },
+        "clearance_cost": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.004966472537351683,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.8477505547389427,
+          "p95": 0.0
+        },
+        "foot_cost": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.3979267088186472,
+          "median": 0.20871438445433257,
+          "minimum": 0.039524217927046475,
+          "maximum": 1.0,
+          "p95": 1.0
+        },
+        "body_cost": {
+          "known": 7661,
+          "valid_functions": 20391,
+          "known_fraction": 0.3757049678779854,
+          "mean": 0.148368805468596,
+          "median": 0.11426449602567947,
+          "minimum": 0.05115115003048318,
+          "maximum": 1.0,
+          "p95": 0.37076032404569087
+        },
+        "jump_a_m": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.21922951434610308,
+          "median": 0.047072909688686326,
+          "minimum": 3.3257220380389363e-09,
+          "maximum": 8.773015625602817,
+          "p95": 0.9211825078097213
+        },
+        "jump_upper_m": {
+          "known": 20391,
+          "valid_functions": 20391,
+          "known_fraction": 1.0,
+          "mean": 0.12146998190958495,
+          "median": 0.024558147429441297,
+          "minimum": 0.007930462029581486,
+          "maximum": 7.498914056890873,
+          "p95": 0.5325450756702883
+        }
+      },
+      "stages_ms": {
+        "select_centers_ms": 1550.639435999983,
+        "window_query_ms": 0.0,
+        "initial_fit_and_covariance_ms": 5854.397005999999,
+        "support_domains_and_bounded_extra_centers_ms": 5393.165980000049,
+        "fit_pipeline_ms": 12798.202422000031,
+        "three_jump_methods_ms": 2661.016723999637,
+        "clearance_ms": 3001.3008610003453,
+        "local_costs_ms": 23.471761000109836,
+        "body_50x80_ms": 6562.340687999495,
+        "display_geometry_ms": 15618.458648999876,
+        "total_assessment_ms": 40664.791104999495
+      },
+      "fit_ms": 12798.202422000031,
+      "fit_and_display_ms": 28416.661070999908,
+      "all_metrics_ms": 40664.791104999495,
+      "radius_stats_m": {
+        "minimum": 0.07,
+        "median": 0.1,
+        "maximum": 0.15
+      },
+      "radius_histogram": {
+        "0.070": 741,
+        "0.085": 757,
+        "0.100": 17704,
+        "0.120": 624,
+        "0.150": 565
+      },
+      "mean_models_per_used_raw_point": 1.4185960735661476,
+      "max_models_per_raw_point": 6,
+      "raw_points_used": 477176,
+      "extra_centers": {
+        "budget": 1084,
+        "centers_added": 1084,
+        "actual_candidate_solves": 14096,
+        "attempted_candidates": 3252
+      },
+      "geometry_audit": {
+        "cross_function_triangles": 0,
+        "max_vertex_polynomial_error_m": 1.2126181072602549e-06
+      },
+      "files_sha256": {
+        "data.json": "656a721d1d12729530af5dace3865274ba977902397a31a24b22291e7adc9f48",
+        "models.bin": "27ee920af85494ffe341d9439f493a96a218634784d05224e77ff780d0741d10",
+        "patches.bin": "68039b72dcacc2570a3c4bb8e20cdc1616c718ceaf2a84a4e86be559e2a3afa7",
+        "patch-faces.bin": "291079038be118e4837718b9ad2e4fd6e22c9f4c539d2a7910537941780d0054"
+      }
+    },
+    {
+      "scene": "vocano",
+      "name": "火山",
+      "profile": "qcircle-r07",
+      "raw_points": 100000,
+      "centers": 1670,
+      "actual_solve_count": 1055,
+      "valid": 1034,
+      "displayed_functions": 973,
+      "triangles": 13728,
+      "raw_xyz_sha256": "50803da84df2d649881ac1429c239d52c43b04ce8e2ae378f89257063b1b16ca",
+      "sample": {
+        "seed": 211,
+        "size": 5000,
+        "supported": 738,
+        "supported_fraction": 0.1476,
+        "tolerance_m": 0.012,
+        "displayed_triangle_fraction": 0.133,
+        "note": "Same saved raw returns, not held-out accuracy or surface-area coverage."
+      },
+      "metrics": {
+        "jump_b_m": {
+          "known": 668,
+          "valid_functions": 1034,
+          "known_fraction": 0.6460348162475822,
+          "mean": 0.034487758828226724,
+          "median": 0.019784935999301645,
+          "minimum": 9.367118050662704e-07,
+          "maximum": 0.2995779368646123,
+          "p95": 0.1119209437612072
+        },
+        "slope_deg": {
+          "known": 1034,
+          "valid_functions": 1034,
+          "known_fraction": 1.0,
+          "mean": 17.67435662732084,
+          "median": 17.775873353477103,
+          "minimum": 0.0007361049742529151,
+          "maximum": 52.04881066979151,
+          "p95": 35.2317561926237
+        },
+        "roughness_cost": {
+          "known": 1034,
+          "valid_functions": 1034,
+          "known_fraction": 1.0,
+          "mean": 0.5689677635235219,
+          "median": 0.5657961137966243,
+          "minimum": 1.5200474832078922e-10,
+          "maximum": 1.0,
+          "p95": 1.0
+        },
+        "max_error_m": {
+          "known": 1034,
+          "valid_functions": 1034,
+          "known_fraction": 1.0,
+          "mean": 0.004271612303899571,
+          "median": 0.0031926922495701254,
+          "minimum": 3.44678263446825e-12,
+          "maximum": 0.02092383324927504,
+          "p95": 0.012521117241877369
+        },
+        "rmse_m": {
+          "known": 1034,
+          "valid_functions": 1034,
+          "known_fraction": 1.0,
+          "mean": 0.002056012406357713,
+          "median": 0.0015654169355764787,
+          "minimum": 1.5200474832078922e-12,
+          "maximum": 0.007962534320198953,
+          "p95": 0.005912083199016403
+        },
+        "std_patch_m": {
+          "known": 1034,
+          "valid_functions": 1034,
+          "known_fraction": 1.0,
+          "mean": 0.00393780297549024,
+          "median": 0.003142392005292635,
+          "minimum": 0.0024960396520611896,
+          "maximum": 0.011782995757133036,
+          "p95": 0.00801221759019922
+        },
+        "clearance_cost": {
+          "known": 1034,
+          "valid_functions": 1034,
+          "known_fraction": 1.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.0,
+          "p95": 0.0
+        },
+        "foot_cost": {
+          "known": 669,
+          "valid_functions": 1034,
+          "known_fraction": 0.6470019342359767,
+          "mean": 0.45685442858194625,
+          "median": 0.4857580411799849,
+          "minimum": 0.06235083182326466,
+          "maximum": 1.0,
+          "p95": 0.7135461998253521
+        },
+        "body_cost": {
+          "known": 0,
+          "valid_functions": 1034,
+          "known_fraction": 0.0,
+          "mean": null,
+          "median": null,
+          "minimum": null,
+          "maximum": null,
+          "p95": null
+        },
+        "jump_a_m": {
+          "known": 668,
+          "valid_functions": 1034,
+          "known_fraction": 0.6460348162475822,
+          "mean": 0.14317772365930004,
+          "median": 0.10005371704338745,
+          "minimum": 1.0555501889164581e-05,
+          "maximum": 1.1776066907977605,
+          "p95": 0.4576409361352548
+        },
+        "jump_upper_m": {
+          "known": 668,
+          "valid_functions": 1034,
+          "known_fraction": 0.6460348162475822,
+          "mean": 0.08529052324462093,
+          "median": 0.06680684453504436,
+          "minimum": 0.014990910231908353,
+          "maximum": 0.44640859499355423,
+          "p95": 0.20950502900376236
+        }
+      },
+      "stages_ms": {
+        "select_centers_ms": 176.10054399938235,
+        "window_query_ms": 39.50956200060318,
+        "initial_fit_and_covariance_ms": 7.279295999978785,
+        "support_domains_and_bounded_extra_centers_ms": 524.7824930002025,
+        "fit_pipeline_ms": 747.6718950001668,
+        "three_jump_methods_ms": 27.308935999826645,
+        "clearance_ms": 84.56497299994226,
+        "local_costs_ms": 2.1929310005361913,
+        "body_50x80_ms": 182.05719599973236,
+        "display_geometry_ms": 401.70291300000827,
+        "total_assessment_ms": 1445.4988440002126
+      },
+      "fit_ms": 747.6718950001668,
+      "fit_and_display_ms": 1149.374808000175,
+      "all_metrics_ms": 1445.4988440002126,
+      "radius_stats_m": {
+        "minimum": 0.07,
+        "median": 0.07,
+        "maximum": 0.07
+      },
+      "radius_histogram": {
+        "0.070": 1034
+      },
+      "mean_models_per_used_raw_point": 1.0508698815902626,
+      "max_models_per_raw_point": 3,
+      "raw_points_used": 15117,
+      "extra_centers": {
+        "budget": 82,
+        "centers_added": 17,
+        "actual_candidate_solves": 18,
+        "attempted_candidates": 246
+      },
+      "geometry_audit": {
+        "cross_function_triangles": 0,
+        "max_vertex_polynomial_error_m": 2.2269843824584967e-07
+      },
+      "files_sha256": {
+        "data.json": "6b5fa63118ccfc20e64cead7b4c3473f2bda76d6e9b730e8153a3fadf36bcf49",
+        "models.bin": "484fc70e468fde346e4e8a225e3a949c40e1467589712d9699c02f01c477d0a2",
+        "patches.bin": "1dea2f8ce2e375a9fc8cde395cc159077ded8e8861a7e2870d05877e198938c2",
+        "patch-faces.bin": "1c53bb0dbd4085700a0a1c50997ea3aa999ef2f6ef088848b641e3b7dc1a6056"
+      }
+    },
+    {
+      "scene": "vocano",
+      "name": "火山",
+      "profile": "qcircle-adaptive",
+      "raw_points": 100000,
+      "centers": 5857,
+      "actual_solve_count": 16554,
+      "valid": 5747,
+      "displayed_functions": 5747,
+      "triangles": 244177,
+      "raw_xyz_sha256": "50803da84df2d649881ac1429c239d52c43b04ce8e2ae378f89257063b1b16ca",
+      "sample": {
+        "seed": 211,
+        "size": 5000,
+        "supported": 4953,
+        "supported_fraction": 0.9906,
+        "tolerance_m": 0.012,
+        "displayed_triangle_fraction": 0.931,
+        "note": "Same saved raw returns, not held-out accuracy or surface-area coverage."
+      },
+      "metrics": {
+        "jump_b_m": {
+          "known": 5745,
+          "valid_functions": 5747,
+          "known_fraction": 0.9996519923438316,
+          "mean": 0.02516366171589573,
+          "median": 0.005889640366661092,
+          "minimum": 1.6765059731639088e-12,
+          "maximum": 0.5165371486108129,
+          "p95": 0.11419647260070236
+        },
+        "slope_deg": {
+          "known": 5747,
+          "valid_functions": 5747,
+          "known_fraction": 1.0,
+          "mean": 12.858503365454473,
+          "median": 8.511036645070037,
+          "minimum": 0.00010743704981121606,
+          "maximum": 67.95999342588371,
+          "p95": 40.023535172191465
+        },
+        "roughness_cost": {
+          "known": 5747,
+          "valid_functions": 5747,
+          "known_fraction": 1.0,
+          "mean": 0.3770521788587131,
+          "median": 0.1925158334896457,
+          "minimum": 1.0616836636080519e-10,
+          "maximum": 1.0,
+          "p95": 1.0
+        },
+        "max_error_m": {
+          "known": 5747,
+          "valid_functions": 5747,
+          "known_fraction": 1.0,
+          "mean": 0.004374008804969391,
+          "median": 0.0014854245047376986,
+          "minimum": 2.552490073509767e-12,
+          "maximum": 0.02929989886520288,
+          "p95": 0.015949288359166425
+        },
+        "rmse_m": {
+          "known": 5747,
+          "valid_functions": 5747,
+          "known_fraction": 1.0,
+          "mean": 0.0018758032058341196,
+          "median": 0.000631901190487555,
+          "minimum": 1.061683663608052e-12,
+          "maximum": 0.007997850984853925,
+          "p95": 0.007115916396537714
+        },
+        "std_patch_m": {
+          "known": 5747,
+          "valid_functions": 5747,
+          "known_fraction": 1.0,
+          "mean": 0.00298416135300396,
+          "median": 0.0023800484653540934,
+          "minimum": 0.0016974211792146125,
+          "maximum": 0.012603376697138957,
+          "p95": 0.006508189561091757
+        },
+        "clearance_cost": {
+          "known": 5747,
+          "valid_functions": 5747,
+          "known_fraction": 1.0,
+          "mean": 0.0007082666284201247,
+          "median": 0.0,
+          "minimum": 0.0,
+          "maximum": 0.5645397324687954,
+          "p95": 0.0
+        },
+        "foot_cost": {
+          "known": 5745,
+          "valid_functions": 5747,
+          "known_fraction": 0.9996519923438316,
+          "mean": 0.2846979848392584,
+          "median": 0.16628584847951558,
+          "minimum": 0.03695878380062009,
+          "maximum": 1.0,
+          "p95": 0.7432433066012726
+        },
+        "body_cost": {
+          "known": 2528,
+          "valid_functions": 5747,
+          "known_fraction": 0.43988167739690276,
+          "mean": 0.19232539082738517,
+          "median": 0.14432721147183925,
+          "minimum": 0.05428155120810209,
+          "maximum": 0.6676847946875448,
+          "p95": 0.46704172529900007
+        },
+        "jump_a_m": {
+          "known": 5747,
+          "valid_functions": 5747,
+          "known_fraction": 1.0,
+          "mean": 0.10071838687100998,
+          "median": 0.027108216113110234,
+          "minimum": 4.166659931916839e-12,
+          "maximum": 1.7057364324023505,
+          "p95": 0.42653606316475756
+        },
+        "jump_upper_m": {
+          "known": 5745,
+          "valid_functions": 5747,
+          "known_fraction": 0.9996519923438316,
+          "mean": 0.05291747849032489,
+          "median": 0.022417980657071773,
+          "minimum": 0.006810271924960286,
+          "maximum": 0.9379593308690908,
+          "p95": 0.19156363542701188
+        }
+      },
+      "stages_ms": {
+        "select_centers_ms": 360.4825129996243,
+        "window_query_ms": 0.0,
+        "initial_fit_and_covariance_ms": 1249.5064849999835,
+        "support_domains_and_bounded_extra_centers_ms": 1157.5511790006203,
+        "fit_pipeline_ms": 2767.540177000228,
+        "three_jump_methods_ms": 702.1403560002,
+        "clearance_ms": 750.1346380004179,
+        "local_costs_ms": 8.458335999421251,
+        "body_50x80_ms": 1732.707266000034,
+        "display_geometry_ms": 4253.318435999972,
+        "total_assessment_ms": 10214.299209000274
+      },
+      "fit_ms": 2767.540177000228,
+      "fit_and_display_ms": 7020.8586130002,
+      "all_metrics_ms": 10214.299209000274,
+      "radius_stats_m": {
+        "minimum": 0.07,
+        "median": 0.1,
+        "maximum": 0.15
+      },
+      "radius_histogram": {
+        "0.070": 108,
+        "0.085": 135,
+        "0.100": 4348,
+        "0.120": 893,
+        "0.150": 263
+      },
+      "mean_models_per_used_raw_point": 1.5948694245435637,
+      "max_models_per_raw_point": 6,
+      "raw_points_used": 99521,
+      "extra_centers": {
+        "budget": 278,
+        "centers_added": 278,
+        "actual_candidate_solves": 3476,
+        "attempted_candidates": 834
+      },
+      "geometry_audit": {
+        "cross_function_triangles": 0,
+        "max_vertex_polynomial_error_m": 3.4700996076608703e-07
+      },
+      "files_sha256": {
+        "data.json": "d081a2cfc68fbb943ac163f9c2f07d676edc4747812094ec49ba04e92096063d",
+        "models.bin": "2e02595323fad455019787bd4c8b333bd7320fc4739b0e314361359d36526d74",
+        "patches.bin": "94dbb871b7a7b6648cb6b2873db6154280ae5df9007668b2ce78b8d7efe69445",
+        "patch-faces.bin": "e0fe0844f4eb3fe542ebe06de9e5a5eb18de0a5174009674df4c9ea98163050f"
+      }
+    }
+  ],
+  "original_file_preservation": {
+    "files_verified": 553,
+    "changed_files": []
+  },
+  "environment": {
+    "python": "3.10.12",
+    "numpy": "1.21.5",
+    "blas_threads": 1
+  },
+  "source_sha256": {
+    "adaptive_circular_surfaces.py": "7d3273accf51f7dfc4cee41fd17e8c93b828c3328c3c6e7a1adb92cc645b356a",
+    "circular_surfaces.py": "879c95ae27ec172472b9b86250467d03cb04a022a19382a2baebc535a6b7b2ab",
+    "terrain_assessment.py": "8ecf54b883a91e32e74463f62b9447763e7924c94534c7abe3e0fd620e384369",
+    "adaptive_circle_report.py": "90aee2b5df0996eb0b2caf024ccedbabbf231a3bfde2c1e44efe1f937e49473c"
+  },
+  "note": "No point resampling or new scenes. Same saved XYZ; adaptive neighbourhoods, centre pitch and raw support rules change together. One CPU run per scene, excludes IO/browser. Training RMSE is not independent accuracy."
+}

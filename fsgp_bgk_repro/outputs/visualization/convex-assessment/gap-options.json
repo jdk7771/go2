@@ -1,0 +1,111 @@
+{
+  "hill": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/hill/",
+    "qcircle-r07": "small-gaps/qcircle-r07/hill/",
+    "q15-n15": "small-gaps/q15-n15/hill/",
+    "q20-n30": "small-gaps/q20-n30/hill/"
+  },
+  "forest": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/forest/",
+    "qcircle-r07": "small-gaps/qcircle-r07/forest/",
+    "q15-n15": "small-gaps/q15-n15/forest/",
+    "q20-n30": "small-gaps/q20-n30/forest/",
+    "qcircle-adaptive-no-offset": "small-gaps/qcircle-adaptive-no-offset/forest/"
+  },
+  "flat": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/flat/",
+    "qcircle-r07": "small-gaps/qcircle-r07/flat/",
+    "q15-n15": "small-gaps/q15-n15/flat/",
+    "q20-n30": "small-gaps/q20-n30/flat/"
+  },
+  "desert": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/desert/",
+    "qcircle-r07": "small-gaps/qcircle-r07/desert/",
+    "q15-n15": "small-gaps/q15-n15/desert/",
+    "q20-n30": "small-gaps/q20-n30/desert/"
+  },
+  "mountain": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/mountain/",
+    "qcircle-r07": "small-gaps/qcircle-r07/mountain/",
+    "q15-n15": "small-gaps/q15-n15/mountain/",
+    "q20-n30": "small-gaps/q20-n30/mountain/"
+  },
+  "snow": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/snow/",
+    "qcircle-r07": "small-gaps/qcircle-r07/snow/",
+    "q15-n15": "small-gaps/q15-n15/snow/",
+    "q20-n30": "small-gaps/q20-n30/snow/"
+  },
+  "vocano": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/vocano/",
+    "qcircle-r07": "small-gaps/qcircle-r07/vocano/",
+    "q15-n15": "small-gaps/q15-n15/vocano/",
+    "q20-n30": "small-gaps/q20-n30/vocano/"
+  },
+  "steps": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/steps/",
+    "qcircle-r07": "small-gaps/qcircle-r07/steps/",
+    "q15-n15": "small-gaps/q15-n15/steps/",
+    "q20-n30": "small-gaps/q20-n30/steps/"
+  },
+  "flat-corridor-platforms": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/flat-corridor-platforms/",
+    "qcircle-r07": "small-gaps/qcircle-r07/flat-corridor-platforms/",
+    "q15-n15": "small-gaps/q15-n15/flat-corridor-platforms/",
+    "q20-n30": "small-gaps/q20-n30/flat-corridor-platforms/"
+  },
+  "surface-route-test": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/surface-route-test/",
+    "qcircle-r07": "small-gaps/qcircle-r07/surface-route-test/",
+    "q15-n15": "small-gaps/q15-n15/surface-route-test/",
+    "q20-n30": "small-gaps/q20-n30/surface-route-test/"
+  },
+  "table": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/table/",
+    "qcircle-r07": "small-gaps/qcircle-r07/table/",
+    "q15-n15": "small-gaps/q15-n15/table/",
+    "q20-n30": "small-gaps/q20-n30/table/"
+  },
+  "table-low-040": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/table-low-040/",
+    "qcircle-r07": "small-gaps/qcircle-r07/table-low-040/",
+    "q15-n15": "small-gaps/q15-n15/table-low-040/",
+    "q20-n30": "small-gaps/q20-n30/table-low-040/"
+  },
+  "table-low-042": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/table-low-042/",
+    "qcircle-r07": "small-gaps/qcircle-r07/table-low-042/",
+    "q15-n15": "small-gaps/q15-n15/table-low-042/",
+    "q20-n30": "small-gaps/q20-n30/table-low-042/"
+  },
+  "table-low-060": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/table-low-060/",
+    "qcircle-r07": "small-gaps/qcircle-r07/table-low-060/",
+    "q15-n15": "small-gaps/q15-n15/table-low-060/",
+    "q20-n30": "small-gaps/q20-n30/table-low-060/"
+  },
+  "layer-choice": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/layer-choice/",
+    "qcircle-r07": "small-gaps/qcircle-r07/layer-choice/",
+    "q15-n15": "small-gaps/q15-n15/layer-choice/",
+    "q20-n30": "small-gaps/q20-n30/layer-choice/"
+  },
+  "platform-underpass-070": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/platform-underpass-070/",
+    "qcircle-r07": "small-gaps/qcircle-r07/platform-underpass-070/",
+    "q15-n15": "small-gaps/q15-n15/platform-underpass-070/",
+    "q20-n30": "small-gaps/q20-n30/platform-underpass-070/"
+  },
+  "platform-underpass-042": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/platform-underpass-042/",
+    "qcircle-r07": "small-gaps/qcircle-r07/platform-underpass-042/",
+    "q15-n15": "small-gaps/q15-n15/platform-underpass-042/",
+    "q20-n30": "small-gaps/q20-n30/platform-underpass-042/"
+  },
+  "four-platforms": {
+    "qcircle-adaptive": "small-gaps/qcircle-adaptive/four-platforms/",
+    "qcircle-r07": "small-gaps/qcircle-r07/four-platforms/",
+    "q15-n15": "small-gaps/q15-n15/four-platforms/",
+    "q20-n30": "small-gaps/q20-n30/four-platforms/"
+  }
+}

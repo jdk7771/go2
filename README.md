@@ -2,6 +2,10 @@
 
 M20 点云驱动的六维机身轨迹规划。原有 Go2 C++ 工程位于 `src/`、`test/`。
 
+当前局部二次曲面与分层 A* 实验：[完整工作流程](planning-workflow.md)、[指标和结果](result.md)、
+[五平台及耗时分布报告](surface-planning-v1.md)。统一可视化端口为 **42482**；
+[源码检出后的数据生成与依赖说明](fsgp_bgk_repro/README.md#源码同步与复现2026-11-25)。
+
 新增论文复现：[FSGP-BGK CPU 核心方法、运行命令与边界说明](fsgp_bgk_repro/README.md)，
 [已运行的五场景对照报告](fsgp_bgk_repro/outputs/cpu/REPORT.md)。
 

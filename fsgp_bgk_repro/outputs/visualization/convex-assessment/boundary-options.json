@@ -1,0 +1,14 @@
+{
+  "steps": {
+    "qcircle-adaptive": "boundary-heights/qcircle-adaptive/steps/",
+    "qcircle-r07": "boundary-heights/qcircle-r07/steps/",
+    "q15-n15": "boundary-heights/q15-n15/steps/",
+    "q20-n30": "boundary-heights/q20-n30/steps/"
+  },
+  "flat-corridor-platforms": {
+    "qcircle-adaptive": "boundary-heights/qcircle-adaptive/flat-corridor-platforms/",
+    "qcircle-r07": "boundary-heights/qcircle-r07/flat-corridor-platforms/",
+    "q15-n15": "boundary-heights/q15-n15/flat-corridor-platforms/",
+    "q20-n30": "boundary-heights/q20-n30/flat-corridor-platforms/"
+  }
+}

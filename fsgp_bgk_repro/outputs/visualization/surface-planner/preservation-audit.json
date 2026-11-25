@@ -1,0 +1,275 @@
+{
+  "date": "2026-11-24",
+  "revision": "five-platform-full-chain",
+  "passed": true,
+  "planner": "layer-projection-astar",
+  "baseline_files": 1035,
+  "baseline_source": "four-platforms-baseline-sha256.json (other 69 groups)",
+  "changed_files": [],
+  "original_915_manifest": "projection-input-sha256.json",
+  "new_scene_ids": [],
+  "replaced_scene_ids": [
+    "four-platforms"
+  ],
+  "recomputed_fit_groups": 4,
+  "current_fit_groups": 73,
+  "current_fit_files": 1095,
+  "full_input_manifest": "four-platforms-input-sha256.json",
+  "current_main_scenes": 18,
+  "result_files_checked": 12,
+  "source_hashes_current": true,
+  "search_maps": 25,
+  "audited_routes": 21,
+  "failed_maps": 4,
+  "supported_contacts_checked": 31384,
+  "python_tests": 128,
+  "python_test_command": "/usr/bin/python3 -m unittest discover -s fsgp_bgk_repro/tests -p test_*.py",
+  "browser_passed": true,
+  "browser_routes": 21,
+  "new_metric_views": 24,
+  "occupancy_removed_from_terrain_cost": true,
+  "endpoint_height_lift_rule": false,
+  "crossing_height_exclusive_m": 0.4,
+  "crossing_threshold_source": "User setting, not measured blind-policy capability",
+  "overlay_expansion_budget": 66000,
+  "previous_attempt_elapsed_s": 68.23034561000031,
+  "minimum_passage_m": 0.415,
+  "robot_initial_forward_world": [
+    1.0,
+    0.0,
+    0.0
+  ],
+  "robot_initial_right_world": [
+    0.0,
+    -1.0,
+    0.0
+  ],
+  "upper_surface_default_opaque": true,
+  "upper_transparency_toggle_opacity": 0.18,
+  "generated_swing_frames": 0,
+  "crossing_motion_validated": false,
+  "blind_policy_executed": false,
+  "four_platforms": {
+    "platforms": [
+      {
+        "platform": 1,
+        "query_xy_m": [
+          -7.2,
+          -2.4
+        ],
+        "top_height_m": 0.800000011920929,
+        "lower_raw_supported": false,
+        "clearance_m": null,
+        "overhead_passable": null,
+        "direct_climb_candidate": 0,
+        "full_width": false,
+        "actual_outcome": "绕行",
+        "underpass_frames": 0,
+        "upper_support_frames": 0,
+        "minimum_underpass_body_height_m": null,
+        "minimum_underpass_roof_gap_m": null,
+        "passage_body_y_range_m": [
+          -0.040000000000000036,
+          0.12000000000000012
+        ]
+      },
+      {
+        "platform": 2,
+        "query_xy_m": [
+          -3.6,
+          -2.4
+        ],
+        "top_height_m": 0.800000011920929,
+        "lower_raw_supported": true,
+        "clearance_m": 0.699999988079071,
+        "overhead_passable": 1,
+        "direct_climb_candidate": 0,
+        "full_width": true,
+        "actual_outcome": "正常下穿",
+        "underpass_frames": 50,
+        "upper_support_frames": 0,
+        "minimum_underpass_body_height_m": 0.4,
+        "minimum_underpass_roof_gap_m": 0.22999999999999993,
+        "passage_body_y_range_m": [
+          0.1200000000000001,
+          0.12000000000000012
+        ]
+      },
+      {
+        "platform": 3,
+        "query_xy_m": [
+          0.0,
+          -2.4
+        ],
+        "top_height_m": 0.5199999809265137,
+        "lower_raw_supported": true,
+        "clearance_m": 0.41999998688697815,
+        "overhead_passable": 1,
+        "direct_climb_candidate": 0,
+        "full_width": true,
+        "actual_outcome": "降身下穿",
+        "underpass_frames": 50,
+        "upper_support_frames": 0,
+        "minimum_underpass_body_height_m": 0.32,
+        "minimum_underpass_roof_gap_m": 0.02999999999999997,
+        "passage_body_y_range_m": [
+          0.1200000000000001,
+          0.12000000000000012
+        ]
+      },
+      {
+        "platform": 4,
+        "query_xy_m": [
+          3.6,
+          -2.4
+        ],
+        "top_height_m": 0.30000001192092896,
+        "lower_raw_supported": true,
+        "clearance_m": 0.20000000298023224,
+        "overhead_passable": 0,
+        "direct_climb_candidate": 1,
+        "full_width": true,
+        "actual_outcome": "跨层上台候选（动作未验证）",
+        "underpass_frames": 0,
+        "upper_support_frames": 38,
+        "minimum_underpass_body_height_m": null,
+        "minimum_underpass_roof_gap_m": null,
+        "passage_body_y_range_m": [
+          1.0800000000000005,
+          1.56
+        ]
+      },
+      {
+        "platform": 5,
+        "query_xy_m": [
+          7.2,
+          -2.4
+        ],
+        "top_height_m": 0.7799999713897705,
+        "lower_raw_supported": true,
+        "clearance_m": 0.3799999952316284,
+        "overhead_passable": 0,
+        "direct_climb_candidate": 0,
+        "full_width": false,
+        "actual_outcome": "沿小路绕行",
+        "underpass_frames": 0,
+        "upper_support_frames": 0,
+        "minimum_underpass_body_height_m": null,
+        "minimum_underpass_roof_gap_m": null,
+        "passage_body_y_range_m": [
+          3.16,
+          3.160000000000001
+        ]
+      }
+    ],
+    "planning_maps": [
+      {
+        "map_id": "all-platforms-base",
+        "status": "no_validated_route",
+        "elapsed_s": 68.65875847999996,
+        "expansion_limit": 22000,
+        "previous_attempts": 0,
+        "previous_attempt_elapsed_s": 0,
+        "expansions": 22000,
+        "search_limit_reached": true,
+        "open_exhausted": false,
+        "furthest_search_candidate_x_m": 2.76,
+        "a_star_searches": 1,
+        "total_expansions": 22000
+      },
+      {
+        "map_id": "all-platforms-overlay",
+        "status": "success",
+        "elapsed_s": 119.07546216000037,
+        "expansion_limit": 66000,
+        "previous_attempts": 1,
+        "previous_attempt_elapsed_s": 68.23034561000031,
+        "expansions": 29730,
+        "search_limit_reached": false,
+        "open_exhausted": false,
+        "furthest_search_candidate_x_m": 9.319999999999999,
+        "a_star_searches": 2,
+        "total_expansions": 59404
+      }
+    ],
+    "thresholds": {
+      "minimum_passage_m": 0.415,
+      "crossing_height_exclusive_m": 0.4,
+      "threshold_source": "Current geometric planner settings; not measured 40cm blind-policy capability"
+    },
+    "full_route_found": true,
+    "selected_map_id": "all-platforms-overlay",
+    "fifth_bypass": {
+      "y_range_m": [
+        2.8,
+        4.0
+      ],
+      "width_m": 1.2,
+      "side": "initial robot left (+Y)"
+    },
+    "solid_volume_body_checks": 27342,
+    "scope": "One full-chain query only. Outcomes measured from returned frames; constructed solid boxes independently audit body endpoints/samples, never guide planning. No forced waypoints. Cross-layer motion unvalidated."
+  },
+  "current_full_chain_queries": 1,
+  "local_variants_removed": true,
+  "extra_corridor_removed": true,
+  "global_route_forced_waypoints": false,
+  "historical_planning": "history/before-layer-projection-20261123/",
+  "before_direction_correction": "history/before-right-side-correction-20261124/",
+  "before_five_platform_chain": "history/before-five-platform-chain-20261124/",
+  "rejected_initial_candidate": "80/38cm fifth slab gave a bottom-surface stance inside solid material; rejected, current fifth slab is 78/38cm. Independent solid-volume body audit uses constructed truth only.",
+  "new_sources_sha256": {
+    "four_platforms_scene.py": "47ec2f35a3f77c7c88e6e9215bfc43507cf1ca4a117a02257686f8d72c50e108",
+    "four_platforms_audit.py": "e7ed31b7331d82cf66ef926702f987987e6d5ebff64e16aa9cfaf1d6e743acf9",
+    "scene_fit_catalog.py": "760c1a70f60691a306465177ea729688591f85856ff6e1ef412db8643d67d201",
+    "layer_projection_audit.py": "8c49ed3c0cfaa751a44006da7fcbdebb1029d426f78bbc918838f39c2218491e",
+    "layer_projection_report.py": "b255ab065d54aac7feefdabb576616e7514fb9325f225632cbee279d60a10dae",
+    "visualization/surface-planner/index.html": "8e536fde0d44ca8328600a983d05f952f3cc08dd8cda0975ed63e6a112ee9a4f",
+    "visualization/surface-planner/viewer.js": "352673440090e5a6ae676277f1388b0f5e2922b3a56c014a7a8d5ed679e1ba90",
+    "tests/layer_projection_browser.cjs": "8d69c8a01a3e19dcf466c7145a0424ca38bbcb845352410e5e795e6b5fb07095",
+    "retry_layer_projection.py": "bb32e7023d3635ee28e6a9dfc69491f45b5eeaf8a50a2e9f8b8f3b93750a8ae6",
+    "profile_layer_projection.py": "a030e9ddbab64a78ab841d68825febb686e52fef9678fd5d0198f072286e8395"
+  },
+  "documentation_update": {
+    "date": "2026-11-25",
+    "scope": "Timing profile repeat added; original planning records retained.",
+    "planning_rerun": true,
+    "full_scene_rerun": false,
+    "new_benchmark": true,
+    "original_results_overwritten": false,
+    "document_sha256": {
+      "planning-workflow.md": "c1e619a29775e3d0bb91747436b9c7f0766b8f68d82decd135da010a086dae66",
+      "result.md": "f9beb522b5e97b53b45af142991b016cc260efe79ce6b4cf7019c699eec88d93",
+      "surface-planning-v1.md": "6f2f8664d798d96c03b106eba8973760dc0902e62d399715495eef7cc8e34d85",
+      "experiment-results.md": "c3e8f0d9b27bfed6bc60287c78f54aed5cffd497e4e07e78da4d469d896b8264",
+      "fsgp_bgk_repro/outputs/visualization/surface-planner/workflow.md": "c1e619a29775e3d0bb91747436b9c7f0766b8f68d82decd135da010a086dae66",
+      "fsgp_bgk_repro/outputs/visualization/surface-planner/report.md": "6f2f8664d798d96c03b106eba8973760dc0902e62d399715495eef7cc8e34d85",
+      "fsgp_bgk_repro/outputs/visualization/surface-planner/layer-choice.md": "6f2f8664d798d96c03b106eba8973760dc0902e62d399715495eef7cc8e34d85",
+      "fsgp_bgk_repro/outputs/visualization/surface-planner/profiling/four-platforms-20261125/report.md": "03b2da131eabaf5911c041d027c22722525a2091d5838f55e21a084173ef0ad0"
+    }
+  },
+  "profiling_update": {
+    "date": "2026-11-25",
+    "passed": true,
+    "map_id": "all-platforms-overlay",
+    "profile": "profiling/four-platforms-20261125/profile.json",
+    "profile_sha256": "17627ffb77faf851df030b2e1f3d18709cf01e700cb832d0f194c701055ed548",
+    "wall_s": 89.800925927,
+    "historical_success_s": 119.07546216000037,
+    "fit_files_rechecked": 1095,
+    "changed_fit_files": [],
+    "verification": {
+      "passed": true,
+      "same_route_nodes": true,
+      "same_1302_frame_geometry": true,
+      "same_frame_phases": true,
+      "same_cost": true,
+      "saved_result_unchanged": true,
+      "fit_inputs_unchanged": true,
+      "original_runtime_sources_unchanged": true,
+      "exclusive_spans_sum_to_wall": true
+    },
+    "counted_in_main_route_catalog": false,
+    "instrumentation_overhead_included": true
+  }
+}

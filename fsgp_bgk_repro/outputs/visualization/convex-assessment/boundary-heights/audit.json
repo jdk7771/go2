@@ -1,0 +1,163 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "q15-n15",
+      "samples": 3031,
+      "source_hashes_verified": 6,
+      "same_xy_difference_verified": true,
+      "maximum_float32_height_error_m": 1.855316776877558e-07,
+      "maximum_float32_delta_error_m": 1.855316776877558e-07
+    },
+    {
+      "scene": "steps",
+      "profile": "q15-n15",
+      "samples": 1962,
+      "source_hashes_verified": 6,
+      "same_xy_difference_verified": true,
+      "maximum_float32_height_error_m": 1.5030316018183054e-07,
+      "maximum_float32_delta_error_m": 1.5245885126580205e-07
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "q20-n30",
+      "samples": 2297,
+      "source_hashes_verified": 6,
+      "same_xy_difference_verified": true,
+      "maximum_float32_height_error_m": 9.442871935771979e-08,
+      "maximum_float32_delta_error_m": 9.629136450695075e-08
+    },
+    {
+      "scene": "steps",
+      "profile": "q20-n30",
+      "samples": 2312,
+      "source_hashes_verified": 6,
+      "same_xy_difference_verified": true,
+      "maximum_float32_height_error_m": 1.0107083403543271e-07,
+      "maximum_float32_delta_error_m": 1.0107083403543271e-07
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "qcircle-adaptive",
+      "samples": 2332,
+      "source_hashes_verified": 6,
+      "same_xy_difference_verified": true,
+      "maximum_float32_height_error_m": 1.0705075714767531e-11,
+      "maximum_float32_delta_error_m": 1.0705075714767531e-11
+    },
+    {
+      "scene": "steps",
+      "profile": "qcircle-adaptive",
+      "samples": 2445,
+      "source_hashes_verified": 6,
+      "same_xy_difference_verified": true,
+      "maximum_float32_height_error_m": 3.175449592163204e-08,
+      "maximum_float32_delta_error_m": 3.175449592163204e-08
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "qcircle-r07",
+      "samples": 5990,
+      "source_hashes_verified": 6,
+      "same_xy_difference_verified": true,
+      "maximum_float32_height_error_m": 0.0,
+      "maximum_float32_delta_error_m": 0.0
+    },
+    {
+      "scene": "steps",
+      "profile": "qcircle-r07",
+      "samples": 2801,
+      "source_hashes_verified": 6,
+      "same_xy_difference_verified": true,
+      "maximum_float32_height_error_m": 3.476744007968602e-08,
+      "maximum_float32_delta_error_m": 3.476744007968602e-08
+    }
+  ],
+  "synthetic_geometry_checks": [
+    {
+      "scene": "flat-corridor-platforms",
+      "platforms": [
+        {
+          "expected_m": 0.15,
+          "samples": 335,
+          "measured_m": 0.15000000596046448
+        },
+        {
+          "expected_m": 0.8,
+          "samples": 335,
+          "measured_m": 0.800000011920929
+        }
+      ]
+    },
+    {
+      "scene": "steps",
+      "central_risers": [
+        {
+          "edge_x_m": -3.0,
+          "expected_m": 0.08,
+          "samples": 100,
+          "measured_m": 0.07999999821186066
+        },
+        {
+          "edge_x_m": -2.5,
+          "expected_m": 0.18,
+          "samples": 100,
+          "measured_m": 0.17999999225139618
+        },
+        {
+          "edge_x_m": -2.0,
+          "expected_m": 0.12,
+          "samples": 104,
+          "measured_m": 0.12000000476837158
+        },
+        {
+          "edge_x_m": -1.5,
+          "expected_m": 0.30000000000000004,
+          "samples": 100,
+          "measured_m": 0.30000001192092896
+        },
+        {
+          "edge_x_m": -1.0,
+          "expected_m": 0.09999999999999998,
+          "samples": 100,
+          "measured_m": 0.09999996423721313
+        },
+        {
+          "edge_x_m": -0.5,
+          "expected_m": 0.21999999999999997,
+          "samples": 100,
+          "measured_m": 0.22000002860563217
+        },
+        {
+          "edge_x_m": 0.5,
+          "expected_m": 0.25,
+          "samples": 100,
+          "measured_m": 0.25
+        },
+        {
+          "edge_x_m": 1.1,
+          "expected_m": 0.09999999999999998,
+          "samples": 100,
+          "measured_m": 0.10000002384185791
+        },
+        {
+          "edge_x_m": 1.7,
+          "expected_m": 0.4,
+          "samples": 99,
+          "measured_m": 0.3999999761581421
+        },
+        {
+          "edge_x_m": 2.3,
+          "expected_m": 0.25,
+          "samples": 100,
+          "measured_m": 0.25
+        }
+      ]
+    }
+  ],
+  "original_data_preservation": {
+    "files_verified": 555,
+    "changed_files": []
+  }
+}

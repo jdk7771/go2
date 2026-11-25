@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "scene": "desert",
+      "profile": "qcircle-adaptive",
+      "valid": 4796,
+      "triangles": 200638
+    },
+    {
+      "scene": "mountain",
+      "profile": "qcircle-adaptive",
+      "valid": 2791,
+      "triangles": 117611
+    },
+    {
+      "scene": "snow",
+      "profile": "qcircle-adaptive",
+      "valid": 20391,
+      "triangles": 951384
+    },
+    {
+      "scene": "vocano",
+      "profile": "qcircle-adaptive",
+      "valid": 5747,
+      "triangles": 244177
+    }
+  ],
+  "automatic_scene_switch": true,
+  "refresh_preserves_auto": true,
+  "manual_choice_preserved": true,
+  "legacy_links": true,
+  "errors": [],
+  "failures": []
+}

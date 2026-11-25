@@ -1,0 +1,869 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "scene": "hill",
+      "routes": 1,
+      "frames": [
+        953
+      ],
+      "metric_weights": {
+        "slope_deg": 0.3,
+        "normal_spread_deg": 0.2,
+        "rmse_m": 0.15,
+        "max_error_m": 0.1,
+        "std_patch_m": 0.1
+      },
+      "wallPatches": 0,
+      "forceFrames": 0
+    },
+    {
+      "scene": "surface-route-test",
+      "routes": 2,
+      "frames": [
+        307,
+        428
+      ],
+      "metric_weights": {
+        "slope_deg": 0.3,
+        "normal_spread_deg": 0.2,
+        "rmse_m": 0.15,
+        "max_error_m": 0.1,
+        "std_patch_m": 0.1
+      },
+      "wallPatches": 1,
+      "forceFrames": 86
+    },
+    {
+      "scene": "flat",
+      "routes": 1,
+      "frames": [
+        353
+      ],
+      "metric_weights": {
+        "slope_deg": 0.3,
+        "normal_spread_deg": 0.2,
+        "rmse_m": 0.15,
+        "max_error_m": 0.1,
+        "std_patch_m": 0.1
+      },
+      "wallPatches": 0,
+      "forceFrames": 0
+    },
+    {
+      "scene": "table",
+      "routes": 2,
+      "frames": [
+        241,
+        87
+      ],
+      "metric_weights": {
+        "slope_deg": 0.3,
+        "normal_spread_deg": 0.2,
+        "rmse_m": 0.15,
+        "max_error_m": 0.1,
+        "std_patch_m": 0.1
+      },
+      "wallPatches": 0,
+      "forceFrames": 0
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "routes": 1,
+      "frames": [
+        416
+      ],
+      "metric_weights": {
+        "slope_deg": 0.3,
+        "normal_spread_deg": 0.2,
+        "rmse_m": 0.15,
+        "max_error_m": 0.1,
+        "std_patch_m": 0.1
+      },
+      "wallPatches": 3,
+      "forceFrames": 83
+    },
+    {
+      "scene": "table-low-040",
+      "routes": 1,
+      "frames": [
+        337
+      ],
+      "metric_weights": {
+        "slope_deg": 0.3,
+        "normal_spread_deg": 0.2,
+        "rmse_m": 0.15,
+        "max_error_m": 0.1,
+        "std_patch_m": 0.1
+      },
+      "wallPatches": 0,
+      "forceFrames": 0
+    },
+    {
+      "scene": "table-low-042",
+      "routes": 1,
+      "frames": [
+        259
+      ],
+      "metric_weights": {
+        "slope_deg": 0.3,
+        "normal_spread_deg": 0.2,
+        "rmse_m": 0.15,
+        "max_error_m": 0.1,
+        "std_patch_m": 0.1
+      },
+      "wallPatches": 0,
+      "forceFrames": 0
+    },
+    {
+      "scene": "table-low-060",
+      "routes": 1,
+      "frames": [
+        241
+      ],
+      "metric_weights": {
+        "slope_deg": 0.3,
+        "normal_spread_deg": 0.2,
+        "rmse_m": 0.15,
+        "max_error_m": 0.1,
+        "std_patch_m": 0.1
+      },
+      "wallPatches": 0,
+      "forceFrames": 0
+    }
+  ],
+  "new_scene_metric_views": [
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-adaptive",
+      "field": "clearance_cost",
+      "valid": 1961
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-adaptive",
+      "field": "slope_deg",
+      "valid": 1961
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-adaptive",
+      "field": "rmse_m",
+      "valid": 1961
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-adaptive",
+      "field": "std_patch_m",
+      "valid": 1961
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-adaptive",
+      "field": "normal_spread_deg",
+      "valid": 1961
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-adaptive",
+      "field": "max_error_m",
+      "valid": 1961
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-r07",
+      "field": "clearance_cost",
+      "valid": 2246
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-r07",
+      "field": "slope_deg",
+      "valid": 2246
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-r07",
+      "field": "rmse_m",
+      "valid": 2246
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-r07",
+      "field": "std_patch_m",
+      "valid": 2246
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-r07",
+      "field": "normal_spread_deg",
+      "valid": 2246
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-r07",
+      "field": "max_error_m",
+      "valid": 2246
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q15-n15",
+      "field": "clearance_cost",
+      "valid": 2687
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q15-n15",
+      "field": "slope_deg",
+      "valid": 2687
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q15-n15",
+      "field": "rmse_m",
+      "valid": 2687
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q15-n15",
+      "field": "std_patch_m",
+      "valid": 2687
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q15-n15",
+      "field": "normal_spread_deg",
+      "valid": 2687
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q15-n15",
+      "field": "max_error_m",
+      "valid": 2687
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q20-n30",
+      "field": "clearance_cost",
+      "valid": 2667
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q20-n30",
+      "field": "slope_deg",
+      "valid": 2667
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q20-n30",
+      "field": "rmse_m",
+      "valid": 2667
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q20-n30",
+      "field": "std_patch_m",
+      "valid": 2667
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q20-n30",
+      "field": "normal_spread_deg",
+      "valid": 2667
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q20-n30",
+      "field": "max_error_m",
+      "valid": 2667
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-adaptive",
+      "field": "clearance_cost",
+      "valid": 3734
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-adaptive",
+      "field": "slope_deg",
+      "valid": 3734
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-adaptive",
+      "field": "rmse_m",
+      "valid": 3734
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-adaptive",
+      "field": "std_patch_m",
+      "valid": 3734
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-adaptive",
+      "field": "normal_spread_deg",
+      "valid": 3734
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-adaptive",
+      "field": "max_error_m",
+      "valid": 3734
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-r07",
+      "field": "clearance_cost",
+      "valid": 4257
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-r07",
+      "field": "slope_deg",
+      "valid": 4257
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-r07",
+      "field": "rmse_m",
+      "valid": 4257
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-r07",
+      "field": "std_patch_m",
+      "valid": 4257
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-r07",
+      "field": "normal_spread_deg",
+      "valid": 4257
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-r07",
+      "field": "max_error_m",
+      "valid": 4257
+    },
+    {
+      "scene": "table",
+      "profile": "q15-n15",
+      "field": "clearance_cost",
+      "valid": 5019
+    },
+    {
+      "scene": "table",
+      "profile": "q15-n15",
+      "field": "slope_deg",
+      "valid": 5019
+    },
+    {
+      "scene": "table",
+      "profile": "q15-n15",
+      "field": "rmse_m",
+      "valid": 5019
+    },
+    {
+      "scene": "table",
+      "profile": "q15-n15",
+      "field": "std_patch_m",
+      "valid": 5019
+    },
+    {
+      "scene": "table",
+      "profile": "q15-n15",
+      "field": "normal_spread_deg",
+      "valid": 5019
+    },
+    {
+      "scene": "table",
+      "profile": "q15-n15",
+      "field": "max_error_m",
+      "valid": 5019
+    },
+    {
+      "scene": "table",
+      "profile": "q20-n30",
+      "field": "clearance_cost",
+      "valid": 5011
+    },
+    {
+      "scene": "table",
+      "profile": "q20-n30",
+      "field": "slope_deg",
+      "valid": 5011
+    },
+    {
+      "scene": "table",
+      "profile": "q20-n30",
+      "field": "rmse_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table",
+      "profile": "q20-n30",
+      "field": "std_patch_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table",
+      "profile": "q20-n30",
+      "field": "normal_spread_deg",
+      "valid": 5011
+    },
+    {
+      "scene": "table",
+      "profile": "q20-n30",
+      "field": "max_error_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-adaptive",
+      "field": "clearance_cost",
+      "valid": 3332
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-adaptive",
+      "field": "slope_deg",
+      "valid": 3332
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-adaptive",
+      "field": "rmse_m",
+      "valid": 3332
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-adaptive",
+      "field": "std_patch_m",
+      "valid": 3332
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-adaptive",
+      "field": "normal_spread_deg",
+      "valid": 3332
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-adaptive",
+      "field": "max_error_m",
+      "valid": 3332
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-r07",
+      "field": "clearance_cost",
+      "valid": 4275
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-r07",
+      "field": "slope_deg",
+      "valid": 4275
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-r07",
+      "field": "rmse_m",
+      "valid": 4275
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-r07",
+      "field": "std_patch_m",
+      "valid": 4275
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-r07",
+      "field": "normal_spread_deg",
+      "valid": 4275
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-r07",
+      "field": "max_error_m",
+      "valid": 4275
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q15-n15",
+      "field": "clearance_cost",
+      "valid": 5019
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q15-n15",
+      "field": "slope_deg",
+      "valid": 5019
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q15-n15",
+      "field": "rmse_m",
+      "valid": 5019
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q15-n15",
+      "field": "std_patch_m",
+      "valid": 5019
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q15-n15",
+      "field": "normal_spread_deg",
+      "valid": 5019
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q15-n15",
+      "field": "max_error_m",
+      "valid": 5019
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q20-n30",
+      "field": "clearance_cost",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q20-n30",
+      "field": "slope_deg",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q20-n30",
+      "field": "rmse_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q20-n30",
+      "field": "std_patch_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q20-n30",
+      "field": "normal_spread_deg",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q20-n30",
+      "field": "max_error_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-adaptive",
+      "field": "clearance_cost",
+      "valid": 3443
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-adaptive",
+      "field": "slope_deg",
+      "valid": 3443
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-adaptive",
+      "field": "rmse_m",
+      "valid": 3443
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-adaptive",
+      "field": "std_patch_m",
+      "valid": 3443
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-adaptive",
+      "field": "normal_spread_deg",
+      "valid": 3443
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-adaptive",
+      "field": "max_error_m",
+      "valid": 3443
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-r07",
+      "field": "clearance_cost",
+      "valid": 4279
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-r07",
+      "field": "slope_deg",
+      "valid": 4279
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-r07",
+      "field": "rmse_m",
+      "valid": 4279
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-r07",
+      "field": "std_patch_m",
+      "valid": 4279
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-r07",
+      "field": "normal_spread_deg",
+      "valid": 4279
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-r07",
+      "field": "max_error_m",
+      "valid": 4279
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q15-n15",
+      "field": "clearance_cost",
+      "valid": 5013
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q15-n15",
+      "field": "slope_deg",
+      "valid": 5013
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q15-n15",
+      "field": "rmse_m",
+      "valid": 5013
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q15-n15",
+      "field": "std_patch_m",
+      "valid": 5013
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q15-n15",
+      "field": "normal_spread_deg",
+      "valid": 5013
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q15-n15",
+      "field": "max_error_m",
+      "valid": 5013
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q20-n30",
+      "field": "clearance_cost",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q20-n30",
+      "field": "slope_deg",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q20-n30",
+      "field": "rmse_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q20-n30",
+      "field": "std_patch_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q20-n30",
+      "field": "normal_spread_deg",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q20-n30",
+      "field": "max_error_m",
+      "valid": 5011
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-adaptive",
+      "field": "clearance_cost",
+      "valid": 3396
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-adaptive",
+      "field": "slope_deg",
+      "valid": 3396
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-adaptive",
+      "field": "rmse_m",
+      "valid": 3396
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-adaptive",
+      "field": "std_patch_m",
+      "valid": 3396
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-adaptive",
+      "field": "normal_spread_deg",
+      "valid": 3396
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-adaptive",
+      "field": "max_error_m",
+      "valid": 3396
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-r07",
+      "field": "clearance_cost",
+      "valid": 4266
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-r07",
+      "field": "slope_deg",
+      "valid": 4266
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-r07",
+      "field": "rmse_m",
+      "valid": 4266
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-r07",
+      "field": "std_patch_m",
+      "valid": 4266
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-r07",
+      "field": "normal_spread_deg",
+      "valid": 4266
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-r07",
+      "field": "max_error_m",
+      "valid": 4266
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q15-n15",
+      "field": "clearance_cost",
+      "valid": 4368
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q15-n15",
+      "field": "slope_deg",
+      "valid": 4368
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q15-n15",
+      "field": "rmse_m",
+      "valid": 4368
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q15-n15",
+      "field": "std_patch_m",
+      "valid": 4368
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q15-n15",
+      "field": "normal_spread_deg",
+      "valid": 4368
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q15-n15",
+      "field": "max_error_m",
+      "valid": 4368
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q20-n30",
+      "field": "clearance_cost",
+      "valid": 4364
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q20-n30",
+      "field": "slope_deg",
+      "valid": 4364
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q20-n30",
+      "field": "rmse_m",
+      "valid": 4364
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q20-n30",
+      "field": "std_patch_m",
+      "valid": 4364
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q20-n30",
+      "field": "normal_spread_deg",
+      "valid": 4364
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q20-n30",
+      "field": "max_error_m",
+      "valid": 4364
+    }
+  ],
+  "animation": true,
+  "frame_slider": true,
+  "route_switch": true,
+  "robot_close_view": true,
+  "zmp_and_leg_display": true,
+  "original_hulls": true,
+  "raw_toggle": true,
+  "wall_fits": true,
+  "main_viewer_link": true,
+  "mobile": true,
+  "errors": [],
+  "failed": []
+}

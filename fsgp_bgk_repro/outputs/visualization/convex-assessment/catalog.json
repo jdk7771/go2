@@ -1,0 +1,109 @@
+{
+  "scenes": [
+    {
+      "id": "hill",
+      "name": "丘陵"
+    },
+    {
+      "id": "forest",
+      "name": "森林"
+    },
+    {
+      "id": "flat",
+      "name": "平地"
+    },
+    {
+      "id": "desert",
+      "name": "沙漠"
+    },
+    {
+      "id": "mountain",
+      "name": "山地"
+    },
+    {
+      "id": "snow",
+      "name": "雪地"
+    },
+    {
+      "id": "vocano",
+      "name": "火山"
+    },
+    {
+      "id": "steps",
+      "name": "高低组合多级台阶"
+    },
+    {
+      "id": "flat-corridor-platforms",
+      "name": "平地 · 通道与高低台"
+    },
+    {
+      "id": "surface-route-test",
+      "name": "A* 初版 · 矮台、立墙与顶板"
+    },
+    {
+      "id": "table",
+      "name": "大桌子"
+    },
+    {
+      "id": "table-low-040",
+      "name": "低桌 · 净空 0.40 m"
+    },
+    {
+      "id": "table-low-042",
+      "name": "低桌 · 净空 0.42 m"
+    },
+    {
+      "id": "table-low-060",
+      "name": "低桌 · 净空 0.60 m"
+    },
+    {
+      "id": "layer-choice",
+      "name": "封闭通道 · 降身或逐级上桥"
+    },
+    {
+      "id": "platform-underpass-070",
+      "name": "高低台 · 第二台下方净空 0.70 m · 向机器人右侧延伸"
+    },
+    {
+      "id": "platform-underpass-042",
+      "name": "高低台 · 第二台下方净空 0.42 m · 向机器人右侧延伸"
+    },
+    {
+      "id": "four-platforms",
+      "name": "五平台通行链 · 绕行、下穿、降身、上台、小路"
+    }
+  ],
+  "default_scene": "hill",
+  "metrics": [
+    "clearance_cost",
+    "slope_deg",
+    "rmse_m",
+    "std_patch_m",
+    "normal_spread_deg",
+    "max_error_m"
+  ],
+  "fields": [
+    "x",
+    "y",
+    "z",
+    "c0",
+    "c1",
+    "c2",
+    "c3",
+    "c4",
+    "c5",
+    "height",
+    "valid",
+    "point_count",
+    "rmse_m",
+    "max_error_m",
+    "std_patch_m",
+    "slope_deg",
+    "normal_spread_deg",
+    "clearance_cost",
+    "mean_normal_x",
+    "mean_normal_y",
+    "mean_normal_z",
+    "domain_area_m2"
+  ]
+}

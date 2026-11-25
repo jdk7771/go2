@@ -1,0 +1,391 @@
+{
+  "passed": true,
+  "scene_settings": 8,
+  "metric_views": 48,
+  "records": [
+    {
+      "scene": "platform-underpass-070",
+      "profile": "qcircle-adaptive",
+      "filled": 4537,
+      "area": 1.20567313040854,
+      "unfilled": 26,
+      "large": 0,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 6688,
+          "mean": 0.28170073314954525,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 6688,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 6688,
+          "mean": 7.388368608579697e-14,
+          "max": 2.7877704421011982e-11
+        },
+        {
+          "field": "std_patch_m",
+          "known": 6688,
+          "mean": 0.0019243208795683491,
+          "max": 0.013269606263603878
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 6688,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 6688,
+          "mean": 1.7552657352247754e-13,
+          "max": 6.100820196253132e-11
+        }
+      ]
+    },
+    {
+      "scene": "platform-underpass-042",
+      "profile": "qcircle-adaptive",
+      "filled": 4545,
+      "area": 1.2077256131387035,
+      "unfilled": 24,
+      "large": 0,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 6587,
+          "mean": 0.3211303394065406,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 6587,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 6587,
+          "mean": 5.28194122455531e-14,
+          "max": 1.401884436126912e-11
+        },
+        {
+          "field": "std_patch_m",
+          "known": 6587,
+          "mean": 0.0019141655266850474,
+          "max": 0.013269606263603878
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 6587,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 6587,
+          "mean": 1.2600888222051037e-13,
+          "max": 3.8734637025639174e-11
+        }
+      ]
+    },
+    {
+      "scene": "platform-underpass-070",
+      "profile": "qcircle-r07",
+      "filled": 7224,
+      "area": 3.0772820571502084,
+      "unfilled": 705,
+      "large": 1248,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 7817,
+          "mean": 0.23850660129659373,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 7817,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 7817,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "std_patch_m",
+          "known": 7817,
+          "mean": 0.002064637671741558,
+          "max": 0.00275157899913112
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 7817,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 7817,
+          "mean": 0,
+          "max": 0
+        }
+      ]
+    },
+    {
+      "scene": "platform-underpass-042",
+      "profile": "qcircle-r07",
+      "filled": 7221,
+      "area": 3.0754887709546606,
+      "unfilled": 702,
+      "large": 1242,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 7818,
+          "mean": 0.29399547638612944,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 7818,
+          "mean": 0.014759129609477527,
+          "max": 12.820766185452976
+        },
+        {
+          "field": "rmse_m",
+          "known": 7818,
+          "mean": 0.000008580464992402636,
+          "max": 0.007453563923400424
+        },
+        {
+          "field": "std_patch_m",
+          "known": 7818,
+          "mean": 0.002069946659045552,
+          "max": 0.006908826158924868
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 7818,
+          "mean": 0.013289912193523504,
+          "max": 11.544527030136571
+        },
+        {
+          "field": "max_error_m",
+          "known": 7818,
+          "mean": 0.000011511901812922034,
+          "max": 0.010000005374824997
+        }
+      ]
+    },
+    {
+      "scene": "platform-underpass-070",
+      "profile": "q15-n15",
+      "filled": 1,
+      "area": 0.000004499884129316456,
+      "unfilled": 0,
+      "large": 3,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 9465,
+          "mean": 0.24500551913508617,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 9465,
+          "mean": 0.9189090113800594,
+          "max": 37.925677384006114
+        },
+        {
+          "field": "rmse_m",
+          "known": 9465,
+          "mean": 0.0006924438144244885,
+          "max": 0.015828537428162637
+        },
+        {
+          "field": "std_patch_m",
+          "known": 9465,
+          "mean": 0.0023119479865605424,
+          "max": 0.02818123498935801
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 9465,
+          "mean": 1.0700805154278958,
+          "max": 24.939064319572953
+        },
+        {
+          "field": "max_error_m",
+          "known": 9465,
+          "mean": 0.0011198708739667692,
+          "max": 0.0344430653878061
+        }
+      ]
+    },
+    {
+      "scene": "platform-underpass-042",
+      "profile": "q15-n15",
+      "filled": 1,
+      "area": 0.000004499884129316456,
+      "unfilled": 0,
+      "large": 3,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 9383,
+          "mean": 0.292606336739659,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 9383,
+          "mean": 0.8077854522493515,
+          "max": 40.35309879270166
+        },
+        {
+          "field": "rmse_m",
+          "known": 9383,
+          "mean": 0.0006146507512933915,
+          "max": 0.018257412054144655
+        },
+        {
+          "field": "std_patch_m",
+          "known": 9383,
+          "mean": 0.00225890544384904,
+          "max": 0.030394138481838823
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 9383,
+          "mean": 0.9435327482522424,
+          "max": 27.967857448558696
+        },
+        {
+          "field": "max_error_m",
+          "known": 9383,
+          "mean": 0.0010083670729285215,
+          "max": 0.034037853397264256
+        }
+      ]
+    },
+    {
+      "scene": "platform-underpass-070",
+      "profile": "q20-n30",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 2,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 9459,
+          "mean": 0.23755355255416216,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 9459,
+          "mean": 0.6229444144055405,
+          "max": 21.44411204951147
+        },
+        {
+          "field": "rmse_m",
+          "known": 9459,
+          "mean": 0.0008903455085623387,
+          "max": 0.018532398736636663
+        },
+        {
+          "field": "std_patch_m",
+          "known": 9459,
+          "mean": 0.0018325917324486807,
+          "max": 0.015401326855979508
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 9459,
+          "mean": 1.0612188577672423,
+          "max": 23.95897668282834
+        },
+        {
+          "field": "max_error_m",
+          "known": 9459,
+          "mean": 0.0018176158783682853,
+          "max": 0.03425652880495735
+        }
+      ]
+    },
+    {
+      "scene": "platform-underpass-042",
+      "profile": "q20-n30",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 2,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 9382,
+          "mean": 0.28712904699883796,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 9382,
+          "mean": 0.5779148643853815,
+          "max": 25.9396841440312
+        },
+        {
+          "field": "rmse_m",
+          "known": 9382,
+          "mean": 0.0008380978799834692,
+          "max": 0.019905758577935393
+        },
+        {
+          "field": "std_patch_m",
+          "known": 9382,
+          "mean": 0.0018105078868168127,
+          "max": 0.019058636325134496
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 9382,
+          "mean": 0.9769266560716917,
+          "max": 26.957978206616264
+        },
+        {
+          "field": "max_error_m",
+          "known": 9382,
+          "mean": 0.0017378815952385932,
+          "max": 0.04049017871915042
+        }
+      ]
+    }
+  ],
+  "all_current_scenes": false,
+  "base_models_unchanged": true,
+  "zero_gap_settings": true,
+  "toggle": true,
+  "share": "http://127.0.0.1:42482/?scene=steps&profile=qcircle-adaptive&coverage=1&gaps=1&metric=clearance_cost&angle=3d&points=0&boundary=0",
+  "mobile": true,
+  "errors": [],
+  "failed": []
+}

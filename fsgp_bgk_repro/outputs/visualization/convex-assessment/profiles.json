@@ -1,0 +1,113 @@
+{
+  "default_profile": "qcircle-adaptive",
+  "profiles": [
+    {
+      "id": "qcircle-adaptive",
+      "label": "自适应圆形 · 至少 15 点",
+      "path": "qcircle-adaptive/",
+      "scene_ids": [
+        "hill",
+        "forest",
+        "flat",
+        "desert",
+        "mountain",
+        "snow",
+        "vocano",
+        "steps",
+        "flat-corridor-platforms",
+        "surface-route-test",
+        "table",
+        "table-low-040",
+        "table-low-042",
+        "table-low-060",
+        "layer-choice",
+        "platform-underpass-070",
+        "platform-underpass-042",
+        "four-platforms"
+      ]
+    },
+    {
+      "id": "qcircle-r07",
+      "label": "圆形 R=7 cm · 至少 15 点",
+      "path": "qcircle-r07/",
+      "scene_ids": [
+        "hill",
+        "forest",
+        "flat",
+        "desert",
+        "mountain",
+        "snow",
+        "vocano",
+        "steps",
+        "flat-corridor-platforms",
+        "surface-route-test",
+        "table",
+        "table-low-040",
+        "table-low-042",
+        "table-low-060",
+        "layer-choice",
+        "platform-underpass-070",
+        "platform-underpass-042",
+        "four-platforms"
+      ]
+    },
+    {
+      "id": "q15-n15",
+      "label": "15×15 cm · 至少 15 点",
+      "path": "q15-n15/",
+      "scene_ids": [
+        "hill",
+        "forest",
+        "flat",
+        "desert",
+        "mountain",
+        "snow",
+        "vocano",
+        "steps",
+        "flat-corridor-platforms",
+        "surface-route-test",
+        "table",
+        "table-low-040",
+        "table-low-042",
+        "table-low-060",
+        "layer-choice",
+        "platform-underpass-070",
+        "platform-underpass-042",
+        "four-platforms"
+      ]
+    },
+    {
+      "id": "q20-n30",
+      "label": "20×20 cm · 至少 30 点",
+      "path": "q20-n30/",
+      "scene_ids": [
+        "hill",
+        "forest",
+        "flat",
+        "desert",
+        "mountain",
+        "snow",
+        "vocano",
+        "steps",
+        "flat-corridor-platforms",
+        "surface-route-test",
+        "table",
+        "table-low-040",
+        "table-low-042",
+        "table-low-060",
+        "layer-choice",
+        "platform-underpass-070",
+        "platform-underpass-042",
+        "four-platforms"
+      ]
+    },
+    {
+      "id": "qcircle-adaptive-no-offset",
+      "label": "自适应圆形 · 无中心偏移限制",
+      "path": "qcircle-adaptive-no-offset/",
+      "scene_ids": [
+        "forest"
+      ]
+    }
+  ]
+}

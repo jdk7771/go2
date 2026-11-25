@@ -1,0 +1,198 @@
+{
+  "passed": true,
+  "scene": "four-platforms",
+  "elapsed_s": 33.02206627300029,
+  "result_sha256": "00a9e0a0a85d8931015478812fe2f99b935daf60081473e8fa0da3de91f38f9a",
+  "routes": [
+    {
+      "case_id": "all-platforms",
+      "map_id": "all-platforms-overlay",
+      "map_mode": "overlay",
+      "label": "五平台链 · 全程自由规划 · 叠加可跨层后重规划",
+      "nodes": 136,
+      "frames": 1302,
+      "route_length_m": 25.796682773899725,
+      "route_cost": 26.95250741308336,
+      "supported_contacts_checked": 5208,
+      "maximum_raw_distance_m": 0.017376024679938578,
+      "maximum_ik_residual_m": 1.8385843027689748e-15,
+      "minimum_zmp_margin_m": 0.20727189301511295,
+      "minimum_raw_wheel_center_distance_m": 0.09000066911060185,
+      "minimum_observed_ceiling_gap_m": 0.029999986886978136,
+      "layer_crossings": 2,
+      "rolling_frames": 1278,
+      "generated_swing_frames": 0,
+      "crossing_motion_validated": false,
+      "underpass_frames": null,
+      "underpass_clearance_m": null,
+      "underpass_minimum_body_height_m": null,
+      "underpass_minimum_ceiling_gap_m": null,
+      "body_lowering_frames": null,
+      "underpass_normal_height_feasible": null
+    }
+  ],
+  "scope": "Observed rolling samples and supported crossing endpoints. Boundary crossings below 40cm are planning candidates; no swing/dynamic crossing verification.",
+  "occupancy_in_cost": false,
+  "endpoint_height_lift_rule": false,
+  "four_platforms": {
+    "platforms": [
+      {
+        "platform": 1,
+        "query_xy_m": [
+          -7.2,
+          -2.4
+        ],
+        "top_height_m": 0.800000011920929,
+        "lower_raw_supported": false,
+        "clearance_m": null,
+        "overhead_passable": null,
+        "direct_climb_candidate": 0,
+        "full_width": false,
+        "actual_outcome": "绕行",
+        "underpass_frames": 0,
+        "upper_support_frames": 0,
+        "minimum_underpass_body_height_m": null,
+        "minimum_underpass_roof_gap_m": null,
+        "passage_body_y_range_m": [
+          -0.040000000000000036,
+          0.12000000000000012
+        ]
+      },
+      {
+        "platform": 2,
+        "query_xy_m": [
+          -3.6,
+          -2.4
+        ],
+        "top_height_m": 0.800000011920929,
+        "lower_raw_supported": true,
+        "clearance_m": 0.699999988079071,
+        "overhead_passable": 1,
+        "direct_climb_candidate": 0,
+        "full_width": true,
+        "actual_outcome": "正常下穿",
+        "underpass_frames": 50,
+        "upper_support_frames": 0,
+        "minimum_underpass_body_height_m": 0.4,
+        "minimum_underpass_roof_gap_m": 0.22999999999999993,
+        "passage_body_y_range_m": [
+          0.1200000000000001,
+          0.12000000000000012
+        ]
+      },
+      {
+        "platform": 3,
+        "query_xy_m": [
+          0.0,
+          -2.4
+        ],
+        "top_height_m": 0.5199999809265137,
+        "lower_raw_supported": true,
+        "clearance_m": 0.41999998688697815,
+        "overhead_passable": 1,
+        "direct_climb_candidate": 0,
+        "full_width": true,
+        "actual_outcome": "降身下穿",
+        "underpass_frames": 50,
+        "upper_support_frames": 0,
+        "minimum_underpass_body_height_m": 0.32,
+        "minimum_underpass_roof_gap_m": 0.02999999999999997,
+        "passage_body_y_range_m": [
+          0.1200000000000001,
+          0.12000000000000012
+        ]
+      },
+      {
+        "platform": 4,
+        "query_xy_m": [
+          3.6,
+          -2.4
+        ],
+        "top_height_m": 0.30000001192092896,
+        "lower_raw_supported": true,
+        "clearance_m": 0.20000000298023224,
+        "overhead_passable": 0,
+        "direct_climb_candidate": 1,
+        "full_width": true,
+        "actual_outcome": "跨层上台候选（动作未验证）",
+        "underpass_frames": 0,
+        "upper_support_frames": 38,
+        "minimum_underpass_body_height_m": null,
+        "minimum_underpass_roof_gap_m": null,
+        "passage_body_y_range_m": [
+          1.0800000000000005,
+          1.56
+        ]
+      },
+      {
+        "platform": 5,
+        "query_xy_m": [
+          7.2,
+          -2.4
+        ],
+        "top_height_m": 0.7799999713897705,
+        "lower_raw_supported": true,
+        "clearance_m": 0.3799999952316284,
+        "overhead_passable": 0,
+        "direct_climb_candidate": 0,
+        "full_width": false,
+        "actual_outcome": "沿小路绕行",
+        "underpass_frames": 0,
+        "upper_support_frames": 0,
+        "minimum_underpass_body_height_m": null,
+        "minimum_underpass_roof_gap_m": null,
+        "passage_body_y_range_m": [
+          3.16,
+          3.160000000000001
+        ]
+      }
+    ],
+    "planning_maps": [
+      {
+        "map_id": "all-platforms-base",
+        "status": "no_validated_route",
+        "elapsed_s": 68.65875847999996,
+        "expansion_limit": 22000,
+        "previous_attempts": 0,
+        "previous_attempt_elapsed_s": 0,
+        "expansions": 22000,
+        "search_limit_reached": true,
+        "open_exhausted": false,
+        "furthest_search_candidate_x_m": 2.76,
+        "a_star_searches": 1,
+        "total_expansions": 22000
+      },
+      {
+        "map_id": "all-platforms-overlay",
+        "status": "success",
+        "elapsed_s": 119.07546216000037,
+        "expansion_limit": 66000,
+        "previous_attempts": 1,
+        "previous_attempt_elapsed_s": 68.23034561000031,
+        "expansions": 29730,
+        "search_limit_reached": false,
+        "open_exhausted": false,
+        "furthest_search_candidate_x_m": 9.319999999999999,
+        "a_star_searches": 2,
+        "total_expansions": 59404
+      }
+    ],
+    "thresholds": {
+      "minimum_passage_m": 0.415,
+      "crossing_height_exclusive_m": 0.4,
+      "threshold_source": "Current geometric planner settings; not measured 40cm blind-policy capability"
+    },
+    "full_route_found": true,
+    "selected_map_id": "all-platforms-overlay",
+    "fifth_bypass": {
+      "y_range_m": [
+        2.8,
+        4.0
+      ],
+      "width_m": 1.2,
+      "side": "initial robot left (+Y)"
+    },
+    "solid_volume_body_checks": 27342,
+    "scope": "One full-chain query only. Outcomes measured from returned frames; constructed solid boxes independently audit body endpoints/samples, never guide planning. No forced waypoints. Cross-layer motion unvalidated."
+  }
+}

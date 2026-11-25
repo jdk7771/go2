@@ -1,0 +1,309 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "id": "duck-under",
+      "cost": 11.202651424973665,
+      "frames": 610,
+      "minimumHeight": 0.32,
+      "maximumSupport": 0,
+      "order": [],
+      "index": 300,
+      "opacity": 0.06
+    },
+    {
+      "id": "climb-over",
+      "cost": 21.432448078539732,
+      "frames": 1918,
+      "minimumHeight": 0.4,
+      "maximumSupport": 0.47999998927116394,
+      "order": [
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3,
+        0,
+        1,
+        2,
+        3
+      ],
+      "index": 435,
+      "opacity": 1
+    }
+  ],
+  "metrics": [
+    {
+      "profile": "qcircle-adaptive",
+      "field": "clearance_cost",
+      "valid": 7346
+    },
+    {
+      "profile": "qcircle-adaptive",
+      "field": "slope_deg",
+      "valid": 7346
+    },
+    {
+      "profile": "qcircle-adaptive",
+      "field": "rmse_m",
+      "valid": 7346
+    },
+    {
+      "profile": "qcircle-adaptive",
+      "field": "std_patch_m",
+      "valid": 7346
+    },
+    {
+      "profile": "qcircle-adaptive",
+      "field": "normal_spread_deg",
+      "valid": 7346
+    },
+    {
+      "profile": "qcircle-adaptive",
+      "field": "max_error_m",
+      "valid": 7346
+    },
+    {
+      "profile": "qcircle-r07",
+      "field": "clearance_cost",
+      "valid": 4575
+    },
+    {
+      "profile": "qcircle-r07",
+      "field": "slope_deg",
+      "valid": 4575
+    },
+    {
+      "profile": "qcircle-r07",
+      "field": "rmse_m",
+      "valid": 4575
+    },
+    {
+      "profile": "qcircle-r07",
+      "field": "std_patch_m",
+      "valid": 4575
+    },
+    {
+      "profile": "qcircle-r07",
+      "field": "normal_spread_deg",
+      "valid": 4575
+    },
+    {
+      "profile": "qcircle-r07",
+      "field": "max_error_m",
+      "valid": 4575
+    },
+    {
+      "profile": "q15-n15",
+      "field": "clearance_cost",
+      "valid": 4822
+    },
+    {
+      "profile": "q15-n15",
+      "field": "slope_deg",
+      "valid": 4822
+    },
+    {
+      "profile": "q15-n15",
+      "field": "rmse_m",
+      "valid": 4822
+    },
+    {
+      "profile": "q15-n15",
+      "field": "std_patch_m",
+      "valid": 4822
+    },
+    {
+      "profile": "q15-n15",
+      "field": "normal_spread_deg",
+      "valid": 4822
+    },
+    {
+      "profile": "q15-n15",
+      "field": "max_error_m",
+      "valid": 4822
+    },
+    {
+      "profile": "q20-n30",
+      "field": "clearance_cost",
+      "valid": 4824
+    },
+    {
+      "profile": "q20-n30",
+      "field": "slope_deg",
+      "valid": 4824
+    },
+    {
+      "profile": "q20-n30",
+      "field": "rmse_m",
+      "valid": 4824
+    },
+    {
+      "profile": "q20-n30",
+      "field": "std_patch_m",
+      "valid": 4824
+    },
+    {
+      "profile": "q20-n30",
+      "field": "normal_spread_deg",
+      "valid": 4824
+    },
+    {
+      "profile": "q20-n30",
+      "field": "max_error_m",
+      "valid": 4824
+    }
+  ],
+  "binary_headroom": true,
+  "layer_tree": true,
+  "sequential_change_flags": true,
+  "playback": true,
+  "route_switch": true,
+  "original_fitted_surfaces": true,
+  "mobile": true,
+  "errors": [],
+  "failed": []
+}

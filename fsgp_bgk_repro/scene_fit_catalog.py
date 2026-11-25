@@ -28,9 +28,24 @@ NAMES = {"flat":"平地", "ramp":"斜坡", "steps":"高低组合多级台阶", "
          "hill":"丘陵", "forest":"森林", "quick":"Quick 地形", "desert":"沙漠",
          "mountain":"山地", "snow":"雪地", "vocano":"火山", "table":"大桌子",
          "combined":"丘陵、森林与桌子", "corridor-040":"独立通道 · 净空 0.40 m",
-         "corridor-060":"独立通道 · 净空 0.60 m", "corridor-080":"独立通道 · 净空 0.80 m"}
+         "corridor-060":"独立通道 · 净空 0.60 m", "corridor-080":"独立通道 · 净空 0.80 m",
+         "flat-corridor-platforms":"平地 · 通道与高低台", "surface-route-test":"A* 初版 · 矮台、立墙与顶板"}
+NAMES.update({f'table-low-{n}':f'低桌 · 净空 {h:.2f} m' for n,h in [('040',.40),('042',.42),('060',.60)]})
+NAMES['layer-choice']='封闭通道 · 降身或逐级上桥'
+NAMES['four-platforms']='五平台通行链 · 绕行、下穿、降身、上台、小路'
+NAMES.update({f'platform-underpass-{n}':f'高低台 · 第二台下方净空 {h:.2f} m · 向机器人右侧延伸'
+              for n,h in [('070',.70),('042',.42)]})
 ORDER = ["corridor-040", "corridor-060", "corridor-080", "combined", "table", "hill", "forest",
-         "flat", "ramp", "steps", "steps-single", "flat_ramp", "quick", "desert", "mountain", "snow", "vocano"]
+         "flat", "ramp", "steps", "steps-single", "flat_ramp", "quick", "desert", "mountain", "snow", "vocano",
+         "flat-corridor-platforms", "surface-route-test"]
+ORDER += ['table-low-040','table-low-042','table-low-060']
+ORDER += ['layer-choice']
+ORDER += ['platform-underpass-070','platform-underpass-042']
+ORDER += ['four-platforms']
+# Current compact assessment; ORDER above remains the historical scene index.
+CURRENT_ASSESSMENT_SCENES = ("hill", "forest", "flat", "desert", "mountain", "snow", "vocano", "steps",
+                             "flat-corridor-platforms", "surface-route-test", "table", "table-low-040", "table-low-042", "table-low-060", "layer-choice",
+                             "platform-underpass-070", "platform-underpass-042", "four-platforms")
 
 
 def file_sha(path):
@@ -54,6 +69,8 @@ def source_cloud(name):
         path = WEB / "large-table/large_table.npz"
     elif name == "combined":
         path = WEB / "combined-scene/combined_scene.npz"
+    elif name in ("flat-corridor-platforms", "surface-route-test", "layer-choice", "four-platforms") or name.startswith(('table-low-','platform-underpass-')):
+        path = WEB / name / "scene.npz"
     else:
         path = WEB / name / "corridor_scene.npz"
     return read_cloud(path).astype("<f4"), {"kind":"file", "path":str(path.relative_to(ROOT.parent)), "sha256":file_sha(path)}
@@ -396,8 +413,11 @@ def publish_index():
         home, archive = WEB / "index.html", WEB / "legacy-results.html"
         if home.exists() and not archive.exists():
             shutil.copyfile(home, archive)
-        from .publish_metric_viewer import publish
-        publish()
+        # A cold checkout builds the historical fit inputs before the current
+        # convex-domain assessment. Publish the homepage only when it is ready.
+        if (WEB / 'convex-assessment/profiles.json').exists():
+            from .publish_metric_viewer import publish
+            publish()
     with (OUT / "summary.csv").open("w") as stream:
         writer = csv.writer(stream)
         writer.writerow(["scene", "raw_points", "seed_count", "solved", "valid", "rejected", "triangles", "median_training_rmse_m", "xyz_to_mesh_median_ms"])

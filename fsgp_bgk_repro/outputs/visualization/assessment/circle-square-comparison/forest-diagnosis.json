@@ -1,0 +1,49 @@
+{
+  "scene": "forest",
+  "profile": "qcircle-r07",
+  "raw_points": 141068,
+  "xy_extent_m": [
+    11.999940395355225,
+    11.999574184417725
+  ],
+  "xy_bounding_area_m2": 143.99417498265598,
+  "center_selection": {
+    "lattice_xy_locations": 13038,
+    "raw_xy_at_least_15": 1315,
+    "raw_xy_count_median": 11.0,
+    "height_group_supported_locations": 836,
+    "initial_centers": 1057,
+    "extra_saved_centers": 3
+  },
+  "saved_center_funnel": {
+    "centers": 1060,
+    "insufficient": 339,
+    "rank_rejected": 0,
+    "center_offset_rejected": 6,
+    "rmse_rejected": 193,
+    "valid": 522,
+    "displayed": 398,
+    "valid_no_display": 124
+  },
+  "geometry": {
+    "valid_functions": 522,
+    "after_hull_candidate_triangles": 7044,
+    "deleted_xy_support": 2175,
+    "deleted_height_compatibility": 244,
+    "kept_triangles": 4625
+  },
+  "rendered_triangle_xy_area_sum_m2": 3.5904905796051025,
+  "xy_coverage_upper_bound_fraction": 0.024934971015581536,
+  "raw_sample": {
+    "size": 5000,
+    "seed": 211,
+    "nearest_xy_median_m": 0.013394473169318941,
+    "raw_r07_count_median": 12.0,
+    "height_gated_count_median": 11.0,
+    "raw_r07_enough_fraction": 0.3796,
+    "height_gated_enough_fraction": 0.15,
+    "function_supported_fraction": 0.058,
+    "displayed_triangle_fraction": 0.0414
+  },
+  "note": "Read-only audit of saved fixed-R7 forest. Fit rejection reasons partitioned in order: count, rank, offset, RMSE. Triangle reasons partitioned in order: XY absence then height mismatch. Projected triangle area sum includes overlap and different heights, so gives an upper bound on XY union coverage. Sample support is not independent accuracy or area coverage."
+}

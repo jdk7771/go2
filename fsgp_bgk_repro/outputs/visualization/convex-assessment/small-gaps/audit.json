@@ -1,0 +1,736 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "scene": "hill",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 7.910245102826785e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "forest",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.9726702399646143e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "flat",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "desert",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.970440103304938e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "mountain",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.4656829705472774e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "snow",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 7.982039420539877e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "vocano",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.002578933790744e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "steps",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.71221500813823e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.984590435379687e-12,
+      "new_fits": 0
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.984590435379687e-12,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.1881164375135995e-12,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "layer-choice",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.9057473488182097e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "platform-underpass-070",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 7.891595155129494e-10,
+      "new_fits": 0
+    },
+    {
+      "scene": "platform-underpass-042",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.5608183068802646e-12,
+      "new_fits": 0
+    },
+    {
+      "scene": "four-platforms",
+      "profile": "qcircle-adaptive",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "hill",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.5304365253452374e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "forest",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "flat",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "desert",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "mountain",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.824165073496033e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "snow",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.893830162193801e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "vocano",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 8.732323808491316e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "steps",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.8606494395511106e-09,
+      "new_fits": 0
+    },
+    {
+      "scene": "table",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.0998873468135457e-09,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "layer-choice",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.8607937907487724e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "platform-underpass-070",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "platform-underpass-042",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.849202180270737e-09,
+      "new_fits": 0
+    },
+    {
+      "scene": "four-platforms",
+      "profile": "qcircle-r07",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 5.958875393119456e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "hill",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.339797815580468e-06,
+      "new_fits": 0
+    },
+    {
+      "scene": "forest",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.0797847333220432e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "flat",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "desert",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.076249304705513e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "mountain",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.1664617582951564e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "snow",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.0486047186120118e-06,
+      "new_fits": 0
+    },
+    {
+      "scene": "vocano",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.92777092594687e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "steps",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.9778161159121908e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "layer-choice",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 4.046363591414526e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "platform-underpass-070",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 2.108254759658479e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "platform-underpass-042",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.718051567678458e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "four-platforms",
+      "profile": "q15-n15",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "hill",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 9.243318973561898e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "forest",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.1683692724417938e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "flat",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "desert",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 7.747556951542833e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "mountain",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.1913241437788713e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "snow",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 3.7988006668099317e-07,
+      "new_fits": 0
+    },
+    {
+      "scene": "vocano",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 8.237939497224289e-08,
+      "new_fits": 0
+    },
+    {
+      "scene": "steps",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "surface-route-test",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "layer-choice",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "platform-underpass-070",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "platform-underpass-042",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "four-platforms",
+      "profile": "q20-n30",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 0.0,
+      "new_fits": 0
+    },
+    {
+      "scene": "forest",
+      "profile": "qcircle-adaptive-no-offset",
+      "original_files_verified": 15,
+      "filled_regions_under_threshold": true,
+      "large_gap_areas_unchanged": true,
+      "one_original_function_per_triangle": true,
+      "maximum_float32_height_error_m": 1.6565641192123337e-07,
+      "new_fits": 0
+    }
+  ],
+  "baseline_preservation": null
+}

@@ -1,0 +1,579 @@
+{
+  "passed": true,
+  "scene_settings": 12,
+  "metric_views": 72,
+  "records": [
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-adaptive",
+      "filled": 2642,
+      "area": 0.7230323077720885,
+      "unfilled": 0,
+      "large": 0,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 3332,
+          "mean": 0.27700525857796293,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 3332,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 3332,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "std_patch_m",
+          "known": 3332,
+          "mean": 0.0018221749255896407,
+          "max": 0.0029817367020971565
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 3332,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 3332,
+          "mean": 0,
+          "max": 0
+        }
+      ]
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-adaptive",
+      "filled": 2638,
+      "area": 0.7213656378789096,
+      "unfilled": 0,
+      "large": 0,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 3443,
+          "mean": 0.27039835073533913,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 3443,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 3443,
+          "mean": 7.42075783778447e-14,
+          "max": 4.274180364407236e-12
+        },
+        {
+          "field": "std_patch_m",
+          "known": 3443,
+          "mean": 0.0018342094013488147,
+          "max": 0.0029817367020971565
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 3443,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 3443,
+          "mean": 1.7370989941118651e-13,
+          "max": 1.6827400584062957e-11
+        }
+      ]
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-adaptive",
+      "filled": 2642,
+      "area": 0.7230323077720886,
+      "unfilled": 0,
+      "large": 0,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 3396,
+          "mean": 0.2893911478734308,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 3396,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 3396,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "std_patch_m",
+          "known": 3396,
+          "mean": 0.00184112552643531,
+          "max": 0.0029817367020971565
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 3396,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 3396,
+          "mean": 0,
+          "max": 0
+        }
+      ]
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "qcircle-r07",
+      "filled": 4459,
+      "area": 1.9172161922598758,
+      "unfilled": 6,
+      "large": 696,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 4275,
+          "mean": 0.25125946575879576,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 4275,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 4275,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4275,
+          "mean": 0.0020632120093200964,
+          "max": 0.006202867362354277
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 4275,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 4275,
+          "mean": 0,
+          "max": 0
+        }
+      ]
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "qcircle-r07",
+      "filled": 4456,
+      "area": 1.9161224484205757,
+      "unfilled": 6,
+      "large": 686,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 4279,
+          "mean": 0.25289418465035096,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 4279,
+          "mean": 0.04793931632303045,
+          "max": 12.820772311888026
+        },
+        {
+          "field": "rmse_m",
+          "known": 4279,
+          "mean": 0.000027870302120683982,
+          "max": 0.007453563923400424
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4279,
+          "mean": 0.0020792002798998396,
+          "max": 0.006908817841051783
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 4279,
+          "mean": 0.043166953984556486,
+          "max": 11.54447459457124
+        },
+        {
+          "field": "max_error_m",
+          "known": 4279,
+          "mean": 0.000037391934096096914,
+          "max": 0.01000000537482494
+        }
+      ]
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "qcircle-r07",
+      "filled": 4462,
+      "area": 1.9187786923530112,
+      "unfilled": 6,
+      "large": 695,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 4266,
+          "mean": 0.24978460760400906,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 4266,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 4266,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4266,
+          "mean": 0.002062491364970388,
+          "max": 0.006202867362354277
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 4266,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 4266,
+          "mean": 0,
+          "max": 0
+        }
+      ]
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q15-n15",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 0,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 5019,
+          "mean": 0.2435977534508581,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 5019,
+          "mean": 0.5406333478151532,
+          "max": 13.144473383637642
+        },
+        {
+          "field": "rmse_m",
+          "known": 5019,
+          "mean": 0.0004943495074744185,
+          "max": 0.010421952230985847
+        },
+        {
+          "field": "std_patch_m",
+          "known": 5019,
+          "mean": 0.002096531821841831,
+          "max": 0.010468185071951842
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 5019,
+          "mean": 0.6221199995558498,
+          "max": 14.794363349184977
+        },
+        {
+          "field": "max_error_m",
+          "known": 5019,
+          "mean": 0.0008958185215707767,
+          "max": 0.021440114945126126
+        }
+      ]
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q15-n15",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 0,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 5013,
+          "mean": 0.24388931267384298,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 5013,
+          "mean": 0.7012278602965498,
+          "max": 25.005977440850845
+        },
+        {
+          "field": "rmse_m",
+          "known": 5013,
+          "mean": 0.0006333021870316871,
+          "max": 0.018257412054144655
+        },
+        {
+          "field": "std_patch_m",
+          "known": 5013,
+          "mean": 0.0021831994395572576,
+          "max": 0.014218091260936407
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 5013,
+          "mean": 0.8089964472062465,
+          "max": 27.967857267435512
+        },
+        {
+          "field": "max_error_m",
+          "known": 5013,
+          "mean": 0.0011836512063829558,
+          "max": 0.030389597690653004
+        }
+      ]
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q15-n15",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 3,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 4368,
+          "mean": 0.2780496094621346,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 4368,
+          "mean": 0.3403111092391423,
+          "max": 13.144460034168258
+        },
+        {
+          "field": "rmse_m",
+          "known": 4368,
+          "mean": 0.00032672136574111115,
+          "max": 0.010421939807053597
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4368,
+          "mean": 0.0020250481699561423,
+          "max": 0.010468172592905799
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 4368,
+          "mean": 0.38375927769103724,
+          "max": 14.794348457174147
+        },
+        {
+          "field": "max_error_m",
+          "known": 4368,
+          "mean": 0.0006308846997370927,
+          "max": 0.021440140503728736
+        }
+      ]
+    },
+    {
+      "scene": "table-low-040",
+      "profile": "q20-n30",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 0,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 5011,
+          "mean": 0.23746872560341242,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 5011,
+          "mean": 0.43674294729855007,
+          "max": 9.799947454612717
+        },
+        {
+          "field": "rmse_m",
+          "known": 5011,
+          "mean": 0.0005192164723333767,
+          "max": 0.009710309714649222
+        },
+        {
+          "field": "std_patch_m",
+          "known": 5011,
+          "mean": 0.0016929484293147642,
+          "max": 0.006602657342978923
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 5011,
+          "mean": 0.609709383387008,
+          "max": 12.877540553543296
+        },
+        {
+          "field": "max_error_m",
+          "known": 5011,
+          "mean": 0.0010150795595091368,
+          "max": 0.02072817368892887
+        }
+      ]
+    },
+    {
+      "scene": "table-low-042",
+      "profile": "q20-n30",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 0,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 5011,
+          "mean": 0.23747862225832678,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 5011,
+          "mean": 0.5961706641427755,
+          "max": 20.280773663294617
+        },
+        {
+          "field": "rmse_m",
+          "known": 5011,
+          "mean": 0.0006827268643546747,
+          "max": 0.01954824653275608
+        },
+        {
+          "field": "std_patch_m",
+          "known": 5011,
+          "mean": 0.001785045783791143,
+          "max": 0.012740655495678776
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 5011,
+          "mean": 0.8338109167252142,
+          "max": 26.95797813426641
+        },
+        {
+          "field": "max_error_m",
+          "known": 5011,
+          "mean": 0.0013544259676266774,
+          "max": 0.0395994440506454
+        }
+      ]
+    },
+    {
+      "scene": "table-low-060",
+      "profile": "q20-n30",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 0,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 4364,
+          "mean": 0.27056891992733884,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 4364,
+          "mean": 0.2737141979881139,
+          "max": 9.799936803769642
+        },
+        {
+          "field": "rmse_m",
+          "known": 4364,
+          "mean": 0.00034391923203844747,
+          "max": 0.009710304654408369
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4364,
+          "mean": 0.0016226350520089853,
+          "max": 0.006602649471999892
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 4364,
+          "mean": 0.37422586941091834,
+          "max": 12.87752645634349
+        },
+        {
+          "field": "max_error_m",
+          "known": 4364,
+          "mean": 0.0007150735976749901,
+          "max": 0.02072819839883157
+        }
+      ]
+    }
+  ],
+  "all_current_scenes": false,
+  "base_models_unchanged": true,
+  "zero_gap_settings": true,
+  "toggle": true,
+  "share": "http://127.0.0.1:42482/?scene=steps&profile=qcircle-adaptive&coverage=1&gaps=1&metric=clearance_cost&angle=3d&points=0&boundary=0",
+  "mobile": true,
+  "errors": [],
+  "failed": []
+}

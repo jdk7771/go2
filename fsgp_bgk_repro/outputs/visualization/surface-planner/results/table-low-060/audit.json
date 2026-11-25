@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "scene": "table-low-060",
+  "elapsed_s": 2.5147491779998745,
+  "result_sha256": "60b413d85016087da4b7bd3b488900f81b1fadcf4a87c7f5d9ade41afdee5b19",
+  "routes": [
+    {
+      "case_id": "low-table-under",
+      "map_id": "low-table-under-base",
+      "map_mode": "base",
+      "label": "净空 60 cm · 桌下穿行 · 本层滚动",
+      "nodes": 29,
+      "frames": 241,
+      "route_length_m": 4.4799999999999995,
+      "route_cost": 4.636490879902915,
+      "supported_contacts_checked": 964,
+      "maximum_raw_distance_m": 0.012532843469592268,
+      "maximum_ik_residual_m": 4.47545209131181e-16,
+      "minimum_zmp_margin_m": 0.22580661961275258,
+      "minimum_raw_wheel_center_distance_m": 0.09001404525160395,
+      "minimum_observed_ceiling_gap_m": 0.13000002384185788,
+      "layer_crossings": 0,
+      "rolling_frames": 240,
+      "generated_swing_frames": 0,
+      "crossing_motion_validated": null,
+      "underpass_frames": null,
+      "underpass_clearance_m": null,
+      "underpass_minimum_body_height_m": null,
+      "underpass_minimum_ceiling_gap_m": null,
+      "body_lowering_frames": null,
+      "underpass_normal_height_feasible": null
+    }
+  ],
+  "scope": "Observed rolling samples and supported crossing endpoints. Boundary crossings below 40cm are planning candidates; no swing/dynamic crossing verification.",
+  "occupancy_in_cost": false,
+  "endpoint_height_lift_rule": false
+}

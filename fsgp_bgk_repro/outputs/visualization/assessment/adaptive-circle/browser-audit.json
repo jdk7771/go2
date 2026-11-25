@@ -1,0 +1,311 @@
+{
+  "records": [
+    {
+      "scene": "desert",
+      "centers": 4822,
+      "valid": 4796,
+      "shown": 4796,
+      "triangles": 200638,
+      "metrics": [
+        {
+          "field": "jump_b_m",
+          "known": 4796,
+          "mean": 0.0019156972942708974,
+          "max": 0.027767904367609675
+        },
+        {
+          "field": "slope_deg",
+          "known": 4796,
+          "mean": 17.76939085344654,
+          "max": 50.26233673461829
+        },
+        {
+          "field": "roughness_cost",
+          "known": 4796,
+          "mean": 0.24170178360761793,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 4796,
+          "mean": 0.000726710170753696,
+          "max": 0.00532612743596429
+        },
+        {
+          "field": "rmse_m",
+          "known": 4796,
+          "mean": 0.00033550981356050987,
+          "max": 0.0023375019328032137
+        },
+        {
+          "field": "std_patch_m",
+          "known": 4796,
+          "mean": 0.0021900261558364864,
+          "max": 0.004112067413770805
+        },
+        {
+          "field": "clearance_cost",
+          "known": 4796,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "foot_cost",
+          "known": 4796,
+          "mean": 0.21203201783460857,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 2103,
+          "mean": 0.2330745187201293,
+          "max": 0.6857563487618078
+        },
+        {
+          "field": "jump_a_m",
+          "known": 4796,
+          "mean": 0.010469895607380033,
+          "max": 0.1121374763802967
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 4796,
+          "mean": 0.01826524141507145,
+          "max": 0.31254786323364186
+        }
+      ]
+    },
+    {
+      "scene": "mountain",
+      "centers": 2944,
+      "valid": 2791,
+      "shown": 2791,
+      "triangles": 117611,
+      "metrics": [
+        {
+          "field": "jump_b_m",
+          "known": 2788,
+          "mean": 0.02658705661018801,
+          "max": 0.5738804150569018
+        },
+        {
+          "field": "slope_deg",
+          "known": 2791,
+          "mean": 11.339468313289053,
+          "max": 81.80089564659238
+        },
+        {
+          "field": "roughness_cost",
+          "known": 2791,
+          "mean": 0.5038214067697574,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 2791,
+          "mean": 0.007068485421889419,
+          "max": 0.03301049442715194
+        },
+        {
+          "field": "rmse_m",
+          "known": 2791,
+          "mean": 0.002871504536355007,
+          "max": 0.00799445011781779
+        },
+        {
+          "field": "std_patch_m",
+          "known": 2791,
+          "mean": 0.002983054559046044,
+          "max": 0.020164749638516322
+        },
+        {
+          "field": "clearance_cost",
+          "known": 2791,
+          "mean": 0.002363813123380468,
+          "max": 0.7489327605861015
+        },
+        {
+          "field": "foot_cost",
+          "known": 2788,
+          "mean": 0.3120081873871867,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 1408,
+          "mean": 0.32449333910902045,
+          "max": 0.7070843388779168
+        },
+        {
+          "field": "jump_a_m",
+          "known": 2791,
+          "mean": 0.10200179213456445,
+          "max": 2.9086019539195966
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 2788,
+          "mean": 0.05285584031756888,
+          "max": 1.3954090037233111
+        }
+      ]
+    },
+    {
+      "scene": "snow",
+      "centers": 22767,
+      "valid": 20391,
+      "shown": 20391,
+      "triangles": 951384,
+      "metrics": [
+        {
+          "field": "jump_b_m",
+          "known": 20391,
+          "mean": 0.056848951911573305,
+          "max": 2.12350016176476
+        },
+        {
+          "field": "slope_deg",
+          "known": 20391,
+          "mean": 20.608975229554208,
+          "max": 77.73835528993418
+        },
+        {
+          "field": "roughness_cost",
+          "known": 20391,
+          "mean": 0.46172009302549616,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 20391,
+          "mean": 0.005315063354232346,
+          "max": 0.048466364298999795
+        },
+        {
+          "field": "rmse_m",
+          "known": 20391,
+          "mean": 0.0021713941643187883,
+          "max": 0.007999979245386571
+        },
+        {
+          "field": "std_patch_m",
+          "known": 20391,
+          "mean": 0.0030996988800888097,
+          "max": 0.026746194835167405
+        },
+        {
+          "field": "clearance_cost",
+          "known": 20391,
+          "mean": 0.004966472537351673,
+          "max": 0.8477505547389427
+        },
+        {
+          "field": "foot_cost",
+          "known": 20391,
+          "mean": 0.3979267088186472,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 7661,
+          "mean": 0.14836880546859663,
+          "max": 1
+        },
+        {
+          "field": "jump_a_m",
+          "known": 20391,
+          "mean": 0.21922951434610294,
+          "max": 8.773015625602817
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 20391,
+          "mean": 0.12146998190958448,
+          "max": 7.498914056890873
+        }
+      ]
+    },
+    {
+      "scene": "vocano",
+      "centers": 5857,
+      "valid": 5747,
+      "shown": 5747,
+      "triangles": 244177,
+      "metrics": [
+        {
+          "field": "jump_b_m",
+          "known": 5745,
+          "mean": 0.025163661715895683,
+          "max": 0.5165371486108129
+        },
+        {
+          "field": "slope_deg",
+          "known": 5747,
+          "mean": 12.858503365454474,
+          "max": 67.95999342588371
+        },
+        {
+          "field": "roughness_cost",
+          "known": 5747,
+          "mean": 0.37705217885871267,
+          "max": 1
+        },
+        {
+          "field": "max_error_m",
+          "known": 5747,
+          "mean": 0.0043740088049693876,
+          "max": 0.02929989886520288
+        },
+        {
+          "field": "rmse_m",
+          "known": 5747,
+          "mean": 0.0018758032058341168,
+          "max": 0.007997850984853925
+        },
+        {
+          "field": "std_patch_m",
+          "known": 5747,
+          "mean": 0.002984161353003966,
+          "max": 0.012603376697138957
+        },
+        {
+          "field": "clearance_cost",
+          "known": 5747,
+          "mean": 0.0007082666284201245,
+          "max": 0.5645397324687954
+        },
+        {
+          "field": "foot_cost",
+          "known": 5745,
+          "mean": 0.2846979848392576,
+          "max": 1
+        },
+        {
+          "field": "body_cost",
+          "known": 2528,
+          "mean": 0.19232539082738515,
+          "max": 0.6676847946875448
+        },
+        {
+          "field": "jump_a_m",
+          "known": 5747,
+          "mean": 0.10071838687100987,
+          "max": 1.7057364324023505
+        },
+        {
+          "field": "jump_upper_m",
+          "known": 5745,
+          "mean": 0.052917478490325,
+          "max": 0.9379593308690908
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "metric_views": 44,
+  "scene_count": 17,
+  "old_profiles_verified": 3,
+  "partial_profile_fallback": true,
+  "mobile": true
+}

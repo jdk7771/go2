@@ -1,0 +1,245 @@
+{
+  "date": "2026-11-22",
+  "scene": "forest",
+  "raw_xyz_sha256": "de627d15778dd40dbc72f3aeee1582279b2155be859da377abc0cecc3b0ebd34",
+  "experiment": {
+    "center_offset_check": false,
+    "height_selection_gate_m": 0.04,
+    "rmse_limit_m": 0.008,
+    "minimum_points": 15,
+    "radius_candidates_m": [
+      0.07,
+      0.085,
+      0.1,
+      0.12,
+      0.15
+    ],
+    "metrics": [
+      "clearance_cost",
+      "slope_deg",
+      "rmse_m",
+      "std_patch_m",
+      "normal_spread_deg",
+      "max_error_m"
+    ]
+  },
+  "control_baseline_reproduced_exactly": true,
+  "fresh_control_fit_pipeline_ms": 3171.1478199999874,
+  "frozen_gate_comparison": {
+    "fixed_saved_centers": 5379,
+    "baseline_valid": 4666,
+    "ordered_center_offset_rejections": 261,
+    "rescued_with_same_coefficients": 23,
+    "valid_without_center_gate": 4689,
+    "rescued_model_ids": [
+      723,
+      816,
+      1612,
+      1630,
+      1637,
+      1767,
+      1769,
+      2103,
+      2234,
+      3588,
+      3593,
+      5098,
+      5154,
+      5156,
+      5157,
+      5227,
+      5232,
+      5234,
+      5237,
+      5239,
+      5245,
+      5299,
+      5304
+    ],
+    "note": "No refitting, radius reselection or new centers. Count/rank/RMSE checks remain active."
+  },
+  "cases": [
+    {
+      "profile": "qcircle-adaptive",
+      "raw_points": 141068,
+      "centers": 5379,
+      "actual_solves": 16906,
+      "valid": 4666,
+      "displayed": 4666,
+      "valid_center_offset_over_4cm": 0,
+      "center_offset_m": {
+        "known": 4666,
+        "total": 4666,
+        "median": 0.0018956874237561665,
+        "p95": 0.009394538687023097,
+        "maximum": 0.03950060510400355
+      },
+      "metrics": {
+        "clearance_cost": {
+          "known": 4666,
+          "total": 4666,
+          "median": 0.0,
+          "p95": 0.3311477430734354,
+          "maximum": 1.0
+        },
+        "slope_deg": {
+          "known": 4666,
+          "total": 4666,
+          "median": 12.234038839834978,
+          "p95": 26.638910752934652,
+          "maximum": 53.07236423917562
+        },
+        "rmse_m": {
+          "known": 4666,
+          "total": 4666,
+          "median": 0.00010298378269273364,
+          "p95": 0.00031437411456845474,
+          "maximum": 0.007955215398975658
+        },
+        "std_patch_m": {
+          "known": 4666,
+          "total": 4666,
+          "median": 0.0020486195450302733,
+          "p95": 0.0025350315192735444,
+          "maximum": 0.01868683617628521
+        },
+        "normal_spread_deg": {
+          "known": 4666,
+          "total": 4666,
+          "median": 0.6594130746736624,
+          "p95": 1.4372803874490956,
+          "maximum": 48.648344626043944
+        },
+        "max_error_m": {
+          "known": 4666,
+          "total": 4666,
+          "median": 0.0002347532182390348,
+          "p95": 0.0007104725702843137,
+          "maximum": 0.03981261771838199
+        }
+      },
+      "observed_support": {
+        "sampled_observed_points": 5000,
+        "seed": 211,
+        "threshold_m": 0.012,
+        "inside_any_xy_hull_fraction": 0.9584,
+        "height_supported_fraction": 0.7106,
+        "note": "Same observed points in both cases; at least one exact convex domain must contain XY and predict within 12 mm. This is not held-out precision or surface-area coverage."
+      },
+      "fit_pipeline_ms": 3283.6760800055345,
+      "total_compute_ms": 6207.053790996724,
+      "largest_center_offset": {
+        "model": 4342,
+        "offset_m": 0.03950060510400355,
+        "center_inside_convex_domain": true,
+        "center_reference_xyz": [
+          -3.2639999999999976,
+          3.5000588965435036,
+          0.9752561450004578
+        ],
+        "fitted_center_height_m": 1.0147567501044614,
+        "rmse_m": 0.000739620854798232,
+        "domain_area_m2": 0.031761640275817626
+      }
+    },
+    {
+      "profile": "qcircle-adaptive-no-offset",
+      "raw_points": 141068,
+      "centers": 5447,
+      "actual_solves": 16794,
+      "valid": 4760,
+      "displayed": 4760,
+      "valid_center_offset_over_4cm": 91,
+      "center_offset_m": {
+        "known": 4760,
+        "total": 4760,
+        "median": 0.001957236158719262,
+        "p95": 0.011506443835173956,
+        "maximum": 1.5626203828486567
+      },
+      "metrics": {
+        "clearance_cost": {
+          "known": 4760,
+          "total": 4760,
+          "median": 0.0,
+          "p95": 0.48303547255740054,
+          "maximum": 1.0
+        },
+        "slope_deg": {
+          "known": 4760,
+          "total": 4760,
+          "median": 12.335858499258308,
+          "p95": 26.87400891336702,
+          "maximum": 53.07236423917562
+        },
+        "rmse_m": {
+          "known": 4760,
+          "total": 4760,
+          "median": 0.00010377753924955092,
+          "p95": 0.0004731877851375382,
+          "maximum": 0.007977028984728544
+        },
+        "std_patch_m": {
+          "known": 4760,
+          "total": 4760,
+          "median": 0.0020526595699003856,
+          "p95": 0.002585570148139238,
+          "maximum": 0.012924463503635594
+        },
+        "normal_spread_deg": {
+          "known": 4760,
+          "total": 4760,
+          "median": 0.6653010674673925,
+          "p95": 1.5564776598102452,
+          "maximum": 48.648344626043944
+        },
+        "max_error_m": {
+          "known": 4760,
+          "total": 4760,
+          "median": 0.00023682286703642468,
+          "p95": 0.001080443840718058,
+          "maximum": 0.03981261771838199
+        }
+      },
+      "observed_support": {
+        "sampled_observed_points": 5000,
+        "seed": 211,
+        "threshold_m": 0.012,
+        "inside_any_xy_hull_fraction": 0.9628,
+        "height_supported_fraction": 0.714,
+        "note": "Same observed points in both cases; at least one exact convex domain must contain XY and predict within 12 mm. This is not held-out precision or surface-area coverage."
+      },
+      "fit_pipeline_ms": 3357.798225000124,
+      "total_compute_ms": 6382.842604999951,
+      "largest_center_offset": {
+        "model": 5365,
+        "offset_m": 1.5626203828486567,
+        "center_inside_convex_domain": true,
+        "center_reference_xyz": [
+          3.8063066005706787,
+          1.4338053464889526,
+          2.3787641525268555
+        ],
+        "fitted_center_height_m": 0.8161437696781988,
+        "rmse_m": 9.723691336203668e-05,
+        "domain_area_m2": 0.02853174555160365
+      }
+    }
+  ],
+  "geometry_audit": {
+    "whole_hulls_covered": true,
+    "cross_function_triangles": 0,
+    "max_float32_vertex_error_m": 4.763159173748477e-07,
+    "fixed_fit_arrays_unchanged": null
+  },
+  "baseline_preservation": {
+    "files": 540,
+    "changed": []
+  },
+  "source_sha256": {
+    "terrain_assessment.py": "c1f31b9b1518aebe81e5df5194f67d42218b8e47592446c541565af865565287",
+    "adaptive_circular_surfaces.py": "7d3273accf51f7dfc4cee41fd17e8c93b828c3328c3c6e7a1adb92cc645b356a",
+    "convex_surface_assessment.py": "da7a6451372fc14c39c58238769f603538b27ddfa7bbf2668ee8fee53e62d083",
+    "forest_center_offset_ablation.py": "fae52b52678bfed572fb9c52f6e6d6d3903bd219b56dfbb79dbb88d011c8a7fb"
+  }
+}

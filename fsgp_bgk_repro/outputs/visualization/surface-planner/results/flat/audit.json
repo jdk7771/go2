@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "scene": "flat",
+  "elapsed_s": 2.9896190089998527,
+  "result_sha256": "38aabbb86ac0eaeb05d869565aa2f43010e72ffc317767d06b11a16d864101d3",
+  "routes": [
+    {
+      "case_id": "flat",
+      "map_id": "flat-base",
+      "map_mode": "base",
+      "label": "平地直行 · 本层滚动",
+      "nodes": 41,
+      "frames": 353,
+      "route_length_m": 6.4662741699796955,
+      "route_cost": 6.714766232507951,
+      "supported_contacts_checked": 1412,
+      "maximum_raw_distance_m": 0.016165768953061654,
+      "maximum_ik_residual_m": 4.941739743737033e-16,
+      "minimum_zmp_margin_m": 0.20860127653368155,
+      "minimum_raw_wheel_center_distance_m": 0.09000114891584304,
+      "minimum_observed_ceiling_gap_m": null,
+      "layer_crossings": 0,
+      "rolling_frames": 352,
+      "generated_swing_frames": 0,
+      "crossing_motion_validated": null,
+      "underpass_frames": null,
+      "underpass_clearance_m": null,
+      "underpass_minimum_body_height_m": null,
+      "underpass_minimum_ceiling_gap_m": null,
+      "body_lowering_frames": null,
+      "underpass_normal_height_feasible": null
+    }
+  ],
+  "scope": "Observed rolling samples and supported crossing endpoints. Boundary crossings below 40cm are planning candidates; no swing/dynamic crossing verification.",
+  "occupancy_in_cost": false,
+  "endpoint_height_lift_rule": false
+}

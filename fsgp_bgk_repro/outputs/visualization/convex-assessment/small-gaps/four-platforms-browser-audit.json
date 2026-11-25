@@ -1,0 +1,203 @@
+{
+  "passed": true,
+  "scene_settings": 4,
+  "metric_views": 24,
+  "records": [
+    {
+      "scene": "four-platforms",
+      "profile": "qcircle-adaptive",
+      "filled": 11572,
+      "area": 3.0291047600262107,
+      "unfilled": 2,
+      "large": 2,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 18547,
+          "mean": 0.3515539653974878,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 18547,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "rmse_m",
+          "known": 18547,
+          "mean": 7.469508845336017e-14,
+          "max": 2.906502839495889e-11
+        },
+        {
+          "field": "std_patch_m",
+          "known": 18547,
+          "mean": 0.0018214210062457731,
+          "max": 0.007064610825365293
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 18547,
+          "mean": 0,
+          "max": 0
+        },
+        {
+          "field": "max_error_m",
+          "known": 18547,
+          "mean": 1.769343932373951e-13,
+          "max": 6.57118422175973e-11
+        }
+      ]
+    },
+    {
+      "scene": "four-platforms",
+      "profile": "qcircle-r07",
+      "filled": 20046,
+      "area": 8.631607541406094,
+      "unfilled": 66,
+      "large": 2931,
+      "empty": false,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 22551,
+          "mean": 0.3368432571045603,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 22551,
+          "mean": 0.02199851542372029,
+          "max": 12.820769764071226
+        },
+        {
+          "field": "rmse_m",
+          "known": 22551,
+          "mean": 0.00001289030708642812,
+          "max": 0.007453575030070215
+        },
+        {
+          "field": "std_patch_m",
+          "known": 22551,
+          "mean": 0.0020654930788171198,
+          "max": 0.006908844668784983
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 22551,
+          "mean": 0.020427027547457496,
+          "max": 11.903666086626433
+        },
+        {
+          "field": "max_error_m",
+          "known": 22551,
+          "mean": 0.00001729416175601088,
+          "max": 0.010000020276260475
+        }
+      ]
+    },
+    {
+      "scene": "four-platforms",
+      "profile": "q15-n15",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 15,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 27554,
+          "mean": 0.3421635753898469,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 27554,
+          "mean": 1.0425445782475862,
+          "max": 37.92568981825057
+        },
+        {
+          "field": "rmse_m",
+          "known": 27554,
+          "mean": 0.0008835776340676957,
+          "max": 0.018257417495283455
+        },
+        {
+          "field": "std_patch_m",
+          "known": 27554,
+          "mean": 0.0023429344858827365,
+          "max": 0.028376315232349736
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 27554,
+          "mean": 1.2165897370213723,
+          "max": 27.967756131916257
+        },
+        {
+          "field": "max_error_m",
+          "known": 27554,
+          "mean": 0.0015265084640268547,
+          "max": 0.03444300145006379
+        }
+      ]
+    },
+    {
+      "scene": "four-platforms",
+      "profile": "q20-n30",
+      "filled": 0,
+      "area": 0,
+      "unfilled": 0,
+      "large": 0,
+      "empty": true,
+      "metrics": [
+        {
+          "field": "clearance_cost",
+          "known": 27570,
+          "mean": 0.3457906998490621,
+          "max": 1
+        },
+        {
+          "field": "slope_deg",
+          "known": 27570,
+          "mean": 0.7542083492781415,
+          "max": 20.761477506787468
+        },
+        {
+          "field": "rmse_m",
+          "known": 27570,
+          "mean": 0.001027734363259579,
+          "max": 0.019905757026845154
+        },
+        {
+          "field": "std_patch_m",
+          "known": 27570,
+          "mean": 0.0018676102714724392,
+          "max": 0.014804697797247125
+        },
+        {
+          "field": "normal_spread_deg",
+          "known": 27570,
+          "mean": 1.2002920670673485,
+          "max": 22.927476170303372
+        },
+        {
+          "field": "max_error_m",
+          "known": 27570,
+          "mean": 0.002046124747204866,
+          "max": 0.03959942304160986
+        }
+      ]
+    }
+  ],
+  "all_current_scenes": false,
+  "base_models_unchanged": true,
+  "zero_gap_settings": true,
+  "toggle": true,
+  "share": "http://127.0.0.1:42482/?scene=steps&profile=qcircle-adaptive&coverage=1&gaps=1&metric=clearance_cost&angle=3d&points=0&boundary=0",
+  "mobile": true,
+  "errors": [],
+  "failed": []
+}

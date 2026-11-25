@@ -1,0 +1,27 @@
+{
+  "routes": [
+    {
+      "id": "duck-under",
+      "label": "方案一 · 压低身体穿桥下",
+      "cost": 11.202651424973665,
+      "length_m": 10.626274169979697,
+      "planning_s": 10.72950270500587,
+      "frames": 610,
+      "change_actions": 0,
+      "minimum_zmp_margin_m": 0.20856020010801712,
+      "minimum_ceiling_gap_m": 0.029999986886978136
+    },
+    {
+      "id": "climb-over",
+      "label": "方案二 · 逐腿上台阶走桥面",
+      "cost": 21.432448078539732,
+      "length_m": 13.065096679918783,
+      "planning_s": 25.9445314149998,
+      "frames": 1918,
+      "change_actions": 152,
+      "minimum_zmp_margin_m": 0.010697991971232002,
+      "minimum_ceiling_gap_m": null
+    }
+  ],
+  "recommended": "duck-under"
+}

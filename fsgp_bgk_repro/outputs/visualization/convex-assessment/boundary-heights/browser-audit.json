@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "qcircle-adaptive",
+      "samples": 2332,
+      "pairs": 4,
+      "max": 0.800000011920929
+    },
+    {
+      "scene": "steps",
+      "profile": "qcircle-adaptive",
+      "samples": 2445,
+      "pairs": 17,
+      "max": 1
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "qcircle-r07",
+      "samples": 5990,
+      "pairs": 5,
+      "max": 0.800000011920929
+    },
+    {
+      "scene": "steps",
+      "profile": "qcircle-r07",
+      "samples": 2801,
+      "pairs": 17,
+      "max": 1
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "q15-n15",
+      "samples": 3031,
+      "pairs": 32,
+      "max": 0.7871078600309251
+    },
+    {
+      "scene": "steps",
+      "profile": "q15-n15",
+      "samples": 1962,
+      "pairs": 58,
+      "max": 0.9770726810958993
+    },
+    {
+      "scene": "flat-corridor-platforms",
+      "profile": "q20-n30",
+      "samples": 2297,
+      "pairs": 5,
+      "max": 0.7874765662075925
+    },
+    {
+      "scene": "steps",
+      "profile": "q20-n30",
+      "samples": 2312,
+      "pairs": 17,
+      "max": 0.9774696192896418
+    }
+  ],
+  "scene_settings": 8,
+  "metric_views": 48,
+  "base_metrics_unchanged": true,
+  "correct_line_colors": true,
+  "selection": true,
+  "toggle": true,
+  "share": true,
+  "mobile": true,
+  "scene_scope": true,
+  "errors": [],
+  "failed": []
+}

@@ -1,0 +1,259 @@
+{
+  "date": "2026-11-21",
+  "profile": "qcircle-r07",
+  "density_sample_rule": "5000 original XYZ points per scene, random seed 211; includes each anchor itself. These anchors are not the hexagonal fit centres.",
+  "scenes": [
+    {
+      "id": "desert",
+      "raw_points": 100000,
+      "xyz_extent_m": [
+        11.99983263015747,
+        11.999937534332275,
+        1.9547068513929844
+      ],
+      "density": {
+        "raw_radius7_count_median": 11.0,
+        "height_gated_count_median": 11.0,
+        "fraction_at_least15_before_height_gate": 0.0144,
+        "fraction_at_least15_after_height_gate": 0.0058,
+        "fraction_at_least15_after_height_modes": 0.0058
+      },
+      "profiles": {
+        "q20-n30": {
+          "centers": 18285,
+          "valid": 844,
+          "displayed_functions": null,
+          "insufficient_saved_centres": 17441,
+          "rmse_rejected": 0,
+          "other_rejected": 0,
+          "jump_b_known": 365,
+          "foot_known": 365,
+          "body_known": 0,
+          "body_missing_at_least_one_contact": 843,
+          "body_all_contacts_but_grid_below80": 1,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 0.24
+        },
+        "q15-n15": {
+          "centers": 18285,
+          "valid": 10945,
+          "displayed_functions": null,
+          "insufficient_saved_centres": 7340,
+          "rmse_rejected": 0,
+          "other_rejected": 0,
+          "jump_b_known": 10943,
+          "foot_known": 10943,
+          "body_known": 3806,
+          "body_missing_at_least_one_contact": 6544,
+          "body_all_contacts_but_grid_below80": 595,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 0.84
+        },
+        "qcircle-r07": {
+          "centers": 119,
+          "valid": 38,
+          "displayed_functions": 33,
+          "insufficient_saved_centres": 81,
+          "rmse_rejected": 0,
+          "other_rejected": 0,
+          "jump_b_known": 0,
+          "foot_known": 0,
+          "body_known": 0,
+          "body_missing_at_least_one_contact": 38,
+          "body_all_contacts_but_grid_below80": 0,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 0.04
+        }
+      }
+    },
+    {
+      "id": "mountain",
+      "raw_points": 50000,
+      "xyz_extent_m": [
+        9.201889038085938,
+        9.784121990203857,
+        1.4432667717337608
+      ],
+      "density": {
+        "raw_radius7_count_median": 13.0,
+        "height_gated_count_median": 12.0,
+        "fraction_at_least15_before_height_gate": 0.1632,
+        "fraction_at_least15_after_height_gate": 0.0948,
+        "fraction_at_least15_after_height_modes": 0.0948
+      },
+      "profiles": {
+        "q20-n30": {
+          "centers": 7533,
+          "valid": 5191,
+          "displayed_functions": null,
+          "insufficient_saved_centres": 2341,
+          "rmse_rejected": 1,
+          "other_rejected": 0,
+          "jump_b_known": 5188,
+          "foot_known": 5188,
+          "body_known": 3925,
+          "body_missing_at_least_one_contact": 1250,
+          "body_all_contacts_but_grid_below80": 16,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 1.0
+        },
+        "q15-n15": {
+          "centers": 7533,
+          "valid": 6750,
+          "displayed_functions": null,
+          "insufficient_saved_centres": 777,
+          "rmse_rejected": 6,
+          "other_rejected": 0,
+          "jump_b_known": 6750,
+          "foot_known": 6750,
+          "body_known": 5239,
+          "body_missing_at_least_one_contact": 1493,
+          "body_all_contacts_but_grid_below80": 18,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 1.0
+        },
+        "qcircle-r07": {
+          "centers": 602,
+          "valid": 380,
+          "displayed_functions": 355,
+          "insufficient_saved_centres": 169,
+          "rmse_rejected": 53,
+          "other_rejected": 0,
+          "jump_b_known": 206,
+          "foot_known": 207,
+          "body_known": 0,
+          "body_missing_at_least_one_contact": 380,
+          "body_all_contacts_but_grid_below80": 0,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 0.12
+        }
+      }
+    },
+    {
+      "id": "snow",
+      "raw_points": 500000,
+      "xyz_extent_m": [
+        20.462552070617676,
+        20.46255397796631,
+        5.642600018181838
+      ],
+      "density": {
+        "raw_radius7_count_median": 17.0,
+        "height_gated_count_median": 15.0,
+        "fraction_at_least15_before_height_gate": 0.8096,
+        "fraction_at_least15_after_height_gate": 0.547,
+        "fraction_at_least15_after_height_modes": 0.547
+      },
+      "profiles": {
+        "q20-n30": {
+          "centers": 61454,
+          "valid": 35924,
+          "displayed_functions": null,
+          "insufficient_saved_centres": 25530,
+          "rmse_rejected": 0,
+          "other_rejected": 0,
+          "jump_b_known": 35848,
+          "foot_known": 35868,
+          "body_known": 28529,
+          "body_missing_at_least_one_contact": 7258,
+          "body_all_contacts_but_grid_below80": 137,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 1.0
+        },
+        "q15-n15": {
+          "centers": 61454,
+          "valid": 55662,
+          "displayed_functions": null,
+          "insufficient_saved_centres": 5792,
+          "rmse_rejected": 0,
+          "other_rejected": 0,
+          "jump_b_known": 55662,
+          "foot_known": 55662,
+          "body_known": 44329,
+          "body_missing_at_least_one_contact": 10775,
+          "body_all_contacts_but_grid_below80": 558,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 0.96
+        },
+        "qcircle-r07": {
+          "centers": 29069,
+          "valid": 23014,
+          "displayed_functions": 22126,
+          "insufficient_saved_centres": 5956,
+          "rmse_rejected": 97,
+          "other_rejected": 2,
+          "jump_b_known": 22917,
+          "foot_known": 22995,
+          "body_known": 231,
+          "body_missing_at_least_one_contact": 21115,
+          "body_all_contacts_but_grid_below80": 1668,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 0.56
+        }
+      }
+    },
+    {
+      "id": "vocano",
+      "raw_points": 100000,
+      "xyz_extent_m": [
+        10.901516437530518,
+        10.90146780014038,
+        1.1823347906320123
+      ],
+      "density": {
+        "raw_radius7_count_median": 13.0,
+        "height_gated_count_median": 13.0,
+        "fraction_at_least15_before_height_gate": 0.203,
+        "fraction_at_least15_after_height_gate": 0.1134,
+        "fraction_at_least15_after_height_modes": 0.1134
+      },
+      "profiles": {
+        "q20-n30": {
+          "centers": 14637,
+          "valid": 9967,
+          "displayed_functions": null,
+          "insufficient_saved_centres": 4670,
+          "rmse_rejected": 0,
+          "other_rejected": 0,
+          "jump_b_known": 9961,
+          "foot_known": 9961,
+          "body_known": 7488,
+          "body_missing_at_least_one_contact": 2443,
+          "body_all_contacts_but_grid_below80": 36,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 1.0
+        },
+        "q15-n15": {
+          "centers": 14637,
+          "valid": 13565,
+          "displayed_functions": null,
+          "insufficient_saved_centres": 1072,
+          "rmse_rejected": 0,
+          "other_rejected": 0,
+          "jump_b_known": 13565,
+          "foot_known": 13565,
+          "body_known": 11184,
+          "body_missing_at_least_one_contact": 2341,
+          "body_all_contacts_but_grid_below80": 40,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 1.0
+        },
+        "qcircle-r07": {
+          "centers": 1670,
+          "valid": 1034,
+          "displayed_functions": 973,
+          "insufficient_saved_centres": 616,
+          "rmse_rejected": 20,
+          "other_rejected": 0,
+          "jump_b_known": 668,
+          "foot_known": 669,
+          "body_known": 0,
+          "body_missing_at_least_one_contact": 1034,
+          "body_all_contacts_but_grid_below80": 0,
+          "body_support_passed_but_score_unknown": 0,
+          "median_body_grid_coverage": 0.12
+        }
+      }
+    }
+  ]
+}

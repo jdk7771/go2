@@ -1,0 +1,206 @@
+{
+  "passed": true,
+  "original_current_scene_files_unchanged": 480,
+  "records": [
+    {
+      "profile": "qcircle-adaptive",
+      "raw_points": 156743,
+      "centers": 8527,
+      "solved": 8527,
+      "actual_solves": 17019,
+      "valid": 5793,
+      "displayed": 5793,
+      "fit_pipeline_ms": 4824.130200999207,
+      "timings": {
+        "input_and_fit_ms": 4835.308273999544,
+        "convex_domains_ms": 213.74095699866302,
+        "six_metrics_ms": 3598.0710283620283,
+        "display_geometry_ms": 955.773599765962,
+        "total_compute_ms": 9636.171304999152,
+        "note": "One CPU run; fresh fitting or saved-model loading as specified by fit.source. Export IO and browser excluded; not comparable to fit-only timing."
+      },
+      "regions": {
+        "通道内地面": {
+          "functions": 371,
+          "mean_occupancy": 0.9835388287098483,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "顶板底面": {
+          "functions": 371,
+          "mean_occupancy": 0.9912384134612917,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "顶板上表面": {
+          "functions": 371,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "矮台顶面": {
+          "functions": 81,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "高台顶面": {
+          "functions": 81,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        }
+      }
+    },
+    {
+      "profile": "qcircle-r07",
+      "raw_points": 156743,
+      "centers": 6953,
+      "solved": 6953,
+      "actual_solves": 7969,
+      "valid": 6953,
+      "displayed": 6953,
+      "fit_pipeline_ms": 1044.3147099940688,
+      "timings": {
+        "input_and_fit_ms": 1045.263274005265,
+        "convex_domains_ms": 239.18015999515774,
+        "six_metrics_ms": 3087.9271295052604,
+        "display_geometry_ms": 1074.208245772752,
+        "total_compute_ms": 5484.862798999529,
+        "note": "One CPU run; fresh fitting or saved-model loading as specified by fit.source. Export IO and browser excluded; not comparable to fit-only timing."
+      },
+      "regions": {
+        "通道内地面": {
+          "functions": 504,
+          "mean_occupancy": 0.9954551133307951,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "顶板底面": {
+          "functions": 504,
+          "mean_occupancy": 0.9978181728365662,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "顶板上表面": {
+          "functions": 504,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "矮台顶面": {
+          "functions": 105,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "高台顶面": {
+          "functions": 105,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        }
+      }
+    },
+    {
+      "profile": "q15-n15",
+      "raw_points": 156743,
+      "centers": 9805,
+      "solved": 9799,
+      "actual_solves": 9799,
+      "valid": 8419,
+      "displayed": 8419,
+      "fit_pipeline_ms": 199.17617100145435,
+      "timings": {
+        "input_and_fit_ms": 199.79508299729787,
+        "convex_domains_ms": 281.429009999556,
+        "six_metrics_ms": 4414.324872413999,
+        "display_geometry_ms": 1195.590195566183,
+        "total_compute_ms": 6138.016797995078,
+        "note": "One CPU run; fresh fitting or saved-model loading as specified by fit.source. Export IO and browser excluded; not comparable to fit-only timing."
+      },
+      "regions": {
+        "通道内地面": {
+          "functions": 576,
+          "mean_occupancy": 0.9999999225139613,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "顶板底面": {
+          "functions": 576,
+          "mean_occupancy": 0.9999999999999996,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "顶板上表面": {
+          "functions": 576,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "矮台顶面": {
+          "functions": 120,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "高台顶面": {
+          "functions": 120,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        }
+      }
+    },
+    {
+      "profile": "q20-n30",
+      "raw_points": 156743,
+      "centers": 9805,
+      "solved": 8467,
+      "actual_solves": 8467,
+      "valid": 8417,
+      "displayed": 8417,
+      "fit_pipeline_ms": 260.8362680039136,
+      "timings": {
+        "input_and_fit_ms": 261.4779819996329,
+        "convex_domains_ms": 314.6293890022207,
+        "six_metrics_ms": 6220.55449331674,
+        "display_geometry_ms": 1265.5425408447627,
+        "total_compute_ms": 8111.032041000726,
+        "note": "One CPU run; fresh fitting or saved-model loading as specified by fit.source. Export IO and browser excluded; not comparable to fit-only timing."
+      },
+      "regions": {
+        "通道内地面": {
+          "functions": 576,
+          "mean_occupancy": 0.9999999914850508,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "顶板底面": {
+          "functions": 576,
+          "mean_occupancy": 0.9999999999999996,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "顶板上表面": {
+          "functions": 576,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "矮台顶面": {
+          "functions": 120,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        },
+        "高台顶面": {
+          "functions": 120,
+          "mean_occupancy": 0.0,
+          "mean_slope_deg": 0.0,
+          "max_rmse_m": 0.0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "passed": true,
+  "records": [
+    {
+      "scene": "table-low-040",
+      "routes": 1,
+      "frames": [
+        338
+      ],
+      "wallPatches": 0,
+      "forceFrames": 0
+    },
+    {
+      "scene": "table-low-042",
+      "routes": 1,
+      "frames": [
+        259
+      ],
+      "wallPatches": 0,
+      "forceFrames": 0
+    },
+    {
+      "scene": "table-low-060",
+      "routes": 1,
+      "frames": [
+        241
+      ],
+      "wallPatches": 0,
+      "forceFrames": 0
+    }
+  ],
+  "new_scene_metric_views": [],
+  "animation": true,
+  "frame_slider": true,
+  "route_switch": true,
+  "robot_close_view": true,
+  "zmp_and_leg_display": true,
+  "original_hulls": true,
+  "raw_toggle": true,
+  "wall_fits": true,
+  "main_viewer_link": true,
+  "mobile": true,
+  "errors": [],
+  "failed": []
+}

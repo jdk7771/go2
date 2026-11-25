@@ -1,0 +1,384 @@
+{
+  "wall_s": 89.800925927,
+  "categories": [
+    {
+      "id": "surface_query",
+      "label": "曲面查询、凸包、法向与高度层筛选",
+      "exclusive_s": 21.311715391,
+      "percent": 23.73217778213611
+    },
+    {
+      "id": "ik",
+      "label": "四腿IK与解析正运动学",
+      "exclusive_s": 17.133088334,
+      "percent": 19.078966232405715
+    },
+    {
+      "id": "pose",
+      "label": "姿态组合、机身高度筛选其余",
+      "exclusive_s": 10.734063486,
+      "percent": 11.953176846668397
+    },
+    {
+      "id": "raw_tree",
+      "label": "原始点KD树检索（支撑及碰撞）",
+      "exclusive_s": 9.712786749,
+      "percent": 10.81590935587414
+    },
+    {
+      "id": "body_collision",
+      "label": "机身盒碰撞其余",
+      "exclusive_s": 6.798289529,
+      "percent": 7.57040025904231
+    },
+    {
+      "id": "stability",
+      "label": "模型重心与准静态支撑裕量",
+      "exclusive_s": 6.670755591,
+      "percent": 7.428381747892799
+    },
+    {
+      "id": "layer_connections",
+      "label": "跨层候选及交接匹配其余",
+      "exclusive_s": 6.667449375,
+      "percent": 7.424700030843815
+    },
+    {
+      "id": "search_other",
+      "label": "A*邻接、队列、缓存及记录其余",
+      "exclusive_s": 6.192592555,
+      "percent": 6.8959116969840775
+    },
+    {
+      "id": "foot_selection",
+      "label": "四足候选选择其余",
+      "exclusive_s": 4.473246676,
+      "percent": 4.98129237513246
+    },
+    {
+      "id": "rolling_other",
+      "label": "滚动与降身采样调度其余",
+      "exclusive_s": 0.102026248,
+      "percent": 0.11361380403019239
+    },
+    {
+      "id": "validation_other",
+      "label": "路线验证调度其余",
+      "exclusive_s": 0.004603287,
+      "percent": 0.005126101933227342
+    },
+    {
+      "id": "control_other",
+      "label": "规划控制与统计其余",
+      "exclusive_s": 0.000308706,
+      "percent": 0.0003437670567572432
+    }
+  ],
+  "phases": [
+    {
+      "phase": "search",
+      "elapsed_s": 84.533887453,
+      "percent": 94.13476150760226
+    },
+    {
+      "phase": "validation",
+      "elapsed_s": 5.266729767999999,
+      "percent": 5.8648947253409975
+    },
+    {
+      "phase": "control",
+      "elapsed_s": 0.000308706,
+      "percent": 0.0003437670567572432
+    }
+  ],
+  "intervals": [
+    {
+      "phase": "search",
+      "function": "ProjectionPlanner.search_projection",
+      "elapsed_s": 81.970295942
+    },
+    {
+      "phase": "validation",
+      "function": "ProjectionPlanner.validate_projection",
+      "elapsed_s": 3.214919599
+    },
+    {
+      "phase": "search",
+      "function": "ProjectionPlanner.search_projection",
+      "elapsed_s": 2.563591511
+    },
+    {
+      "phase": "validation",
+      "function": "ProjectionPlanner.validate_projection",
+      "elapsed_s": 2.051810169
+    }
+  ],
+  "functions": [
+    {
+      "phase": "search",
+      "category": "surface_query",
+      "function": "LayerSurfaceMap.query",
+      "calls": 207732,
+      "exclusive_s": 20.054985017,
+      "inclusive_s": 22.942234533
+    },
+    {
+      "phase": "search",
+      "category": "ik",
+      "function": "SurfaceRobot.ik",
+      "calls": 180804,
+      "exclusive_s": 15.833014294,
+      "inclusive_s": 15.833014294
+    },
+    {
+      "phase": "search",
+      "category": "pose",
+      "function": "Planner.fixed_pose",
+      "calls": 30134,
+      "exclusive_s": 9.592634871,
+      "inclusive_s": 41.671563252
+    },
+    {
+      "phase": "search",
+      "category": "raw_tree",
+      "function": "raw.query",
+      "calls": 508505,
+      "exclusive_s": 7.617295914,
+      "inclusive_s": 7.617295914
+    },
+    {
+      "phase": "search",
+      "category": "body_collision",
+      "function": "SurfaceMap.body_free",
+      "calls": 37170,
+      "exclusive_s": 6.342226925,
+      "inclusive_s": 7.645196205
+    },
+    {
+      "phase": "search",
+      "category": "search_other",
+      "function": "ProjectionPlanner.search_projection",
+      "calls": 2,
+      "exclusive_s": 6.192592555,
+      "inclusive_s": 84.533887453
+    },
+    {
+      "phase": "search",
+      "category": "layer_connections",
+      "function": "LayerGraph.match",
+      "calls": 22438,
+      "exclusive_s": 5.822762026,
+      "inclusive_s": 5.822762026
+    },
+    {
+      "phase": "search",
+      "category": "foot_selection",
+      "function": "SurfaceMap.contacts",
+      "calls": 31816,
+      "exclusive_s": 4.473246676,
+      "inclusive_s": 27.667590243
+    },
+    {
+      "phase": "search",
+      "category": "stability",
+      "function": "support_margin",
+      "calls": 59764,
+      "exclusive_s": 3.175964324,
+      "inclusive_s": 3.175964324
+    },
+    {
+      "phase": "search",
+      "category": "stability",
+      "function": "SurfaceRobot.com",
+      "calls": 29882,
+      "exclusive_s": 2.960522649,
+      "inclusive_s": 2.960522649
+    },
+    {
+      "phase": "search",
+      "category": "raw_tree",
+      "function": "rawxy.query_ball_point",
+      "calls": 37170,
+      "exclusive_s": 1.30296928,
+      "inclusive_s": 1.30296928
+    },
+    {
+      "phase": "validation",
+      "category": "ik",
+      "function": "SurfaceRobot.ik",
+      "calls": 15332,
+      "exclusive_s": 1.30007404,
+      "inclusive_s": 1.30007404
+    },
+    {
+      "phase": "validation",
+      "category": "surface_query",
+      "function": "LayerSurfaceMap.query",
+      "calls": 13498,
+      "exclusive_s": 1.161943293,
+      "inclusive_s": 1.334671584
+    },
+    {
+      "phase": "validation",
+      "category": "pose",
+      "function": "Planner.fixed_pose",
+      "calls": 2587,
+      "exclusive_s": 0.820443042,
+      "inclusive_s": 3.991594567
+    },
+    {
+      "phase": "validation",
+      "category": "raw_tree",
+      "function": "raw.query",
+      "calls": 23755,
+      "exclusive_s": 0.696255037,
+      "inclusive_s": 0.696255037
+    },
+    {
+      "phase": "search",
+      "category": "layer_connections",
+      "function": "ProjectionPlanner.macro_targets",
+      "calls": 59402,
+      "exclusive_s": 0.460759467,
+      "inclusive_s": 9.611667752
+    },
+    {
+      "phase": "validation",
+      "category": "body_collision",
+      "function": "SurfaceMap.body_free",
+      "calls": 2952,
+      "exclusive_s": 0.456062604,
+      "inclusive_s": 0.552329122
+    },
+    {
+      "phase": "search",
+      "category": "layer_connections",
+      "function": "ProjectionPlanner.edge_kind",
+      "calls": 50502,
+      "exclusive_s": 0.383927882,
+      "inclusive_s": 6.206689908
+    },
+    {
+      "phase": "search",
+      "category": "pose",
+      "function": "Planner.evaluate",
+      "calls": 31816,
+      "exclusive_s": 0.320985573,
+      "inclusive_s": 69.660139068
+    },
+    {
+      "phase": "validation",
+      "category": "stability",
+      "function": "support_margin",
+      "calls": 5172,
+      "exclusive_s": 0.274840124,
+      "inclusive_s": 0.274840124
+    },
+    {
+      "phase": "validation",
+      "category": "stability",
+      "function": "SurfaceRobot.com",
+      "calls": 2586,
+      "exclusive_s": 0.259428494,
+      "inclusive_s": 0.259428494
+    },
+    {
+      "phase": "validation",
+      "category": "rolling_other",
+      "function": "ProjectionPlanner.rolling_edge",
+      "calls": 266,
+      "exclusive_s": 0.102026248,
+      "inclusive_s": 5.262126481
+    },
+    {
+      "phase": "validation",
+      "category": "raw_tree",
+      "function": "rawxy.query_ball_point",
+      "calls": 2952,
+      "exclusive_s": 0.096266518,
+      "inclusive_s": 0.096266518
+    },
+    {
+      "phase": "validation",
+      "category": "surface_query",
+      "function": "SurfaceMap.near",
+      "calls": 10196,
+      "exclusive_s": 0.094787081,
+      "inclusive_s": 1.168505666
+    },
+    {
+      "phase": "validation",
+      "category": "validation_other",
+      "function": "ProjectionPlanner.validate_projection",
+      "calls": 2,
+      "exclusive_s": 0.004603287,
+      "inclusive_s": 5.266729768
+    },
+    {
+      "phase": "control",
+      "category": "control_other",
+      "function": "ProjectionPlanner.plan_projection",
+      "calls": 1,
+      "exclusive_s": 0.000308706,
+      "inclusive_s": 89.800925927
+    }
+  ],
+  "date": "2026-11-25",
+  "scene": "four-platforms",
+  "map_id": "all-platforms-overlay",
+  "scope": "One instrumented repeat of the final successful overlay query, including its rolling-edge replan; earlier exhausted attempts not repeated.",
+  "accounting": "Exclusive nested spans. Raw KD-tree calls are separated from their query/collision parents. Instrumentation overhead is included, not subtracted.",
+  "setup": {
+    "input_models_and_trees_s": 0.23520472300015172,
+    "layer_graph_s": 5.947383378000268,
+    "robot_model_s": 0.07213217599974087
+  },
+  "historical_success_s": 119.07546216000037,
+  "planner_internal_wall_s": 89.80067302599991,
+  "node_evaluations": 31816,
+  "invalid_rolling_edges": 1,
+  "searches": [
+    {
+      "expansions": 29674,
+      "open_exhausted": false
+    },
+    {
+      "expansions": 29730,
+      "open_exhausted": false
+    }
+  ],
+  "route": {
+    "nodes": 136,
+    "frames": 1302,
+    "crossings": 2,
+    "cost": 26.95250741308336
+  },
+  "source_sha256": {
+    "layer_projection_planner.py": "592177b31fb56871e00a44d410b4349f97d5148ee0bea1ef6a385ce0d0ef38a2",
+    "boundary_heights.py": "5702afb481e9c559b00da857827790bbb077f67eb4b35be8411dd5a00cce2397",
+    "surface_astar.py": "7a4a754cca0fb195cec8a6542582a556ae92e168e1c1d62707d03fa4e3e8eaab",
+    "surface_robot.py": "52a5fc0a7b7ba64fc0d50890702718f97539eb4e4ac5318edc5978ce41d086bf",
+    "surface_layers.py": "1d2b729cd70b3bb82d7a1835091133291bb925f876d3caaf66cffa961b33ffaf",
+    "profile_layer_projection.py": "a030e9ddbab64a78ab841d68825febb686e52fef9678fd5d0198f072286e8395"
+  },
+  "input_sha256": {
+    "models.bin": "101f3f721b940e32d716123e9ec8627d634e1efa1ae87938a951ed12e33f1d93",
+    "polygons.bin": "d7cd3851cb5dc25d4d705e852636beb3d734dadf6a763e90a3e6bd51e9bce782",
+    "polygon-offsets.bin": "29f4f0390546f4cd3459f6e8fe8131d8d8357baaa788ed09b99ca812804f5034",
+    "points.bin": "131838a807813b7dfe95729691d00684cd28896503c2c00640920b077f9ff702",
+    "data.json": "cef86c6eb8debddf9a6f4a17ca2ffcdd2e5890880b74c639a6b6bc0fdebeb337"
+  },
+  "saved_result_sha256": "00a9e0a0a85d8931015478812fe2f99b935daf60081473e8fa0da3de91f38f9a",
+  "reproduction": "python -m fsgp_bgk_repro.profile_layer_projection --scene four-platforms --map all-platforms-overlay",
+  "verification": {
+    "passed": true,
+    "same_route_nodes": true,
+    "same_1302_frame_geometry": true,
+    "same_frame_phases": true,
+    "same_cost": true,
+    "saved_result_unchanged": true,
+    "fit_inputs_unchanged": true,
+    "original_runtime_sources_unchanged": true,
+    "exclusive_spans_sum_to_wall": true
+  }
+}

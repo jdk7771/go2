@@ -1,0 +1,57 @@
+{
+  "passed": true,
+  "metrics": [
+    {
+      "field": "clearance_cost",
+      "count": 4760,
+      "mean": 0.04870078443088784,
+      "max": 1
+    },
+    {
+      "field": "slope_deg",
+      "count": 4760,
+      "mean": 13.22783397961399,
+      "max": 53.07236423917562
+    },
+    {
+      "field": "rmse_m",
+      "count": 4760,
+      "mean": 0.00032941029408860897,
+      "max": 0.007977028984728544
+    },
+    {
+      "field": "std_patch_m",
+      "count": 4760,
+      "mean": 0.0021895520979884906,
+      "max": 0.012924463503635594
+    },
+    {
+      "field": "normal_spread_deg",
+      "count": 4760,
+      "mean": 0.9959117228430734,
+      "max": 48.648344626043944
+    },
+    {
+      "field": "max_error_m",
+      "count": 4760,
+      "mean": 0.0010158549088688457,
+      "max": 0.03981261771838199
+    }
+  ],
+  "result": {
+    "valid": 4760,
+    "displayed": 4760,
+    "above4cm": 91,
+    "maximumOffset": 1.5626203828486567,
+    "example": 5365
+  },
+  "metric_views": 6,
+  "forest_only": true,
+  "scene_switch_fallback": true,
+  "raw_overlay": true,
+  "selection_and_share": true,
+  "mobile": true,
+  "shared": "http://127.0.0.1:42482/?scene=forest&profile=qcircle-adaptive-no-offset&coverage=0&metric=std_patch_m&angle=3d&points=0&model=5365",
+  "errors": [],
+  "failed": []
+}
