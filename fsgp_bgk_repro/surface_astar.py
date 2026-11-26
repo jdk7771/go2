@@ -3,6 +3,7 @@
 Only A* selects routes. Foot selection, body-height sampling and quasi-static
 single-leg phases are explicit geometric checks; there is no second planner.
 """
+import math
 from dataclasses import dataclass,asdict,replace
 import heapq
 import json
@@ -13,7 +14,7 @@ from scipy.spatial import cKDTree
 from .assessment_export import sha,finite_json
 from .convex_surface_assessment import OUT,FIELDS,inside
 from .boundary_heights import predict
-from .surface_robot import SurfaceRobot,support_margin,body_rotation
+from .surface_robot import SurfaceRobot,support_margin,body_rotation,body_rotation_and_plane
 from .m20_step_capability import OUT as CAPABILITY
 from .scene_fit_catalog import WEB
 from .surface_obstacles import refine
@@ -81,11 +82,61 @@ class SurfaceMap:
         self.radius=max(np.linalg.norm(self.polygons[self.offsets[i]:self.offsets[i+1]],axis=1).max() for i in self.active)
         # Occupancy remains a diagnostic metric; binary headroom and collision
         # checks decide feasibility. Keep the other five weights unchanged.
-        self.cache={};self.weights=np.array([.30,.20,.15,.10,.10]);self.names=['slope_deg','normal_spread_deg','rmse_m','max_error_m','std_patch_m']
+        self.cache={};self._raw_cache={};self._pass_cache={}
+        self.weights=np.array([.30,.20,.15,.10,.10]);self.names=['slope_deg','normal_spread_deg','rmse_m','max_error_m','std_patch_m']
         self.scales=np.array([45.,15.,.02,.02,.01]);self.costs=np.clip(self.m[:,[FIELDS.index(k) for k in self.names]]/self.scales,0,1)@self.weights
         self.hashes={n:sha(self.folder/n) for n in ('models.bin','polygons.bin','polygon-offsets.bin','points.bin','data.json')}
+        self._clearance_blocked=self.m[:,FIELDS.index('clearance_cost')]>1e-10
+        # Precompute per-patch polygon edges, world AABBs, and 2D spatial grid buckets.
+        self._pcell=.12;inv_pcell=1./self._pcell
+        self._poly_data={};self._patch_grid={}
+        m=self.m;polys=self.polygons;offs=self.offsets
+        for i in self.active:
+            ii=int(i);p=polys[offs[ii]:offs[ii+1]]
+            e=np.roll(p,-1,axis=0)-p
+            cx=float(m[ii,0]);cy=float(m[ii,1]);cz=float(m[ii,2])
+            c0,c1,c2,c3,c4,c5=(float(m[ii,k]) for k in range(3,9))
+            px=p[:,0].copy();py=p[:,1].copy();ex=e[:,0].copy();ey=e[:,1].copy()
+            x0=float(px.min())+cx-1e-9;x1=float(px.max())+cx+1e-9
+            y0=float(py.min())+cy-1e-9;y1=float(py.max())+cy+1e-9
+            self._poly_data[ii]=(px,py,ex,ey,cx,cy,cz,c0,c1,c2,c3,c4,c5,x0,x1,y0,y1)
+            gx0=math.floor(x0*inv_pcell);gx1=math.floor(x1*inv_pcell)
+            gy0=math.floor(y0*inv_pcell);gy1=math.floor(y1*inv_pcell)
+            for gx in range(gx0,gx1+1):
+                for gy in range(gy0,gy1+1):
+                    self._patch_grid.setdefault((gx,gy),[]).append(ii)
+        # Precompute 2D XY cell buckets of Z-sorted raw points for exact OBB body_free.
+        self._rcell=.20;inv_rcell=1./self._rcell
+        self._pt_cells={}
+        if len(self.points):
+            gxy=np.floor(self.points[:,:2]*inv_rcell).astype(np.int64)
+            order=np.lexsort((self.points[:,2],gxy[:,1],gxy[:,0]))
+            self._sorted_pts=np.ascontiguousarray(self.points[order])
+            sgxy=gxy[order]
+            change=np.empty(len(sgxy)+1,dtype=bool);change[0]=True;change[-1]=True
+            change[1:-1]=(sgxy[1:,0]!=sgxy[:-1,0])|(sgxy[1:,1]!=sgxy[:-1,1])
+            bounds=np.flatnonzero(change)
+            for a,b in zip(bounds[:-1],bounds[1:]):
+                sub=self._sorted_pts[a:b];zs=sub[:,2]
+                self._pt_cells[(int(sgxy[a,0]),int(sgxy[a,1]))]=(sub,zs,float(zs[0]),float(zs[-1]))
+        # Precompute foot candidate offsets.
+        raw_offs=np.array([[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]],dtype=float)*self.config.foot_adjust_m
+        self._foot_offsets=[(off,float(np.linalg.norm(off)),bool(np.any(off))) for off in raw_offs]
 
     def polygon(self,i):return self.polygons[self.offsets[i]:self.offsets[i+1]]
+
+    def point_inside_owner(self,owner,x,y):
+        d=self._poly_data.get(int(owner))
+        if d is None:return bool(inside((np.array([x,y])-self.m[owner,:2])[None,:],self.polygon(owner))[0])
+        u=x-d[4];v=y-d[5]
+        return bool((d[2]*(v-d[1])-d[3]*(u-d[0])>=-1e-10).all())
+
+    def predict_scalar(self,owner,x,y):
+        d=self._poly_data.get(int(owner))
+        if d is not None:
+            u=x-d[4];v=y-d[5]
+            return d[6]+d[7]+d[8]*u+d[9]*v+d[10]*u*u+d[11]*u*v+d[12]*v*v
+        return float(predict(self.m,owner,[x,y]))
 
     def near(self,xy,expected=None):
         """Project a missing target onto an observed convex domain, never fill it."""
@@ -107,49 +158,116 @@ class SurfaceMap:
         best=min(candidates,key=lambda pair:pair[0]+.001*pair[1]['cost'])
         return [best[1]]
 
+    def _query_stack(self,x,y,skip_clearance):
+        bucket=self._patch_grid.get((math.floor(x/self._pcell),math.floor(y/self._pcell)))
+        if not bucket:return []
+        poly_data=self._poly_data;blocked=self._clearance_blocked;costs=self.costs
+        matches=[];pts3=[]
+        for i in bucket:
+            if skip_clearance and blocked[i]:continue
+            d=poly_data[i]
+            if x<d[13] or x>d[14] or y<d[15] or y>d[16]:continue
+            u=x-d[4];v=y-d[5]
+            if not (d[2]*(v-d[1])-d[3]*(u-d[0])>=-1e-10).all():continue
+            z=d[6]+d[7]+d[8]*u+d[9]*v+d[10]*u*u+d[11]*u*v+d[12]*v*v
+            nx=-(d[8]+2.*d[10]*u+d[11]*v);ny=-(d[9]+d[11]*u+2.*d[12]*v)
+            inv_n=1./math.sqrt(nx*nx+ny*ny+1.)
+            matches.append((i,z,np.array([nx*inv_n,ny*inv_n,inv_n],dtype=float),float(costs[i])))
+            pts3.append((x,y,z))
+        if not matches:return []
+        if len(pts3)==1:
+            dists=(float(self.raw.query(pts3[0])[0]),)
+        else:
+            dists=self.raw.query(pts3)[0]
+        raw_lim=self.config.raw_support_m
+        found=[dict(owner=i,point=np.array([x,y,z],dtype=float),normal=n,cost=cost,raw_distance_m=float(dist))
+               for (i,z,n,cost),dist in zip(matches,dists)]
+        if len(found)>1:
+            found.sort(key=lambda o:(o['raw_distance_m']>raw_lim,o['cost'],o['raw_distance_m']))
+            result=[]
+            for option in found:
+                z=option['point'][2]
+                if not any(abs(z-old['point'][2])<.012 for old in result):result.append(option)
+        else:
+            result=found
+        return classify_stack(result,self.config.minimum_passage_m,self.config.step_limit_m,raw_lim)
+
     def query(self,xy,occupied=False):
-        xy=np.asarray(xy);key=(*np.round(xy,6),occupied)
-        if key in self.cache:return self.cache[key]
-        ids=self.active[self.tree.query_ball_point(xy,self.radius+1e-8)];found=[]
-        for i in ids:
-            if not self.config.binary_overhead and not occupied and self.config.reject_overhead_occupancy and self.m[i,FIELDS.index('clearance_cost')]>1e-10:continue
-            if not inside((xy-self.m[i,:2])[None,:],self.polygon(i))[0]:continue
-            z=float(predict(self.m,i,xy));distance=float(self.raw.query([*xy,z])[0])
-            u,v=xy-self.m[i,:2];c=self.m[i,3:9];n=np.array([-(c[1]+2*c[3]*u+c[4]*v),-(c[2]+c[4]*u+2*c[5]*v),1.]);n/=np.linalg.norm(n)
-            found.append(dict(owner=int(i),point=np.r_[xy,z],normal=n,cost=float(self.costs[i]),raw_distance_m=distance))
-        result=[]
-        for option in sorted(found,key=lambda o:(o['raw_distance_m']>self.config.raw_support_m,o['cost'],o['raw_distance_m'])):
-            if not any(abs(option['point'][2]-old['point'][2])<.012 for old in result):result.append(option)
-        result=classify_stack(result,self.config.minimum_passage_m,self.config.step_limit_m,self.config.raw_support_m)
-        if not occupied:result=[o for o in result if o['raw_supported'] and (not self.config.binary_overhead or o['overhead_passable'])]
-        self.cache[key]=result;return result
+        x=float(xy[0]);y=float(xy[1]);rk=(round(x,6),round(y,6))
+        legacy_filter=(not self.config.binary_overhead and not occupied and self.config.reject_overhead_occupancy)
+        if legacy_filter:
+            key=(rk[0],rk[1],False)
+            cached=self.cache.get(key)
+            if cached is not None:return cached
+            result=[o for o in self._query_stack(x,y,True) if o['raw_supported']]
+            self.cache[key]=result;return result
+        if occupied:
+            cached=self._raw_cache.get(rk)
+            if cached is not None:return cached
+            result=self._query_stack(x,y,False)
+            self._raw_cache[rk]=result;return result
+        cached=self._pass_cache.get(rk)
+        if cached is not None:return cached
+        raw_res=self._raw_cache.get(rk)
+        if raw_res is None:
+            raw_res=self._query_stack(x,y,False)
+            self._raw_cache[rk]=raw_res
+        if self.config.binary_overhead:
+            result=[o for o in raw_res if o['raw_supported'] and o['overhead_passable']]
+        else:
+            result=[o for o in raw_res if o['raw_supported']]
+        self._pass_cache[rk]=result;return result
 
     def contacts(self,xy,yaw,reference,robot):
-        c,s=np.cos(yaw),np.sin(yaw);R=np.array([[c,-s],[s,c]])
+        c=math.cos(yaw);s=math.sin(yaw);R=np.array([[c,-s],[s,c]])
         nominal=robot.nominal_feet[:,:2]@R.T+xy;chosen=[]
-        offsets=np.array([[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]])*self.config.foot_adjust_m
+        radius=robot.radius;wheel_clear=self.config.wheel_clearance_m
+        offsets=self._foot_offsets
         for location in nominal:
             options=[]
-            for offset in offsets:
+            for offset,off_norm,nonzero in offsets:
                 q=location+offset
                 for option in self.query(q):
                     # A supported nominal contact can still put the wheel into
                     # a stair riser. Try the existing nearby offsets first.
-                    wheel=option['point']+robot.radius*option['normal']
-                    if self.raw.query(wheel)[0]<self.config.wheel_clearance_m:continue
-                    expected=float(predict(self.m,reference,q));difference=abs(option['point'][2]-expected)
+                    wheel=option['point']+radius*option['normal']
+                    if self.raw.query(wheel)[0]<wheel_clear:continue
+                    expected=self.predict_scalar(reference,float(q[0]),float(q[1]))
+                    difference=abs(float(option['point'][2])-expected)
                     if difference>.18:continue
-                    options.append((option['cost']+.3*np.linalg.norm(offset)/.05+.4*difference/.15,option))
-                if options and not np.any(offset):break
+                    options.append((option['cost']+.3*off_norm/.05+.4*difference/.15,option))
+                if options and not nonzero:break
             if not options:return None
             chosen.append(min(options,key=lambda p:p[0])[1])
         return chosen
 
     def body_free(self,body,rotation,robot):
-        ids=self.rawxy.query_ball_point(body[:2],np.linalg.norm(robot.half_body[:2])+.12)
-        if not ids:return False
-        local=(self.points[ids]-body)@rotation
-        return not np.any(np.all(np.abs(local)<=robot.half_body+self.config.clearance_m,axis=1))
+        half=robot.half_body+self.config.clearance_m
+        ext=np.abs(rotation)@half
+        bx,by,bz=float(body[0]),float(body[1]),float(body[2])
+        x0=bx-float(ext[0]);x1=bx+float(ext[0])
+        y0=by-float(ext[1]);y1=by+float(ext[1])
+        z0=bz-float(ext[2]);z1=bz+float(ext[2])
+        inv_r=1./self._rcell
+        gx0=math.floor(x0*inv_r);gx1=math.floor(x1*inv_r)
+        gy0=math.floor(y0*inv_r);gy1=math.floor(y1*inv_r)
+        cells=self._pt_cells
+        hx,hy,hz=float(half[0]),float(half[1]),float(half[2])
+        for gx in range(gx0,gx1+1):
+            for gy in range(gy0,gy1+1):
+                cell=cells.get((gx,gy))
+                if cell is None:continue
+                pts,zs,zmin,zmax=cell
+                if zmax<z0 or zmin>z1:continue
+                lo=int(np.searchsorted(zs,z0,side='left'))
+                hi=int(np.searchsorted(zs,z1,side='right'))
+                if lo>=hi:continue
+                sub=pts[lo:hi]
+                xy_mask=(sub[:,0]>=x0)&(sub[:,0]<=x1)&(sub[:,1]>=y0)&(sub[:,1]<=y1)
+                if not xy_mask.any():continue
+                local=(sub[xy_mask]-body)@rotation
+                if ((np.abs(local[:,0])<=hx)&(np.abs(local[:,1])<=hy)&(np.abs(local[:,2])<=hz)).any():return False
+        return True
 
 
 def jumps(a,b,m):
@@ -176,42 +294,70 @@ class Planner:
         return self.centers[grid]
 
     def fixed_pose(self,xy,yaw,feet,normals,owners,support=None,height=None):
-        mask=np.ones(4,bool) if support is None else np.asarray(support,bool)
-        grounded=feet[mask]
-        rotation=body_rotation(grounded,yaw);plane=np.linalg.lstsq(np.c_[grounded[:,:2],np.ones(len(grounded))],grounded[:,2],rcond=None)[0]
-        ground=float(np.r_[xy,1.]@plane);options=[]
-        upper=[]
+        all_four=support is None
+        mask=np.ones(4,bool) if all_four else np.asarray(support,bool)
+        grounded=feet if all_four else feet[mask]
+        rotation,plane=body_rotation_and_plane(grounded,yaw)
+        x0,y0=float(xy[0]),float(xy[1])
+        ground=float(plane[0]*x0+plane[1]*y0+plane[2])
         support_top=max(ground,float(grounded[:,2].max()))
+        thresh=support_top+.02 if self.cfg.binary_overhead else ground+.12
+        ceiling=np.inf
         for o in self.surface.query(xy,occupied=True):
             # A tread already beneath a supporting foot is a support surface,
             # even if it lies slightly above the least-squares support plane.
-            if o['point'][2]>(support_top+.02 if self.cfg.binary_overhead else ground+.12):upper.append(o['point'][2])
-        ceiling=min(upper) if upper else np.inf
-        for h in ((.32,.36,.40,.44,.48,.52) if height is None else (height,)):
-            body=np.r_[xy,ground+h];ik=self.robot.ik(body,rotation,feet,normals)
-            if ik['maximum_residual_m']>self.cfg.ik_accept_m:continue
-            if body[2]+np.abs(rotation[2])@self.robot.half_body+self.cfg.clearance_m>ceiling:continue
-            cost=ik['soft_cost']+.25*((h-self.robot.nominal_height)/.10)**2
-            options.append((cost,body,h,ik))
-        for cost,body,height,ik in sorted(options,key=lambda o:o[0]):
+            oz=float(o['point'][2])
+            if oz>thresh and oz<ceiling:ceiling=oz
+        body_top_margin=float(np.abs(rotation[2])@self.robot.half_body)+self.cfg.clearance_m
+        nom_h=self.robot.nominal_height;ik_acc=self.cfg.ik_accept_m
+        wheel_clear=self.cfg.wheel_clearance_m;raw_sup=self.cfg.raw_support_m
+        zmp_lim=self.cfg.zmp_margin_m;radius=self.robot.radius
+        grounded_idx=(0,1,2,3) if all_four else tuple(int(k) for k in np.flatnonzero(mask))
+        # Test heights in ascending height-penalty order; since ik['soft_cost'] >= 0,
+        # once a valid height has total cost <= next height penalty, no other height can beat it.
+        heights=(.40,.36,.44,.32,.48,.52) if height is None else (height,)
+        best=None
+        for h in heights:
+            h_pen=.25*((h-nom_h)/.10)**2
+            if best is not None and h_pen>=best[0]:break
+            bz=ground+h
+            if bz+body_top_margin>ceiling:continue
+            body=np.array([x0,y0,bz],dtype=float)
+            ik=self.robot.ik(body,rotation,feet,normals)
+            if ik['maximum_residual_m']>ik_acc:continue
+            cost=ik['soft_cost']+h_pen
+            if best is not None and cost>=best[0]:continue
             if not self.surface.body_free(body,rotation,self.robot):continue
-            if self.surface.raw.query(ik['wheels'])[0].min()<self.cfg.wheel_clearance_m:continue
-            actual_contacts=ik['wheels']-self.robot.radius*normals
-            if any(not inside((actual_contacts[k,:2]-self.surface.m[owners[k],:2])[None,:],self.surface.polygon(owners[k]))[0]
-                   or self.surface.raw.query(actual_contacts[k])[0]>self.cfg.raw_support_m for k in np.flatnonzero(mask)):continue
-            com=self.robot.com(body,rotation,ik['q'])
-            margin=min(support_margin(com,feet[mask]),support_margin(com,actual_contacts[mask]))
-            if margin<self.cfg.zmp_margin_m:continue
-            foot_cost=np.array([self.surface.costs[i] for i in owners])
-            return dict(body=body,rotation=rotation,yaw=float(yaw),feet=feet.copy(),normals=normals.copy(),owners=list(map(int,owners)),
-                wheels=ik['wheels'],joints=ik['q'],ik_max_m=ik['maximum_residual_m'],ik_cost=ik['soft_cost'],
-                com=com,zmp=np.r_[com[:2],float(np.r_[com[:2],1.]@plane)],zmp_margin_m=margin,
-                body_height_m=height,body_height_cost=.25*((height-self.robot.nominal_height)/.1)**2,
-                ceiling_z_m=ceiling,
-                overhead_passable=1,overhead_clearance_m=float(ceiling-ground),change_flag=[False]*4,
-                foot_costs=foot_cost,terrain_cost=float(foot_cost.mean()),cost=float(foot_cost.mean()+.15*cost+.05*max(0,(.05-margin)/.05)),
-                support=mask.tolist(),swing_leg=None,lift_flag=[False]*4)
-        return None
+            wheels=ik['wheels']
+            actual_contacts=wheels-radius*normals
+            if any(not self.surface.point_inside_owner(owners[k],float(actual_contacts[k,0]),float(actual_contacts[k,1])) for k in grounded_idx):continue
+            # Single batched KD-tree query for all 4 wheels + grounded actual contacts.
+            if all_four:
+                qpts=np.vstack((wheels,actual_contacts))
+                dists=self.surface.raw.query(qpts)[0]
+                if float(dists[:4].min())<wheel_clear or float(dists[4:].max())>raw_sup:continue
+            else:
+                qpts=np.vstack((wheels,actual_contacts[mask]))
+                dists=self.surface.raw.query(qpts)[0]
+                if float(dists[:4].min())<wheel_clear or float(dists[4:].max())>raw_sup:continue
+            com=self.robot.com_fast(body,rotation,ik['q'])
+            m1=support_margin(com,grounded)
+            if m1<zmp_lim:continue
+            m2=support_margin(com,actual_contacts if all_four else actual_contacts[mask])
+            margin=m1 if m1<m2 else m2
+            if margin<zmp_lim:continue
+            best=(cost,body,h,h_pen,ik,com,margin)
+        if best is None:return None
+        cost,body,h,h_pen,ik,com,margin=best
+        foot_cost=np.array([self.surface.costs[i] for i in owners])
+        return dict(body=body,rotation=rotation,yaw=float(yaw),feet=feet.copy(),normals=normals.copy(),owners=list(map(int,owners)),
+            wheels=ik['wheels'],joints=ik['q'],ik_max_m=ik['maximum_residual_m'],ik_cost=ik['soft_cost'],
+            com=com,zmp=np.array([com[0],com[1],float(plane[0]*com[0]+plane[1]*com[1]+plane[2])],dtype=float),zmp_margin_m=margin,
+            body_height_m=h,body_height_cost=h_pen,
+            ceiling_z_m=ceiling,
+            overhead_passable=1,overhead_clearance_m=float(ceiling-ground),change_flag=[False]*4,
+            foot_costs=foot_cost,terrain_cost=float(foot_cost.mean()),cost=float(foot_cost.mean()+.15*cost+.05*max(0,(.05-margin)/.05)),
+            support=mask.tolist(),swing_leg=None,lift_flag=[False]*4)
 
     def evaluate(self,xy,yaw,reference):
         chosen=self.surface.contacts(xy,yaw,reference,self.robot)

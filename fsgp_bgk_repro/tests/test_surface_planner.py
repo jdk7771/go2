@@ -36,6 +36,15 @@ class RobotGeometryTests(unittest.TestCase):
         self.assertLess(support_margin([2,0,0],feet),0)
         self.assertLess(support_margin([0,0,0],feet[:2]),0)
 
+    def test_com_fast_matches_mujoco_subtree_com(self):
+        from scipy.spatial.transform import Rotation
+        r=self.robot;rng=np.random.default_rng(19)
+        for _ in range(16):
+            body=rng.uniform(-3.,3.,3)
+            R=Rotation.from_euler('xyz',rng.uniform(-.35,.35,3)).as_matrix()
+            q=DEFAULT_Q[:12].reshape(4,3)+rng.uniform(-.25,.25,(4,3))
+            np.testing.assert_allclose(r.com_fast(body,R,q),r.com(body,R,q),atol=1e-12)
+
 
 class ObservedSurfaceTests(unittest.TestCase):
     @classmethod

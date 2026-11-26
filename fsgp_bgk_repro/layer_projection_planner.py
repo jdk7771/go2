@@ -6,8 +6,11 @@ The user-set 0.40 m threshold is distinct from the old blind-policy experiment.
 from dataclasses import asdict,replace
 from pathlib import Path
 import argparse
+import hashlib
 import heapq
 import json
+import math
+import pickle
 import time
 import numpy as np
 from scipy.spatial import cKDTree
@@ -17,6 +20,7 @@ from .surface_astar import SurfaceMap,Planner,Config,CASES,RESULT
 from .surface_robot import SurfaceRobot
 
 CROSSING_LIMIT_M=.40
+LAYER_GRAPH_CACHE=Path(__file__).resolve().parent/'outputs'/'layer_graph_cache'
 
 
 def crossing_allowed(height_m,xy_gap_m):
@@ -29,45 +33,72 @@ def segment_distance(q,a,b):
     return float(np.linalg.norm(np.asarray(q)-(a+t*delta)))
 
 
+def _graph_cache_path(surface):
+    hashes=getattr(surface,'hashes',None)
+    if not isinstance(hashes,dict):return None
+    keys=('models.bin','polygons.bin','polygon-offsets.bin')
+    if not all(k in hashes for k in keys):return None
+    sig='|'.join([*(str(hashes[k]) for k in keys),f'{GROUP_GAP:.9f}',f'{GROUP_HEIGHT:.9f}',f'{CROSSING_LIMIT_M:.9f}','v1'])
+    digest=hashlib.sha256(sig.encode('ascii')).hexdigest()[:24]
+    return LAYER_GRAPH_CACHE/f'{digest}.pkl'
+
+
 class LayerGraph:
     def __init__(self,surface):
-        polygons=[surface.polygon(i)+surface.m[i,:2] for i in surface.active]
-        records,self.info=extract(surface.m,surface.active,polygons,include_membership=True)
-        # The diagnostic extractor first groups models by predictions at both
-        # centres. A flat/ramp junction can disagree there yet meet continuously
-        # at its actual boundary. Merge such regions before planning.
-        parent={r['id']:r['id'] for r in self.info['regions']};pair_max={}
-        def root(k):
-            while parent[k]!=k:parent[k]=parent[parent[k]];k=parent[k]
-            return k
-        for p in records:
-            if p['boundary_xy_gap_m']>GROUP_GAP+1e-9:continue
-            pair=tuple(sorted((p['left_region'],p['right_region'])))
-            pair_max[pair]=max(pair_max.get(pair,0.),p['delta_m'])
-        for (a,b),height in pair_max.items():
-            if height<=GROUP_HEIGHT+1e-9:parent[root(b)]=root(a)
-        remap={k:root(k) for k in parent}
-        merged=np.array([remap.get(int(k),int(k)) for k in self.info['function_regions']])
-        groups=[]
-        for k in sorted(set(remap.values())):
-            members=self.info['function_ids'][merged==k]
-            groups.append(dict(id=k,functions=len(members),median_center_height_m=float(np.median(predict(surface.m,members,surface.m[members,:2])))))
-        self.info.update(regions=groups,function_regions=merged,retained_components=len(groups))
-        for p in records:p['left_region']=remap[p['left_region']];p['right_region']=remap[p['right_region']]
-        records=[p for p in records if p['left_region']!=p['right_region']]
-        self.regions={r['id']:r for r in self.info['regions']}
-        self.labels=np.full(len(surface.m),-1,int)
-        self.labels[self.info['function_ids']]=self.info['function_regions']
-        self.links={r:set() for r in self.regions};unique={}
-        for r in records:
-            if not crossing_allowed(r['delta_m'],r['boundary_xy_gap_m']):continue
-            key=(*sorted((r['left_region'],r['right_region'])),*np.round(r['xy']/.04).astype(int))
-            if key not in unique or r['boundary_xy_gap_m']<unique[key]['boundary_xy_gap_m']:unique[key]=r
-        self.portals=list(unique.values());self.by_pair={}
-        for k,p in enumerate(self.portals):
-            a,b=p['left_region'],p['right_region'];self.links[a].add(b);self.links[b].add(a)
-            self.by_pair.setdefault(tuple(sorted((a,b))),[]).append(k)
+        cache_path=_graph_cache_path(surface)
+        loaded=None
+        if cache_path is not None and cache_path.exists():
+            try:loaded=pickle.loads(cache_path.read_bytes())
+            except Exception:loaded=None
+        if loaded is not None:
+            self.info,self.regions,self.labels,self.links,self.portals,self.by_pair=loaded
+        else:
+            polygons=[surface.polygon(i)+surface.m[i,:2] for i in surface.active]
+            records,self.info=extract(surface.m,surface.active,polygons,include_membership=True)
+            # The diagnostic extractor first groups models by predictions at both
+            # centres. A flat/ramp junction can disagree there yet meet continuously
+            # at its actual boundary. Merge such regions before planning.
+            parent={r['id']:r['id'] for r in self.info['regions']};pair_max={}
+            def root(k):
+                while parent[k]!=k:parent[k]=parent[parent[k]];k=parent[k]
+                return k
+            for p in records:
+                if p['boundary_xy_gap_m']>GROUP_GAP+1e-9:continue
+                pair=tuple(sorted((p['left_region'],p['right_region'])))
+                pair_max[pair]=max(pair_max.get(pair,0.),p['delta_m'])
+            for (a,b),height in pair_max.items():
+                if height<=GROUP_HEIGHT+1e-9:parent[root(b)]=root(a)
+            remap={k:root(k) for k in parent}
+            merged=np.array([remap.get(int(k),int(k)) for k in self.info['function_regions']])
+            groups=[]
+            for k in sorted(set(remap.values())):
+                members=self.info['function_ids'][merged==k]
+                groups.append(dict(id=k,functions=len(members),median_center_height_m=float(np.median(predict(surface.m,members,surface.m[members,:2])))))
+            self.info.update(regions=groups,function_regions=merged,retained_components=len(groups))
+            for p in records:p['left_region']=remap[p['left_region']];p['right_region']=remap[p['right_region']]
+            records=[p for p in records if p['left_region']!=p['right_region']]
+            self.regions={r['id']:r for r in self.info['regions']}
+            self.labels=np.full(len(surface.m),-1,int)
+            self.labels[self.info['function_ids']]=self.info['function_regions']
+            self.links={r:set() for r in self.regions};unique={}
+            for r in records:
+                if not crossing_allowed(r['delta_m'],r['boundary_xy_gap_m']):continue
+                key=(*sorted((r['left_region'],r['right_region'])),*np.round(r['xy']/.04).astype(int))
+                if key not in unique or r['boundary_xy_gap_m']<unique[key]['boundary_xy_gap_m']:unique[key]=r
+            self.portals=list(unique.values());self.by_pair={}
+            for k,p in enumerate(self.portals):
+                a,b=p['left_region'],p['right_region'];self.links[a].add(b);self.links[b].add(a)
+                self.by_pair.setdefault(tuple(sorted((a,b))),[]).append(k)
+            if cache_path is not None:
+                try:
+                    cache_path.parent.mkdir(parents=True,exist_ok=True)
+                    tmp=cache_path.with_suffix('.tmp')
+                    tmp.write_bytes(pickle.dumps((self.info,self.regions,self.labels,self.links,self.portals,self.by_pair),protocol=pickle.HIGHEST_PROTOCOL))
+                    tmp.replace(cache_path)
+                except Exception:pass
         self.trees={pair:cKDTree([self.portals[k]['xy'] for k in ids]) for pair,ids in self.by_pair.items()}
+        self.pair_coords={pair:np.array([self.portals[k]['xy'] for k in ids],dtype=float) for pair,ids in self.by_pair.items()}
+        self.pair_ids={pair:np.asarray(ids,dtype=int) for pair,ids in self.by_pair.items()}
         self.tree=cKDTree([p['xy'] for p in self.portals]) if self.portals else None
 
     def reachable(self,root):
@@ -78,12 +109,25 @@ class LayerGraph:
         return parent
 
     def match(self,a,b,old_xy,new_xy):
-        pair=tuple(sorted((int(a),int(b))))
-        if pair not in self.by_pair:return None
-        middle=(np.asarray(old_xy)+new_xy)/2
-        ids=self.trees[pair].query_ball_point(middle,np.linalg.norm(np.asarray(new_xy)-old_xy)/2+.08)
-        options=[self.by_pair[pair][j] for j in ids if segment_distance(self.portals[self.by_pair[pair][j]]['xy'],np.asarray(old_xy),np.asarray(new_xy))<=.08]
-        return min(options,key=lambda k:np.linalg.norm(self.portals[k]['xy']-middle)) if options else None
+        ia,ib=int(a),int(b)
+        pair=(ia,ib) if ia<=ib else (ib,ia)
+        coords=self.pair_coords.get(pair)
+        if coords is None:return None
+        ox,oy=float(old_xy[0]),float(old_xy[1]);nx,ny=float(new_xy[0]),float(new_xy[1])
+        mx=.5*(ox+nx);my=.5*(oy+ny);dx=nx-ox;dy=ny-oy
+        seg_len2=dx*dx+dy*dy
+        ids=self.trees[pair].query_ball_point((mx,my),.5*math.sqrt(seg_len2)+.08)
+        if not ids:return None
+        pts=coords[ids]
+        vx=pts[:,0]-ox;vy=pts[:,1]-oy
+        inv_len2=1./(seg_len2 if seg_len2>1e-20 else 1e-20)
+        t=np.clip((vx*dx+vy*dy)*inv_len2,0.,1.)
+        ex=pts[:,0]-(ox+t*dx);ey=pts[:,1]-(oy+t*dy)
+        ok=(ex*ex+ey*ey)<=.0064+1e-12
+        if not np.any(ok):return None
+        ok_pts=pts[ok];ok_idx=np.asarray(ids)[ok]
+        d2=(ok_pts[:,0]-mx)**2+(ok_pts[:,1]-my)**2
+        return int(self.pair_ids[pair][ok_idx[int(np.argmin(d2))]])
 
     def metadata(self):
         return dict(regions=list(self.regions.values()),portals=self.portals,
@@ -98,20 +142,31 @@ class LayerSurfaceMap(SurfaceMap):
     def query(self,xy,occupied=False):
         options=super().query(xy,occupied)
         if occupied or self.graph is None:return options
-        return [o for o in options if self.graph.labels[o['owner']] in self.allowed_layers
-            and (self.forced_region is None or self.graph.labels[o['owner']]==self.forced_region)]
+        labels=self.graph.labels;allowed=self.allowed_layers;forced=self.forced_region
+        if forced is None:
+            return [o for o in options if int(labels[o['owner']]) in allowed]
+        return [o for o in options if int(labels[o['owner']])==forced and forced in allowed]
 
 
 class ProjectionPlanner(Planner):
-    def __init__(self,surface,robot,config,graph,allowed):
+    def __init__(self,surface,robot,config,graph,allowed,heuristic_weight=1.0):
         super().__init__(surface,robot,config);self.graph=graph;surface.allowed_layers=set(allowed)
+        self.heuristic_weight=float(heuristic_weight)
         self.edge_info={};self.map_samples={};self.macro_grid_cache={};self.edge_type_cache={}
+        self._heuristic_cache={};self._moves_by_h=[
+            [(hd,int(d[0]),int(d[1]),float(math.hypot(d[0],d[1])*config.grid_m)) for hd,d in enumerate(self.directions)]
+            +[((h+d)%8,0,0,0.) for d in (-1,1)]
+            for h in range(8)]
 
     def center_options(self,grid):
+        cached=self.centers.get(grid)
+        if cached is not None:return cached
         result=super().center_options(grid)
+        labels=self.graph.labels
         for o in result:
-            self.map_samples[(*grid,int(self.graph.labels[o['owner']]))]=dict(xy_m=list(map(float,o['point'][:2])),
-                z_m=float(o['point'][2]),layer_id=int(self.graph.labels[o['owner']]),owner=o['owner'],foot_cost=o['cost'],
+            lay=int(labels[o['owner']])
+            self.map_samples[(*grid,lay)]=dict(xy_m=list(map(float,o['point'][:2])),
+                z_m=float(o['point'][2]),layer_id=lay,owner=o['owner'],foot_cost=o['cost'],
                 overhead_passable=o['overhead_passable'])
         return result
 
@@ -123,69 +178,258 @@ class ProjectionPlanner(Planner):
             portals.append(dict(leg=int(leg),portal_id=int(match),from_layer=int(old[leg]),to_layer=int(new[leg])))
         return dict(kind='layer_crossing' if portals else 'rolling',contacts=portals)
 
+    def _query_grid_options(self,grid):
+        """Lightweight grid center query without populating layer_tree/map_samples."""
+        cached=self.centers.get(grid)
+        if cached is not None:return cached
+        gx=float(self.low[0])+grid[0]*self.cfg.grid_m;gy=float(self.low[1])+grid[1]*self.cfg.grid_m
+        if gx<self.low[0]-1e-12 or gy<self.low[1]-1e-12 or gx>self.high[0]+1e-12 or gy>self.high[1]+1e-12:return []
+        return self.surface.query((gx,gy))
+
+    def _macro_geometry(self,grid,own,use_center_options=True):
+        if self.graph.tree is None or len(self.surface.allowed_layers)<2:return []
+        cache_key=(grid[0],grid[1],own)
+        cached=self.macro_grid_cache.get(cache_key)
+        if cached is not None:return cached
+        bx=float(self.low[0])+grid[0]*self.cfg.grid_m;by=float(self.low[1])+grid[1]*self.cfg.grid_m
+        near={}
+        allowed=self.surface.allowed_layers;portals=self.graph.portals
+        for k in self.graph.tree.query_ball_point((bx,by),.65):
+            p=portals[k];a,b=p['left_region'],p['right_region']
+            if own!=a and own!=b:continue
+            other=b if a==own else a
+            if other not in allowed:continue
+            px,py=float(p['xy'][0]),float(p['xy'][1])
+            key=(other,int(round(px/.16)),int(round(py/.16)))
+            if key not in near:near[key]=k
+        if not near:
+            self.macro_grid_cache[cache_key]=[]
+            return []
+        selected=sorted(near.values(),key=lambda k:math.hypot(float(portals[k]['xy'][0])-bx,float(portals[k]['xy'][1])-by))[:12]
+        seen=set();geometry=[];labels=self.graph.labels;grid_m=self.cfg.grid_m
+        lox,loy=float(self.low[0]),float(self.low[1])
+        opt_fn=self.center_options if use_center_options else self._query_grid_options
+        for k in selected:
+            p=portals[k];other=p['right_region'] if own==p['left_region'] else p['left_region']
+            sign=1. if own==p['left_region'] else -1.
+            nx=float(p['outward_normal_xy'][0])*sign;ny=float(p['outward_normal_xy'][1])*sign
+            px=float(p['xy'][0]);py=float(p['xy'][1])
+            for distance in (.32,.48,.64):
+                tg=(int(round((px+nx*distance-lox)/grid_m)),int(round((py+ny*distance-loy)/grid_m)))
+                for option in opt_fn(tg):
+                    if int(labels[option['owner']])!=other:continue
+                    key=(tg[0],tg[1],option['owner'])
+                    if key in seen:continue
+                    seen.add(key);geometry.append((tg,option['owner']))
+        self.macro_grid_cache[cache_key]=geometry
+        return geometry
+
     def macro_targets(self,pose):
         if self.graph.tree is None or len(self.surface.allowed_layers)<2:return []
-        own=int(self.graph.labels[pose['center_owner']]);cache_key=(*pose['key'][:2],own)
-        if cache_key in self.macro_grid_cache:
-            return [n for grid,owner in self.macro_grid_cache[cache_key] if (n:=self.node(grid,pose['key'][2],owner)) is not None]
-        near={}
-        for k in self.graph.tree.query_ball_point(pose['body'][:2],.65):
-            p=self.graph.portals[k];a,b=p['left_region'],p['right_region']
-            if own not in (a,b):continue
-            other=b if a==own else a
-            if other not in self.surface.allowed_layers:continue
-            key=(other,*np.round(p['xy']/.16).astype(int))
-            if key not in near:near[key]=k
-        selected=sorted(near.values(),key=lambda k:np.linalg.norm(self.graph.portals[k]['xy']-pose['body'][:2]))[:12]
-        targets=[];seen=set();geometry=[]
-        for k in selected:
-            p=self.graph.portals[k];other=p['right_region'] if own==p['left_region'] else p['left_region']
-            normal=np.asarray(p['outward_normal_xy'])*(1 if own==p['left_region'] else -1)
-            for distance in (.32,.48,.64):
-                grid=tuple(np.round((np.asarray(p['xy'])+normal*distance-self.low)/self.cfg.grid_m).astype(int))
-                for option in self.center_options(grid):
-                    if self.graph.labels[option['owner']]!=other:continue
-                    key=(*grid,option['owner'])
-                    if key in seen:continue
-                    seen.add(key);geometry.append((grid,option['owner']));nxt=self.node(grid,pose['key'][2],option['owner'])
-                    if nxt is not None:targets.append(nxt)
-        self.macro_grid_cache[cache_key]=geometry
-        return targets
+        own=int(self.graph.labels[pose['center_owner']]);grid=pose['key'][:2];h=pose['key'][2]
+        return [n for tg,owner in self._macro_geometry(grid,own,use_center_options=True) if (n:=self.node(tg,h,owner)) is not None]
+
+    def _build_heuristic_2d(self,goal_xy,goal_z=None):
+        """Reverse 2D Dijkstra over passable projected (grid, layer) states.
+
+        Strictly admissible lower bound for 4D A* edge costs:
+        every 4D move (8-neighbor or macro portal jump) is present with its exact
+        XY distance (<= distance*(1 + 2*nxt['cost']) + 0.015*turn).
+        """
+        gx,gy=float(goal_xy[0]),float(goal_xy[1])
+        cache_key=(round(gx,6),round(gy,6),None if goal_z is None else round(float(goal_z),6))
+        cached=self._heuristic_cache.get(cache_key)
+        if cached is not None:return cached
+        grid_m=self.cfg.grid_m;lox,loy=float(self.low[0]),float(self.low[1])
+        hix,hiy=float(self.high[0]),float(self.high[1])
+        nx=int(math.floor((hix-lox)/grid_m+1e-6))+1
+        ny=int(math.floor((hiy-loy)/grid_m+1e-6))+1
+        labels=self.graph.labels;allowed=self.surface.allowed_layers
+        goal_rad=grid_m*.8+1e-9
+        active_nodes=set();cell_layers={};goal_seeds=[]
+        query_fn=self.surface.query
+        for i in range(nx):
+            x=lox+i*grid_m
+            if x>hix+1e-12:continue
+            dx_g=x-gx
+            for j in range(ny):
+                y=loy+j*grid_m
+                if y>hiy+1e-12:continue
+                opts=query_fn((x,y))
+                if not opts:continue
+                near_goal=(dx_g*dx_g+(y-gy)*(y-gy))<=goal_rad*goal_rad
+                ls=set()
+                for o in opts:
+                    lay=int(labels[o['owner']])
+                    ls.add(lay)
+                    node=(i,j,lay)
+                    active_nodes.add(node)
+                    if near_goal and (goal_z is None or abs(float(o['point'][2])-goal_z)<=.04+1e-9):
+                        goal_seeds.append(node)
+                cell_layers[(i,j)]=ls
+        if not goal_seeds:
+            self._heuristic_cache[cache_key]={}
+            return {}
+        # Build reverse cross-layer edges (both 1-step boundary crossings and macro portal jumps).
+        rev_cross={}
+        if len(allowed)>=2 and self.graph.tree is not None:
+            ptree=self.graph.tree;portals=self.graph.portals
+            step_dirs=((1,0,grid_m),(1,1,grid_m*math.sqrt(2.)),(0,1,grid_m),(-1,1,grid_m*math.sqrt(2.)),
+                (-1,0,grid_m),(-1,-1,grid_m*math.sqrt(2.)),(0,-1,grid_m),(1,-1,grid_m*math.sqrt(2.)),(0,0,0.))
+            for (i,j),ls in cell_layers.items():
+                x=lox+i*grid_m;y=loy+j*grid_m
+                p_ids=ptree.query_ball_point((x,y),.72)
+                if not p_ids:continue
+                for lay in ls:
+                    others=set()
+                    for k in p_ids:
+                        p=portals[k];a,b=p['left_region'],p['right_region']
+                        if lay==a and b in allowed:others.add(b)
+                        elif lay==b and a in allowed:others.add(a)
+                    if not others:continue
+                    src=(i,j,lay)
+                    for dx,dy,w in step_dirs:
+                        nl=cell_layers.get((i+dx,j+dy))
+                        if not nl:continue
+                        for other in others:
+                            if other in nl:
+                                rev_cross.setdefault((i+dx,j+dy,other),[]).append((src,w))
+                    for tg,owner in self._macro_geometry((i,j),lay,use_center_options=False):
+                        other=int(labels[owner]);dst=(tg[0],tg[1],other)
+                        if dst in active_nodes:
+                            mw=math.hypot((tg[0]-i)*grid_m,(tg[1]-j)*grid_m)
+                            rev_cross.setdefault(dst,[]).append((src,mw))
+        # Reverse Dijkstra from all goal seeds.
+        dist_2d={};hq=[]
+        for seed in set(goal_seeds):
+            dist_2d[seed]=0.;heapq.heappush(hq,(0.,seed))
+        diag=grid_m*math.sqrt(2.)
+        nb_steps=((1,0,grid_m),(-1,0,grid_m),(0,1,grid_m),(0,-1,grid_m),
+            (1,1,diag),(1,-1,diag),(-1,1,diag),(-1,-1,diag))
+        while hq:
+            d,cur=heapq.heappop(hq)
+            if d!=dist_2d.get(cur):continue
+            ci,cj,clay=cur
+            for dx,dy,w in nb_steps:
+                nxt=(ci+dx,cj+dy,clay)
+                if nxt not in active_nodes:continue
+                nd=d+w
+                if nd<dist_2d.get(nxt,math.inf):
+                    dist_2d[nxt]=nd;heapq.heappush(hq,(nd,nxt))
+            cross=rev_cross.get(cur)
+            if cross:
+                for nxt,w in cross:
+                    nd=d+w
+                    if nd<dist_2d.get(nxt,math.inf):
+                        dist_2d[nxt]=nd;heapq.heappush(hq,(nd,nxt))
+        self._heuristic_cache[cache_key]=dist_2d
+        return dist_2d
 
     def search_projection(self,start_xy,goal_xy,start_z=None,goal_z=None):
         try:
             start=self.nearby_endpoint(start_xy,0,start_z)
             self.nearby_endpoint(goal_xy,0,goal_z)
         except RuntimeError:return None,dict(expansions=0,reason='No supported stance on this projected map',tree=[])
-        goal=np.asarray(goal_xy);queue=[(float(np.linalg.norm(start['body'][:2]-goal)),0.,0,start['key'])]
-        costs={start['key']:0.};parents={start['key']:None};serial=0;expansions=0;last=None
+        dist_2d=self._build_heuristic_2d(goal_xy,goal_z)
+        labels=self.graph.labels;grid_m=self.cfg.grid_m
+        start_key=start['key'];start_h=dist_2d.get((start_key[0],start_key[1],int(labels[start_key[3]])))
+        if start_h is None:
+            return None,dict(expansions=0,reason='Unreachable on 2D projected layer graph',tree=[],open_exhausted=True)
+        goal=np.asarray(goal_xy,dtype=float);gx,gy=float(goal[0]),float(goal[1])
+        hw=self.heuristic_weight;goal_rad=grid_m*.8;macro_lim=grid_m*1.5
+        # Heap item: (f_score, g_score, serial, evaluated, parent_key, target_key, dist, turn, is_macro)
+        queue=[(hw*start_h,0.,0,True,None,start_key,0.,0,False)]
+        costs={start_key:0.};parents={start_key:None};closed=set() if hw>1.0 else None;serial=0;expansions=0;last=None
+        nodes=self.nodes;blocked=self.blocked;edge_type_cache=self.edge_type_cache;edge_info=self.edge_info
+        moves_by_h=self._moves_by_h;has_macro=self.graph.tree is not None and len(self.surface.allowed_layers)>=2
         while queue and expansions<self.cfg.maximum_expansions:
-            _,cost,_,key=heapq.heappop(queue)
-            if cost!=costs.get(key):continue
-            pose=self.nodes[key];expansions+=1;i,j,h,_=key
-            at_height=goal_z is None or abs(float(predict(self.surface.m,pose['center_owner'],pose['body'][:2]))-goal_z)<=.04
-            if np.linalg.norm(pose['body'][:2]-goal)<=self.cfg.grid_m*.8 and at_height:last=key;break
-            candidates=[]
-            for heading,direction in list(enumerate(self.directions))+[((h+d)%8,np.zeros(2,int)) for d in (-1,1)]:
-                grid=(i+int(direction[0]),j+int(direction[1]))
-                for option in self.center_options(grid):
-                    nxt=self.node(grid,heading,option['owner'])
-                    if nxt is not None:candidates.append(nxt)
-            candidates+=self.macro_targets(pose)
-            for nxt in candidates:
-                edge=(key,nxt['key'])
-                if edge in self.blocked:continue
-                distance=float(np.linalg.norm(nxt['body'][:2]-pose['body'][:2]))
-                heading=nxt['key'][2];turn=min(abs(heading-h),8-abs(heading-h))
-                proposed=cost+distance*(1+2*nxt['cost'])+.015*turn
-                if proposed>=costs.get(nxt['key'],np.inf):continue
-                if edge not in self.edge_type_cache:self.edge_type_cache[edge]=self.edge_kind(pose,nxt)
-                info=self.edge_type_cache[edge]
+            _,g_val,_,evaluated,pkey,key,edist,eturn,is_macro=heapq.heappop(queue)
+            if not evaluated:
+                if closed is not None and key in closed:continue
+                if g_val>=costs.get(key,math.inf):continue
+                edge=(pkey,key)
+                if edge in blocked:continue
+                nxt=nodes.get(key)
+                if key not in nodes:
+                    nxt=self.node((key[0],key[1]),key[2],key[3])
+                if nxt is None:continue
+                pcost=costs.get(pkey,math.inf)
+                proposed=pcost+edist*(1.+2.*nxt['cost'])+.015*eturn
+                if proposed>=costs.get(key,math.inf):continue
+                info=edge_type_cache.get(edge)
+                if edge not in edge_type_cache:
+                    info=self.edge_kind(nodes[pkey],nxt);edge_type_cache[edge]=info
                 if info is None:continue
-                # A macro connection must actually cross a recorded boundary.
-                if distance>self.cfg.grid_m*1.5 and info['kind']!='layer_crossing':continue
-                costs[nxt['key']]=proposed;parents[nxt['key']]=key;self.edge_info[edge]=info;serial+=1
-                heapq.heappush(queue,(proposed+np.linalg.norm(nxt['body'][:2]-goal),proposed,serial,nxt['key']))
+                if is_macro and edist>macro_lim and info['kind']!='layer_crossing':continue
+                costs[key]=proposed;parents[key]=pkey;edge_info[edge]=info;serial+=1
+                h_val=dist_2d[(key[0],key[1],int(labels[key[3]]))]
+                heapq.heappush(queue,(proposed+hw*h_val,proposed,serial,True,None,key,0.,0,False))
+                continue
+            if g_val!=costs.get(key):continue
+            if closed is not None:
+                if key in closed:continue
+                closed.add(key)
+            pose=nodes[key];expansions+=1;i,j,h,own_id=key
+            bx,by=float(pose['body'][0]),float(pose['body'][1])
+            if math.hypot(bx-gx,by-gy)<=goal_rad:
+                at_height=goal_z is None or abs(self.surface.predict_scalar(pose['center_owner'],bx,by)-goal_z)<=.04
+                if at_height:last=key;break
+            # Generate 8-neighbor + 2 in-place turn candidates lazily.
+            for heading,di,dj,dist in moves_by_h[h]:
+                gi=i+di;gj=j+dj;grid=(gi,gj)
+                turn=abs(heading-h)
+                if turn>4:turn=8-turn
+                g_lb=g_val+dist+.015*turn
+                for option in self.center_options(grid):
+                    oid=option['owner'];lay=int(labels[oid])
+                    h_val=dist_2d.get((gi,gj,lay))
+                    if h_val is None:continue
+                    tkey=(gi,gj,heading,oid)
+                    if g_lb>=costs.get(tkey,math.inf):continue
+                    edge=(key,tkey)
+                    if edge in blocked:continue
+                    if tkey in nodes:
+                        nxt=nodes[tkey]
+                        if nxt is None:continue
+                        proposed=g_val+dist*(1.+2.*nxt['cost'])+.015*turn
+                        if proposed>=costs.get(tkey,math.inf):continue
+                        info=edge_type_cache.get(edge)
+                        if edge not in edge_type_cache:
+                            info=self.edge_kind(pose,nxt);edge_type_cache[edge]=info
+                        if info is None:continue
+                        costs[tkey]=proposed;parents[tkey]=key;edge_info[edge]=info;serial+=1
+                        heapq.heappush(queue,(proposed+hw*h_val,proposed,serial,True,None,tkey,0.,0,False))
+                    else:
+                        serial+=1
+                        heapq.heappush(queue,(g_lb+hw*h_val,g_lb,serial,False,key,tkey,dist,turn,False))
+            # Generate macro cross-layer portal candidates lazily.
+            if has_macro:
+                own_layer=int(labels[own_id])
+                for tg,oid in self._macro_geometry((i,j),own_layer,use_center_options=True):
+                    gi,gj=tg;lay=int(labels[oid])
+                    h_val=dist_2d.get((gi,gj,lay))
+                    if h_val is None:continue
+                    tkey=(gi,gj,h,oid)
+                    dist=math.hypot((gi-i)*grid_m,(gj-j)*grid_m)
+                    g_lb=g_val+dist
+                    if g_lb>=costs.get(tkey,math.inf):continue
+                    edge=(key,tkey)
+                    if edge in blocked:continue
+                    if tkey in nodes:
+                        nxt=nodes[tkey]
+                        if nxt is None:continue
+                        proposed=g_val+dist*(1.+2.*nxt['cost'])
+                        if proposed>=costs.get(tkey,math.inf):continue
+                        info=edge_type_cache.get(edge)
+                        if edge not in edge_type_cache:
+                            info=self.edge_kind(pose,nxt);edge_type_cache[edge]=info
+                        if info is None:continue
+                        if dist>macro_lim and info['kind']!='layer_crossing':continue
+                        costs[tkey]=proposed;parents[tkey]=key;edge_info[edge]=info;serial+=1
+                        heapq.heappush(queue,(proposed+hw*h_val,proposed,serial,True,None,tkey,0.,0,False))
+                    else:
+                        serial+=1
+                        heapq.heappush(queue,(g_lb+hw*h_val,g_lb,serial,False,key,tkey,dist,0,True))
         keys=[]
         if last is not None:
             while last is not None:keys.append(last);last=parents[last]
@@ -255,12 +499,12 @@ def specifications(scene):
     return [{k:v for k,v in spec.items() if k not in ('maximum_routes','route_mode','crossing','expected_underpass')} for spec in CASES[scene]]
 
 
-def run_scene(scene,robot):
+def run_scene(scene,robot,heuristic_weight=1.0):
     config=replace(Config(),step_limit_m=CROSSING_LIMIT_M,lift_flag_m=None,ordered_switches=False,maximum_expansions=22000)
     started=time.perf_counter();surface=LayerSurfaceMap(scene,config);graph=LayerGraph(surface);surface.graph=graph
     setup_s=time.perf_counter()-started;routes=[];cases=[];maps=[];initial_stance=None
     for spec in specifications(scene):
-        surface.allowed_layers=set(graph.regions);finder=ProjectionPlanner(surface,robot,config,graph,graph.regions)
+        surface.allowed_layers=set(graph.regions);finder=ProjectionPlanner(surface,robot,config,graph,graph.regions,heuristic_weight=heuristic_weight)
         try:initial=finder.nearby_endpoint(spec['start'],0,spec.get('start_z'));root=int(graph.labels[initial['center_owner']])
         except RuntimeError:
             cases.append(dict(**spec,status='no_supported_start',routes=0));continue
@@ -268,7 +512,7 @@ def run_scene(scene,robot):
         parent=graph.reachable(root);passes=[('base',{root})]
         if len(parent)>1:passes.append(('overlay',set(parent)))
         for mode,allowed in passes:
-            planner=ProjectionPlanner(surface,robot,config,graph,allowed);route,stats=planner.plan_projection(spec)
+            planner=ProjectionPlanner(surface,robot,config,graph,allowed,heuristic_weight=heuristic_weight);route,stats=planner.plan_projection(spec)
             map_id=spec['id']+'-'+mode
             maps.append(dict(id=map_id,case_id=spec['id'],mode=mode,root_layer=root,allowed_layers=sorted(allowed),parent_layers=parent,
                 projection_z_m=graph.regions[root]['median_center_height_m'],status='success' if route else 'no_validated_route',statistics=stats))
@@ -299,9 +543,11 @@ def run_scene(scene,robot):
 
 
 def run():
-    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--scenes',nargs='+',choices=list(CASES),default=list(CASES));args=parser.parse_args()
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--scenes',nargs='+',choices=list(CASES),default=list(CASES))
+    parser.add_argument('--heuristic-weight',type=float,default=1.0,help='A* heuristic weight (1.0=exact optimal, e.g. 1.15=fast near-optimal)')
+    args=parser.parse_args()
     robot=SurfaceRobot()
-    return [run_scene(scene,robot) for scene in args.scenes]
+    return [run_scene(scene,robot,heuristic_weight=args.heuristic_weight) for scene in args.scenes]
 
 
 if __name__=='__main__':run()
